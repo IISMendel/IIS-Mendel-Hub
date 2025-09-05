@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Hub Chimica - IIS Mendel (Docenti)</title>
+    <meta name="description" content="Hub Chimica e Trasformazione Prodotti IIS Mendel - 110+ strumenti per docenti tecnico agrario">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #7c3aed;
+            --accent-color: #0891b2;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --mendel-green: #22c55e;
+            --mendel-blue: #3b82f6;
+            --chemistry-orange: #ea580c;
+            --chemistry-red: #dc2626;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+            --gradient-secondary: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            --gradient-accent: linear-gradient(135deg, #0891b2 0%, #7c3aed 100%);
+            --gradient-mendel: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            --gradient-chemistry: linear-gradient(135deg, #059669 0%, #ea580c 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-chemistry);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-chemistry);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-mendel);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-chemistry);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--chemistry-orange);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--primary-color);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .controls-container:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+        }
+
+        .controls-container.dragging {
+            opacity: 0.8;
+            transform: rotate(2deg) scale(1.05);
+            z-index: 2000;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .filter-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--chemistry-orange);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-chemistry);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .category-node.active {
+            border-color: var(--chemistry-orange);
+            background: rgba(234, 88, 12, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-chemistry);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-chemistry);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-chemistry);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .legend:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+        }
+
+        .legend.dragging {
+            opacity: 0.8;
+            transform: rotate(2deg) scale(1.05);
+            z-index: 2000;
+        }
+
+        .legend-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: var(--chemistry-orange);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drag-handle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            cursor: grab;
+            transition: all 0.3s ease;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            color: var(--chemistry-orange);
+            transform: scale(1.2);
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • VILLA CORTESE (MI)
+            </div>
+            <h1>🧪 Hub Chimica e Trasformazioni</h1>
+            <p>110+ Strumenti per Docenti di Chimica e Trasformazione Prodotti</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Chimica IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di riferimento per i <strong>docenti di chimica e trasformazione prodotti</strong> dell'IIS Mendel di Villa Cortese, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura". Una raccolta completa di <strong>110+ strumenti digitali</strong> 
+                per l'insegnamento della chimica nel biennio tecnico e nel triennio agrario, con laboratori virtuali, AI specializzata, 
+                database di sicurezza e risorse per trasformazioni alimentari e processi industriali.
+            </p>
+
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3 style="color: var(--chemistry-orange); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        ⚗️ Per i Docenti
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Strumenti professionali per l'insegnamento della chimica generale, organica, analitica e delle trasformazioni. 
+                        Include laboratori virtuali avanzati, AI per la chimica, database di sicurezza, simulatori di processi 
+                        e risorse specifiche per il settore agrario e alimentare.
+                    </p>
+                </div>
+
+                <div class="intro-box">
+                    <h3 style="color: var(--primary-color); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🎓 Biennio e Triennio
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Risorse differenziate per il biennio tecnico (chimica generale e inorganica) e il triennio agrario 
+                        (chimica organica, biochimica, trasformazioni alimentari). Include strumenti per didattica inclusiva, 
+                        valutazione e supporto per studenti DSA/BES.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(5, 150, 105, 0.1); border-radius: 16px; border: 1px solid rgba(5, 150, 105, 0.2);">
+                <p style="color: var(--primary-color); font-weight: 600; margin: 0;">
+                    👨‍🏫 <strong>Hub Riservato ai Docenti:</strong> Piattaforma professionale per l'insegnamento della chimica 
+                    nell'IIS Mendel, con strumenti avanzati per laboratorio, progettazione didattica e valutazione, 
+                    sviluppata nella comunità di pratiche PNRR.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 110+ strumenti chimici..." id="searchInput">
+        </div>
+        <button class="filter-btn" onclick="toggleFilters()">Statistiche</button>
+    </div>
+
+    <div class="controls-container" id="controlsContainer">
+        <div class="control-group">
+            <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+            <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+            <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+        </div>
+    </div>
+
+    <div class="map-container" id="mapContainer">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+            <h3 id="panelTitle">Strumenti Chimici</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Gli strumenti verranno caricati dinamicamente -->
+        </div>
+    </div>
+
+    <div class="legend" id="legend">
+        <div class="legend-header">
+            <div class="legend-title">🧪 Controlli</div>
+            <div class="drag-handle" title="Trascina per spostare">⚡</div>
+        </div>
+        • Clicca sui nodi per esplorare<br>
+        • 15 categorie, 110+ strumenti chimici<br>
+        • Usa la ricerca per filtrare<br>
+        • Zoom: Ctrl + (+/-) o rotella<br>
+        • Tema scuro: Ctrl + Alt + T<br>
+        • Reset zoom: Ctrl + 0<br>
+        • Doppio click per ripristinare posizione
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">110</div>
+        <div class="stats-label">Strumenti<br>Chimici</div>
+    </div>
+
+    <script>
+        // DATI COMPLETI 110+ STRUMENTI CHIMICA E TRASFORMAZIONI
+        const chemistryData = {
+            "AI Chimica Avanzata": {
+                icon: "🤖",
+                color: "#059669",
+                tools: [
+                    {name: "ChemCrow AI", link: "https://github.com/ur-whitelab/chemcrow-public", description: "AI agent per chimica che pianifica sintesi, predice proprietà e analizza reazioni. Integra 17 tools chimici per ricerca avanzata."},
+                    {name: "AlphaFold Protein", link: "https://alphafold.ebi.ac.uk/", description: "DeepMind AI per predire strutture proteiche 3D. Essenziale per biochimica e trasformazioni enzimatiche in biotecnologie alimentari."},
+                    {name: "ChemSpider AI", link: "https://www.chemspider.com/", description: "Database chimico con AI search per 100M+ composti. Identifica molecole, predice proprietà e trova percorsi sintetici."},
+                    {name: "Reaxys Predictor", link: "https://www.reaxys.com/", description: "AI Elsevier per predire condizioni di reazione, rese e sottoprodotti. Database di 105M+ reazioni chimiche validate."},
+                    {name: "IBM RXN for Chemistry", link: "https://rxn.res.ibm.com/", description: "AI IBM per predire prodotti di reazione e pianificare sintesi organiche. Modelli trained su milioni di reazioni."},
+                    {name: "ChemAxon Predictor", link: "https://chemaxon.com/", description: "Suite AI per predire proprietà ADMET, tossicità, solubilità e stabilità di composti chimici per industria alimentare."},
+                    {name: "DeepChem", link: "https://deepchem.io/", description: "Framework open source per machine learning in chimica. Predice proprietà molecolari e attività biologiche."},
+                    {name: "Atomwise Discovery", link: "https://www.atomwise.com/", description: "AI per drug discovery che predice binding affinity e ottimizza molecole per applicazioni alimentari e nutraceutiche."}
+                ]
+            },
+            "Chimica Generale e Inorganica": {
+                icon: "⚛️",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Periodic Table Pro", link: "https://www.ptable.com/", description: "Tavola periodica interattiva con proprietà dettagliate, orbitali, isotopi e trend periodici per biennio tecnico."},
+                    {name: "ChemSketch", link: "https://www.acdlabs.com/resources/freeware/chemsketch/", description: "Software gratuito ACD Labs per disegnare strutture chimiche, calcolare proprietà e creare presentazioni didattiche."},
+                    {name: "Avogadro", link: "https://avogadro.cc/", description: "Editor molecolare 3D open source per visualizzare strutture, calcolare geometrie e preparare input per calcoli quantistici."},
+                    {name: "ChemCollective", link: "http://chemcollective.org/", description: "Laboratori virtuali Carnegie Mellon per stechiometria, equilibri, cinetica e termodinamica. Simulazioni interattive sicure."},
+                    {name: "PhET Chemistry Simulations", link: "https://phet.colorado.edu/en/simulations/category/chemistry", description: "Simulazioni University of Colorado per pH, concentrazioni, gas ideali, legami chimici e reazioni acido-base."},
+                    {name: "Molecular Workbench", link: "https://mw.concord.org/modeler/", description: "Simulazioni molecolari per visualizzare atomi, legami, stati della materia e trasformazioni chimiche."},
+                    {name: "Virtual Chemistry Lab", link: "https://www.chemcollective.org/vlabs/", description: "Laboratorio virtuale per esperimenti di titolazione, calorimetria, spettroscopia e analisi qualitativa."},
+                    {name: "NIST Chemistry WebBook", link: "https://webbook.nist.gov/chemistry/", description: "Database NIST con dati termochimici, spettroscopici e di proprietà per migliaia di composti chimici."}
+                ]
+            },
+            "Chimica Organica e Biochimica": {
+                icon: "🧬",
+                color: "#dc2626",
+                tools: [
+                    {name: "ChemDraw Online", link: "https://chemdrawdirect.perkinelmer.cloud/", description: "Editor strutture organiche PerkinElmer per disegnare molecole, meccanismi di reazione e pathway biochimici."},
+                    {name: "BioCyc Database", link: "https://biocyc.org/", description: "Database di pathway metabolici e reti biochimiche per 19,000+ organismi. Essenziale per biochimica alimentare."},
+                    {name: "KEGG Pathway", link: "https://www.genome.jp/kegg/pathway.html", description: "Database giapponese di pathway metabolici, molecole bioattive e network di interazioni per biotecnologie."},
+                    {name: "UniProt", link: "https://www.uniprot.org/", description: "Database mondiale di sequenze e funzioni proteiche. Catalogo completo per enzimi nelle trasformazioni alimentari."},
+                    {name: "ChEBI Database", link: "https://www.ebi.ac.uk/chebi/", description: "Ontologia EMBL per entità chimiche di interesse biologico. Classifica metaboliti, vitamine, conservanti alimentari."},
+                    {name: "BRENDA Enzyme", link: "https://www.brenda-enzymes.org/", description: "Database mondiale di enzimi con 83,000+ enzimi caratterizzati. Fondamentale per processi biotecnologici alimentari."},
+                    {name: "PubChem", link: "https://pubchem.ncbi.nlm.nih.gov/", description: "Database NIH con 110M+ composti chimici, bioassays e pathway biologici per ricerca in chimica organica."},
+                    {name: "Metabolomics Workbench", link: "https://www.metabolomicsworkbench.org/", description: "Repository NIH per dati metabolomici. Analizza metaboliti in processi di trasformazione alimentare."}
+                ]
+            },
+            "Laboratorio Virtuale e Simulazioni": {
+                icon: "🔬",
+                color: "#0891b2",
+                tools: [
+                    {name: "Labster Virtual Labs", link: "https://www.labster.com/", description: "200+ laboratori virtuali 3D per chimica analitica, organica, biochimica e microbiologia alimentare. Simulazioni realistiche."},
+                    {name: "Beyond Labz", link: "https://www.beyondlabz.com/", description: "Laboratori virtuali per esperimenti di chimica generale, organica e analitica con strumentazione professionale simulata."},
+                    {name: "ChemLab", link: "http://www.modelscience.com/products.html", description: "Simulatore di laboratorio chimico 3D per esperimenti di sintesi, analisi e caratterizzazione di composti."},
+                    {name: "Virtual ChemLab", link: "https://chemlab.byu.edu/", description: "Laboratorio virtuale Brigham Young per esperimenti di chimica generale, organica e fisica con strumentazione realistica."},
+                    {name: "Chemistry VR Lab", link: "https://immersivevreducation.com/", description: "Laboratorio di chimica in realtà virtuale per esperimenti immersivi e training di sicurezza in ambiente protetto."},
+                    {name: "Molecular Dynamics Sim", link: "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html", description: "Simulazioni dinamica molecolare per stati della materia, transizioni di fase e proprietà termodinamiche."},
+                    {name: "ChemReaX", link: "https://www.chemreax.com/", description: "Simulatore di reazioni chimiche per bilanciamento equazioni, stechiometria e predizione prodotti di reazione."},
+                    {name: "Virtual Chemistry Experiments", link: "https://www.thesciencehouse.org/", description: "Collezione esperimenti virtuali per titolazioni, sintesi organiche, analisi qualitativa e spettroscopia."}
+                ]
+            },
+            "Trasformazioni Alimentari": {
+                icon: "🍞",
+                color: "#ea580c",
+                tools: [
+                    {name: "Food Science Toolkit", link: "https://www.ift.org/", description: "Strumenti IFT per calcoli nutrizionali, conservazione, packaging e sviluppo prodotti alimentari innovativi."},
+                    {name: "Baking Calculator", link: "https://www.kingarthurbaking.com/", description: "Calcolatori per panificazione: idratazione impasti, fermentazione, scaling ricette e controllo qualità prodotti da forno."},
+                    {name: "Fermentation Monitor", link: "https://www.lallemandbrewing.com/", description: "Tools Lallemand per monitoraggio fermentazioni: vino, birra, latticini e prodotti fermentati tradizionali."},
+                    {name: "Dairy Science Tools", link: "https://www.dairyprocessinghandbook.com/", description: "Calcolatori Tetra Pak per processi lattiero-caseari: pastorizzazione, sterilizzazione, concentrazione e essiccamento."},
+                    {name: "Meat Science Calculator", link: "https://www.meatscience.org/", description: "Tools AMSA per trasformazione carni: stagionatura, conservazione, formulazione insaccati e controllo qualità."},
+                    {name: "Oil Processing Tools", link: "https://www.aocs.org/", description: "Calcolatori AOCS per estrazione oli, raffinazione, idrogenazione e analisi qualità grassi e oli alimentari."},
+                    {name: "Beverage Formulation", link: "https://www.beverageinstitute.org/", description: "Tools per formulazione bevande: bilanciamento gusto, conservazione, carbonatazione e stabilità microbiologica."},
+                    {name: "Food Preservation Calc", link: "https://www.fda.gov/food/", description: "Calcolatori FDA per conservazione alimentare: pH, attività dell'acqua, shelf-life e validazione processi termici."}
+                ]
+            },
+            "Analisi e Controllo Qualità": {
+                icon: "📊",
+                color: "#7c3aed",
+                tools: [
+                    {name: "NIST Mass Spectral Library", link: "https://www.nist.gov/srd/nist-standard-reference-database-1a", description: "Database spettri di massa NIST con 350,000+ composti per identificazione tramite GC-MS e LC-MS."},
+                    {name: "SpectralDatabase", link: "https://sdbs.db.aist.go.jp/", description: "Database giapponese con spettri IR, NMR, MS e Raman per identificazione strutturale composti organici."},
+                    {name: "ChemSpider Spectra", link: "http://www.chemspider.com/", description: "Collezione spettri NMR, IR, MS per identificazione composti. Integrato con database chimico completo."},
+                    {name: "FTIR Spectroscopy DB", link: "https://spectrabase.com/", description: "Database Wiley con 2.3M+ spettri per identificazione funzionalità e caratterizzazione materiali."},
+                    {name: "UV-Vis Calculator", link: "https://omlc.org/calc/", description: "Calcolatori per spettroscopia UV-Vis: legge Beer-Lambert, concentrazioni e analisi quantitativa."},
+                    {name: "Chromatography Calculator", link: "https://www.chromacademy.com/", description: "Tools per cromatografia HPLC/GC: risoluzione, efficienza colonne, ottimizzazione metodi analitici."},
+                    {name: "Lab Quality Control", link: "https://www.aoac.org/", description: "Strumenti AOAC per controllo qualità laboratorio: carte controllo, validazione metodi, incertezza di misura."},
+                    {name: "Statistical Process Control", link: "https://www.nist.gov/itl/sed/gsg/statistical-process-control", description: "Tools NIST per controllo statistico processi: carte X-bar, R, capability studies per industria alimentare."}
+                ]
+            },
+            "Processi Industriali Agrari": {
+                icon: "🏭",
+                color: "#059669",
+                tools: [
+                    {name: "Process Simulation Tools", link: "https://www.aspentech.com/", description: "Simulatori Aspen per processi chimici industriali: distillazione, estrazione, cristallizzazione in ambito agroalimentare."},
+                    {name: "Unit Operations Calculator", link: "https://www.che.com/", description: "Calcolatori per operazioni unitarie: scambio termico, separazioni, mixing e sizing equipment industriale."},
+                    {name: "Distillation Calculator", link: "https://www.chemstations.com/", description: "Tools per progettazione colonne di distillazione: McCabe-Thiele, efficienza, dimensionamento per industria alimentare."},
+                    {name: "Heat Exchanger Design", link: "https://www.htri.net/", description: "Software HTRI per progettazione scambiatori di calore in processi di trasformazione alimentare e conservazione."},
+                    {name: "Crystallization Toolkit", link: "https://www.crystallization.org/", description: "Tools per progettazione processi di cristallizzazione: nucleazione, crescita cristalli, purificazione zuccheri."},
+                    {name: "Extraction Calculator", link: "https://www.separationprocesses.com/", description: "Calcolatori per estrazione liquido-liquido e supercritica: oli essenziali, principi attivi vegetali."},
+                    {name: "Membrane Technology", link: "https://www.membrane-extraction-technology.com/", description: "Tools per tecnologie a membrana: ultrafiltrazione, osmosi inversa, concentrazione succhi e latticini."},
+                    {name: "Bioprocess Engineering", link: "https://www.bioprocessengr.com/", description: "Calcolatori per bioprocessi: fermentatori, bioreattori, downstream processing per biotecnologie alimentari."}
+                ]
+            },
+            "Strumenti Calcolo Chimico": {
+                icon: "🧮",
+                color: "#6366f1",
+                tools: [
+                    {name: "Stoichiometry Calculator", link: "https://www.webqc.org/balance.php", description: "Calcolatore per bilanciamento equazioni chimiche, calcoli stechiometrici e conversioni massa-moli."},
+                    {name: "Molarity Calculator", link: "https://www.rapidtables.com/calc/chemistry/molarity-calculator.html", description: "Calcolatori per concentrazioni: molarità, molalità, normalità, ppm, percentuali peso/volume."},
+                    {name: "pH Calculator", link: "https://www.physiologyweb.com/calculators/ph_calculator.html", description: "Calcolatori pH per acidi/basi forti e deboli, tamponi, titolazioni e soluzioni tampone biologiche."},
+                    {name: "Gas Laws Calculator", link: "https://www.omnicalculator.com/chemistry/ideal-gas-law", description: "Calcolatori per leggi dei gas: Boyle, Charles, Gay-Lussac, gas ideali e condizioni standard."},
+                    {name: "Thermodynamics Calc", link: "https://www.engineeringtoolbox.com/", description: "Calcolatori termodinamici: entalpia, entropia, energia libera, equilibri chimici e diagrammi di fase."},
+                    {name: "Kinetics Calculator", link: "https://www.kintecus.com/", description: "Tools per cinetica chimica: costanti di velocità, ordini di reazione, Arrhenius, catalisi enzimatica."},
+                    {name: "Dilution Calculator", link: "https://www.sigmaaldrich.com/IT/en/support/calculators-and-apps/dilution-calculator", description: "Calcolatore Sigma-Aldrich per diluizioni seriali, preparazione standard e curve di calibrazione."},
+                    {name: "Unit Converter Chemistry", link: "https://www.convertunits.com/from/mole", description: "Convertitore universale per unità chimiche: moli, massa molecolare, pressioni, temperature, energie."}
+                ]
+            },
+            "Sicurezza e Normative": {
+                icon: "⚠️",
+                color: "#dc2626",
+                tools: [
+                    {name: "Safety Data Sheets DB", link: "https://www.sigmaaldrich.com/IT/en/support/sds-search", description: "Database SDS Sigma-Aldrich con schede di sicurezza aggiornate per reagenti chimici e normative REACH."},
+                    {name: "GESTIS Substance DB", link: "https://gestis.dguv.de/", description: "Database tedesco con informazioni sicurezza per 9,000+ sostanze chimiche: tossicità, esposizione, DPI."},
+                    {name: "NIOSH Pocket Guide", link: "https://www.cdc.gov/niosh/npg/", description: "Guida tascabile NIOSH per esposizione professionale: limiti TLV, protezioni, primi soccorsi chimici."},
+                    {name: "ChemWatch", link: "https://jr.chemwatch.net/", description: "Sistema gestione sicurezza chimica: SDS, etichettatura GHS, valutazione rischi e training sicurezza."},
+                    {name: "ECHA InfoCard", link: "https://echa.europa.eu/information-on-chemicals", description: "Database ECHA con informazioni registrazione REACH: classificazione, pericoli, usi autorizzati."},
+                    {name: "Hazard Communication", link: "https://www.osha.gov/hazcom", description: "Strumenti OSHA per comunicazione pericoli: etichettatura GHS, pittogrammi, frasi di rischio H e P."},
+                    {name: "Lab Safety Calculator", link: "https://www.acs.org/content/acs/en/chemical-safety.html", description: "Tools ACS per calcoli sicurezza: ventilazione, containment, distanze sicurezza, gestione rifiuti."},
+                    {name: "Emergency Response DB", link: "https://www.cameo.noaa.gov/", description: "Database NOAA per emergenze chimiche: compatibilità, reattività, procedure spill response."}
+                ]
+            },
+            "Supporto Didattico DSA/BES": {
+                icon: "🎯",
+                color: "#f59e0b",
+                tools: [
+                    {name: "ChemSketch Reader", link: "https://www.acdlabs.com/resources/freeware/", description: "Software con sintesi vocale per lettura formule chimiche e supporto studenti dislessici."},
+                    {name: "Molecular Models 3D", link: "https://molview.org/", description: "Visualizzatore 3D molecole per studenti con difficoltà spaziali. Rotazione, zoom, modalità stick/ball."},
+                    {name: "Voice Chemistry Lab", link: "https://www.naturalreaders.com/", description: "Sintesi vocale per procedure laboratorio e protocolli sperimentali. Supporto per studenti non vedenti."},
+                    {name: "Chemistry Mind Maps", link: "https://www.mindmeister.com/", description: "Mappe mentali per organizzare concetti chimici: reazioni, classificazioni, proprietà per studenti DSA."},
+                    {name: "Visual Periodic Table", link: "https://www.rsc.org/periodic-table", description: "Tavola periodica Royal Society con colori, simboli ingranditi e informazioni audio per accessibilità."},
+                    {name: "Simplified Lab Protocols", link: "https://www.jove.com/", description: "Video protocolli JoVE semplificati con sottotitoli e istruzioni step-by-step per studenti BES."},
+                    {name: "Chemistry Symbols Font", link: "https://www.fontsquirrel.com/", description: "Font ad alta leggibilità per formule chimiche e simboli. Supporta studenti disgrafici e dislessici."},
+                    {name: "Interactive Chemistry", link: "https://phet.colorado.edu/en/accessibility", description: "Simulazioni PhET accessibili con screen reader, controlli tastiera e alto contrasto per ipovedenti."}
+                ]
+            },
+            "Piattaforme Apprendimento Chimica": {
+                icon: "📚",
+                color: "#0891b2",
+                tools: [
+                    {name: "Khan Academy Chemistry", link: "https://www.khanacademy.org/science/chemistry", description: "Corso completo chimica generale e organica con video, esercizi interattivi e valutazioni personalizzate."},
+                    {name: "Coursera Chemistry", link: "https://www.coursera.org/browse/physical-science-and-engineering/chemistry", description: "Corsi universitari da Duke, Rice, Johns Hopkins per chimica avanzata e specializzazioni settoriali."},
+                    {name: "edX Chemistry Courses", link: "https://www.edx.org/learn/chemistry", description: "Corsi MIT, Harvard, Berkeley per chimica fisica, organica, biochimica e ingegneria chimica."},
+                    {name: "Brilliant Chemistry", link: "https://brilliant.org/courses/chemistry/", description: "Apprendimento interattivo con problem-solving per termodinamica, cinetica e chimica quantistica."},
+                    {name: "Master Chemistry", link: "https://www.masteringchemistry.com/", description: "Piattaforma Pearson con feedback personalizzato, simulazioni e tutoring per corsi universitari."},
+                    {name: "ALEKS Chemistry", link: "https://www.aleks.com/k12/chemistry", description: "Sistema adattivo per apprendimento personalizzato con assessment continuo e remediation automatica."},
+                    {name: "ChemTutor", link: "https://www.chemtutor.com/", description: "Tutorials interattivi per chimica generale: nomenclatura, stechiometria, equilibri, elettrochimica."},
+                    {name: "Organic Chemistry Portal", link: "https://www.organic-chemistry.org/", description: "Portale completo per chimica organica: reazioni, meccanismi, sintesi, nomenclatura IUPAC."}
+                ]
+            },
+            "Database e Schede Sicurezza": {
+                icon: "📋",
+                color: "#334155",
+                tools: [
+                    {name: "PubChem Compound", link: "https://pubchem.ncbi.nlm.nih.gov/", description: "Database NIH con 110M+ composti: proprietà fisico-chimiche, tossicità, bioattività per risk assessment."},
+                    {name: "ChemIDplus", link: "https://chem.nlm.nih.gov/chemidplus/", description: "Database NLM con sinonimi, CAS numbers, proprietà, tossicità e riferimenti letteratura per sostanze chimiche."},
+                    {name: "TOXNET", link: "https://toxnet.nlm.nih.gov/", description: "Network database NLM per tossicologia: HSDB, TOXLINE, ChemIDplus per valutazione rischi chimici."},
+                    {name: "ECOTOX Database", link: "https://cfpub.epa.gov/ecotox/", description: "Database EPA per ecotossicità: effetti su organismi acquatici, terrestri per valutazione impatto ambientale."},
+                    {name: "RTECS Database", link: "https://www.cdc.gov/niosh/rtecs/", description: "Registry NIOSH effetti tossici sostanze chimiche: dati dose-risposta, vie esposizione, organi bersaglio."},
+                    {name: "HSDB Hazardous Substances", link: "https://pubchem.ncbi.nlm.nih.gov/source/hsdb", description: "Hazardous Substances Data Bank con peer-review per tossicità, ecologia, emergency response."},
+                    {name: "CAMEO Chemicals", link: "https://cameochemicals.noaa.gov/", description: "Database NOAA per compatibilità chimica, reattività, gestione emergenze e response planning."},
+                    {name: "CHRIS Database", link: "https://www.uscg.mil/Chemical-Hazards-Response-Information-System-CHRIS/", description: "Chemical Hazards Response Information System USCG per trasporto marittimo sostanze pericolose."}
+                ]
+            },
+            "Biotecnologie e Fermentazioni": {
+                icon: "🦠",
+                color: "#059669",
+                tools: [
+                    {name: "BioBrick Database", link: "http://parts.igem.org/", description: "Registry iGEM di parti biologiche standardizzate per ingegneria genetica e biologia sintetica alimentare."},
+                    {name: "Fermentation Calculator", link: "https://www.northernbrewer.com/", description: "Calcolatori per fermentazione alcolica: densità, ABV, attenuazione, timing per bevande fermentate."},
+                    {name: "Enzyme Database", link: "https://enzyme.expasy.org/", description: "ExPASy enzyme database con 7,000+ enzimi caratterizzati: cinetica, substrati, applicazioni industriali."},
+                    {name: "MetaCyc Pathways", link: "https://metacyc.org/", description: "Database pathway metabolici da 3,000+ organismi per progettazione processi biotecnologici alimentari."},
+                    {name: "BioNumbers", link: "https://bionumbers.hms.harvard.edu/", description: "Database quantitativo Harvard per parametri biologici: concentrazioni, rate, dimensioni cellulari."},
+                    {name: "IMG/M Database", link: "https://img.jgi.doe.gov/", description: "Integrated Microbial Genomes per analisi comparativa microorganismi in biotecnologie alimentari."},
+                    {name: "FoodMicrobioNet", link: "https://www.foodmicrobionet.org/", description: "Network europeo per microbiologia alimentare: starter cultures, probiotici, conservazione biologica."},
+                    {name: "Probiotics Database", link: "https://www.worldgastroenterology.org/", description: "Database WGO per ceppi probiotici: identificazione, caratteristiche, applicazioni alimentari e salutistiche."}
+                ]
+            },
+            "Ambiente e Sostenibilità": {
+                icon: "🌱",
+                color: "#22c55e",
+                tools: [
+                    {name: "LCA Calculator", link: "https://www.pre-sustainability.com/", description: "Calcolatore Life Cycle Assessment per valutare impatto ambientale processi produttivi alimentari."},
+                    {name: "Green Chemistry Tools", link: "https://www.acs.org/content/acs/en/greenchemistry.html", description: "Strumenti ACS per chimica verde: solventi alternativi, catalisi, atom economy, rinnovabili."},
+                    {name: "Carbon Footprint Calc", link: "https://www.carbonfootprint.com/", description: "Calcolatore impronta carbonio per industria alimentare: emissioni CO2, offset, certificazioni."},
+                    {name: "Water Footprint Tool", link: "https://waterfootprint.org/", description: "Strumenti per calcolo impronta idrica processi alimentari: blue, green, grey water consumption."},
+                    {name: "Sustainable Chemistry", link: "https://www.epa.gov/greenchemistry", description: "Tools EPA per design molecole sostenibili: degradabilità, tossicità ridotta, efficienza energetica."},
+                    {name: "Circular Economy Tools", link: "https://www.ellenmacarthurfoundation.org/", description: "Framework Ellen MacArthur per economia circolare: riuso, riciclo, riduzione sprechi alimentari."},
+                    {name: "Biodegradability Test", link: "https://www.oecd.org/chemicalsafety/testing/", description: "Test OECD per biodegradabilità packaging alimentare e additivi: ready, inherent, ultimate."},
+                    {name: "Renewable Feedstock", link: "https://www.biorefinery.nl/", description: "Database feedstock rinnovabili per bioraffinerie: biomasse, sottoprodotti agricoli, waste streams."}
+                ]
+            },
+            "Strumenti Valutazione Docenti": {
+                icon: "📝",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Chemistry Test Maker", link: "https://www.proprofs.com/quiz-school/", description: "Generatore test online per chimica: quiz interattivi, valutazione automatica, analytics prestazioni studenti."},
+                    {name: "Lab Report Rubrics", link: "https://www.rcampus.com/", description: "Rubric generator per valutazione relazioni laboratorio: criteri standardizzati, feedback costruttivo."},
+                    {name: "ChemSketch Assessment", link: "https://www.acdlabs.com/resources/freeware/", description: "Tools per valutare disegni strutture chimiche: correttezza, nomenclatura, meccanismi reazione."},
+                    {name: "Virtual Lab Grading", link: "https://www.labster.com/", description: "Sistema valutazione automatica per laboratori virtuali: competenze procedurali, safety protocols."},
+                    {name: "Concept Mapping Tools", link: "https://cmaptools.ihmc.us/", description: "IHMC CmapTools per valutare comprensione concetti chimici tramite mappe concettuali collaborative."},
+                    {name: "Peer Review Platform", link: "https://www.peergrade.io/", description: "Piattaforma per peer assessment: valutazione tra pari di progetti, relazioni, presentazioni chimiche."},
+                    {name: "Portfolio Assessment", link: "https://www.seesaw.me/", description: "Platform per portfolio digitali studenti: raccolta lavori, progressi, riflessioni metacognitive."},
+                    {name: "Formative Assessment", link: "https://www.socrative.com/", description: "Tools per valutazione formativa real-time: exit tickets, quiz, feedback immediato durante lezioni."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 110;
+        let currentZoom = 1;
+        let isDarkMode = false;
+
+        // FUNZIONI PRINCIPALI DELL'APP
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_chemistry_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(chemistryData);
+            
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += chemistryData[category].tools.length;
+            });
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = chemistryData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${chemistryData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${chemistryData[category].tools.length} strumenti</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${chemistryData[categoryName].tools.length} strumenti disponibili`;
+            
+            content.innerHTML = '';
+            
+            chemistryData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        ${chemistryData[categoryName].icon} ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi al Strumento
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(chemistryData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        isVisible = chemistryData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount}/${Object.keys(chemistryData).length}`;
+                document.querySelector('.stats-label').textContent = 'Categorie\nVisibili';
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+                document.querySelector('.stats-label').innerHTML = 'Strumenti<br>Chimici';
+            }
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '+':
+                        case '=':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                if (e.key === 't' && e.ctrlKey && e.altKey) {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+
+            document.addEventListener('wheel', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        zoomOut();
+                    } else {
+                        zoomIn();
+                    }
+                }
+            }, { passive: false });
+        }
+
+        // FUNZIONE PER RENDERE LA LEGENDA SPOSTABILE
+        function setupDraggableLegend() {
+            const legend = document.getElementById('legend');
+            const dragHandle = legend.querySelector('.drag-handle');
+            let isDragging = false;
+            let dragOffset = { x: 0, y: 0 };
+
+            // Inizia dragging
+            const startDrag = (e) => {
+                isDragging = true;
+                legend.classList.add('dragging');
+                
+                const rect = legend.getBoundingClientRect();
+                dragOffset.x = (e.clientX || e.touches[0].clientX) - rect.left;
+                dragOffset.y = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', endDrag);
+                document.addEventListener('touchmove', drag, { passive: false });
+                document.addEventListener('touchend', endDrag);
+                
+                e.preventDefault();
+            };
+
+            // Durante il dragging
+            const drag = (e) => {
+                if (!isDragging) return;
+                
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                
+                const newX = clientX - dragOffset.x;
+                const newY = clientY - dragOffset.y;
+                
+                // Limiti della finestra
+                const maxX = window.innerWidth - legend.offsetWidth;
+                const maxY = window.innerHeight - legend.offsetHeight;
+                
+                const clampedX = Math.max(0, Math.min(newX, maxX));
+                const clampedY = Math.max(0, Math.min(newY, maxY));
+                
+                legend.style.left = clampedX + 'px';
+                legend.style.top = clampedY + 'px';
+                legend.style.bottom = 'auto';
+                legend.style.right = 'auto';
+                
+                e.preventDefault();
+            };
+
+            // Fine dragging
+            const endDrag = () => {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                legend.classList.remove('dragging');
+                
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', endDrag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('touchend', endDrag);
+                
+                // Salva posizione
+                const rect = legend.getBoundingClientRect();
+                localStorage.setItem('mendel_chemistry_legend_position', JSON.stringify({
+                    x: rect.left,
+                    y: rect.top
+                }));
+            };
+
+            // Event listeners
+            dragHandle.addEventListener('mousedown', startDrag);
+            dragHandle.addEventListener('touchstart', startDrag, { passive: false });
+            legend.addEventListener('mousedown', startDrag);
+            legend.addEventListener('touchstart', startDrag, { passive: false });
+
+            // Carica posizione salvata
+            const savedPosition = localStorage.getItem('mendel_chemistry_legend_position');
+            if (savedPosition) {
+                try {
+                    const pos = JSON.parse(savedPosition);
+                    legend.style.left = pos.x + 'px';
+                    legend.style.top = pos.y + 'px';
+                    legend.style.bottom = 'auto';
+                    legend.style.right = 'auto';
+                } catch (e) {
+                    console.log('Errore caricamento posizione legenda:', e);
+                }
+            }
+
+            // Reset posizione su doppio click
+            legend.addEventListener('dblclick', () => {
+                legend.style.left = '2rem';
+                legend.style.top = 'auto';
+                legend.style.bottom = '2rem';
+                legend.style.right = 'auto';
+                localStorage.removeItem('mendel_chemistry_legend_position');
+                alert('🧪 Legenda ripristinata nella posizione originale');
+            });
+        }
+
+        // FUNZIONE PER RENDERE I CONTROLLI SPOSTABILI
+        function setupDraggableControls() {
+            const controlsContainer = document.getElementById('controlsContainer');
+            let isDragging = false;
+            let dragOffset = { x: 0, y: 0 };
+
+            // Inizia dragging
+            const startDrag = (e) => {
+                // Solo se si clicca direttamente sul container, non sui pulsanti
+                if (e.target.closest('.control-btn')) return;
+                
+                isDragging = true;
+                controlsContainer.classList.add('dragging');
+                
+                const rect = controlsContainer.getBoundingClientRect();
+                dragOffset.x = (e.clientX || e.touches[0].clientX) - rect.left;
+                dragOffset.y = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', endDrag);
+                document.addEventListener('touchmove', drag, { passive: false });
+                document.addEventListener('touchend', endDrag);
+                
+                e.preventDefault();
+            };
+
+            // Durante il dragging
+            const drag = (e) => {
+                if (!isDragging) return;
+                
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                
+                const newX = clientX - dragOffset.x;
+                const newY = clientY - dragOffset.y;
+                
+                // Limiti della finestra
+                const maxX = window.innerWidth - controlsContainer.offsetWidth;
+                const maxY = window.innerHeight - controlsContainer.offsetHeight;
+                
+                const clampedX = Math.max(0, Math.min(newX, maxX));
+                const clampedY = Math.max(0, Math.min(newY, maxY));
+                
+                controlsContainer.style.left = clampedX + 'px';
+                controlsContainer.style.top = clampedY + 'px';
+                controlsContainer.style.right = 'auto';
+                controlsContainer.style.bottom = 'auto';
+                
+                e.preventDefault();
+            };
+
+            // Fine dragging
+            const endDrag = () => {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                controlsContainer.classList.remove('dragging');
+                
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', endDrag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('touchend', endDrag);
+                
+                // Salva posizione
+                const rect = controlsContainer.getBoundingClientRect();
+                localStorage.setItem('mendel_chemistry_controls_position', JSON.stringify({
+                    x: rect.left,
+                    y: rect.top
+                }));
+            };
+
+            // Event listeners
+            controlsContainer.addEventListener('mousedown', startDrag);
+            controlsContainer.addEventListener('touchstart', startDrag, { passive: false });
+
+            // Carica posizione salvata
+            const savedPosition = localStorage.getItem('mendel_chemistry_controls_position');
+            if (savedPosition) {
+                try {
+                    const pos = JSON.parse(savedPosition);
+                    controlsContainer.style.left = pos.x + 'px';
+                    controlsContainer.style.top = pos.y + 'px';
+                    controlsContainer.style.right = 'auto';
+                    controlsContainer.style.bottom = 'auto';
+                } catch (e) {
+                    console.log('Errore caricamento posizione controlli:', e);
+                }
+            }
+
+            // Reset posizione su doppio click
+            controlsContainer.addEventListener('dblclick', () => {
+                controlsContainer.style.top = '2rem';
+                controlsContainer.style.right = '2rem';
+                controlsContainer.style.left = 'auto';
+                controlsContainer.style.bottom = 'auto';
+                localStorage.removeItem('mendel_chemistry_controls_position');
+                alert('🎮 Controlli ripristinati nella posizione originale');
+            });
+        }
+
+        function toggleFilters() {
+            // Mostra statistiche dettagliate delle categorie
+            const categories = Object.keys(chemistryData);
+            let filterInfo = "🧪 STATISTICHE HUB CHIMICA:\n\n";
+            
+            let totalTools = 0;
+            categories.forEach(category => {
+                const count = chemistryData[category].tools.length;
+                totalTools += count;
+                filterInfo += `${chemistryData[category].icon} ${category}: ${count} strumenti\n`;
+            });
+            
+            filterInfo += `\n🎯 TOTALE: ${totalTools} strumenti chimici\n`;
+            filterInfo += `📚 ${categories.length} categorie disponibili\n\n`;
+            filterInfo += "💡 SUGGERIMENTO: Usa la ricerca per trovare strumenti specifici\n";
+            filterInfo += "🔍 Cerca per nome strumento o parola chiave (es: 'spettroscopia', 'sicurezza', 'fermentazione')";
+            
+            alert(filterInfo);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function loadUserPreferences() {
+            const savedTheme = localStorage.getItem('mendel_chemistry_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+        }
+
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                currentZoom = 1;
+                updateZoom();
+            }
+        }
+
+        // EVENT LISTENERS E INIZIALIZZAZIONE
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserPreferences();
+            initializeMap();
+            setupSearch();
+            setupKeyboardControls();
+            setupDraggableLegend();
+            setupDraggableControls(); // Aggiunta questa linea
+        });
+
+        // Chiudi pannello quando si clicca fuori
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('toolsPanel');
+            const isClickInsidePanel = panel.contains(e.target);
+            const isClickOnCategoryNode = e.target.closest('.category-node');
+            
+            if (!isClickInsidePanel && !isClickOnCategoryNode && panel.classList.contains('open')) {
+                closePanel();
+            }
+        });
+
+        window.addEventListener('resize', debounce(handleResize, 250));
+
+        // Esponi funzioni globali necessarie
+        window.toggleTheme = toggleTheme;
+        window.zoomIn = zoomIn;
+        window.zoomOut = zoomOut;
+        window.resetZoom = resetZoom;
+        window.closePanel = closePanel;
+        window.toggleFilters = toggleFilters;
+    </script>
+</body>
+</html>

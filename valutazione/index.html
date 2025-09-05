@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Hub Valutazione - IIS Mendel</title>
+    <meta name="description" content="Hub Valutazione - IIS Mendel - 100+ strumenti per assessment STEM, umanistico e competenze agrarie">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #06b6d4;
+            --accent-color: #8b5cf6;
+            --eval-blue: #0284c7;
+            --data-purple: #7c3aed;
+            --success-green: #10b981;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-eval: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-eval);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-eval);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-eval);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-eval);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-eval);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-btn:hover {
+            background: var(--eval-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--eval-blue);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .category-count {
+            background: var(--gradient-eval);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tools-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-item:hover {
+            background: rgba(14, 165, 233, 0.1);
+            transform: translateX(4px);
+            border-color: var(--eval-blue);
+        }
+
+        .tool-content {
+            flex: 1;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-description {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .tool-badge {
+            background: var(--gradient-eval);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        .external-icon {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .special-sections {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .special-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .special-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card.blue {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--eval-blue);
+        }
+
+        .feature-card.purple {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card.green {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success-green);
+        }
+
+        .feature-card.cyan {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--secondary-color);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list {
+            text-align: left;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .feature-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .assessment-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .assessment-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px dashed var(--border-light);
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .assessment-card:hover {
+            border-style: solid;
+            border-color: var(--eval-blue);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .assessment-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .assessment-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .assessment-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .assessment-badge.stem { background: var(--eval-blue); color: white; }
+        .assessment-badge.humanities { background: var(--accent-color); color: white; }
+        .assessment-badge.agrarian { background: var(--success-green); color: white; }
+        .assessment-badge.ai { background: var(--data-purple); color: white; }
+
+        .assessment-desc {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-card {
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .team-card.blue {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.2));
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .team-card.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.2));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .team-card.green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .team-card.cyan {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.2));
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .team-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .team-desc {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(135deg, var(--eval-blue), var(--accent-color));
+        }
+
+        .project-card.objectives {
+            background: linear-gradient(135deg, var(--success-green), var(--secondary-color));
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .project-list {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .project-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number.blue { color: var(--eval-blue); }
+        .stat-number.purple { color: var(--accent-color); }
+        .stat-number.green { color: var(--success-green); }
+        .stat-number.cyan { color: var(--secondary-color); }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-container, .controls-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                justify-content: center;
+                margin: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .special-card {
+                padding: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>📊 Hub Valutazione </h1>
+            <p>100+ Strumenti per Assessment STEM, Umanistico e Competenze Agrarie</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Valutazione - IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di eccellenza per l'<strong>assessment innovativo</strong> dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>100+ strumenti specializzati</strong> per la valutazione formativa e sommativa 
+                nelle discipline STEM, umanistiche e nelle competenze agrarie, integrando AI, analytics e metodologie innovative.
+            </p>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(14, 165, 233, 0.1); border-radius: 16px; border: 1px solid rgba(14, 165, 233, 0.2);">
+                <p style="color: var(--eval-blue); font-weight: 600; margin: 0;">
+                    📊 <strong>Hub Valutazione - IIS Mendel:</strong> Trasformare l'assessment attraverso 
+                    strumenti digitali avanzati, AI e metodologie evidence-based. 
+                    100+ risorse per valutare competenze e promuovere l'apprendimento nella comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span style="color: var(--text-light); font-size: 1.125rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 100+ strumenti di valutazione..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button class="control-btn" onclick="toggleTheme()" title="Tema">🌙</button>
+        <button class="control-btn" onclick="showStats()" title="Statistiche">📊</button>
+    </div>
+
+    <div class="main-content">
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+
+        <div class="special-sections">
+            <!-- Sezione Assessment Integrato -->
+            <div class="special-card">
+                <h3 class="special-title">🎯 Assessment Integrato STEM-Umanistico-Agrario</h3>
+                <div class="features-grid">
+                    <div class="feature-card blue">
+                        <h4 class="feature-title">🔬 STEM Assessment</h4>
+                        <div class="feature-list">
+                            <div>• Valutazione competenze scientifiche</div>
+                            <div>• Problem solving matematico</div>
+                            <div>• Laboratori virtuali valutati</div>
+                            <div>• Progetti tecnici agrari</div>
+                        </div>
+                    </div>
+                    <div class="feature-card purple">
+                        <h4 class="feature-title">📚 Assessment Umanistico</h4>
+                        <div class="feature-list">
+                            <div>• Competenze linguistiche</div>
+                            <div>• Pensiero critico e argomentazione</div>
+                            <div>• Portfolio digitali</div>
+                            <div>• Presentazioni multimediali</div>
+                        </div>
+                    </div>
+                    <div class="feature-card green">
+                        <h4 class="feature-title">🌾 Competenze Agrarie</h4>
+                        <div class="feature-list">
+                            <div>• Valutazione pratica di campo</div>
+                            <div>• Progetti sostenibilità</div>
+                            <div>• Analisi casi aziendali</div>
+                            <div>• Competenze professionali</div>
+                        </div>
+                    </div>
+                    <div class="feature-card cyan">
+                        <h4 class="feature-title">🤖 AI-Enhanced Assessment</h4>
+                        <div class="feature-list">
+                            <div>• Feedback automatizzato</div>
+                            <div>• Analisi learning analytics</div>
+                            <div>• Personalizzazione percorsi</div>
+                            <div>• Predizione performance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase Assessment Methods -->
+            <div class="special-card">
+                <h3 class="special-title">🎓 Showcase Metodologie Assessment</h3>
+                <div class="assessment-showcase-grid" id="assessmentShowcaseGrid">
+                    <!-- I metodi di assessment verranno generati dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Sezione TEAM Buone Pratiche -->
+            <div class="special-card">
+                <h3 class="special-title">🏆 TEAM Buone Pratiche - Assessment Innovativo</h3>
+                <div class="team-grid">
+                    <div class="team-card blue">
+                        <div class="team-icon">📊</div>
+                        <h4 class="team-title">Evidence-Based Assessment</h4>
+                        <p class="team-desc">Valutazione basata su evidenze e dati oggettivi</p>
+                    </div>
+                    <div class="team-card purple">
+                        <div class="team-icon">🎯</div>
+                        <h4 class="team-title">Competency-Based Evaluation</h4>
+                        <p class="team-desc">Focus su competenze e risultati di apprendimento</p>
+                    </div>
+                    <div class="team-card green">
+                        <div class="team-icon">🔄</div>
+                        <h4 class="team-title">Formative Assessment</h4>
+                        <p class="team-desc">Valutazione continua per migliorare l'apprendimento</p>
+                    </div>
+                    <div class="team-card cyan">
+                        <div class="team-icon">📈</div>
+                        <h4 class="team-title">Learning Analytics</h4>
+                        <p class="team-desc">Analisi dati per personalizzazione didattica</p>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">📋</span>
+                            <h4 class="project-title">Progetti Assessment 2025</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Rubric Digitali Intelligenti</div>
+                            <div>• Portfolio Competenze Agrarie</div>
+                            <div>• AI Feedback System</div>
+                            <div>• Assessment Autentico STEM</div>
+                        </div>
+                    </div>
+                    <div class="project-card objectives">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🎯</span>
+                            <h4 class="project-title">Obiettivi PNRR</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Valutazione Competenze 21° Secolo</div>
+                            <div>• Assessment Personalizzato</div>
+                            <div>• Metodologie Evidence-Based</div>
+                            <div>• Comunità Pratiche Valutative</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3 class="special-title">Statistiche della Piattaforma</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number blue">102</div>
+                        <div class="stat-label">Strumenti Assessment</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number purple">178</div>
+                        <div class="stat-label">Docenti Formati</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number green">24</div>
+                        <div class="stat-label">Metodologie Validate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number cyan">94%</div>
+                        <div class="stat-label">Efficacia Valutativa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dati delle categorie valutazione
+        const categories = [
+            {
+                id: 'ai-assessment',
+                name: 'Strumenti AI Assessment',
+                icon: '🤖',
+                color: 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
+                description: 'Strumenti AI per valutazione automatizzata e feedback intelligente',
+                tools: [
+                    { name: 'Gradescope', url: 'https://www.gradescope.com/', description: 'AI-powered grading per STEM con riconoscimento calligrafia' },
+                    { name: 'Edubot Assessment', url: 'https://www.edubot.ai/', description: 'Chatbot AI per valutazione formativa in tempo reale' },
+                    { name: 'Century Tech', url: 'https://www.century.tech/', description: 'Piattaforma AI assessment personalizzato e adattivo' },
+                    { name: 'Cognii Virtual Learning Assistant', url: 'https://www.cognii.com/', description: 'AI tutoring e assessment per scrittura e pensiero critico' },
+                    { name: 'Content Technologies AutoTutor', url: 'https://www.autotutor.org/', description: 'Sistema intelligente conversazione per assessment' },
+                    { name: 'Squirrel AI Assessment', url: 'https://squirrelai.com/', description: 'AI adaptive testing per matematica e scienze' },
+                    { name: 'Coursera Assessment AI', url: 'https://www.coursera.org/', description: 'Peer assessment automatizzato con machine learning' },
+                    { name: 'IBM Watson Education', url: 'https://www.ibm.com/watson/education/', description: 'AI analytics per performance prediction' },
+                    { name: 'Proctorio AI Monitoring', url: 'https://proctorio.com/', description: 'Proctoring intelligente per esami online' },
+                    { name: 'Turnitin Feedback Studio', url: 'https://www.turnitin.com/', description: 'AI feedback per miglioramento scrittura accademica' }
+                ]
+            },
+            {
+                id: 'formative-assessment',
+                name: 'Valutazione Formativa',
+                icon: '📝',
+                color: 'linear-gradient(135deg, #0ea5e9, #0284c7)',
+                description: 'Valutazione formativa in tempo reale per migliorare l\'apprendimento',
+                tools: [
+                    { name: 'Kahoot!', url: 'https://kahoot.com/', description: 'Quiz interattivi per valutazione formativa immediata' },
+                    { name: 'Mentimeter', url: 'https://www.mentimeter.com/', description: 'Polling live e word clouds per feedback istantaneo' },
+                    { name: 'Socrative', url: 'https://www.socrative.com/', description: 'Assessment real-time con exit tickets e quick polls' },
+                    { name: 'Plickers', url: 'https://get.plickers.com/', description: 'Assessment cartaceo con scanning QR code' },
+                    { name: 'Poll Everywhere', url: 'https://www.polleverywhere.com/', description: 'Audience response system per engagement attivo' },
+                    { name: 'Quizizz', url: 'https://quizizz.com/', description: 'Gamified assessment con feedback immediato' },
+                    { name: 'Pear Deck', url: 'https://www.peardeck.com/', description: 'Presentazioni interattive con student response' },
+                    { name: 'Nearpod', url: 'https://nearpod.com/', description: 'Lezioni interattive con assessment integrato' },
+                    { name: 'Flipgrid', url: 'https://flipgrid.com/', description: 'Video assessment per competenze comunicative' },
+                    { name: 'Padlet', url: 'https://padlet.com/', description: 'Collaboration boards per assessment peer-to-peer' }
+                ]
+            },
+            {
+                id: 'rubrics-portfolios',
+                name: 'Rubric & Portfolio Digitali',
+                icon: '📋',
+                color: 'linear-gradient(135deg, #10b981, #059669)',
+                description: 'Creazione rubric e portfolio digitali per valutazione autentica',
+                tools: [
+                    { name: 'RubiStar', url: 'http://rubistar.4teachers.org/', description: 'Generatore rubric gratuito per ogni disciplina' },
+                    { name: 'Seesaw', url: 'https://web.seesaw.me/', description: 'Portfolio digitale studenti con assessment tools' },
+                    { name: 'FreshGrade', url: 'https://www.freshgrade.com/', description: 'Portfolio e communication tool per famiglie' },
+                    { name: 'Google Sites Portfolio', url: 'https://sites.google.com/', description: 'Creazione portfolio personali con Google Workspace' },
+                    { name: 'Adobe Portfolio', url: 'https://portfolio.adobe.com/', description: 'Portfolio creativi per progetti artistici e multimediali' },
+                    { name: 'Bulb Digital Portfolio', url: 'https://www.bulbapp.com/', description: 'Portfolio scolastico con rubric assessment' },
+                    { name: 'iRubric', url: 'https://www.rcampus.com/indexrubric.cfm', description: 'Piattaforma online per rubric personalizzate' },
+                    { name: 'QuickRubric', url: 'https://www.quickrubric.com/', description: 'Creazione rapida rubric con condivisione facile' },
+                    { name: 'Mahara ePortfolio', url: 'https://mahara.org/', description: 'Portfolio opensource per lifelong learning' },
+                    { name: 'ForAllRubrics', url: 'https://www.forallrubrics.com/', description: 'App mobile per assessment con rubric offline' }
+                ]
+            },
+            {
+                id: 'stem-assessment',
+                name: 'Valutazione STEM',
+                icon: '🔬',
+                color: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+                description: 'Valutazione specializzata per matematica, scienze e competenze tecniche',
+                tools: [
+                    { name: 'Desmos Activity Builder', url: 'https://teacher.desmos.com/', description: 'Assessment matematico interattivo con graphing' },
+                    { name: 'PhET Simulations Assessment', url: 'https://phet.colorado.edu/', description: 'Valutazione attraverso simulazioni scientifiche' },
+                    { name: 'GeoGebra Classroom', url: 'https://www.geogebra.org/classroom', description: 'Assessment matematica dinamica e geometria' },
+                    { name: 'Labster Virtual Labs', url: 'https://www.labster.com/', description: 'Valutazione competenze laboratorio in VR' },
+                    { name: 'Code.org Assessment Tools', url: 'https://code.org/', description: 'Assessment programmazione e computational thinking' },
+                    { name: 'Khan Academy Mastery', url: 'https://www.khanacademy.org/', description: 'Mastery learning con assessment adattivo STEM' },
+                    { name: 'IXL Math Assessment', url: 'https://www.ixl.com/', description: 'Assessment matematico personalizzato K-12' },
+                    { name: 'Wolfram Alpha Problem Generator', url: 'https://www.wolframalpha.com/', description: 'Generazione automatica problemi matematici' },
+                    { name: 'Carnegie Learning MATHia', url: 'https://www.carnegielearning.com/', description: 'AI tutor matematico con assessment continuo' },
+                    { name: 'Prodigy Math Game', url: 'https://www.prodigygame.com/', description: 'Gamified math assessment con curriculum alignment' }
+                ]
+            },
+            {
+                id: 'humanities-assessment',
+                name: 'Assessment Umanistico',
+                icon: '📚',
+                color: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                description: 'Valutazione competenze linguistiche, storiche e comunicative',
+                tools: [
+                    { name: 'NoRedInk Writing Assessment', url: 'https://www.noredink.com/', description: 'Assessment grammatica e writing skills personalizzato' },
+                    { name: 'Writelike Assessment', url: 'https://writelike.org/', description: 'Valutazione creative writing attraverso mentor texts' },
+                    { name: 'CommonLit Assessment', url: 'https://www.commonlit.org/', description: 'Reading comprehension con testi autentici' },
+                    { name: 'Actively Learn', url: 'https://www.activelylearn.com/', description: 'Annotated reading con assessment integrato' },
+                    { name: 'VoiceThread', url: 'https://voicethread.com/', description: 'Assessment orale multimediale e collaborativo' },
+                    { name: 'Adobe Spark Presentations', url: 'https://spark.adobe.com/', description: 'Valutazione attraverso storytelling digitale' },
+                    { name: 'Flipgrid Language Assessment', url: 'https://flipgrid.com/', description: 'Assessment competenze linguistiche attraverso video' },
+                    { name: 'Storybird Writing Assessment', url: 'https://storybird.com/', description: 'Creative writing assessment con prompt visuali' },
+                    { name: 'Timeline JS', url: 'https://timeline.knightlab.com/', description: 'Assessment storia attraverso timeline interattive' },
+                    { name: 'ThingLink Interactive Media', url: 'https://www.thinglink.com/', description: 'Assessment multimediale per competenze comunicative' }
+                ]
+            },
+            {
+                id: 'authentic-assessment',
+                name: 'Assessment Autentico',
+                icon: '🎯',
+                color: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+                description: 'Valutazione competenze attraverso compiti di realtà e progetti autentici',
+                tools: [
+                    { name: 'Buck Institute PBL Tools', url: 'https://www.pblworks.org/', description: 'Project-Based Learning con rubric assessment' },
+                    { name: 'Trello Project Management', url: 'https://trello.com/', description: 'Assessment gestione progetti attraverso kanban' },
+                    { name: 'Slack Collaboration Assessment', url: 'https://slack.com/', description: 'Valutazione competenze collaborative digitali' },
+                    { name: 'Flipgrid Community Showcase', url: 'https://flipgrid.com/', description: 'Assessment attraverso presentazioni comunità' },
+                    { name: 'Adobe Creative Cloud Education', url: 'https://www.adobe.com/education.html', description: 'Assessment progetti creativi multimediali' },
+                    { name: 'Minecraft Education Assessment', url: 'https://education.minecraft.net/', description: 'Problem solving assessment in ambienti virtuali' },
+                    { name: 'Tinkercad Design Challenges', url: 'https://www.tinkercad.com/', description: 'Assessment design thinking e making' },
+                    { name: 'Flipsnack Magazine Creator', url: 'https://www.flipsnack.com/', description: 'Assessment attraverso pubblicazioni digitali' },
+                    { name: 'Canva Design Assessment', url: 'https://www.canva.com/', description: 'Valutazione competenze design e comunicazione visiva' },
+                    { name: 'Wix Website Projects', url: 'https://www.wix.com/', description: 'Assessment attraverso creazione portfolio web' }
+                ]
+            },
+            {
+                id: 'peer-assessment',
+                name: 'Valutazione tra Pari',
+                icon: '🤝',
+                color: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                description: 'Valutazione tra pari per sviluppare metacognizione e spirito critico',
+                tools: [
+                    { name: 'Peergrade', url: 'https://www.peergrade.io/', description: 'Piattaforma peer review con rubric personalizzate' },
+                    { name: 'Teammates', url: 'https://teammatesv4.appspot.com/', description: 'Peer evaluation per progetti di gruppo' },
+                    { name: 'Kritik', url: 'https://kritik.io/', description: 'Peer assessment con machine learning quality control' },
+                    { name: 'Crowdmark Collaborative', url: 'https://crowdmark.com/', description: 'Grading collaborativo con peer input' },
+                    { name: 'PeerWise Question Bank', url: 'https://peerwise.cs.auckland.ac.nz/', description: 'Studenti creano domande per peer assessment' },
+                    { name: 'Calibrated Peer Review', url: 'https://cpr.molsci.ucla.edu/', description: 'Sistema calibrato per peer review scrittura' },
+                    { name: 'FeedbackFruits Peer Review', url: 'https://feedbackfruits.com/', description: 'Peer feedback integrato in LMS' },
+                    { name: 'Turnitin PeerMark', url: 'https://www.turnitin.com/', description: 'Peer review system integrato antiplagio' },
+                    { name: 'ComPAIR', url: 'https://compair.educate.ubc.ca/', description: 'Comparative peer assessment pairing' },
+                    { name: 'iPeer Assessment', url: 'https://ipeer.ctlt.ubc.ca/', description: 'Peer evaluation online per teamwork' }
+                ]
+            },
+            {
+                id: 'analytics-data',
+                name: 'Analisi dell\'Apprendimento',
+                icon: '📈',
+                color: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                description: 'Analisi dati apprendimento per decisioni evidence-based',
+                tools: [
+                    { name: 'Google Analytics for Education', url: 'https://analytics.google.com/', description: 'Analytics engagement e performance digital learning' },
+                    { name: 'Tableau Public Education', url: 'https://public.tableau.com/', description: 'Visualizzazione dati educational per insights' },
+                    { name: 'Microsoft Power BI Education', url: 'https://powerbi.microsoft.com/', description: 'Business intelligence per institutional research' },
+                    { name: 'Brightspace Analytics', url: 'https://www.d2l.com/', description: 'Learning analytics integrato in LMS' },
+                    { name: 'Canvas Analytics', url: 'https://www.instructure.com/', description: 'Student success analytics e early warning' },
+                    { name: 'Blackboard Analytics', url: 'https://www.blackboard.com/', description: 'Institutional analytics per student outcomes' },
+                    { name: 'Knewton Adaptive Learning', url: 'https://www.knewton.com/', description: 'AI-powered personalized learning analytics' },
+                    { name: 'Civitas Learning', url: 'https://www.civitaslearning.com/', description: 'Predictive analytics per student success' },
+                    { name: 'Yellowdig Analytics', url: 'https://yellowdig.co/', description: 'Social learning analytics e community engagement' },
+                    { name: 'IBM SPSS Statistics', url: 'https://www.ibm.com/products/spss-statistics', description: 'Statistical analysis per educational research' }
+                ]
+            }
+        ];
+
+        const assessmentShowcase = [
+            { name: 'Portfolio Competenze Agrarie', desc: 'Valutazione autentica progetti sostenibilità azienda agricola', badge: 'AGRARIAN', badgeClass: 'agrarian', url: 'https://web.seesaw.me/' },
+            { name: 'STEM Problem Solving Lab', desc: 'Assessment laboratorio virtuale fisica applicata', badge: 'STEM', badgeClass: 'stem', url: 'https://www.labster.com/' },
+            { name: 'Digital Storytelling History', desc: 'Valutazione narrative storiche multimediali', badge: 'HUMANITIES', badgeClass: 'humanities', url: 'https://spark.adobe.com/' },
+            { name: 'AI-Powered Math Assessment', desc: 'Valutazione matematica adattiva con feedback intelligente', badge: 'AI', badgeClass: 'ai', url: 'https://www.carnegielearning.com/' },
+            { name: 'Collaborative Research Project', desc: 'Assessment ricerca scientifica attraverso peer review', badge: 'STEM', badgeClass: 'stem', url: 'https://www.peergrade.io/' },
+            { name: 'Creative Writing Portfolio', desc: 'Valutazione competenze linguistiche through authentic tasks', badge: 'HUMANITIES', badgeClass: 'humanities', url: 'https://www.noredink.com/' }
+        ];
+
+        // Variabili globali
+        let isDarkMode = false;
+
+        // Funzioni principali
+        function initializeApp() {
+            renderCategories();
+            renderAssessmentShowcase();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            
+            grid.innerHTML = categories.map((category, index) => `
+                <div class="category-card animate-fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: ${category.color}">
+                            ${category.icon}
+                        </div>
+                        <h3 class="category-title">${category.name}</h3>
+                        <div class="category-count">${category.tools.length} tools</div>
+                    </div>
+                    
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.875rem;">${category.description}</p>
+                    
+                    <div class="tools-list">
+                        ${category.tools.map((tool, toolIndex) => `
+                            <div class="tool-item" onclick="window.open('${tool.url}', '_blank')">
+                                <span class="tool-badge">#${toolIndex + 1}</span>
+                                <div class="tool-content">
+                                    <div class="tool-name">${tool.name}</div>
+                                    <div class="tool-description">${tool.description}</div>
+                                </div>
+                                <span class="external-icon">🔗</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAssessmentShowcase() {
+            const container = document.getElementById('assessmentShowcaseGrid');
+            container.innerHTML = assessmentShowcase.map(assessment => `
+                <div class="assessment-card" onclick="window.open('${assessment.url}', '_blank')">
+                    <div class="assessment-header">
+                        <h4 class="assessment-name">${assessment.name}</h4>
+                        <span class="assessment-badge ${assessment.badgeClass}">${assessment.badge}</span>
+                    </div>
+                    <p class="assessment-desc">${assessment.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.style.filter = isDarkMode ? 'invert(1) hue-rotate(180deg)' : '';
+            event.target.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function showStats() {
+            const stats = categories.map(cat => `${cat.name}: ${cat.tools.length} strumenti`).join('\n');
+            const totalTools = categories.reduce((sum, cat) => sum + cat.tools.length, 0);
+            alert(`📊 Statistiche Hub Valutazione:\n\n${stats}\n\nTotale: ${totalTools} strumenti di assessment`);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const categoryCards = document.querySelectorAll('.category-card');
+                
+                categoryCards.forEach(card => {
+                    const categoryTitle = card.querySelector('.category-title').textContent.toLowerCase();
+                    const toolNames = Array.from(card.querySelectorAll('.tool-name'))
+                        .map(tool => tool.textContent.toLowerCase())
+                        .join(' ');
+                    
+                    const isVisible = categoryTitle.includes(searchTerm) || 
+                                    toolNames.includes(searchTerm) || 
+                                    searchTerm === '';
+                    
+                    card.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearch();
+        });
+
+        // Esponi funzioni globali
+        window.toggleTheme = toggleTheme;
+        window.showStats = showStats;
+    </script>
+</body>
+</html>

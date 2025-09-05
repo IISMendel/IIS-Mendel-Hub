@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIS Mendel – Learning Hub</title>
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #22c55e 0%, #16a34a 25%, #667eea 75%, #764ba2 100%);
+      --card: rgba(255, 255, 255, 0.95);
+      --card-hover: rgba(255, 255, 255, 1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.2);
+      --text: #1f2b3a;
+      --text-light: #64748b;
+      --accent: #16a34a;
+      --pnrr-bg: rgba(255, 255, 255, 0.9);
+      --pnrr-border: rgba(34, 197, 94, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      font-weight: 300;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      margin-bottom: 3rem;
+    }
+
+    /* Sezioni PNRR e Buone Pratiche */
+    .info-section {
+      background: var(--pnrr-bg);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 1px solid var(--pnrr-border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .info-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .info-description {
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: rgba(34, 197, 94, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.9rem;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    /* Grid delle materie */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media(min-width: 560px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    a.card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      border-radius: 20px;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    a.card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    a.card:hover::before {
+      left: 100%;
+    }
+
+    a.card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+      background: var(--card-hover);
+    }
+
+    .card .emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+      transition: transform 0.3s ease;
+    }
+
+    a.card:hover .emoji {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Colori specifici per categoria */
+    a.card:nth-child(1), a.card:nth-child(2) { border-left: 5px solid #06b6d4; } /* Ambiente */
+    a.card:nth-child(3), a.card:nth-child(8), a.card:nth-child(15) { border-left: 5px solid #3b82f6; } /* Scienze */
+    a.card:nth-child(4), a.card:nth-child(7) { border-left: 5px solid #f59e0b; } /* Lingue */
+    a.card:nth-child(5), a.card:nth-child(6), a.card:nth-child(11) { border-left: 5px solid #8b5cf6; } /* Umanistiche */
+    a.card:nth-child(9), a.card:nth-child(10), a.card:nth-child(14), a.card:nth-child(16) { border-left: 5px solid #ef4444; } /* Tech */
+    a.card:nth-child(12), a.card:nth-child(13) { border-left: 5px solid #10b981; } /* STEM */
+    a.card:nth-child(17) { border-left: 5px solid #06b6d4; } /* Valutazione - colore cyan come trasversale */
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Elementi flottanti animati */
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 8s ease-in-out infinite;
+      font-size: 2rem;
+    }
+
+    .floating-element:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+      color: #22c55e;
+    }
+
+    .floating-element:nth-child(2) {
+      top: 20%;
+      right: 15%;
+      animation-delay: 2s;
+      color: #3b82f6;
+    }
+
+    .floating-element:nth-child(3) {
+      bottom: 25%;
+      left: 20%;
+      animation-delay: 4s;
+      color: #16a34a;
+    }
+
+    .floating-element:nth-child(4) {
+      top: 60%;
+      right: 25%;
+      animation-delay: 1s;
+      color: #10b981;
+    }
+
+    .floating-element:nth-child(5) {
+      bottom: 40%;
+      right: 10%;
+      animation-delay: 3s;
+      color: #059669;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-30px) rotate(180deg);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      a.card {
+        padding: 1.5rem;
+      }
+
+      .info-section {
+        padding: 1.5rem;
+      }
+
+      .info-badges {
+        gap: 0.5rem;
+      }
+
+      .badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-elements">
+    <div class="floating-element">🎓</div>
+    <div class="floating-element">📚</div>
+    <div class="floating-element">🌱</div>
+    <div class="floating-element">🌿</div>
+    <div class="floating-element">🍃</div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>IIS Mendel<br>Learning Hub</h1>
+      <p class="tagline">Seleziona un hub disciplinare o una sezione trasversale.</p>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">
+        🇪🇺 Progetto finanziato dal PNRR
+      </div>
+      <div class="info-description">
+        Questo hub didattico è stato realizzato nell'ambito del Piano Nazionale di Ripresa e Resilienza (PNRR), 
+        Missione 4 "Istruzione e Ricerca" - Componente 1 "Potenziamento dell'offerta dei servizi di istruzione: 
+        dagli asili nido alle Università" - Investimento 3.2 "Scuola 4.0: scuole innovative, cablaggio, nuovi ambienti 
+        di apprendimento e laboratori", finanziato dall'Unione europea - NextGenerationEU.
+      </div>
+      <div class="info-badges">
+        <div class="badge">🇮🇹 PNRR</div>
+        <div class="badge">🇪🇺 Next Generation EU</div>
+        <div class="badge">🏫 Scuola 4.0</div>
+        <div class="badge">💡 Innovazione Didattica</div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">
+        🏆 Team Buone Pratiche & Comunità Educativa
+      </div>
+      <div class="info-description">
+        Il nostro <strong>Team Buone Pratiche</strong> è composto da docenti esperti che validano, testano e documentano 
+        metodologie innovative per l'insegnamento. Ogni risorsa presente negli hub disciplinari è stata valutata 
+        e approvata dal team attraverso sperimentazione in classe, garantendo qualità ed efficacia didattica. 
+        La <strong>Comunità di Pratiche</strong> favorisce lo scambio di esperienze, la condivisione di metodologie 
+        innovative e la crescita professionale continua, secondo i principi del PNRR Scuola Futura.
+      </div>
+      <div class="info-badges">
+        <div class="badge">🎯 Metodologie Validate</div>
+        <div class="badge">🤝 Comunità di Pratiche</div>
+        <div class="badge">📊 Sperimentazione in Classe</div>
+        <div class="badge">🔄 Miglioramento Continuo</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="agricoltura-di-precisione/">
+        <span class="emoji">🌾</span> 
+        Agricoltura di precisione
+      </a>
+      <a class="card" href="ambiente-sostenibilita/">
+        <span class="emoji">🌱</span> 
+        Ambiente e sostenibilità
+      </a>
+      <a class="card" href="chimica/">
+        <span class="emoji">⚗️</span> 
+        Chimica
+      </a>
+      <a class="card" href="clil/">
+        <span class="emoji">🌍</span> 
+        CLIL
+      </a>
+      <a class="card" href="diritto/">
+        <span class="emoji">⚖️</span> 
+        Diritto
+      </a>
+      <a class="card" href="educazione-civica/">
+        <span class="emoji">🏛️</span> 
+        Educazione Civica
+      </a>
+      <a class="card" href="english/">
+        <span class="emoji">🇬🇧</span> 
+        English
+      </a>
+      <a class="card" href="fisica/">
+        <span class="emoji">🔭</span> 
+        Fisica
+      </a>
+      <a class="card" href="gamification/">
+        <span class="emoji">🎮</span> 
+        Gamification
+      </a>
+      <a class="card" href="informatica/">
+        <span class="emoji">💻</span> 
+        Informatica
+      </a>
+      <a class="card" href="italiano-storia/">
+        <span class="emoji">🖋️</span> 
+        Italiano e Storia
+      </a>
+      <a class="card" href="matematica/">
+        <span class="emoji">➗</span> 
+        Matematica
+      </a>
+      <a class="card" href="pv_eeml/">
+        <span class="emoji">🔋</span> 
+        PV_EEML
+      </a>
+      <a class="card" href="scienze-integrate/">
+        <span class="emoji">🔬</span> 
+        Scienze integrate
+      </a>
+      <a class="card" href="stem-restanti/">
+        <span class="emoji">🧪</span> 
+        STEM e restanti materie
+      </a>
+      <a class="card" href="cybersecurity/">
+        <span class="emoji">🔐</span> 
+        Cybersecurity
+      </a>
+      <a class="card" href="valutazione/">
+        <span class="emoji">📊</span> 
+        Valutazione
+      </a>
+    </div>
+
+    <footer>© 2025 IIS Mendel – Villa Cortese</footer>
+  </div>
+</body>
+</html>

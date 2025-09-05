@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬 Hub Scienze Integrate - IIS Mendel</title>
+    <meta name="description" content="Hub Scienze Integrate IIS Mendel - 100+ strumenti per chimica, biologia, fisica, biotecnologie e scienze applicate all'agraria">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --science-blue: #1e40af;
+            --bio-green: #059669;
+            --physics-cyan: #0891b2;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-science: linear-gradient(135deg, #1e40af 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-science);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-science);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-science);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-science);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-science);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-btn:hover {
+            background: var(--science-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .map-container {
+            padding: 4rem 2rem;
+            min-height: 600px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+        }
+
+        .category-node:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--science-blue);
+        }
+
+        .category-node.active {
+            border-color: var(--science-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .category-count {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s ease;
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-science);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: rgba(248, 250, 252, 1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--science-blue);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-science);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-science);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container, .search-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                justify-content: center;
+                margin: 1rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                right: auto;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>🧬 Hub Scienze Integrate</h1>
+            <p>100+ Strumenti per Chimica, Biologia, Fisica, Biotecnologie e Scienze Applicate all'Agraria</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Scienze Integrate IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di riferimento per le <strong>scienze integrate</strong> dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>100+ strumenti specializzati</strong> per chimica, biologia, fisica, biotecnologie, 
+                matematica e scienze applicate al settore agrario e agroalimentare.
+            </p>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 16px; border: 1px solid rgba(59, 130, 246, 0.2);">
+                <p style="color: var(--science-blue); font-weight: 600; margin: 0;">
+                    🧬 <strong>Hub Scienze Integrate IIS Mendel:</strong> Strumenti digitali avanzati per 
+                    l'integrazione delle discipline scientifiche nell'istruzione agraria. 
+                    100+ risorse per costruire il futuro scientifico della comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span style="color: var(--text-light); font-size: 1.125rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 100+ strumenti scientifici..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button class="control-btn" onclick="toggleTheme()" title="Tema">🌙</button>
+        <button class="control-btn" onclick="showStats()" title="Statistiche">📊</button>
+    </div>
+
+    <div class="map-container">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()">×</button>
+            <h3 id="panelTitle">Strumenti Scientifici</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Gli strumenti verranno caricati dinamicamente -->
+        </div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">100</div>
+        <div class="stats-label">Strumenti<br>Scientifici</div>
+    </div>
+
+    <script>
+        // DATI SEMPLIFICATI MA COMPLETI
+        const data = {
+            "🧪 Chimica e Biochimica": {
+                icon: "🧪",
+                tools: [
+                    {name: "ChemSketch", link: "https://www.acdlabs.com/resources/free-chemistry-software-apps/chemsketch/", description: "Software gratuito per disegnare strutture chimiche e reazioni per chimica organica applicata all'agraria."},
+                    {name: "Avogadro Molecular Editor", link: "https://avogadro.cc/", description: "Editor molecolare 3D open source per visualizzare strutture chimiche."},
+                    {name: "ChemSpider", link: "http://www.chemspider.com/", description: "Database chimico gratuito con proprietà fisico-chimiche di pesticidi e fertilizzanti."},
+                    {name: "PubChem", link: "https://pubchem.ncbi.nlm.nih.gov/", description: "Database NCBI per informazioni chimiche e biologiche di agrofarmaci."},
+                    {name: "Periodic Table Dynamic", link: "https://www.ptable.com/", description: "Tavola periodica interattiva per studio nutrienti minerali delle piante."},
+                    {name: "WebMO", link: "https://www.webmo.net/", description: "Interface web per modellazione molecolare di pesticidi."},
+                    {name: "ChemCollective", link: "http://chemcollective.org/", description: "Laboratorio virtuale per simulazioni analisi terreno."},
+                    {name: "Molecular Workbench", link: "https://molecular-workbench.concord.org/", description: "Simulazioni interattive di sistemi molecolari biologici."},
+                    {name: "NIST Chemistry WebBook", link: "https://webbook.nist.gov/chemistry/", description: "Database termochimico per proprietà sostanze agrarie."},
+                    {name: "ChemReaX", link: "http://www.chemreax.com/", description: "Simulatore reazioni chimiche nel suolo e metabolismo piante."}
+                ]
+            },
+            "🔬 Biologia e Biotecnologie": {
+                icon: "🔬",
+                tools: [
+                    {name: "NCBI BLAST", link: "https://blast.ncbi.nlm.nih.gov/", description: "Strumento bioinformatico per analisi genomica di cultivar e patogeni delle piante."},
+                    {name: "Foldit", link: "https://fold.it/", description: "Gioco protein folding per studio enzimi metabolismo vegetale."},
+                    {name: "BioDig", link: "http://biodigitaledu.com/", description: "Anatomia 3D per confronto sistemi fisiologici uomo-pianta."},
+                    {name: "CellCraft", link: "http://www.cellcraft.com/", description: "Gioco educativo su biologia cellulare vegetale."},
+                    {name: "Virtual Plant", link: "https://virtualplant.bio.nyu.edu/", description: "Simulatore crescita piante con modelli matematici."},
+                    {name: "PlantNet", link: "https://identify.plantnet.org/", description: "App identificazione piante tramite AI per riconoscimento specie."},
+                    {name: "DNA Subway", link: "https://dnasubway.cyverse.org/", description: "Piattaforma bioinformatica per studio resistenze genetiche."},
+                    {name: "Gene Designer", link: "https://www.atum.bio/ecommerce/", description: "Tool design sequenze per biotecnologie agrarie."},
+                    {name: "Phylogeny.fr", link: "http://www.phylogeny.fr/", description: "Pipeline analisi filogenetiche per studio evoluzione specie vegetali."},
+                    {name: "BioNumbers", link: "https://bionumbers.hms.harvard.edu/", description: "Database quantitativo per parametri biometrici piante."}
+                ]
+            },
+            "⚗️ Fisica Applicata": {
+                icon: "⚗️",
+                tools: [
+                    {name: "PhET Interactive Simulations", link: "https://phet.colorado.edu/", description: "Simulazioni fisiche per ottica, meccanica applicata a serre e irrigazione."},
+                    {name: "Algodoo", link: "http://www.algodoo.com/", description: "Simulatore 2D fisica per meccanica macchine agricole."},
+                    {name: "Tracker Video Analysis", link: "https://physlets.org/tracker/", description: "Software analisi video per cinematica crescita piante."},
+                    {name: "Virtual Physics Lab", link: "https://www.vlab.co.in/", description: "Laboratorio virtuale per ottica fotosintesi e meccanica sistemi irrigui."},
+                    {name: "Optics Bench", link: "https://ricktu288.github.io/ray-optics/", description: "Simulatore ottica per studio spettri luminosi fotosintesi."},
+                    {name: "Circuit Simulator", link: "https://www.falstad.com/circuit/", description: "Simulatore circuiti per automazione agricola."},
+                    {name: "GeoGebra Physics", link: "https://www.geogebra.org/physics", description: "Applet GeoGebra per modellazione fenomeni fisici in agricoltura."},
+                    {name: "Energy Skate Park", link: "https://phet.colorado.edu/en/simulation/energy-skate-park", description: "Simulazione conservazione energia per sistemi agricoli."},
+                    {name: "Waves on a String", link: "https://phet.colorado.edu/en/simulation/wave-on-a-string", description: "Studio vibrazioni in strutture agricole."},
+                    {name: "Fluid Pressure", link: "https://phet.colorado.edu/en/simulation/fluid-pressure-and-flow", description: "Simulazione per progettazione sistemi irrigazione."}
+                ]
+            },
+            "🧬 Genetica e Genomica": {
+                icon: "🧬",
+                tools: [
+                    {name: "NCBI Genome Browser", link: "https://www.ncbi.nlm.nih.gov/genome/", description: "Browser genomi per analisi sequenze genomiche specie agrarie."},
+                    {name: "Ensembl Plants", link: "https://plants.ensembl.org/", description: "Database genomico piante per miglioramento genetico assistito."},
+                    {name: "CropPAL", link: "https://www.croppal.org/", description: "Database geni resistenza patogeni per breeding assistito."},
+                    {name: "PlantGDB", link: "http://www.plantgdb.org/", description: "Database genomico con analisi comparativa genomi colture."},
+                    {name: "TAIR", link: "https://www.arabidopsis.org/", description: "Database Arabidopsis per genetica funzionale e pathway metabolici."},
+                    {name: "Gramene", link: "http://gramene.org/", description: "Database comparativo genomi graminacee e cereali."},
+                    {name: "Sol Genomics Network", link: "https://solgenomics.net/", description: "Network genomico solanacee per miglioramento genetico."},
+                    {name: "Phytozome", link: "https://phytozome-next.jgi.doe.gov/", description: "Portal genomi vegetali per ricerca genomica comparativa."},
+                    {name: "PlantReactome", link: "https://plantreactome.gramene.org/", description: "Database pathway metabolici e regolazione genica piante."},
+                    {name: "AgriGO", link: "http://bioinfo.cau.edu.cn/agriGO/", description: "Analisi Gene Ontology per stress biotici/abiotici piante."}
+                ]
+            },
+            "🌡️ Fisica del Suolo": {
+                icon: "🌡️",
+                tools: [
+                    {name: "HYDRUS Software", link: "https://www.pc-progress.com/en/Default.aspx", description: "Modellazione flusso acqua e nutrienti nel suolo."},
+                    {name: "WOFOST Model", link: "https://www.wur.nl/en/Research-Results/Research-Institutes/Environmental-Research/Facilities-Products/Software-and-models/WOFOST.htm", description: "Modello simulazione crescita colture e previsione rese."},
+                    {name: "CropSyst", link: "http://modeling.bsyse.wsu.edu/CS_Suite/CropSyst/", description: "Sistema modellazione bilancio idrico e azotato."},
+                    {name: "DSSAT", link: "https://dssat.net/", description: "Decision Support System per gestione sostenibile colture."},
+                    {name: "AquaCrop", link: "http://www.fao.org/aquacrop/en/", description: "Modello FAO per ottimizzazione irrigazione."},
+                    {name: "ClimateData Online", link: "https://www.ncdc.noaa.gov/cdo-web/", description: "Database climatici per zonazione e scelta varietà."},
+                    {name: "Global Weather Data", link: "https://power.larc.nasa.gov/", description: "Dati meteorologici NASA per agricoltura."},
+                    {name: "Soil Data Viewer", link: "https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/tools/?cid=nrcs142p2_053620", description: "Visualizzatore caratteristiche fisico-chimiche suoli."},
+                    {name: "PedoTransfer Functions", link: "https://www.pedotransfer.org/", description: "Funzioni per stimare proprietà idrauliche suolo."},
+                    {name: "SPAW", link: "https://www.ars.usda.gov/research/software/download/?softwareid=492", description: "Soil-Plant-Atmosphere-Water model per bilancio idrico."}
+                ]
+            },
+            "🔍 Microscopia": {
+                icon: "🔍",
+                tools: [
+                    {name: "ImageJ", link: "https://imagej.nih.gov/ij/", description: "Software analisi immagini per morfometria foglie e tessuti."},
+                    {name: "CellProfiler", link: "https://cellprofiler.org/", description: "Software quantificazione fenotipi cellulari vegetali."},
+                    {name: "LeafJ", link: "https://www.plant-image-analysis.org/", description: "Plugin ImageJ per analisi morfologica foglie."},
+                    {name: "RootNav", link: "http://rootnav.sourceforge.net/", description: "Software tracciamento crescita sistema radicale."},
+                    {name: "PlantCV", link: "https://plantcv.danforthcenter.org/", description: "Libreria Python per fenotipizzazione piante."},
+                    {name: "SmartRoot", link: "http://www.uclouvain.be/smartroot", description: "Software analisi semi-automatica radici."},
+                    {name: "WinRHIZO", link: "http://www.regentinstruments.com/assets/winrhizo_about.html", description: "Software morfologia sistema radicale."},
+                    {name: "Digital Plant Phenotyping", link: "https://www.plant-phenotyping.org/", description: "Piattaforma fenotipizzazione digitale."},
+                    {name: "SAVI", link: "https://www.ars.usda.gov/research/software/download/?softwareid=494", description: "Seed Analysis per analisi germinazione e vigore."},
+                    {name: "AnalySIS", link: "https://www.olympus-lifescience.com/en/software/analysis/", description: "Software Olympus per istologia tessuti vegetali."}
+                ]
+            },
+            "📊 Biostatistica": {
+                icon: "📊",
+                tools: [
+                    {name: "R Statistical Software", link: "https://www.r-project.org/", description: "Ambiente statistico per analisi dati sperimentali agricoli."},
+                    {name: "Bioconductor", link: "https://www.bioconductor.org/", description: "Pacchetti R per analisi dati genomici piante."},
+                    {name: "Galaxy Project", link: "https://galaxyproject.org/", description: "Piattaforma bioinformatica per analisi NGS."},
+                    {name: "Cytoscape", link: "https://cytoscape.org/", description: "Software visualizzazione reti biologiche e pathway."},
+                    {name: "TASSEL", link: "https://www.maizegenetics.net/tassel", description: "Trait Analysis per GWAS e analisi QTL."},
+                    {name: "PLINK", link: "https://www.cog-genomics.org/plink/", description: "Toolset per association studies genomici."},
+                    {name: "MEGA", link: "https://www.megasoftware.net/", description: "Molecular Evolutionary Genetics Analysis."},
+                    {name: "Geneious", link: "https://www.geneious.com/", description: "Piattaforma bioinformatica per assemblaggio genomi."},
+                    {name: "BEAST", link: "https://beast.community/", description: "Bayesian Evolutionary Analysis per filogenesi."},
+                    {name: "CLC Genomics", link: "https://digitalinsights.qiagen.com/", description: "Workbench per analisi genomiche."}
+                ]
+            },
+            "⚛️ Chimica Analitica": {
+                icon: "⚛️",
+                tools: [
+                    {name: "NIST Mass Spectral Database", link: "https://www.nist.gov/srd/nist-standard-reference-database-1a", description: "Database spettri massa per identificazione pesticidi."},
+                    {name: "SpectralDatabase AIST", link: "https://sdbs.db.aist.go.jp/sdbs/cgi-bin/cre_index.cgi", description: "Database spettri per identificazione fitofarmaci."},
+                    {name: "ChemSpider Spectra", link: "http://www.chemspider.com/", description: "Collezione spettri per identificazione residui."},
+                    {name: "MassBank", link: "https://massbank.eu/MassBank/", description: "Database spettri massa per metabolomica."},
+                    {name: "Human Metabolome Database", link: "https://hmdb.ca/", description: "Database metaboliti per metabolomica nutrizionale."},
+                    {name: "FooDB", link: "https://foodb.ca/", description: "Database composizione chimica alimenti."},
+                    {name: "Golm Metabolome Database", link: "http://gmd.mpimp-golm.mpg.de/", description: "Database metabolomica GC-MS per piante."},
+                    {name: "MetaCyc", link: "https://metacyc.org/", description: "Database pathway metabolici validati."},
+                    {name: "KEGG", link: "https://www.genome.jp/kegg/", description: "Kyoto Encyclopedia per pathway metabolici."},
+                    {name: "PubMed Analytical Methods", link: "https://pubmed.ncbi.nlm.nih.gov/", description: "Letteratura metodi analitici per residui."}
+                ]
+            },
+            "🌱 Fisiologia Vegetale": {
+                icon: "🌱",
+                tools: [
+                    {name: "PlantSimLab", link: "https://plantsimlab.org/", description: "Laboratorio virtuale per simulazione processi vegetali."},
+                    {name: "PhotosynQ", link: "https://photosynq.org/", description: "Piattaforma crowdsourcing misure fotosintesi."},
+                    {name: "LICOR Environmental", link: "https://www.licor.com/env/", description: "Software strumentazione per scambi gassosi."},
+                    {name: "Chlorophyll Meter", link: "https://www.hansatech-instruments.com/", description: "Tools analisi contenuto clorofilliano."},
+                    {name: "Plant Stress Analysis", link: "https://www.psi.cz/", description: "Software PSI per analisi stress vegetale."},
+                    {name: "WinControl", link: "https://www.walz.com/", description: "Software controllo strumentazione Walz."},
+                    {name: "Sap Flow Meter", link: "https://www.ictinternational.com/", description: "Misura flusso xilematico e stress idrico."},
+                    {name: "PlantNet Physiological", link: "https://identify.plantnet.org/", description: "Database caratteristiche fisiologiche specie."},
+                    {name: "Leaf Area Meter", link: "https://www.licor.com/env/products/leaf_area/LI-3100C/", description: "Software misurazione area fogliare."},
+                    {name: "Plant Growth Analysis", link: "https://www.plant-growth-analysis.com/", description: "Strumenti analisi crescita vegetale."}
+                ]
+            },
+            "🔢 Matematica": {
+                icon: "🔢",
+                tools: [
+                    {name: "GeoGebra", link: "https://www.geogebra.org/", description: "Software matematica per modellazione curve crescita."},
+                    {name: "Desmos Graphing Calculator", link: "https://www.desmos.com/calculator", description: "Calcolatrice grafica per visualizzazione funzioni."},
+                    {name: "Wolfram Alpha", link: "https://www.wolframalpha.com/", description: "Motore computazionale per calcoli statistici."},
+                    {name: "MATLAB Online", link: "https://www.mathworks.com/products/matlab-online.html", description: "Ambiente per modellazione sistemi dinamici."},
+                    {name: "Octave Online", link: "https://octave-online.net/", description: "Alternativa open source MATLAB."},
+                    {name: "Sage Math", link: "https://www.sagemath.org/", description: "Sistema algebra computazionale."},
+                    {name: "NumPy/SciPy", link: "https://numpy.org/", description: "Librerie Python per calcolo scientifico."},
+                    {name: "Jupyter Notebook", link: "https://jupyter.org/", description: "Ambiente interattivo per analisi dati."},
+                    {name: "Mathematica Online", link: "https://www.wolfram.com/mathematica/online/", description: "Piattaforma per modellazione matematica avanzata."},
+                    {name: "Origin", link: "https://www.originlab.com/", description: "Software per analisi dati e grafici scientifici."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 100;
+        let isDarkMode = false;
+
+        // Funzioni principali
+        function initializeApp() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(data);
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${data[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${data[category].tools.length} strumenti</div>
+                `;
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${data[categoryName].tools.length} strumenti disponibili`;
+            
+            content.innerHTML = '';
+            
+            data[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        ${data[categoryName].icon} ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🔬 Accedi al Strumento
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+            });
+            
+            panel.classList.add('open');
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.style.filter = isDarkMode ? 'invert(1) hue-rotate(180deg)' : '';
+            event.target.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function showStats() {
+            const categories = Object.keys(data);
+            const stats = categories.map(cat => `${cat}: ${data[cat].tools.length} strumenti`).join('\n');
+            alert(`🧬 Statistiche Hub Scienze Integrate:\n\n${stats}\n\nTotale: ${totalTools} strumenti scientifici`);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const categoryNodes = document.querySelectorAll('.category-node');
+                
+                categoryNodes.forEach(node => {
+                    const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                    const isVisible = categoryTitle.includes(searchTerm) || searchTerm === '';
+                    
+                    node.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearch();
+        });
+
+        // Click fuori dal pannello per chiudere
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('toolsPanel');
+            const isClickInsidePanel = panel.contains(e.target);
+            const isClickOnCategoryNode = e.target.closest('.category-node');
+            
+            if (!isClickInsidePanel && !isClickOnCategoryNode && panel.classList.contains('open')) {
+                closePanel();
+            }
+        });
+
+        // Esponi funzioni globali
+        window.closePanel = closePanel;
+        window.toggleTheme = toggleTheme;
+        window.showStats = showStats;
+    </script>
+</body>
+</html>

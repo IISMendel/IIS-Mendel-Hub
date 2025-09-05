@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📐 Hub Matematica - IIS Mendel (135 Strumenti)</title>
+    <meta name="description" content="Hub Matematica IIS Mendel - 135 strumenti matematici completi per scuola agraria e matematica generale">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --mendel-green: #22c55e;
+            --mendel-blue: #3b82f6;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-mendel: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            --gradient-math: linear-gradient(135deg, #667eea 0%, #22c55e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-math);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-math);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-mendel);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-math);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--mendel-green);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--mendel-blue);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .filter-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .category-node.active {
+            border-color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-math);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-math);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .legend:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+            border-color: var(--mendel-green);
+        }
+
+        .legend.dragging {
+            opacity: 0.9;
+            transform: rotate(1deg) scale(1.02);
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .legend-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+            cursor: grab;
+        }
+
+        .legend-header:active {
+            cursor: grabbing;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: var(--mendel-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .drag-handle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: grab;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            color: var(--mendel-green);
+            transform: scale(1.3);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>📐 Hub Matematica Completo</h1>
+            <p>135 Strumenti Matematici per Istituto Tecnico Agrario e Matematica Generale</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Matematica IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di riferimento per l'apprendimento matematico dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>135 strumenti matematici</strong> che spazia dall'agricoltura applicata 
+                alla matematica generale: algebra, calcolo, geometria, statistica, con particolare attenzione all'inclusività e ai bisogni educativi speciali.
+            </p>
+
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3 style="color: var(--mendel-green); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🎯 La Nostra Missione
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Supportare docenti e studenti dell'IIS Mendel nell'apprendimento e insegnamento della matematica 
+                        attraverso strumenti digitali all'avanguardia, con particolare attenzione ai settori agrario, 
+                        alimentare e ambientale. Ogni risorsa è stata testata e validata per l'uso didattico inclusivo.
+                    </p>
+                </div>
+
+                <div class="intro-box">
+                    <h3 style="color: var(--mendel-blue); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🤝 Comunità Educativa
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Dai calcolatori AI per problemi complessi agli strumenti compensativi per DSA/BES/DVA. 
+                        Include risorse per matematica pura (algebra, calcolo, trigonometria), matematica applicata 
+                        all'agricoltura, statistica, matematica finanziaria, logica e simulatori virtuali, 
+                        favorendo lo scambio di esperienze didattiche innovative.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 16px; border: 1px solid rgba(34, 197, 94, 0.2);">
+                <p style="color: var(--mendel-green); font-weight: 600; margin: 0;">
+                    📐 <strong>Hub Matematica IIS Mendel:</strong> Strumenti digitali avanzati per 
+                    l'apprendimento e l'insegnamento della matematica applicata alle scienze agrarie e ambientali. 
+                    135 risorse educative per la comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 135 strumenti matematici..." id="searchInput">
+        </div>
+        <button class="filter-btn" onclick="toggleFilters()">Statistiche</button>
+    </div>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+            <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+            <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+        </div>
+    </div>
+
+    <div class="map-container" id="mapContainer">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+            <h3 id="panelTitle">Strumenti Matematici</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Gli strumenti verranno caricati dinamicamente -->
+        </div>
+    </div>
+
+    <div class="legend" id="legend">
+        <div class="legend-header" id="legendHeader">
+            <div class="legend-title">📋 Controlli</div>
+            <div class="drag-handle" title="🖱️ Trascina per spostare">⚡</div>
+        </div>
+        • Clicca sui nodi per esplorare<br>
+        • 15 categorie, 135+ strumenti matematici<br>
+        • Usa la ricerca per filtrare<br>
+        • Zoom: Ctrl + (+/-) o rotella<br>
+        • Tema scuro: Ctrl + Alt + T<br>
+        • Reset zoom: Ctrl + 0<br>
+        • Doppio click per ripristinare posizione<br>
+        • <strong>💡 Trascinami se copro troppo!</strong>
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">135</div>
+        <div class="stats-label">Strumenti<br>Matematici</div>
+    </div>
+
+    <script>
+        // DATI COMPLETI 135 STRUMENTI MATEMATICI
+        const mathData = {
+            "AI Matematica Avanzata": {
+                icon: "🤖",
+                color: "#2563eb",
+                tools: [
+                    {name: "Julius AI", link: "https://julius.ai/", description: "AI matematico avanzato con oltre 1.2M utenti. Risolve problemi complessi da algebra a calcolo differenziale con spiegazioni step-by-step per studenti agrari."},
+                    {name: "Wolfram Alpha", link: "https://www.wolframalpha.com/", description: "Il motore computazionale più potente per matematica avanzata, fisica, statistica agraria e calcoli per biotecnologie alimentari."},
+                    {name: "Symbolab", link: "https://www.symbolab.com/", description: "Oltre 500 calcolatrici specializzate per algebra, calcolo, trigonometria e statistica applicata all'agricoltura. Oltre 300M utenti nel mondo."},
+                    {name: "Photomath", link: "https://photomath.com/", description: "Scansiona problemi matematici scritti a mano. Ideale per calcoli agronomici, dosaggi fertilizzanti e problemi di geometria applicata."},
+                    {name: "Microsoft Math Solver", link: "https://mathsolver.microsoft.com/", description: "Solver gratuito Microsoft con supporto multi-input per calcoli agricoli complessi e problemi di ottimizzazione delle risorse."},
+                    {name: "Mathway", link: "https://www.mathway.com/", description: "Tutore virtuale per problemi da algebra elementare a calcolo avanzato. Perfetto per matematica applicata alle scienze agrarie."},
+                    {name: "Cymath", link: "https://www.cymath.com/", description: "Solver matematico con spiegazioni dettagliate per algebra e calcolo applicato a problemi agronomici e ambientali."},
+                    {name: "Mathful", link: "https://mathful.com/", description: "Solver AI 2025 più popolare per tutti i livelli educativi con breakdown step-by-step per calcoli tecnico-agrari."},
+                    {name: "CameraMath", link: "https://www.cameramath.com/", description: "App AI completa con Ask Tutors per supporto personalizzato in matematica applicata all'agricoltura e zootecnia."},
+                    {name: "GauthMath", link: "https://www.gauthmath.com/", description: "Soluzioni AI real-time per ampia gamma di problemi matematici applicati alle scienze agrarie e alimentari."}
+                ]
+            },
+            "Calcolatrici Specializzate Agrarie": {
+                icon: "🧮",
+                color: "#059669",
+                tools: [
+                    {name: "Calculator.net", link: "https://www.calculator.net/", description: "Collezione di oltre 150 calcolatrici gratuite incluse quelle per calcoli agronomici, dosaggi, superfici e volumi."},
+                    {name: "CalcTool", link: "https://www.calctool.org/", description: "Calcolatrici specializzate per agricoltura: dosaggi fertilizzanti, calcolo rese, conversioni unità di misura agrarie."},
+                    {name: "Calculator Soup", link: "https://www.calculatorsoup.com/", description: "Calcolatrici avanzate per frazioni, percentuali, geometria applicata e calcoli statistici per l'agricoltura."},
+                    {name: "Web 2.0 Calculator", link: "https://web2.0calc.com/", description: "Calcolatrice scientifica online completa per calcoli complessi in agronomia e biotecnologie."},
+                    {name: "Desmos Scientific", link: "https://www.desmos.com/scientific", description: "Calcolatrice scientifica Desmos per calcoli di chimica agraria, pH del suolo e concentrazioni."},
+                    {name: "Convertworld", link: "https://www.convertworld.com/", description: "Convertitore universale per unità agrarie: ettari, quintali, litri, concentrazioni e dosaggi."},
+                    {name: "Metric Conversions", link: "https://www.metric-conversions.org/", description: "Conversioni metriche essenziali per l'agricoltura: superfici, volumi, pesi e misure agronomiche."},
+                    {name: "Unit Juggler", link: "https://www.unitjuggler.com/", description: "Convertitore di unità avanzato per misure agricole, zootecniche e calcoli di resa."}
+                ]
+            },
+            "Grafici e Visualizzazione Dati": {
+                icon: "📊",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Desmos Graphing Calculator", link: "https://www.desmos.com/calculator", description: "Calcolatrice grafica online più potente. Perfetta per modellare crescita delle piante, curve di produzione e analisi agronomiche."},
+                    {name: "GeoGebra", link: "https://www.geogebra.org/", description: "Matematica interattiva completa: geometria per progettazione terreni, algebra per calcoli produttivi, statistiche per analisi raccolti."},
+                    {name: "Desmos 3D Calculator", link: "https://www.desmos.com/3d", description: "Calcolatrice 3D per modellare topografie, pendenze terreni e superfici agrarie complesse."},
+                    {name: "Graph.tk", link: "https://graph.tk/", description: "Generatore di grafici online per visualizzare dati di produzione, andamenti climatici e trend agricoli."},
+                    {name: "Plotly", link: "https://plotly.com/", description: "Piattaforma professionale per visualizzazioni scientifiche: grafici di rese, analisi temporali e dashboard agricoli."},
+                    {name: "Chart.js", link: "https://www.chartjs.org/", description: "Libreria per creare grafici interattivi di dati agricoli: produzioni, costi, ricavi e trend di mercato."},
+                    {name: "Google Charts", link: "https://developers.google.com/chart", description: "Strumenti Google per visualizzare dati agrari: mappe di produzione, grafici temporali e dashboard farm."},
+                    {name: "Canva Graphs", link: "https://www.canva.com/graphs/", description: "Creatore di grafici visually appealing per presentazioni di progetti agrari e risultati aziendali."}
+                ]
+            },
+            "Matematica Applicata Agricoltura": {
+                icon: "🌱",
+                color: "#059669",
+                tools: [
+                    {name: "Ag Calculator", link: "https://www.extension.iastate.edu/agdm/", description: "Calcolatrici agricole specializzate: calcolo sementi, fertilizzanti, rese per ettaro e analisi economiche."},
+                    {name: "Farm Calc", link: "https://www.farmcalc.com/", description: "Calcolatori farm completi: irrigazione, nutrizione animale, calcolo foraggio e gestione risorse."},
+                    {name: "Precision Ag Calculator", link: "https://www.deere.com/", description: "Strumenti John Deere per agricoltura di precisione: calcoli GPS, mappe di resa e ottimizzazione input."},
+                    {name: "Soil Calculator", link: "https://www.nrcs.usda.gov/", description: "Calcolatori USDA per analisi del suolo: pH, nutrienti, capacità di ritenzione idrica e fertilità."},
+                    {name: "Irrigation Calculator", link: "https://www.irrigationcalculator.com/", description: "Calcoli per sistemi di irrigazione: fabbisogni idrici, portate, perdite e efficienza sistemi."},
+                    {name: "Feed Calculator", link: "https://www.feedcalculator.com/", description: "Calcolatori per alimentazione animale: razioni, fabbisogni nutritivi e ottimizzazione costi mangimi."},
+                    {name: "Greenhouse Calculator", link: "https://www.greenhousetocalculator.com/", description: "Calcoli per serre: climatizzazione, CO2, illuminazione e bilanci energetici per colture protette."},
+                    {name: "Crop Yield Calculator", link: "https://www.yieldcalculator.org/", description: "Stima rese colturali basata su parametri agronomici, meteo e tecniche colturali applicate."}
+                ]
+            },
+            "Supporto DSA/BES": {
+                icon: "🎯",
+                color: "#f59e0b",
+                tools: [
+                    {name: "ModMath", link: "https://www.modmath.com/", description: "Carta millimetrata digitale ideale per studenti disgrafici. Aiuta nell'organizzazione di calcoli agronomici e formule."},
+                    {name: "Equatio", link: "https://www.texthelp.com/equatio", description: "Scrive matematica con voce, tastiera o touchscreen. Perfetto per studenti DSA in calcoli tecnico-agrari."},
+                    {name: "MathType", link: "https://www.wiris.com/mathtype", description: "Editor matematico professionale per creare formule complesse di chimica agraria e calcoli zootecnici."},
+                    {name: "MyScript Calculator", link: "https://www.myscript.com/calculator/", description: "Scrivi a mano equazioni su tablet per calcoli di superficie, volumi e dosaggi in agricoltura."},
+                    {name: "Microsoft Immersive Reader", link: "https://education.microsoft.com/immersive-reader", description: "Lettura immersiva di contenuti matematici applicati all'agricoltura con supporto per disabilità."},
+                    {name: "Read&Write", link: "https://www.texthelp.com/read-write", description: "Supporto per lettura e scrittura di testi matematici e scientifici in agronomia e zootecnia."},
+                    {name: "ClaroRead", link: "https://www.clarosoftware.com/claroread", description: "Supporto completo per lettura, scrittura e studio di matematica applicata alle scienze agrarie."},
+                    {name: "Natural Reader", link: "https://www.naturalreaders.com/", description: "Sintesi vocale per lettura di formule matematiche e testi scientifici in agricoltura."},
+                    {name: "Voice Dream Reader", link: "https://www.voicedream.com/", description: "Lettore vocale avanzato per testi matematici e manuali tecnici di agronomia e zootecnia."},
+                    {name: "Speechify", link: "https://speechify.com/", description: "Text-to-speech per studiare matematica applicata all'agricoltura con voci naturali e controllo velocità."}
+                ]
+            },
+            "Supporto DVA": {
+                icon: "♿",
+                color: "#06b6d4",
+                tools: [
+                    {name: "Numbers (Apple)", link: "https://www.apple.com/numbers/", description: "Foglio di calcolo Apple con funzioni di accessibilità per calcoli agricoli semplificati e intuitivi."},
+                    {name: "Google Sheets Accessibility", link: "https://sheets.google.com/", description: "Fogli di calcolo con supporto vocale completo per gestione dati agricoli e calcoli semplificati."},
+                    {name: "Sensory Apps Calculator", link: "https://sensoryapphouse.com/", description: "Calcolatrici con feedback sensoriale per studenti con bisogni speciali in ambito tecnico-agrario."},
+                    {name: "TouchMath", link: "https://www.touchmath.com/", description: "Metodo multisensoriale per apprendere matematica di base applicata ai settori agricoli."},
+                    {name: "Counting Coins", link: "https://www.abcya.com/games/counting_coins", description: "App educative per calcoli monetari semplici legati a vendite prodotti agricoli e mercati."},
+                    {name: "Visual Math", link: "https://www.visualmath.org/", description: "Matematica visuale per concetti di base applicati all'agricoltura: misure, quantità, proporzioni."},
+                    {name: "SplashLearn Math", link: "https://www.splashlearn.com/", description: "Piattaforma di matematica adattiva con percorsi personalizzati per diverse abilità cognitive."},
+                    {name: "Prodigy Math", link: "https://www.prodigygame.com/", description: "Gioco matematico educativo accessibile per sviluppare competenze di base in ambito tecnico."}
+                ]
+            },
+            "Statistica e Analisi Dati": {
+                icon: "📈",
+                color: "#dc2626",
+                tools: [
+                    {name: "R for Data Science", link: "https://r4ds.had.co.nz/", description: "Linguaggio R per analisi statistiche avanzate di dati agricoli: rese, qualità, trend produttivi."},
+                    {name: "JASP", link: "https://jasp-stats.org/", description: "Software statistico open source user-friendly per analisi dati agricoli e sperimentazione agronomica."},
+                    {name: "Jamovi", link: "https://www.jamovi.org/", description: "Analisi statistiche semplificate per ricerca agricola: ANOVA, regressioni, analisi sperimentali."},
+                    {name: "Google Colaboratory", link: "https://colab.research.google.com/", description: "Ambiente Python online per analisi dati agricoli con machine learning e visualizzazioni avanzate."},
+                    {name: "Statcrunch", link: "https://www.statcrunch.com/", description: "Strumento statistico web-based per analisi dati agrari: correlazioni, test di ipotesi, regressioni."},
+                    {name: "Vassarstats", link: "http://vassarstats.net/", description: "Calcolatori statistici online per ricerca agricola: test t, chi-quadro, ANOVA per esperimenti."},
+                    {name: "Simple Interactive Statistical Analysis", link: "https://www.quantpsy.org/", description: "SISA: analisi statistiche semplificate per dati agricoli e risultati sperimentali."},
+                    {name: "StatsModels", link: "https://www.statsmodels.org/", description: "Libreria Python per modelli statistici avanzati applicati all'analisi di dati agrari e ambientali."}
+                ]
+            },
+            "Geometria e Progettazione": {
+                icon: "📐",
+                color: "#7c3aed",
+                tools: [
+                    {name: "SketchUp Free", link: "https://app.sketchup.com/app", description: "Modellazione 3D gratuita per progettare strutture agricole: serre, stalle, magazzini e layout aziendali."},
+                    {name: "AutoCAD Web", link: "https://web.autocad.com/", description: "CAD online per disegno tecnico di impianti agricoli: irrigazione, drenaggio e planimetrie aziendali."},
+                    {name: "FreeCAD", link: "https://www.freecad.org/", description: "CAD 3D open source per progettazione meccanica agricola e design di attrezzature farm."},
+                    {name: "Fusion 360 Personal", link: "https://www.autodesk.com/products/fusion-360/personal", description: "CAD/CAM professionale gratuito per studenti. Progettazione avanzata di macchinari agricoli."},
+                    {name: "Onshape Education", link: "https://www.onshape.com/education/", description: "CAD cloud-based per progetti collaborativi di ingegneria applicata all'agricoltura."},
+                    {name: "Tinkercad", link: "https://www.tinkercad.com/", description: "Modellazione 3D semplificata per prototipare strumenti agricoli e componenti per automazione farm."},
+                    {name: "GeoGebra Geometry", link: "https://www.geogebra.org/geometry", description: "Geometria interattiva per calcoli di superfici, volumi e progettazione layout di coltivazioni."},
+                    {name: "Draftsight", link: "https://www.draftsight.com/", description: "Software CAD 2D per disegni tecnici di impianti agricoli e progettazione infrastrutture rurali."}
+                ]
+            },
+            "Piattaforme Apprendimento": {
+                icon: "📚",
+                color: "#0891b2",
+                tools: [
+                    {name: "Khan Academy", link: "https://www.khanacademy.org/", description: "Piattaforma educativa gratuita con corsi di matematica applicata alle scienze e tecnologie agricole."},
+                    {name: "Coursera Math", link: "https://www.coursera.org/browse/math-and-logic", description: "Corsi universitari di matematica applicata all'agricoltura e scienze ambientali da top università."},
+                    {name: "edX Mathematics", link: "https://www.edx.org/learn/mathematics", description: "Corsi MIT e Harvard di matematica per scienze applicate e ingegneria agricola."},
+                    {name: "FutureLearn", link: "https://www.futurelearn.com/", description: "Corsi online di matematica e statistica applicata all'agricoltura sostenibile e precision farming."},
+                    {name: "Brilliant", link: "https://brilliant.org/", description: "Apprendimento interattivo di matematica e data science applicati all'agricultural technology."},
+                    {name: "Mathspace", link: "https://mathspace.co/", description: "Piattaforma matematica con feedback step-by-step per problemi di calcolo applicato all'agronomia."},
+                    {name: "IXL Math", link: "https://www.ixl.com/math/", description: "Oltre 4000 skills matematiche adaptive per apprendimento personalizzato in ambito tecnico-scientifico."},
+                    {name: "Prodigy Math", link: "https://www.prodigygame.com/", description: "Gioco matematico educativo allineato ai curricula per motivare l'apprendimento STEM in agricoltura."}
+                ]
+            },
+            "Algebra e Calcolo": {
+                icon: "∫",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "Algebra Calculator", link: "https://www.mathpapa.com/algebra-calculator.html", description: "Risolve equazioni algebriche step-by-step con grafici interattivi per equazioni lineari e quadratiche."},
+                    {name: "Derivative Calculator", link: "https://www.derivative-calculator.net/", description: "Calcola derivate di funzioni complesse con passaggi dettagliati e visualizzazione grafica."},
+                    {name: "Integral Calculator", link: "https://www.integral-calculator.com/", description: "Risolve integrali definiti e indefiniti con spiegazioni complete e verifiche step-by-step."},
+                    {name: "System of Equations Solver", link: "https://www.mathway.com/Algebra", description: "Risolve sistemi di equazioni lineari con metodi matriciali e sostituzioni."},
+                    {name: "Polynomial Calculator", link: "https://www.polynomialcalculator.com/", description: "Operazioni sui polinomi: moltiplicazione, divisione, fattorizzazione e radici."},
+                    {name: "Limit Calculator", link: "https://www.limitcalculator.net/", description: "Calcola limiti di funzioni con L'Hôpital e tecniche avanzate di analisi matematica."},
+                    {name: "Matrix Calculator", link: "https://matrixcalc.org/", description: "Operazioni matriciali complete: determinanti, inverse, autovalori e diagonalizzazione."},
+                    {name: "Partial Derivative Calculator", link: "https://www.partial-derivative.com/", description: "Calcola derivate parziali per funzioni di più variabili con visualizzazione 3D."},
+                    {name: "Series Calculator", link: "https://www.seriesconvergencecalculator.com/", description: "Analizza convergenza di serie infinite con test di convergenza automatici."}
+                ]
+            },
+            "Trigonometria e Funzioni": {
+                icon: "📐",
+                color: "#f97316",
+                tools: [
+                    {name: "Trigonometry Calculator", link: "https://www.calculator.net/triangle-calculator.html", description: "Risolve triangoli con legge dei seni, coseni e calcoli trigonometrici completi."},
+                    {name: "Unit Circle Calculator", link: "https://www.mathwarehouse.com/unit-circle/", description: "Esplora il cerchio goniometrico interattivo con valori esatti di sin, cos, tan."},
+                    {name: "Inverse Trig Calculator", link: "https://www.rapidtables.com/calc/math/Arcsin_Calculator.html", description: "Calcola funzioni trigonometriche inverse (arcsin, arccos, arctan) con precisione."},
+                    {name: "Law of Cosines Calculator", link: "https://www.calculator.net/triangle-calculator.html", description: "Applica la legge dei coseni per risolvere triangoli scaleni con lati e angoli."},
+                    {name: "Sine Wave Generator", link: "https://www.desmos.com/calculator", description: "Genera e analizza onde sinusoidali con ampiezza, frequenza e fase personalizzabili."},
+                    {name: "Polar Coordinates", link: "https://www.mathsisfun.com/polar-cartesian-coordinates.html", description: "Converte tra coordinate polari e cartesiane con visualizzazione grafica."},
+                    {name: "Trig Identities Solver", link: "https://www.symbolab.com/solver/trigonometric-identity-calculator", description: "Verifica e risolve identità trigonometriche con dimostrazioni step-by-step."},
+                    {name: "Harmonic Analysis", link: "https://www.geogebra.org/m/qzjw2e8r", description: "Analizza funzioni periodiche con trasformate di Fourier semplificate."}
+                ]
+            },
+            "Matematica Finanziaria": {
+                icon: "💰",
+                color: "#059669",
+                tools: [
+                    {name: "Compound Interest Calculator", link: "https://www.calculator.net/compound-interest-calculator.html", description: "Calcola interesse composto per investimenti, prestiti e piani di risparmio."},
+                    {name: "Loan Calculator", link: "https://www.calculator.net/loan-calculator.html", description: "Pianifica rate mutui, prestiti personali e finanziamenti con tabelle ammortamento."},
+                    {name: "Present Value Calculator", link: "https://www.calculator.net/present-value-calculator.html", description: "Calcola valore attuale di flussi di cassa futuri per analisi investimenti."},
+                    {name: "Annuity Calculator", link: "https://www.calculator.net/annuity-calculator.html", description: "Pianifica rendite vitalizie e piani pensionistici con calcoli attuariali."},
+                    {name: "ROI Calculator", link: "https://www.calculator.net/roi-calculator.html", description: "Calcola ritorno su investimento per valutare redditività progetti business."},
+                    {name: "Bond Yield Calculator", link: "https://www.calculator.net/bond-yield-calculator.html", description: "Analizza rendimenti obbligazionari con yield to maturity e duration."},
+                    {name: "Depreciation Calculator", link: "https://www.calculator.net/depreciation-calculator.html", description: "Calcola ammortamenti con metodi lineari, accelerati e a quote decrescenti."},
+                    {name: "Break-even Analysis", link: "https://www.calculator.net/break-even-calculator.html", description: "Determina punto di pareggio per business plan e analisi costi-ricavi."}
+                ]
+            },
+            "Logica e Matematica Discreta": {
+                icon: "🧩",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Truth Table Generator", link: "https://web.stanford.edu/class/cs103/tools/truth-table-tool/", description: "Genera tavole di verità per proposizioni logiche complesse con connettivi booleani."},
+                    {name: "Combinatorics Calculator", link: "https://www.calculator.net/combination-permutation-calculator.html", description: "Calcola combinazioni, permutazioni e arrangiamenti per problemi di conteggio."},
+                    {name: "Set Theory Calculator", link: "https://www.symbolab.com/solver/sets-calculator", description: "Operazioni su insiemi: unione, intersezione, differenza e prodotto cartesiano."},
+                    {name: "Graph Theory Visualizer", link: "https://graphonline.ru/en/", description: "Visualizza e analizza grafi: cammini minimi, alberi, connettività e colorazione."},
+                    {name: "Modular Arithmetic", link: "https://www.calculator.net/modulo-calculator.html", description: "Calcoli in aritmetica modulare per crittografia e teoria dei numeri."},
+                    {name: "Prime Number Generator", link: "https://www.calculator.net/prime-number-calculator.html", description: "Genera numeri primi, test di primalità e fattorizzazione di numeri grandi."},
+                    {name: "Boolean Algebra Solver", link: "https://www.boolean-algebra.com/", description: "Semplifica espressioni booleane con leggi di De Morgan e forme canoniche."},
+                    {name: "Fibonacci Calculator", link: "https://www.calculator.net/fibonacci-calculator.html", description: "Calcola sequenze di Fibonacci e rapporto aureo per applicazioni matematiche."}
+                ]
+            },
+            "Simulatori e Laboratori Virtuali": {
+                icon: "🔬",
+                color: "#dc2626",
+                tools: [
+                    {name: "PhET Math Simulations", link: "https://phet.colorado.edu/en/simulations/category/math", description: "Simulazioni interattive University of Colorado per concetti matematici avanzati."},
+                    {name: "Virtual Math Lab", link: "https://www.wtamu.edu/academic/anns/mps/math/mathlab/", description: "Laboratorio matematico virtuale con esperimenti numerici e visualizzazioni."},
+                    {name: "Math Playground", link: "https://www.mathplayground.com/", description: "Giochi matematici interattivi per sviluppare problem-solving e logical thinking."},
+                    {name: "Algebra Tiles", link: "https://www.mathplayground.com/algebra_tiles.html", description: "Manipolatori virtuali per visualizzare operazioni algebriche e equazioni."},
+                    {name: "Fraction Bars", link: "https://www.mathplayground.com/fraction_bars.html", description: "Strumenti visivi per comprendere frazioni, operazioni e equivalenze."},
+                    {name: "Number Line Generator", link: "https://www.mathsisfun.com/definitions/number-line.html", description: "Crea linee dei numeri personalizzate per visualizzare operazioni e concetti."},
+                    {name: "Virtual Protractor", link: "https://www.mathsisfun.com/geometry/protractor-using.html", description: "Goniometro digitale per misurare angoli e costruzioni geometriche precise."},
+                    {name: "Math Manipulatives", link: "https://www.didax.com/virtual-manipulatives.html", description: "Collezione di manipolatori matematici digitali per apprendimento hands-on."}
+                ]
+            },
+            "Esercitatori e Test Matematici": {
+                icon: "📝",
+                color: "#0891b2",
+                tools: [
+                    {name: "Mathway Practice", link: "https://www.mathway.com/", description: "Generatore infinito di problemi matematici con soluzioni step-by-step verificate."},
+                    {name: "Khan Academy Practice", link: "https://www.khanacademy.org/math", description: "Esercizi adattivi personalizzati per tutti i livelli da aritmetica a calcolo avanzato."},
+                    {name: "Math Test Creator", link: "https://www.that-quiz.org/", description: "Crea test matematici personalizzati per verifiche e autovalutazione studenti."},
+                    {name: "Algebra Solver Practice", link: "https://www.algebra.com/", description: "Database di oltre 10,000 problemi algebrici risolti con spiegazioni dettagliate."},
+                    {name: "Calculus Practice", link: "https://www.calculus.org/", description: "Esercizi mirati su derivate, integrali, limiti e applicazioni del calcolo."},
+                    {name: "Geometry Workout", link: "https://www.mathwarehouse.com/geometry/", description: "Problemi di geometria piana e solida con costruzioni dinamiche."},
+                    {name: "Statistics Practice", link: "https://stattrek.com/", description: "Esercizi di statistica descrittiva e inferenziale con dataset reali."},
+                    {name: "Math Facts Practice", link: "https://www.mathfactspro.com/", description: "Allenamento rapido per operazioni aritmetiche e memorizzazione formule."},
+                    {name: "Competition Math", link: "https://artofproblemsolving.com/", description: "Problemi matematici olimpici e per competizioni internazionali STEM."}
+                ]
+            },
+            "Tools Matematici Specializzati": {
+                icon: "⚙️",
+                color: "#6366f1",
+                tools: [
+                    {name: "Linear Programming Solver", link: "https://www.zweigmedia.com/RealWorld/simplex.html", description: "Risolve problemi di ottimizzazione lineare con metodo del simplesso."},
+                    {name: "Differential Equations", link: "https://www.wolframalpha.com/examples/mathematics/differential-equations/", description: "Risolve equazioni differenziali ordinarie e alle derivate parziali."},
+                    {name: "Fourier Transform Calculator", link: "https://www.mathworks.com/help/matlab/ref/fft.html", description: "Calcola trasformate di Fourier per analisi spettrale e processamento segnali."},
+                    {name: "LaPlace Transform", link: "https://www.symbolab.com/solver/laplace-transform-calculator", description: "Trasformate di Laplace per risoluzione equazioni differenziali in ingegneria."},
+                    {name: "Vector Calculator", link: "https://www.symbolab.com/solver/vector-calculator", description: "Operazioni vettoriali: prodotto scalare, vettoriale e proiezioni in spazi n-dimensionali."},
+                    {name: "Complex Number Calculator", link: "https://www.calculator.net/complex-number-calculator.html", description: "Aritmetica complessa con forma polare, esponenziale e operazioni avanzate."},
+                    {name: "Taylor Series Calculator", link: "https://www.symbolab.com/solver/taylor-series-calculator", description: "Sviluppi in serie di Taylor e MacLaurin per approssimazioni funzioni."},
+                    {name: "Eigenvalue Calculator", link: "https://www.symbolab.com/solver/eigenvalue-eigenvector-calculator", description: "Calcola autovalori e autovettori per analisi spettrale matrici."},
+                    {name: "Numerical Methods", link: "https://www.mathworks.com/discovery/numerical-analysis.html", description: "Metodi numerici per risoluzione equazioni non lineari e integrazione."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 135;
+        let currentZoom = 1;
+        let isDarkMode = false;
+
+        // INIZIALIZZAZIONE APP DIRETTA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carica preferenza tema
+            const savedTheme = localStorage.getItem('mendel_math_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+            
+            // Inizializza l'app
+            initializeMap();
+            setupSearch();
+            setupKeyboardControls();
+            setupDraggableLegend();
+        });
+
+        // FUNZIONI PRINCIPALI DELL'APP
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_math_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(mathData);
+            
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += mathData[category].tools.length;
+            });
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = mathData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${mathData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${mathData[category].tools.length} strumenti</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${mathData[categoryName].tools.length} strumenti disponibili`;
+            
+            content.innerHTML = '';
+            
+            mathData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        ${mathData[categoryName].icon} ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi al Strumento
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(mathData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        isVisible = mathData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount} di ${totalTools}`;
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+            }
+        }
+
+        function toggleFilters() {
+            const categories = Object.keys(mathData);
+            const stats = categories.map(cat => `${cat}: ${mathData[cat].tools.length} strumenti`).join('\n');
+            alert(`📊 Statistiche Hub Matematica:\n\n${stats}\n\nTotale: ${totalTools} strumenti`);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey) {
+                    switch(e.key) {
+                        case '=':
+                        case '+':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                if (e.ctrlKey && e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+            
+            document.addEventListener('dblclick', () => {
+                resetZoom();
+            });
+        }
+
+        function setupDraggableLegend() {
+            const legend = document.getElementById('legend');
+            const legendHeader = document.getElementById('legendHeader');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            function dragStart(e) {
+                // Prevent default to avoid selection
+                e.preventDefault();
+                
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                }
+
+                // Allow dragging from header or drag handle
+                if (e.target.closest('.legend-header') || e.target.closest('.drag-handle')) {
+                    isDragging = true;
+                    legend.classList.add('dragging');
+                    document.body.style.userSelect = 'none'; // Prevent text selection while dragging
+                }
+            }
+
+            function dragEnd(e) {
+                if (isDragging) {
+                    initialX = currentX;
+                    initialY = currentY;
+                    isDragging = false;
+                    legend.classList.remove('dragging');
+                    document.body.style.userSelect = ''; // Restore text selection
+                }
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    // Apply constraints to keep legend visible
+                    const rect = legend.getBoundingClientRect();
+                    const maxX = window.innerWidth - rect.width;
+                    const maxY = window.innerHeight - rect.height;
+                    
+                    currentX = Math.max(0, Math.min(currentX, maxX));
+                    currentY = Math.max(0, Math.min(currentY, maxY));
+
+                    legend.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                    legend.style.left = '2rem'; // Keep original positioning as base
+                    legend.style.bottom = '2rem';
+                }
+            }
+
+            // Mouse events
+            legendHeader.addEventListener("mousedown", dragStart);
+            document.addEventListener("mouseup", dragEnd);
+            document.addEventListener("mousemove", drag);
+
+            // Touch events for mobile
+            legendHeader.addEventListener("touchstart", dragStart, { passive: false });
+            document.addEventListener("touchend", dragEnd);
+            document.addEventListener("touchmove", drag, { passive: false });
+
+            // Reset position on double click
+            legend.addEventListener("dblclick", () => {
+                xOffset = 0;
+                yOffset = 0;
+                currentX = 0;
+                currentY = 0;
+                legend.style.transform = 'translate(0px, 0px)';
+                
+                // Show feedback
+                legend.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    legend.style.animation = '';
+                }, 500);
+            });
+
+            // Add visual feedback for draggability
+            legendHeader.addEventListener("mouseenter", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--mendel-green)';
+                }
+            });
+
+            legendHeader.addEventListener("mouseleave", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--border-light)';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

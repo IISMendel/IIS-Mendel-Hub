@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Hub Cybersicurezza Docenti - IIS Mendel</title>
+    <meta name="description" content="Hub Cybersicurezza Docenti IIS Mendel - 90+ strumenti per sicurezza informatica, rilevamento AI e protezione dati nella didattica">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #dc2626;
+            --secondary-color: #ea580c;
+            --accent-color: #0ea5e9;
+            --security-red: #b91c1c;
+            --alert-orange: #f59e0b;
+            --shield-blue: #1d4ed8;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-security: linear-gradient(135deg, #dc2626 0%, #f59e0b 50%, #1d4ed8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-security);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-security);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-security);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-security);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-security);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-btn:hover {
+            background: var(--security-red);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--security-red);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .category-count {
+            background: var(--gradient-security);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tools-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            justify-between;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-item:hover {
+            background: rgba(220, 38, 38, 0.1);
+            transform: translateX(4px);
+            border-color: var(--security-red);
+        }
+
+        .tool-content {
+            flex: 1;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-description {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .tool-badge {
+            background: var(--gradient-security);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        .external-icon {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .special-sections {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .special-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .special-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card.red {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: var(--security-red);
+        }
+
+        .feature-card.orange {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--alert-orange);
+        }
+
+        .feature-card.blue {
+            background: rgba(29, 78, 216, 0.1);
+            border-color: var(--shield-blue);
+        }
+
+        .feature-card.cyan {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list {
+            text-align: left;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .feature-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .alert-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px dashed var(--border-light);
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .alert-card:hover {
+            border-style: solid;
+            border-color: var(--security-red);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .alert-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .alert-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .alert-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .alert-badge.critical { background: var(--security-red); color: white; }
+        .alert-badge.warning { background: var(--alert-orange); color: white; }
+        .alert-badge.info { background: var(--shield-blue); color: white; }
+        .alert-badge.secure { background: #059669; color: white; }
+
+        .alert-desc {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-card {
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .team-card.red {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.2));
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .team-card.orange {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.2));
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .team-card.blue {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(29, 78, 216, 0.2));
+            border-color: rgba(29, 78, 216, 0.3);
+        }
+
+        .team-card.cyan {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.2));
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .team-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .team-desc {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(135deg, var(--security-red), var(--alert-orange));
+        }
+
+        .project-card.objectives {
+            background: linear-gradient(135deg, var(--shield-blue), var(--accent-color));
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .project-list {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .project-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number.red { color: var(--security-red); }
+        .stat-number.orange { color: var(--alert-orange); }
+        .stat-number.blue { color: var(--shield-blue); }
+        .stat-number.cyan { color: var(--accent-color); }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-container, .controls-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                justify-content: center;
+                margin: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .special-card {
+                padding: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>🔐 Hub Cybersicurezza Docenti</h1>
+            <p>90+ Strumenti per Sicurezza Informatica, Rilevamento AI e Protezione Dati nella Didattica</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Cybersicurezza Docenti IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di competenza per la <strong>cybersicurezza educativa</strong> dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>90+ strumenti specializzati</strong> per la sicurezza informatica, il rilevamento 
+                di contenuti generati da AI, la protezione dei dati e l'educazione alla cittadinanza digitale.
+            </p>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(220, 38, 38, 0.1); border-radius: 16px; border: 1px solid rgba(220, 38, 38, 0.2);">
+                <p style="color: var(--security-red); font-weight: 600; margin: 0;">
+                    🔐 <strong>Hub Cybersicurezza Docenti IIS Mendel:</strong> Proteggere l'ambiente educativo digitale 
+                    attraverso formazione, strumenti avanzati e best practices. 
+                    90+ risorse per garantire sicurezza e autenticità nella didattica digitale.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span style="color: var(--text-light); font-size: 1.125rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 90+ strumenti di sicurezza..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button class="control-btn" onclick="toggleTheme()" title="Tema">🌙</button>
+        <button class="control-btn" onclick="showStats()" title="Statistiche">📊</button>
+    </div>
+
+    <div class="main-content">
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+
+        <div class="special-sections">
+            <!-- Sezione AI Detection & Originality -->
+            <div class="special-card">
+                <h3 class="special-title">🤖 Rilevamento AI & Verifica Originalità</h3>
+                <div class="features-grid">
+                    <div class="feature-card red">
+                        <h4 class="feature-title">🔍 AI Detection</h4>
+                        <div class="feature-list">
+                            <div>• Rilevamento testi generati da AI</div>
+                            <div>• Analisi pattern di scrittura</div>
+                            <div>• Verifiche autenticità lavori</div>
+                            <div>• Report dettagliati probabilità</div>
+                        </div>
+                    </div>
+                    <div class="feature-card orange">
+                        <h4 class="feature-title">📝 Plagiarism Check</h4>
+                        <div class="feature-list">
+                            <div>• Controllo antiplagio avanzato</div>
+                            <div>• Database accademici globali</div>
+                            <div>• Similarità contenuti web</div>
+                            <div>• Citazioni e riferimenti</div>
+                        </div>
+                    </div>
+                    <div class="feature-card blue">
+                        <h4 class="feature-title">🛡️ Content Integrity</h4>
+                        <div class="feature-list">
+                            <div>• Watermarking digitale</div>
+                            <div>• Blockchain verification</div>
+                            <div>• Hash fingerprinting</div>
+                            <div>• Timestamp sicuri</div>
+                        </div>
+                    </div>
+                    <div class="feature-card cyan">
+                        <h4 class="feature-title">📊 Analytics & Reports</h4>
+                        <div class="feature-list">
+                            <div>• Dashboard insegnanti</div>
+                            <div>• Trend analysis classe</div>
+                            <div>• Risk assessment studenti</div>
+                            <div>• Interventi personalizzati</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Alerts & Best Practices -->
+            <div class="special-card">
+                <h3 class="special-title">⚠️ Security Alerts & Best Practices</h3>
+                <div class="alert-grid" id="alertGrid">
+                    <!-- Gli alert di sicurezza verranno generati dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Sezione TEAM Buone Pratiche -->
+            <div class="special-card">
+                <h3 class="special-title">🏆 TEAM Buone Pratiche - Cybersicurezza Educativa</h3>
+                <div class="team-grid">
+                    <div class="team-card red">
+                        <div class="team-icon">🛡️</div>
+                        <h4 class="team-title">Security by Design</h4>
+                        <p class="team-desc">Integrazione sicurezza in tutti i processi didattici</p>
+                    </div>
+                    <div class="team-card orange">
+                        <div class="team-icon">🎓</div>
+                        <h4 class="team-title">Digital Citizenship</h4>
+                        <p class="team-desc">Educazione alla cittadinanza digitale responsabile</p>
+                    </div>
+                    <div class="team-card blue">
+                        <div class="team-icon">🔐</div>
+                        <h4 class="team-title">Data Protection</h4>
+                        <p class="team-desc">Conformità GDPR e protezione privacy studenti</p>
+                    </div>
+                    <div class="team-card cyan">
+                        <div class="team-icon">📈</div>
+                        <h4 class="team-title">Continuous Monitoring</h4>
+                        <p class="team-desc">Monitoraggio continuo e incident response</p>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🔒</span>
+                            <h4 class="project-title">Progetti Sicurezza 2025</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• AI Detection Framework Integrato</div>
+                            <div>• GDPR Compliance Dashboard</div>
+                            <div>• Security Awareness Training</div>
+                            <div>• Incident Response System</div>
+                        </div>
+                    </div>
+                    <div class="project-card objectives">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🎯</span>
+                            <h4 class="project-title">Obiettivi PNRR</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Sicurezza Didattica Digitale</div>
+                            <div>• Competenze Cyber-Defence</div>
+                            <div>• Protezione Dati Sensibili</div>
+                            <div>• Network Scuole Sicure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3 class="special-title">Statistiche della Piattaforma</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number red">92</div>
+                        <div class="stat-label">Strumenti Sicurezza</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number orange">156</div>
+                        <div class="stat-label">Docenti Formati</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number blue">18</div>
+                        <div class="stat-label">Moduli Training</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number cyan">99%</div>
+                        <div class="stat-label">Compliance Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dati delle categorie cybersicurezza
+        const categories = [
+            {
+                id: 'ai-detection',
+                name: 'AI Detection & Originality',
+                icon: '🤖',
+                color: 'linear-gradient(135deg, #dc2626, #b91c1c)',
+                description: 'Strumenti per rilevare contenuti generati da AI e verificare originalità',
+                tools: [
+                    { name: 'GPTZero', url: 'https://gptzero.me/', description: 'Rilevatore AI specifico per testi educativi e accademici' },
+                    { name: 'Turnitin', url: 'https://www.turnitin.com/', description: 'Piattaforma completa antiplagio con AI detection' },
+                    { name: 'Originality.ai', url: 'https://originality.ai/', description: 'Scanner AI con analisi approfondita e report dettagliati' },
+                    { name: 'Content at Scale AI Detector', url: 'https://contentatscale.ai/', description: 'Rilevamento AI con accuracy elevata per contenuti lunghi' },
+                    { name: 'Copyleaks', url: 'https://copyleaks.com/', description: 'AI detector con supporto multilingue e API integration' },
+                    { name: 'Winston AI', url: 'https://gowinston.ai/', description: 'Detector specializzato per contenuti educativi' },
+                    { name: 'Sapling AI Detector', url: 'https://sapling.ai/', description: 'Rilevamento AI con interfaccia semplice per docenti' },
+                    { name: 'Writer AI Content Detector', url: 'https://writer.com/', description: 'Tool enterprise per verifica autenticità contenuti' },
+                    { name: 'Scribbr Plagiarism Checker', url: 'https://www.scribbr.com/', description: 'Controllo plagio accademico con AI detection' },
+                    { name: 'CrossPlag', url: 'https://crossplag.com/', description: 'Piattaforma educativa per verifica originalità' }
+                ]
+            },
+            {
+                id: 'password-security',
+                name: 'Password & Access Management',
+                icon: '🔑',
+                color: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                description: 'Gestione sicura password e controllo accessi per ambiente scolastico',
+                tools: [
+                    { name: 'Bitwarden Education', url: 'https://bitwarden.com/products/education/', description: 'Password manager gratuito per istituzioni educative' },
+                    { name: 'LastPass Education', url: 'https://www.lastpass.com/education', description: 'Gestione password enterprise per scuole' },
+                    { name: 'Microsoft Authenticator', url: 'https://www.microsoft.com/authenticator', description: 'Autenticazione a due fattori per Office 365 Education' },
+                    { name: 'Google Authenticator', url: 'https://support.google.com/accounts/answer/1066447', description: '2FA per Google Workspace for Education' },
+                    { name: 'Authy', url: 'https://authy.com/', description: 'App 2FA con backup cloud per docenti' },
+                    { name: 'KeePass', url: 'https://keepass.info/', description: 'Password manager open source per uso scolastico' },
+                    { name: 'Dashlane Education', url: 'https://www.dashlane.com/', description: 'Gestione password con dark web monitoring' },
+                    { name: '1Password Education', url: 'https://1password.com/education/', description: 'Password manager con piani educational' },
+                    { name: 'Have I Been Pwned', url: 'https://haveibeenpwned.com/', description: 'Verifica compromissione account istituzionali' },
+                    { name: 'Password Strength Checker', url: 'https://www.security.org/how-secure-is-my-password/', description: 'Tool educativo per valutare robustezza password' }
+                ]
+            },
+            {
+                id: 'privacy-gdpr',
+                name: 'Privacy & GDPR Compliance',
+                icon: '🛡️',
+                color: 'linear-gradient(135deg, #1d4ed8, #1e40af)',
+                description: 'Strumenti per conformità GDPR e protezione dati in ambito educativo',
+                tools: [
+                    { name: 'GDPR.eu', url: 'https://gdpr.eu/', description: 'Guida completa GDPR per istituzioni educative' },
+                    { name: 'Privacy Policy Generator', url: 'https://www.privacypolicygenerator.info/', description: 'Generatore policy privacy per siti scolastici' },
+                    { name: 'Cookie Consent Tools', url: 'https://cookieconsent.osano.com/', description: 'Banner consenso cookie GDPR compliant' },
+                    { name: 'Garante Privacy', url: 'https://www.garanteprivacy.it/', description: 'Risorse ufficiali privacy per scuole italiane' },
+                    { name: 'Microsoft Privacy Dashboard', url: 'https://account.microsoft.com/privacy', description: 'Controllo privacy dati Office 365 Education' },
+                    { name: 'Google Privacy Checkup', url: 'https://myaccount.google.com/privacycheckup', description: 'Verifica impostazioni privacy Google Workspace' },
+                    { name: 'GDPR Checklist for Schools', url: 'https://schoolprivacy.org.uk/', description: 'Checklist specifica per conformità scuole' },
+                    { name: 'Data Protection Impact Assessment', url: 'https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/data-protection-impact-assessments-dpias/', description: 'Template DPIA per progetti scolastici' },
+                    { name: 'Student Privacy Compass', url: 'https://studentprivacycompass.org/', description: 'Guida privacy per tecnologie educative' },
+                    { name: 'Common Sense Privacy Program', url: 'https://privacy.commonsense.org/', description: 'Programma privacy per educatori' }
+                ]
+            },
+            {
+                id: 'phishing-awareness',
+                name: 'Phishing & Social Engineering',
+                icon: '🎣',
+                color: 'linear-gradient(135deg, #ea580c, #c2410c)',
+                description: 'Training e protezione da attacchi phishing e social engineering',
+                tools: [
+                    { name: 'KnowBe4 Security Awareness', url: 'https://www.knowbe4.com/', description: 'Piattaforma training anti-phishing per educatori' },
+                    { name: 'PhishMe (Proofpoint)', url: 'https://www.proofpoint.com/', description: 'Simulazioni phishing per staff scolastico' },
+                    { name: 'Google Phishing Quiz', url: 'https://phishingquiz.withgoogle.com/', description: 'Quiz interattivo per riconoscere phishing' },
+                    { name: 'Phishing.org', url: 'https://www.phishing.org/', description: 'Risorse educative anti-phishing gratuite' },
+                    { name: 'Microsoft Defender SmartScreen', url: 'https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-smartscreen/', description: 'Protezione phishing integrata Office 365' },
+                    { name: 'Anti-Phishing Working Group', url: 'https://apwg.org/', description: 'Ricerca e intelligence su minacce phishing' },
+                    { name: 'VirusTotal', url: 'https://www.virustotal.com/', description: 'Verifica sicurezza URL e file sospetti' },
+                    { name: 'URLVoid', url: 'https://www.urlvoid.com/', description: 'Scanner reputazione siti web' },
+                    { name: 'Scamwatch', url: 'https://www.scamwatch.gov.au/', description: 'Database truffe online per awareness' },
+                    { name: 'Sophos Phish Threat', url: 'https://www.sophos.com/', description: 'Simulazioni phishing per training staff' }
+                ]
+            },
+            {
+                id: 'digital-citizenship',
+                name: 'Digital Citizenship Education',
+                icon: '🌐',
+                color: 'linear-gradient(135deg, #0ea5e9, #0284c7)',
+                description: 'Risorse per educare alla cittadinanza digitale responsabile',
+                tools: [
+                    { name: 'Common Sense Education', url: 'https://www.commonsense.org/education/', description: 'Curriculum cittadinanza digitale K-12' },
+                    { name: 'Digital Citizenship Institute', url: 'https://www.digitalcitizenship.net/', description: 'Risorse formazione cittadinanza digitale' },
+                    { name: 'NetSmartz', url: 'https://www.missingkids.org/netsmartz', description: 'Sicurezza internet per studenti' },
+                    { name: 'Be Internet Awesome', url: 'https://beinternetawesome.withgoogle.com/', description: 'Programma Google per sicurezza online bambini' },
+                    { name: 'ConnectSafely', url: 'https://www.connectsafely.org/', description: 'Guide sicurezza per genitori e educatori' },
+                    { name: 'Cyberbullying Research Center', url: 'https://cyberbullying.org/', description: 'Ricerca e risorse anti-cyberbullismo' },
+                    { name: 'Digital Wellbeing for Educators', url: 'https://wellbeing.google/', description: 'Strumenti Google per benessere digitale' },
+                    { name: 'Internet Safety 101', url: 'https://internetsafety101.org/', description: 'Corso sicurezza internet per educatori' },
+                    { name: 'Media Literacy Now', url: 'https://medialiteracynow.org/', description: 'Alfabetizzazione mediatica per scuole' },
+                    { name: 'StopBullying.gov', url: 'https://www.stopbullying.gov/', description: 'Risorse ufficiali USA anti-bullismo' }
+                ]
+            },
+            {
+                id: 'network-security',
+                name: 'Network & Infrastructure',
+                icon: '🔒',
+                color: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
+                description: 'Sicurezza rete e infrastruttura IT scolastica',
+                tools: [
+                    { name: 'pfSense', url: 'https://www.pfsense.org/', description: 'Firewall open source per reti scolastiche' },
+                    { name: 'OpenWrt', url: 'https://openwrt.org/', description: 'Firmware router per controllo avanzato rete' },
+                    { name: 'Nmap', url: 'https://nmap.org/', description: 'Network discovery e security auditing' },
+                    { name: 'Wireshark', url: 'https://www.wireshark.org/', description: 'Analizzatore traffico rete per troubleshooting' },
+                    { name: 'Sophos Home', url: 'https://home.sophos.com/', description: 'Protezione endpoint gratuita per dispositivi scuola' },
+                    { name: 'Pi-hole', url: 'https://pi-hole.net/', description: 'DNS sinkhole per bloccare ads e malware' },
+                    { name: 'Untangle NG Firewall', url: 'https://www.untangle.com/', description: 'Firewall unificato per reti educational' },
+                    { name: 'OpenVPN', url: 'https://openvpn.net/', description: 'VPN open source per accesso remoto sicuro' },
+                    { name: 'OSSEC', url: 'https://www.ossec.net/', description: 'Host-based intrusion detection system' },
+                    { name: 'Nagios', url: 'https://www.nagios.org/', description: 'Monitoraggio infrastruttura IT scolastica' }
+                ]
+            },
+            {
+                id: 'mobile-security',
+                name: 'Mobile Device Management',
+                icon: '📱',
+                color: 'linear-gradient(135deg, #10b981, #059669)',
+                description: 'Gestione e sicurezza dispositivi mobili in ambiente BYOD',
+                tools: [
+                    { name: 'Microsoft Intune for Education', url: 'https://docs.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune-for-education', description: 'MDM Microsoft per dispositivi educativi' },
+                    { name: 'Google Admin Console', url: 'https://admin.google.com/', description: 'Gestione dispositivi Chrome OS e Android' },
+                    { name: 'Jamf School', url: 'https://www.jamf.com/products/jamf-school/', description: 'MDM specializzato per iPad e Mac in educazione' },
+                    { name: 'Apple School Manager', url: 'https://school.apple.com/', description: 'Gestione dispositivi iOS/macOS per scuole' },
+                    { name: 'Hexnode UEM', url: 'https://www.hexnode.com/', description: 'Unified endpoint management per BYOD' },
+                    { name: 'SOTI MobiControl', url: 'https://soti.net/', description: 'Enterprise mobility management per education' },
+                    { name: 'VMware Workspace ONE', url: 'https://www.vmware.com/products/workspace-one.html', description: 'Digital workspace platform per scuole' },
+                    { name: 'Cisco Meraki SM', url: 'https://meraki.cisco.com/', description: 'Cloud-managed mobile device management' },
+                    { name: 'IBM MaaS360', url: 'https://www.ibm.com/products/maas360', description: 'UEM con AI-powered analytics' },
+                    { name: 'ManageEngine Mobile Device Manager Plus', url: 'https://www.manageengine.com/', description: 'MDM gratuito per piccole scuole' }
+                ]
+            },
+            {
+                id: 'incident-response',
+                name: 'Incident Response & Forensics',
+                icon: '🚨',
+                color: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                description: 'Gestione incidenti di sicurezza e digital forensics educative',
+                tools: [
+                    { name: 'TheHive Project', url: 'https://thehive-project.org/', description: 'Piattaforma open source incident response' },
+                    { name: 'MISP', url: 'https://www.misp-project.org/', description: 'Threat intelligence sharing platform' },
+                    { name: 'Autopsy Digital Forensics', url: 'https://www.autopsy.com/', description: 'Tool forensics gratuito per investigazioni' },
+                    { name: 'Volatility Framework', url: 'https://www.volatilityfoundation.org/', description: 'Memory forensics per analisi malware' },
+                    { name: 'SANS Incident Response Process', url: 'https://www.sans.org/', description: 'Metodologia standard incident response' },
+                    { name: 'Splunk Free', url: 'https://www.splunk.com/en_us/download/splunk-enterprise.html', description: 'SIEM gratuito per log analysis' },
+                    { name: 'Graylog Open', url: 'https://www.graylog.org/', description: 'Centralized log management open source' },
+                    { name: 'YARA Rules', url: 'https://virustotal.github.io/yara/', description: 'Pattern matching per malware identification' },
+                    { name: 'Cyber Kill Chain', url: 'https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html', description: 'Framework analisi attacchi informatici' },
+                    { name: 'NIST Cybersecurity Framework', url: 'https://www.nist.gov/cyberframework', description: 'Standard nazionale USA cybersecurity' }
+                ]
+            }
+        ];
+
+        const securityAlerts = [
+            { name: 'Verifica Account Compromessi', desc: 'Controllo regolare credenziali staff su database breach', badge: 'CRITICAL', badgeClass: 'critical', url: 'https://haveibeenpwned.com/' },
+            { name: 'Update Sistemi Critici', desc: 'Patch management per vulnerabilità di sicurezza', badge: 'WARNING', badgeClass: 'warning', url: 'https://www.cve.org/' },
+            { name: 'Backup Dati Sensibili', desc: 'Verifica integrità backup dati studenti/personale', badge: 'INFO', badgeClass: 'info', url: '#' },
+            { name: 'Training Awareness Staff', desc: 'Formazione periodica cybersecurity per docenti', badge: 'SECURE', badgeClass: 'secure', url: 'https://www.knowbe4.com/' },
+            { name: 'Audit Permissions', desc: 'Revisione permessi accesso sistemi informatici', badge: 'WARNING', badgeClass: 'warning', url: '#' },
+            { name: 'Monitoring Network Traffic', desc: 'Analisi traffico anomalo infrastruttura scuola', badge: 'INFO', badgeClass: 'info', url: 'https://www.wireshark.org/' }
+        ];
+
+        // Variabili globali
+        let isDarkMode = false;
+
+        // Funzioni principali
+        function initializeApp() {
+            renderCategories();
+            renderSecurityAlerts();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            
+            grid.innerHTML = categories.map((category, index) => `
+                <div class="category-card animate-fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: ${category.color}">
+                            ${category.icon}
+                        </div>
+                        <h3 class="category-title">${category.name}</h3>
+                        <div class="category-count">${category.tools.length} tools</div>
+                    </div>
+                    
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.875rem;">${category.description}</p>
+                    
+                    <div class="tools-list">
+                        ${category.tools.map((tool, toolIndex) => `
+                            <div class="tool-item" onclick="window.open('${tool.url}', '_blank')">
+                                <span class="tool-badge">#${toolIndex + 1}</span>
+                                <div class="tool-content">
+                                    <div class="tool-name">${tool.name}</div>
+                                    <div class="tool-description">${tool.description}</div>
+                                </div>
+                                <span class="external-icon">🔗</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSecurityAlerts() {
+            const container = document.getElementById('alertGrid');
+            container.innerHTML = securityAlerts.map(alert => `
+                <div class="alert-card" onclick="window.open('${alert.url}', '_blank')">
+                    <div class="alert-header">
+                        <h4 class="alert-name">${alert.name}</h4>
+                        <span class="alert-badge ${alert.badgeClass}">${alert.badge}</span>
+                    </div>
+                    <p class="alert-desc">${alert.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.style.filter = isDarkMode ? 'invert(1) hue-rotate(180deg)' : '';
+            event.target.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function showStats() {
+            const stats = categories.map(cat => `${cat.name}: ${cat.tools.length} strumenti`).join('\n');
+            const totalTools = categories.reduce((sum, cat) => sum + cat.tools.length, 0);
+            alert(`🔐 Statistiche Hub Cybersicurezza:\n\n${stats}\n\nTotale: ${totalTools} strumenti di sicurezza`);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const categoryCards = document.querySelectorAll('.category-card');
+                
+                categoryCards.forEach(card => {
+                    const categoryTitle = card.querySelector('.category-title').textContent.toLowerCase();
+                    const toolNames = Array.from(card.querySelectorAll('.tool-name'))
+                        .map(tool => tool.textContent.toLowerCase())
+                        .join(' ');
+                    
+                    const isVisible = categoryTitle.includes(searchTerm) || 
+                                    toolNames.includes(searchTerm) || 
+                                    searchTerm === '';
+                    
+                    card.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearch();
+        });
+
+        // Esponi funzioni globali
+        window.toggleTheme = toggleTheme;
+        window.showStats = showStats;
+    </script>
+</body>
+</html>

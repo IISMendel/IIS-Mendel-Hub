@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Hub Gamification Educational - IIS Mendel</title>
+    <meta name="description" content="Hub Gamification Educational IIS Mendel - 80+ strumenti per apprendimento ludico in ambito STEM, umanistico e agrario">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #7c3aed;
+            --secondary-color: #a855f7;
+            --accent-color: #06b6d4;
+            --game-purple: #6d28d9;
+            --play-pink: #ec4899;
+            --tech-blue: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-game: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-game);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-game);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-game);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-game);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-game);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-btn:hover {
+            background: var(--game-purple);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--game-purple);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .category-count {
+            background: var(--gradient-game);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tools-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            justify-between;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-item:hover {
+            background: rgba(124, 58, 237, 0.1);
+            transform: translateX(4px);
+            border-color: var(--game-purple);
+        }
+
+        .tool-content {
+            flex: 1;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-description {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .tool-badge {
+            background: var(--gradient-game);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        .external-icon {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .special-sections {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .special-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .special-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card.purple {
+            background: rgba(124, 58, 237, 0.1);
+            border-color: var(--game-purple);
+        }
+
+        .feature-card.pink {
+            background: rgba(236, 72, 153, 0.1);
+            border-color: var(--play-pink);
+        }
+
+        .feature-card.blue {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--tech-blue);
+        }
+
+        .feature-card.cyan {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list {
+            text-align: left;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .feature-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .game-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px dashed var(--border-light);
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            border-style: solid;
+            border-color: var(--game-purple);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .game-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .game-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .game-badge.stem { background: var(--tech-blue); color: white; }
+        .game-badge.humanities { background: var(--play-pink); color: white; }
+        .game-badge.agrarian { background: #059669; color: white; }
+        .game-badge.ai { background: var(--game-purple); color: white; }
+        .game-badge.vr { background: var(--accent-color); color: white; }
+
+        .game-desc {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-card {
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .team-card.purple {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(124, 58, 237, 0.2));
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
+        .team-card.pink {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(236, 72, 153, 0.2));
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .team-card.blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2));
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .team-card.cyan {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.2));
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .team-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .team-desc {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(135deg, var(--game-purple), var(--play-pink));
+        }
+
+        .project-card.objectives {
+            background: linear-gradient(135deg, var(--tech-blue), var(--accent-color));
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .project-list {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .project-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number.purple { color: var(--game-purple); }
+        .stat-number.pink { color: var(--play-pink); }
+        .stat-number.blue { color: var(--tech-blue); }
+        .stat-number.cyan { color: var(--accent-color); }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-container, .controls-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                justify-content: center;
+                margin: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .special-card {
+                padding: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>🎮 Hub Gamification Educational</h1>
+            <p>80+ Strumenti per Apprendimento Ludico in ambito STEM, Umanistico e Agrario</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Gamification Educational IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di innovazione per l'<strong>apprendimento ludico</strong> dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>80+ strumenti gamificati</strong> che collegano le aree STEM e umanistiche 
+                attraverso il gioco, l'interazione e l'apprendimento immersivo per l'istruzione agraria del futuro.
+            </p>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(124, 58, 237, 0.1); border-radius: 16px; border: 1px solid rgba(124, 58, 237, 0.2);">
+                <p style="color: var(--game-purple); font-weight: 600; margin: 0;">
+                    🎮 <strong>Hub Gamification Educational IIS Mendel:</strong> Trasformare l'apprendimento in avventura 
+                    attraverso giochi educativi, AI interattiva e realtà virtuale. 
+                    80+ strumenti per gamificare l'educazione nella comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span style="color: var(--text-light); font-size: 1.125rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 80+ giochi educativi..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button class="control-btn" onclick="toggleTheme()" title="Tema">🌙</button>
+        <button class="control-btn" onclick="showStats()" title="Statistiche">📊</button>
+    </div>
+
+    <div class="main-content">
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+
+        <div class="special-sections">
+            <!-- Sezione Learning Through Play -->
+            <div class="special-card">
+                <h3 class="special-title">🎯 Learning Through Play - STEM & Humanities</h3>
+                <div class="features-grid">
+                    <div class="feature-card purple">
+                        <h4 class="feature-title">🧬 STEM Gamificato</h4>
+                        <div class="feature-list">
+                            <div>• Simulazioni scientifiche interattive</div>
+                            <div>• Matematica attraverso giochi</div>
+                            <div>• Laboratori virtuali di chimica</div>
+                            <div>• Fisica con esperimenti ludici</div>
+                        </div>
+                    </div>
+                    <div class="feature-card pink">
+                        <h4 class="feature-title">📚 Umanistiche Interattive</h4>
+                        <div class="feature-list">
+                            <div>• Storytelling digitale immersivo</div>
+                            <div>• Giochi di ruolo storici</div>
+                            <div>• Linguaggi tramite gamification</div>
+                            <div>• Filosofia attraverso dilemmi</div>
+                        </div>
+                    </div>
+                    <div class="feature-card blue">
+                        <h4 class="feature-title">🌾 Agraria Ludica</h4>
+                        <div class="feature-list">
+                            <div>• Simulatori di gestione agricola</div>
+                            <div>• Serious games per sostenibilità</div>
+                            <div>• VR per esplorazione ecosistemi</div>
+                            <div>• AI per decision making</div>
+                        </div>
+                    </div>
+                    <div class="feature-card cyan">
+                        <h4 class="feature-title">🤖 AI & Personalizzazione</h4>
+                        <div class="feature-list">
+                            <div>• Adaptive learning systems</div>
+                            <div>• Chatbot educativi intelligenti</div>
+                            <div>• Percorsi personalizzati</div>
+                            <div>• Analytics apprendimento</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase Giochi Educativi -->
+            <div class="special-card">
+                <h3 class="special-title">🎲 Showcase Giochi Educativi Avanzati</h3>
+                <div class="game-showcase-grid" id="gameShowcaseGrid">
+                    <!-- I giochi showcase verranno generati dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Sezione TEAM Buone Pratiche -->
+            <div class="special-card">
+                <h3 class="special-title">🏆 TEAM Buone Pratiche - Gamification Educativa</h3>
+                <div class="team-grid">
+                    <div class="team-card purple">
+                        <div class="team-icon">🎮</div>
+                        <h4 class="team-title">Game-Based Learning</h4>
+                        <p class="team-desc">Metodologie didattiche basate su meccaniche di gioco</p>
+                    </div>
+                    <div class="team-card pink">
+                        <div class="team-icon">🏅</div>
+                        <h4 class="team-title">Achievement System</h4>
+                        <p class="team-desc">Sistemi di badge e riconoscimenti per l'apprendimento</p>
+                    </div>
+                    <div class="team-card blue">
+                        <div class="team-icon">🚀</div>
+                        <h4 class="team-title">Innovation Lab</h4>
+                        <p class="team-desc">Laboratorio di sperimentazione tecnologie immersive</p>
+                    </div>
+                    <div class="team-card cyan">
+                        <div class="team-icon">📈</div>
+                        <h4 class="team-title">Learning Analytics</h4>
+                        <p class="team-desc">Misurazione e ottimizzazione dell'engagement</p>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🎯</span>
+                            <h4 class="project-title">Progetti Gamification 2025</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Virtual Greenhouse Simulator</div>
+                            <div>• Historic Villa Cortese AR Tour</div>
+                            <div>• AI Math Adventure Tutor</div>
+                            <div>• Sustainable Farm Management Game</div>
+                        </div>
+                    </div>
+                    <div class="project-card objectives">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🎯</span>
+                            <h4 class="project-title">Obiettivi PNRR</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Gamification Didattica Integrata</div>
+                            <div>• Competenze Digitali Ludiche</div>
+                            <div>• Metodologie Immersive</div>
+                            <div>• Community of Practice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3 class="special-title">Statistiche della Piattaforma</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number purple">82</div>
+                        <div class="stat-label">Giochi Educativi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number pink">234</div>
+                        <div class="stat-label">Studenti Attivi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number blue">15</div>
+                        <div class="stat-label">Docenti</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number cyan">96%</div>
+                        <div class="stat-label">Engagement Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dati delle categorie gamification
+        const categories = [
+            {
+                id: 'platforms',
+                name: 'Piattaforme Gamification',
+                icon: '🎮',
+                color: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+                description: 'Piattaforme complete per creare esperienze di apprendimento gamificate',
+                tools: [
+                    { name: 'Kahoot!', url: 'https://kahoot.com/', description: 'Quiz interattivi e giochi educativi per tutte le materie' },
+                    { name: 'Quizizz', url: 'https://quizizz.com/', description: 'Gamification assessment con modalità collaborative' },
+                    { name: 'Classcraft', url: 'https://www.classcraft.com/', description: 'RPG educativo per gestione classe e motivazione' },
+                    { name: 'Minecraft Education', url: 'https://education.minecraft.net/', description: 'Mondo virtuale per apprendimento immersivo STEM' },
+                    { name: 'Duolingo for Schools', url: 'https://schools.duolingo.com/', description: 'Apprendimento linguaggi gamificato' },
+                    { name: 'CodeCombat', url: 'https://codecombat.com/', description: 'Programmazione attraverso giochi di ruolo' },
+                    { name: 'Prodigy Math', url: 'https://www.prodigygame.com/', description: 'RPG matematico adattivo per ogni livello' },
+                    { name: 'Gimkit', url: 'https://www.gimkit.com/', description: 'Quiz con economia virtuale e power-ups' },
+                    { name: 'Blooket', url: 'https://www.blooket.com/', description: 'Giochi educativi con modalità multiple' },
+                    { name: 'FlipGrid', url: 'https://flipgrid.com/', description: 'Video discussion gamificati per engagement' }
+                ]
+            },
+            {
+                id: 'stem',
+                name: 'STEM Gamificato',
+                icon: '🧬',
+                color: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+                description: 'Strumenti ludici per matematica, scienze, fisica e tecnologia',
+                tools: [
+                    { name: 'PhET Interactive Simulations', url: 'https://phet.colorado.edu/', description: 'Simulazioni interattive fisica e chimica' },
+                    { name: 'GeoGebra', url: 'https://www.geogebra.org/', description: 'Matematica dinamica e geometria interattiva' },
+                    { name: 'Labster Virtual Labs', url: 'https://www.labster.com/', description: 'Laboratori virtuali scientifici immersivi' },
+                    { name: 'DragonBox (Algebra)', url: 'https://dragonbox.com/', description: 'Algebra attraverso puzzle e manipolazione visuale' },
+                    { name: 'Kerbal Space Program', url: 'https://www.kerbalspaceprogram.com/', description: 'Simulatore spaziale per fisica e ingegneria' },
+                    { name: 'Simple Machines by Tinybop', url: 'https://tinybop.com/', description: 'Meccanica e fisica attraverso macchine semplici' },
+                    { name: 'CodePen', url: 'https://codepen.io/', description: 'Playground coding per web development' },
+                    { name: 'Scratch', url: 'https://scratch.mit.edu/', description: 'Programmazione visuale per logica computazionale' },
+                    { name: 'Desmos Graphing Calculator', url: 'https://www.desmos.com/calculator', description: 'Matematica avanzata con visualizzazioni interattive' },
+                    { name: 'NASA Eyes', url: 'https://eyes.nasa.gov/', description: 'Esplorazione spazio e sistema solare in tempo reale' }
+                ]
+            },
+            {
+                id: 'humanities',
+                name: 'Umanistiche Interattive',
+                icon: '📚',
+                color: 'linear-gradient(135deg, #ec4899, #be185d)',
+                description: 'Apprendimento gamificato per lingue, storia, letteratura e filosofia',
+                tools: [
+                    { name: 'Reigns: Her Majesty', url: 'https://devolver.com/games/reigns-her-majesty', description: 'Decisioni storiche attraverso gameplay narrativo' },
+                    { name: 'Google Earth Voyager', url: 'https://earth.google.com/web/', description: 'Esplorazioni storiche e geografiche immersive' },
+                    { name: 'Timeline - World History', url: 'https://timeline.knightlab.com/', description: 'Creazione timeline interattive per storia' },
+                    { name: 'Twine', url: 'https://twinery.org/', description: 'Interactive fiction per storytelling educativo' },
+                    { name: 'Memrise', url: 'https://www.memrise.com/', description: 'Apprendimento lingue con gamification avanzata' },
+                    { name: 'Busuu', url: 'https://www.busuu.com/', description: 'Corsi linguistici con meccaniche di gioco' },
+                    { name: 'Rome Total War', url: 'https://www.totalwar.com/', description: 'Strategia storica per comprensione imperi antichi' },
+                    { name: 'Never Alone', url: 'http://neveralonegame.com/', description: 'Cultura indigena attraverso adventure game' },
+                    { name: 'BBC History for Kids', url: 'https://www.bbc.co.uk/cbbc/games/history-games', description: 'Giochi educativi per storia britannica' },
+                    { name: 'Artbreeder', url: 'https://www.artbreeder.com/', description: 'Creatività artistica con AI generativa' }
+                ]
+            },
+            {
+                id: 'agrarian',
+                name: 'Agraria Ludica',
+                icon: '🌾',
+                color: 'linear-gradient(135deg, #059669, #047857)',
+                description: 'Serious games per agricoltura, sostenibilità e gestione territoriale',
+                tools: [
+                    { name: 'Farming Simulator', url: 'https://www.farming-simulator.com/', description: 'Simulatore realistico gestione agricola moderna' },
+                    { name: 'ECO Global Survival', url: 'https://play.eco/', description: 'Ecosistema virtuale per sostenibilità ambientale' },
+                    { name: 'Stardew Valley', url: 'https://www.stardewvalley.net/', description: 'Gestione farm con elementi RPG e comunità' },
+                    { name: 'Slime Rancher', url: 'http://slimerancher.com/', description: 'Allevamento virtuale e gestione risorse biologiche' },
+                    { name: 'Planet Zoo', url: 'https://www.planetzoogame.com/', description: 'Conservazione biodiversità e gestione ecosistemi' },
+                    { name: 'My Time at Portia', url: 'https://www.pathea.net/', description: 'Crafting e sostenibilità in ambiente rurale' },
+                    { name: 'Spiritfarer', url: 'https://spiritfarer.com/', description: 'Coltivazione e cura attraverso narrativa emotiva' },
+                    { name: 'Terra Nil', url: 'https://www.terra-nil.com/', description: 'Reverse city builder per restauro ambientale' },
+                    { name: 'SimCity Green Cities', url: 'https://www.ea.com/games/simcity', description: 'Pianificazione urbana sostenibile' },
+                    { name: 'Anno 1800', url: 'https://www.anno-union.com/', description: 'Gestione risorse e sviluppo industriale sostenibile' }
+                ]
+            },
+            {
+                id: 'ai-creation',
+                name: 'AI Game Creation',
+                icon: '🤖',
+                color: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                description: 'Strumenti AI per creare giochi educativi e contenuti interattivi',
+                tools: [
+                    { name: 'ChatGPT for Education', url: 'https://chat.openai.com/', description: 'AI tutoring e creazione scenari educativi interattivi' },
+                    { name: 'Claude AI', url: 'https://claude.ai/', description: 'Assistant AI per storytelling e game design educativo' },
+                    { name: 'Dall-E 2', url: 'https://openai.com/dall-e-2/', description: 'Generazione artwork per giochi educativi' },
+                    { name: 'Midjourney', url: 'https://www.midjourney.com/', description: 'AI art per visualizzazioni game-based learning' },
+                    { name: 'Scenario.gg', url: 'https://www.scenario.gg/', description: 'AI asset generation per sviluppatori educational games' },
+                    { name: 'Luma AI', url: 'https://lumalabs.ai/', description: '3D modeling AI per ambienti virtuali educativi' },
+                    { name: 'RunwayML', url: 'https://runwayml.com/', description: 'AI creative tools per multimedia educational content' },
+                    { name: 'Synthesia', url: 'https://www.synthesia.io/', description: 'AI video creation per characters educativi' },
+                    { name: 'Descript', url: 'https://www.descript.com/', description: 'AI editing per contenuti audio/video gamificati' },
+                    { name: 'Artflow.ai', url: 'https://artflow.ai/', description: 'Character animation AI per storytelling educativo' }
+                ]
+            },
+            {
+                id: 'mobile-apps',
+                name: 'Apps Educational Games',
+                icon: '📱',
+                color: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+                description: 'App mobile per gamification on-the-go e BYOD',
+                tools: [
+                    { name: 'Socrative', url: 'https://www.socrative.com/', description: 'Quiz e assessment gamificati mobile-first' },
+                    { name: 'Nearpod', url: 'https://nearpod.com/', description: 'Lezioni interattive VR/AR su dispositivi mobili' },
+                    { name: 'Flipgrid', url: 'https://flipgrid.com/', description: 'Video discussions gamificate per engagement mobile' },
+                    { name: 'Padlet', url: 'https://padlet.com/', description: 'Collaboration boards per progetti gamificati' },
+                    { name: 'Seesaw', url: 'https://web.seesaw.me/', description: 'Portfolio digitale studenti con badge system' },
+                    { name: 'Book Creator', url: 'https://bookcreator.com/', description: 'Storytelling interattivo e multimediale' },
+                    { name: 'ThingLink', url: 'https://www.thinglink.com/', description: 'Media interattivi per esplorazione immersiva' },
+                    { name: 'Actionbound', url: 'https://actionbound.com/', description: 'Treasure hunt digitali per outdoor education' },
+                    { name: 'Merge Cube', url: 'https://mergeedu.com/', description: 'Oggetti AR per manipolazione virtuale' },
+                    { name: 'Aurasma (HP Reveal)', url: 'https://www.hp.com/us-en/printers/reveal.html', description: 'Realtà aumentata per contenuti educativi' }
+                ]
+            },
+            {
+                id: 'assessment',
+                name: 'Assessment & Badges',
+                icon: '🏆',
+                color: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                description: 'Sistemi di valutazione gamificata e riconoscimenti digitali',
+                tools: [
+                    { name: 'Badgelist', url: 'https://www.badgelist.com/', description: 'Sistema completo gestione badge digitali educativi' },
+                    { name: 'Mozilla Open Badges', url: 'https://openbadges.org/', description: 'Standard aperto per certificazioni skills digitali' },
+                    { name: 'Credly', url: 'https://www.credly.com/', description: 'Piattaforma professionale credential e badge verification' },
+                    { name: 'ClassDojo', url: 'https://www.classdojo.com/', description: 'Behavior management con punto systems e rewards' },
+                    { name: 'Skoool', url: 'https://www.skoool.ie/', description: 'Learning paths con achievement unlock progressivi' },
+                    { name: 'Edmodo', url: 'https://www.edmodo.com/', description: 'LMS social con badge system integrato' },
+                    { name: 'GoFormative', url: 'https://goformative.com/', description: 'Assessment real-time con gamification elements' },
+                    { name: 'Pear Deck', url: 'https://www.peardeck.com/', description: 'Interactive presentations con student response gamification' },
+                    { name: 'Mentimeter', url: 'https://www.mentimeter.com/', description: 'Live polling e quiz con competitive elements' },
+                    { name: 'Poll Everywhere', url: 'https://www.polleverywhere.com/', description: 'Audience engagement con leaderboards e real-time feedback' }
+                ]
+            },
+            {
+                id: 'vr-ar',
+                name: 'VR/AR Learning',
+                icon: '🥽',
+                color: 'linear-gradient(135deg, #10b981, #059669)',
+                description: 'Realtà virtuale e aumentata per esperienze immersive',
+                tools: [
+                    { name: 'Google Expeditions', url: 'https://arvr.google.com/expeditions/', description: 'Tour virtuali educativi VR/AR per ogni materia' },
+                    { name: 'CoSpaces Edu', url: 'https://cospaces.io/edu/', description: 'Creazione mondi virtuali e programmazione VR/AR' },
+                    { name: 'Metaverse', url: 'https://gometa.io/', description: 'Piattaforma creation AR experiences educative' },
+                    { name: 'Immersive VR Education', url: 'https://immersivevreducation.com/', description: 'Corsi VR per storia, scienza e skills professionali' },
+                    { name: 'Unimersiv', url: 'https://unimersiv.com/', description: 'Università virtuale con corsi VR immersivi' },
+                    { name: 'Mozilla Hubs', url: 'https://hubs.mozilla.com/', description: 'Spazi virtuali sociali per collaborative learning' },
+                    { name: 'Engage VR', url: 'https://engagevr.io/', description: 'Aule virtuali per formazione e presentazioni immersive' },
+                    { name: 'VictoryXR', url: 'https://www.victoryxr.com/', description: 'Curriculum VR/AR per STEM e scienze sociali' },
+                    { name: 'Alchemy VR', url: 'https://alchemyvr.com/', description: 'Documentari VR educativi per storia naturale' },
+                    { name: 'Titans of Space', url: 'https://www.titansofspacevr.com/', description: 'Esplorazione sistema solare in realtà virtuale' }
+                ]
+            }
+        ];
+
+        const gameShowcase = [
+            { name: 'Virtual Greenhouse Manager', desc: 'Simulatore gestione serra con IoT e AI per agraria', badge: 'AGRARIAN', badgeClass: 'agrarian', url: '#' },
+            { name: 'Chemistry Lab VR', desc: 'Laboratorio chimico virtuale per esperimenti sicuri', badge: 'STEM', badgeClass: 'stem', url: 'https://www.labster.com/' },
+            { name: 'Renaissance Time Travel', desc: 'Esplorazione storica immersiva Rinascimento italiano', badge: 'HUMANITIES', badgeClass: 'humanities', url: 'https://earth.google.com/web/' },
+            { name: 'AI Math Tutor RPG', desc: 'Avventura matematica con tutoring AI personalizzato', badge: 'AI', badgeClass: 'ai', url: 'https://www.prodigygame.com/' },
+            { name: 'Ecosystem Balance Game', desc: 'Serious game equilibrio ecosistemi agricoli', badge: 'AGRARIAN', badgeClass: 'agrarian', url: 'https://play.eco/' },
+            { name: 'Language Quest AR', desc: 'Apprendimento lingue attraverso realtà aumentata', badge: 'VR', badgeClass: 'vr', url: 'https://cospaces.io/edu/' }
+        ];
+
+        // Variabili globali
+        let isDarkMode = false;
+
+        // Funzioni principali
+        function initializeApp() {
+            renderCategories();
+            renderGameShowcase();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            
+            grid.innerHTML = categories.map((category, index) => `
+                <div class="category-card animate-fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: ${category.color}">
+                            ${category.icon}
+                        </div>
+                        <h3 class="category-title">${category.name}</h3>
+                        <div class="category-count">${category.tools.length} tools</div>
+                    </div>
+                    
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.875rem;">${category.description}</p>
+                    
+                    <div class="tools-list">
+                        ${category.tools.map((tool, toolIndex) => `
+                            <div class="tool-item" onclick="window.open('${tool.url}', '_blank')">
+                                <span class="tool-badge">#${toolIndex + 1}</span>
+                                <div class="tool-content">
+                                    <div class="tool-name">${tool.name}</div>
+                                    <div class="tool-description">${tool.description}</div>
+                                </div>
+                                <span class="external-icon">🔗</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderGameShowcase() {
+            const container = document.getElementById('gameShowcaseGrid');
+            container.innerHTML = gameShowcase.map(game => `
+                <div class="game-card" onclick="window.open('${game.url}', '_blank')">
+                    <div class="game-header">
+                        <h4 class="game-name">${game.name}</h4>
+                        <span class="game-badge ${game.badgeClass}">${game.badge}</span>
+                    </div>
+                    <p class="game-desc">${game.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.style.filter = isDarkMode ? 'invert(1) hue-rotate(180deg)' : '';
+            event.target.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function showStats() {
+            const stats = categories.map(cat => `${cat.name}: ${cat.tools.length} strumenti`).join('\n');
+            const totalTools = categories.reduce((sum, cat) => sum + cat.tools.length, 0);
+            alert(`🎮 Statistiche Hub Gamification:\n\n${stats}\n\nTotale: ${totalTools} strumenti gamificati`);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const categoryCards = document.querySelectorAll('.category-card');
+                
+                categoryCards.forEach(card => {
+                    const categoryTitle = card.querySelector('.category-title').textContent.toLowerCase();
+                    const toolNames = Array.from(card.querySelectorAll('.tool-name'))
+                        .map(tool => tool.textContent.toLowerCase())
+                        .join(' ');
+                    
+                    const isVisible = categoryTitle.includes(searchTerm) || 
+                                    toolNames.includes(searchTerm) || 
+                                    searchTerm === '';
+                    
+                    card.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearch();
+        });
+
+        // Esponi funzioni globali
+        window.toggleTheme = toggleTheme;
+        window.showStats = showStats;
+    </script>
+</body>
+</html>

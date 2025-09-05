@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="it">
+\1
+<style>
+/* Overrides injected by ChatGPT */
+.login-screen { display: none !important; }
+.logout-btn { display: none !important; }
+.main-app { opacity: 1 !important; visibility: visible !important; }
+/* Make controls-container draggable cursor */
+.controls-container { cursor: move; }
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 STEM e tutte le altre materie dell'IIS MENDEL - Villa Cortese</title>
+    <meta name="description" content="Piattaforma ufficiale STEM e tutte le materie dell'IIS Mendel di Villa Cortese">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU1RFTSBlIHR1dHRlIGxlIGFsdHJlIG1hdGVyaWUgZGVsbCdJSVMgTUVOREVMIiwic2hvcnRfbmFtZSI6Ik1lbmRlbEFMTCIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsInRoZW1lX2NvbG9yIjoiIzE1OTczMyIsImJhY2tncm91bmRfY29sb3IiOiIjZmZmZmZmIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbCxcIiUzQ3N2ZyB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgdmlld0JveD0nMCAwIDE5MiAxOTInIGZpbGw9J25vbmUnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyclM0UlM0NjaXJjbGUgY3g9Jzk2JyBjeT0nOTYnIHI9Jzk2JyBmaWxsPSclMjMxNTk3MzMnLyUzRSUzQ3RleHQgeD0nOTYnIHk9JzEwOCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nNTAnIGZpbGw9J3doaXRlJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyUzRVNUJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #15973e;
+            --secondary-color: #0891b2;
+            --accent-color: #dc2626;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --green-primary: #15973e;
+            --blue-accent: #0891b2;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #15973e 0%, #0891b2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-nature: linear-gradient(135deg, #15973e 0%, #84cc16 50%, #0891b2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-nature);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .school-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-nature);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .school-info {
+            margin-bottom: 2rem;
+        }
+
+        .school-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .school-location {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-light);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--green-primary);
+            box-shadow: 0 0 0 3px rgba(21, 151, 62, 0.1);
+        }
+
+        .login-button {
+            background: var(--gradient-nature);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-weight: 500;
+            margin-top: 1rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Main App */
+        .main-app {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .main-app.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-nature);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-nature);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-medium);
+            z-index: 1001;
+        }
+
+        body.dark .user-info {
+            background: rgba(30, 41, 59, 0.9);
+            color: #e2e8f0;
+        }
+
+        .logout-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        /* Intro Section */
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--green-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--blue-accent);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Controls */
+        .controls-container {
+            position: fixed;
+            top: 8rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--green-primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        /* Search */
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .filter-btn {
+            background: var(--green-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--blue-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--green-primary);
+        }
+
+        .category-node.active {
+            border-color: var(--green-primary);
+            background: rgba(21, 151, 62, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Tools Panel */
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-nature);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--green-primary);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-nature);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Stats */
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-nature);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+
+            .control-group {
+                flex-direction: row;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .user-info {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 1rem auto 0;
+                width: fit-content;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .login-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .school-logo {
+                font-size: 3rem;
+            }
+
+            .school-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+
+            .login-container {
+                padding: 1.5rem;
+            }
+
+            .school-logo {
+                font-size: 2.5rem;
+            }
+
+            .school-name {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading states */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus states */
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus,
+        .login-input:focus,
+        .login-button:focus {
+            outline: 2px solid var(--green-primary);
+            outline-offset: 2px;
+        }
+
+        /* Touch improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <div class="school-logo">🌱</div>
+            <div class="school-info">
+                <div class="school-name">IIS MENDEL</div>
+                <div class="school-location">Villa Cortese (MI)</div>
+            </div>
+            <h2 style="color: var(--text-dark); margin-bottom: 1.5rem; font-weight: 600;">STEM e tutte le altre materie dell'IIS MENDEL</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.875rem;">
+                Inserisci le tue credenziali istituzionali per accedere alle risorse di tutte le materie
+            </p>
+            <form class="login-form" id="loginForm">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        class="login-input" 
+                        placeholder="nome.cognome@agrariomendel.it"
+                        id="emailInput"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                <button type="submit" class="login-button" id="loginButton">
+                    🌱 Accedi a tutte le materie IIS MENDEL
+                </button>
+            </form>
+            <div id="errorMessage"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="main-app" id="mainApp">
+        <div class="header">
+            <div class="user-info" id="userInfo">
+                <span id="userEmail"></span>
+                <button class="logout-btn" onclick="logout()">Esci</button>
+            </div>
+            <div class="header-content">
+                <div class="school-badge">
+                    🏫 IIS MENDEL • VILLA CORTESE (MI)
+                </div>
+                <h1>🌱 STEM e tutte le altre materie dell'IIS MENDEL</h1>
+                <p>Piattaforma Completa per tutte le discipline dell'Istituto</p>
+            </div>
+        </div>
+
+        <div class="intro-section">
+            <div style="text-align: center;">
+                <div class="pnrr-badge">
+                    🇪🇺 PNRR SCUOLA FUTURA - TEAM Buone Pratiche
+                </div>
+            </div>
+            
+            <div class="intro-card">
+                <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Materie IIS Mendel</h2>
+                
+                <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                    La piattaforma completa per l'apprendimento di tutte le materie dell'<strong>IIS Mendel di Villa Cortese</strong>, 
+                    sviluppata nell'ambito del progetto PNRR "Scuola Futura" - TEAM Buone Pratiche. Una raccolta curata di oltre 
+                    <strong>200+ strumenti AI, app e risorse</strong> per tutte le discipline scolastiche.
+                </p>
+
+                <div class="intro-grid">
+                    <div class="intro-box">
+                        <h3 style="color: var(--green-primary); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            🎯 La Nostra Missione
+                        </h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Supportare studenti e docenti dell'IIS Mendel nell'apprendimento di tutte le discipline scolastiche 
+                            attraverso tecnologie all'avanguardia, strumenti AI innovativi e 
+                            metodologie didattiche validate dalla ricerca scientifica.
+                        </p>
+                    </div>
+
+                    <div class="intro-box">
+                        <h3 style="color: var(--blue-accent); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            📚 Risorse Complete
+                        </h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Dalle simulazioni AI per chimica e fisica agli strumenti per produzioni vegetali, zootecnia, 
+                            diritto, economia, geografia, scienze motorie e IRC. Include risorse per biotecnologie, 
+                            estimo, PCTO, e tutte le materie del curriculum scolastico con focus su innovazione e qualità didattica.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(21, 151, 62, 0.1); border-radius: 16px; border: 1px solid rgba(21, 151, 62, 0.2);">
+                    <p style="color: var(--green-primary); font-weight: 600; margin: 0;">
+                        💡 <strong>Come utilizzare la piattaforma:</strong> Esplora le categorie per materia, 
+                        utilizza la ricerca per trovare strumenti specifici, e scopri risorse personalizzate 
+                        per il tuo livello di studio e obiettivi formativi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Cerca risorse per tutte le materie..." id="searchInput">
+            </div>
+            <button class="filter-btn" onclick="toggleFilters()">Filtri</button>
+        </div>
+
+        <div class="controls-container">
+            <div class="control-group">
+                <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+            <div class="control-group">
+                <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+                <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+                <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+            </div>
+        </div>
+
+        <div class="map-container" id="mapContainer">
+            <div class="category-grid" id="categoryGrid">
+                <!-- Le categorie verranno generate dinamicamente -->
+            </div>
+        </div>
+
+        <div class="tools-panel" id="toolsPanel">
+            <div class="tools-header">
+                <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+                <h3 id="panelTitle">Risorse Materie</h3>
+                <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+            </div>
+            <div class="tools-content" id="toolsContent">
+                <!-- Le risorse verranno caricate dinamicamente -->
+            </div>
+        </div>
+
+        <div class="legend">
+            <strong style="color: var(--green-primary);">📋 Controlli:</strong><br>
+            • Clicca sui nodi per esplorare<br>
+            • Usa la ricerca per filtrare<br>
+            • Zoom: Ctrl + (+/-) o rotella<br>
+            • Tema scuro: Ctrl + Alt + T<br>
+            • Reset zoom: Ctrl + 0
+        </div>
+
+        <div class="stats-container">
+            <div class="stats-number" id="totalTools">0</div>
+            <div class="stats-label">Risorse<br>Disponibili</div>
+        </div>
+    </div>
+
+    <script>
+        // DATI COMPLETI PER STEM E MATERIE TECNICHE AGRARIE
+        const stemData = {
+            "Produzioni Vegetali": {
+                icon: "🌾",
+                color: "#15973e",
+                tools: [
+                    {name: "PlantNet AI", link: "https://plantnet.org/", description: "Identificazione AI di piante con database scientifico per riconoscimento specie vegetali."},
+                    {name: "iNaturalist", link: "https://www.inaturalist.org/", description: "Piattaforma collaborativa per identificazione biodiversità vegetale con community scientifica."},
+                    {name: "Crop Protection AI", link: "https://www.plantix.net/", description: "Diagnosi AI di malattie delle piante e consigli per trattamenti sostenibili."},
+                    {name: "AgriWebb", link: "https://www.agriwebb.com/", description: "Gestione digitale delle coltivazioni con monitoraggio avanzato e analisi dati."},
+                    {name: "YARA ImageIT", link: "https://www.yara.com/crop-nutrition/tools-and-services/", description: "Analisi nutrizionale delle colture tramite immagini satellitari e AI."},
+                    {name: "CropX", link: "https://www.cropx.com/", description: "Sensori IoT e AI per irrigazione intelligente e ottimizzazione delle rese."},
+                    {name: "Semios Agricultural IoT", link: "https://semios.com/", description: "Sistema integrato per monitoraggio fitosanitario e gestione sostenibile."},
+                    {name: "FarmLogs", link: "https://farmlogs.com/", description: "Software per pianificazione colturale e tracking delle operazioni agricole."},
+                    {name: "Climate Fieldview", link: "https://www.climate.com/", description: "Piattaforma digitale per gestione precision farming e analisi climatiche."},
+                    {name: "Agrivi Farm Management", link: "https://www.agrivi.com/", description: "Software completo per gestione aziende agricole e pianificazione colturale."},
+                    {name: "Farmers Edge", link: "https://www.farmersedge.ca/", description: "Piattaforma precision agriculture con sensori e analisi predittive."}
+                ]
+            },
+            "Produzioni Animali & Zootecnia": {
+                icon: "🐄",
+                color: "#dc2626",
+                tools: [
+                    {name: "CattleMax", link: "https://www.cattlemax.com/", description: "Software completo per gestione allevamenti bovini con genealogie e performance."},
+                    {name: "AgriWebb Livestock", link: "https://www.agriwebb.com/livestock/", description: "Gestione digitale integrata per allevamenti con monitoraggio benessere animale."},
+                    {name: "Cow Manager", link: "https://www.cowmanager.com/", description: "Sensori intelligenti per monitoraggio salute e cicli riproduttivi bovini."},
+                    {name: "MilkingCloud", link: "https://www.milkingcloud.com/", description: "Piattaforma cloud per gestione allevamenti da latte con analisi produttive."},
+                    {name: "Herdstar", link: "https://www.herdstar.com/", description: "App mobile per registrazione dati zootecnici e gestione mandrie."},
+                    {name: "SmartBow", link: "https://smartbow.at/", description: "Sistema di monitoraggio comportamentale degli animali tramite sensori neck-collar."},
+                    {name: "Allflex Livestock Intelligence", link: "https://www.allflex.global/", description: "Soluzioni IoT complete per identificazione e monitoraggio bestiame."},
+                    {name: "Boehringer Ingelheim VetCalc", link: "https://www.boehringer-ingelheim.com/", description: "Calcolatori veterinari per dosaggi farmacologici e piani sanitari."},
+                    {name: "DairyComp", link: "https://www.dairycomp.com/", description: "Software professionale per gestione mandrie da latte e analytics."},
+                    {name: "FarmWizard", link: "https://www.farmwizard.com/", description: "Gestione integrata allevamenti con compliance e tracciabilità."}
+                ]
+            },
+            "Biotecnologie Agrarie": {
+                icon: "🧬",
+                color: "#7c3aed",
+                tools: [
+                    {name: "SnapGene", link: "https://www.snapgene.com/", description: "Software per biologia molecolare e clonaggio con visualizzazione DNA."},
+                    {name: "Benchling", link: "https://www.benchling.com/", description: "Piattaforma cloud per ricerca biotecnologica e gestione dati genomici."},
+                    {name: "NCBI BLAST", link: "https://blast.ncbi.nlm.nih.gov/", description: "Strumento per analisi sequenze genomiche e comparazioni filogenetiche."},
+                    {name: "Geneious Prime", link: "https://www.geneious.com/", description: "Suite completa per analisi bioinformatiche e genomica applicata."},
+                    {name: "PlantCV", link: "https://plantcv.readthedocs.io/", description: "Libreria Python per analisi fenotipica delle piante con computer vision."},
+                    {name: "CropPAL", link: "https://www.cropal.com/", description: "Database genetico per miglioramento varietale e selezione assistita."},
+                    {name: "Molecular Cloning Planner", link: "https://www.mcplanner.net/", description: "Pianificazione esperimenti di biologia molecolare e PCR design."},
+                    {name: "BioRender", link: "https://biorender.com/", description: "Creazione illustrazioni scientifiche professionali per biotecnologie."},
+                    {name: "MEGA Software", link: "https://www.megasoftware.net/", description: "Analisi filogenetiche e evoluzione molecolare per genomica."},
+                    {name: "ImageJ", link: "https://imagej.nih.gov/ij/", description: "Elaborazione immagini scientifiche per analisi microscopiche."}
+                ]
+            },
+            "Estimo & Catasto": {
+                icon: "🏘️",
+                color: "#0891b2",
+                tools: [
+                    {name: "Sister Agenzia delle Entrate", link: "https://www.agenziaentrate.gov.it/", description: "Sistema informativo territoriale per visure catastali e mappe."},
+                    {name: "Pregeo", link: "https://www.agenziaentrate.gov.it/portale/web/guest/software-pregeo", description: "Software ufficiale per aggiornamenti cartografici e pratiche catastali."},
+                    {name: "Docfa", link: "https://www.agenziaentrate.gov.it/portale/web/guest/software-docfa", description: "Dichiarazione di nuova costruzione, variazione o accatastamento fabbricati."},
+                    {name: "VisualCAD", link: "https://www.visualcad.it/", description: "Software CAD per topografia, estimo e progettazione territoriale."},
+                    {name: "MicroGeo", link: "https://www.microgeo.it/", description: "Suite professionale per catasto, topografia e gestione dati territoriali."},
+                    {name: "ValoreItalia", link: "https://www.valoreitalia.it/", description: "Piattaforma per valutazioni immobiliari e analisi mercato immobiliare."},
+                    {name: "Immobiliare.it Valuta", link: "https://www.immobiliare.it/valuta/", description: "Strumento online per stima valori immobiliari basato su big data."},
+                    {name: "QGIS", link: "https://qgis.org/it/site/", description: "GIS open source per analisi territoriali e cartografia catastale."},
+                    {name: "OMI Database", link: "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari", description: "Osservatorio Mercato Immobiliare per quotazioni ufficiali."},
+                    {name: "Tecnoborsa", link: "https://www.tecnoborsa.com/", description: "Centro studi immobiliari per analisi mercato e valutazioni."}
+                ]
+            },
+            "TTRG (Topografia)": {
+                icon: "📐",
+                color: "#ea580c",
+                tools: [
+                    {name: "AutoCAD", link: "https://www.autodesk.com/products/autocad/", description: "Software CAD professionale per disegno tecnico e progettazione topografica."},
+                    {name: "QGIS", link: "https://qgis.org/it/site/", description: "Sistema informativo geografico open source per cartografia e analisi spaziali."},
+                    {name: "Google Earth Pro", link: "https://www.google.com/earth/versions/", description: "Visualizzazione satellitare avanzata per rilievi preliminari e georeferenziazione."},
+                    {name: "Survey123", link: "https://survey123.arcgis.com/", description: "App Esri per raccolta dati territoriali con GPS integrato."},
+                    {name: "TopoDroid", link: "https://sites.google.com/site/speleoapps/", description: "App Android per rilievi speleologici e topografici con strumenti digitali."},
+                    {name: "Land Surveyor Tools", link: "https://play.google.com/store/apps/details?id=com.planimeter.landsurveyor", description: "Toolkit mobile per calcoli topografici e misurazioni GPS."},
+                    {name: "Bentley MicroStation", link: "https://www.bentley.com/en/products/brands/microstation", description: "Piattaforma CAD per progettazione infrastrutturale e rilievi complessi."},
+                    {name: "Civil 3D", link: "https://www.autodesk.com/products/civil-3d/", description: "Software Autodesk per progettazione civile e modellazione 3D del terreno."},
+                    {name: "Leica Infinity", link: "https://leica-geosystems.com/products/total-stations/software/leica-infinity", description: "Software Leica per elaborazione dati topografici e coordinate."},
+                    {name: "TopSURV", link: "https://www.topconpositioning.com/software/topsurv", description: "Software Topcon per rilievi sul campo e gestione strumentazione."}
+                ]
+            },
+            "GAT (Gestione Ambiente)": {
+                icon: "🌍",
+                color: "#059669",
+                tools: [
+                    {name: "ArcGIS Online", link: "https://www.arcgis.com/", description: "Piattaforma cloud per mapping e analisi ambientali avanzate."},
+                    {name: "Google Earth Engine", link: "https://earthengine.google.com/", description: "Analisi geospaziale su scala planetaria per monitoraggio ambientale."},
+                    {name: "NASA Worldview", link: "https://worldview.earthdata.nasa.gov/", description: "Visualizzazione dati satellitari NASA per studi climatici e ambientali."},
+                    {name: "ISPRA Geoportale", link: "https://www.isprambiente.gov.it/it/servizi/sistema-informativo-nazionale-ambientale", description: "Sistema informativo nazionale ambientale italiano con dati ufficiali."},
+                    {name: "EEA Copernicus", link: "https://www.copernicus.eu/", description: "Servizi europei di osservazione della Terra per ambiente e cambiamenti climatici."},
+                    {name: "Global Forest Watch", link: "https://www.globalforestwatch.org/", description: "Monitoraggio deforestazione globale in tempo reale con dati satellitari."},
+                    {name: "Climate Explorer", link: "https://crt-climate-explorer.nemac.org/", description: "Visualizzazione proiezioni climatiche per pianificazione ambientale."},
+                    {name: "OpenLCA", link: "https://www.openlca.org/", description: "Software open source per Life Cycle Assessment e valutazioni ambientali."},
+                    {name: "ENVI", link: "https://www.l3harrisgeospatial.com/Software-Technology/ENVI", description: "Software per analisi immagini satellitari e telerilevamento ambientale."},
+                    {name: "GRASS GIS", link: "https://grass.osgeo.org/", description: "Sistema GIS open source per analisi geospaziali e modellazione ambientale."}
+                ]
+            },
+            "Chimica & Biochimica": {
+                icon: "⚗️",
+                color: "#be123c",
+                tools: [
+                    {name: "ChemSketch", link: "https://www.acdlabs.com/resources/free-chemistry-software-apps/", description: "Software gratuito per disegno formule chimiche e strutture molecolari."},
+                    {name: "Wolfram Alpha Chemistry", link: "https://www.wolframalpha.com/examples/science-and-technology/chemistry/", description: "Calcolatore avanzato per chimica con database molecolare completo."},
+                    {name: "PhET Chemistry Simulations", link: "https://phet.colorado.edu/it/simulations/category/chemistry", description: "Simulazioni interattive University of Colorado per concetti chimici."},
+                    {name: "ChemDraw", link: "https://www.perkinelmer.com/category/chemdraw", description: "Standard industriale per disegno chimico e comunicazione scientifica."},
+                    {name: "Molview", link: "https://molview.org/", description: "Visualizzatore online 3D di strutture molecolari e database chimico."},
+                    {name: "ChemSpider", link: "http://www.chemspider.com/", description: "Database chimico gratuito della Royal Society of Chemistry."},
+                    {name: "PubChem", link: "https://pubchem.ncbi.nlm.nih.gov/", description: "Database pubblico NIH per informazioni chimiche e biologiche."},
+                    {name: "ChemCollective VLab", link: "http://chemcollective.org/", description: "Laboratorio virtuale per esperimenti chimici sicuri e simulazioni."},
+                    {name: "Avogadro", link: "https://avogadro.cc/", description: "Editor molecolare 3D open source per chimica computazionale."},
+                    {name: "MarvinSketch", link: "https://chemaxon.com/products/marvin", description: "Editor chimico avanzato per disegno e analisi strutture molecolari."}
+                ]
+            },
+            "Fisica": {
+                icon: "⚡",
+                color: "#f59e0b",
+                tools: [
+                    {name: "PhET Physics Simulations", link: "https://phet.colorado.edu/it/simulations/category/physics", description: "Simulazioni interattive physics University of Colorado per tutti i livelli."},
+                    {name: "Tracker Video Analysis", link: "https://physlets.org/tracker/", description: "Software gratuito per analisi video di fenomeni fisici e cinematica."},
+                    {name: "Algodoo Physics Sandbox", link: "http://www.algodoo.com/", description: "Simulatore 2D interattivo per esperimenti di fisica e meccanica."},
+                    {name: "Wolfram Physics", link: "https://www.wolframalpha.com/examples/science-and-technology/physics/", description: "Calcolatore avanzato per problemi di fisica e costanti universali."},
+                    {name: "GeoGebra Physics", link: "https://www.geogebra.org/physics", description: "Simulazioni matematiche interattive per concetti fisici."},
+                    {name: "Virtual Physics Lab", link: "https://www.walter-fendt.de/html5/phit/", description: "Laboratorio virtuale con esperimenti classici di fisica."},
+                    {name: "Physion", link: "http://www.physion.net/", description: "Motore fisico 2D per creare e simulare scenari meccanici."},
+                    {name: "LoggerPro", link: "https://www.vernier.com/product/logger-pro-3/", description: "Software per acquisizione e analisi dati da sensori fisici."},
+                    {name: "Interactive Physics", link: "https://www.design-simulation.com/ip/", description: "Simulatore dinamico per meccanica e sistemi fisici complessi."},
+                    {name: "OpenStax Physics", link: "https://openstax.org/subjects/science", description: "Risorse educative gratuite per fisica con simulazioni integrate."}
+                ]
+            },
+            "Informatica & Coding": {
+                icon: "💻",
+                color: "#3b82f6",
+                tools: [
+                    {name: "Scratch", link: "https://scratch.mit.edu/", description: "Linguaggio di programmazione visuale MIT per principianti e progetti creativi."},
+                    {name: "Code.org", link: "https://code.org/", description: "Piattaforma gratuita per imparare programmazione con corsi strutturati."},
+                    {name: "GitHub Codespaces", link: "https://github.com/features/codespaces", description: "Ambiente di sviluppo cloud integrato con repository Git."},
+                    {name: "Replit", link: "https://replit.com/", description: "IDE online collaborativo per oltre 50 linguaggi di programmazione."},
+                    {name: "Python Tutor", link: "http://pythontutor.com/", description: "Visualizzatore di esecuzione codice Python step-by-step per debugging."},
+                    {name: "W3Schools", link: "https://www.w3schools.com/", description: "Tutorial completi per sviluppo web: HTML, CSS, JavaScript, Python."},
+                    {name: "Codecademy", link: "https://www.codecademy.com/", description: "Corsi interattivi di programmazione con progetti pratici."},
+                    {name: "Arduino IDE", link: "https://www.arduino.cc/en/software", description: "Ambiente sviluppo per programmazione microcontrollori e IoT."},
+                    {name: "App Inventor", link: "https://appinventor.mit.edu/", description: "Piattaforma MIT per creare app Android senza codice complesso."},
+                    {name: "Visual Studio Code", link: "https://code.visualstudio.com/", description: "Editor di codice gratuito Microsoft con estensioni per tutti i linguaggi."},
+                    {name: "Khan Academy Computing", link: "https://www.khanacademy.org/computing", description: "Corsi gratuiti programmazione e computer science con esercizi interattivi."}
+                ]
+            },
+            "Scienze della Terra": {
+                icon: "🌋",
+                color: "#dc2626",
+                tools: [
+                    {name: "Google Earth", link: "https://earth.google.com/", description: "Esplorazione 3D della Terra con layer geologici e dati scientifici."},
+                    {name: "NASA Eyes on Earth", link: "https://eyes.nasa.gov/apps/earth/", description: "Visualizzazione dati satellitari NASA per scienze della Terra."},
+                    {name: "USGS Earthquake Hazards", link: "https://earthquake.usgs.gov/", description: "Monitoraggio sismico globale in tempo reale e database storici."},
+                    {name: "Mineral Database", link: "https://www.mindat.org/", description: "Database completo di minerali con foto, proprietà e località."},
+                    {name: "Global Volcanism Program", link: "https://volcano.si.edu/", description: "Database Smithsonian di vulcani attivi e attività vulcanica."},
+                    {name: "Climate.gov", link: "https://www.climate.gov/", description: "Dati e risorse NOAA su clima e cambiamenti climatici."},
+                    {name: "Geological Survey Maps", link: "https://www.usgs.gov/products/maps", description: "Mappe geologiche digitali e topografiche ad alta risoluzione."},
+                    {name: "Rock Identifier App", link: "https://play.google.com/store/apps/details?id=com.rockidentifier", description: "Identificazione rocce e minerali tramite fotocamera e AI."},
+                    {name: "Seismic Monitor", link: "https://www.seismicportal.eu/", description: "Portale europeo per monitoraggio attività sismica in tempo reale."},
+                    {name: "Virtual Earthquake", link: "http://www.sciencecourseware.org/VirtualEarthquake/", description: "Simulatore per analisi dati sismici e localizzazione epicentri."}
+                ]
+            },
+            "Ecologia & Ambiente": {
+                icon: "🦋",
+                color: "#15973e",
+                tools: [
+                    {name: "eBird", link: "https://ebird.org/", description: "Database globale Cornell Lab per osservazioni ornitologiche e citizen science."},
+                    {name: "iNaturalist", link: "https://www.inaturalist.org/", description: "Piattaforma globale per identificazione specie e monitoraggio biodiversità."},
+                    {name: "Global Biodiversity Information", link: "https://www.gbif.org/", description: "Portale internazionale per dati aperti sulla biodiversità."},
+                    {name: "PlantNet", link: "https://plantnet.org/", description: "Identificazione automatica piante tramite AI e database botanico."},
+                    {name: "Seek by iNaturalist", link: "https://www.inaturalist.org/pages/seek_app", description: "App per identificazione istantanea di flora e fauna con fotocamera."},
+                    {name: "Wildlife Tracker", link: "https://www.wildlife-tracker.org/", description: "Software per analisi dati ecologici e telemetria animale."},
+                    {name: "R for Ecology", link: "https://www.r-project.org/", description: "Linguaggio statistico R con pacchetti specializzati per ecologia."},
+                    {name: "QGIS Ecological Analysis", link: "https://qgis.org/", description: "Analisi spaziali avanzate per studi ecologici e habitat mapping."},
+                    {name: "Movebank", link: "https://www.movebank.org/", description: "Database globale per tracking animali e analisi movimenti migrazione."},
+                    {name: "Ocean Biogeographic Information System", link: "https://obis.org/", description: "Sistema informativo per biodiversità marina e distribuzione specie."}
+                ]
+            },
+            "Diritto & Economia": {
+                icon: "⚖️",
+                color: "#374151",
+                tools: [
+                    {name: "Normattiva", link: "https://www.normattiva.it/", description: "Portale ufficiale italiano per ricerca normativa e legislazione vigente."},
+                    {name: "Gazzetta Ufficiale", link: "https://www.gazzettaufficiale.it/", description: "Pubblicazione ufficiale della Repubblica Italiana per atti normativi."},
+                    {name: "EUR-Lex", link: "https://eur-lex.europa.eu/", description: "Accesso gratuito al diritto dell'Unione Europea e normative comunitarie."},
+                    {name: "Camera di Commercio", link: "https://www.camcom.it/", description: "Servizi digitali per imprese e registri camerali."},
+                    {name: "Agenzia delle Entrate", link: "https://www.agenziaentrate.gov.it/", description: "Servizi fiscali online e modulistica tributaria aggiornata."},
+                    {name: "ISTAT", link: "https://www.istat.it/", description: "Istituto nazionale di statistica con dati economici e demografici."},
+                    {name: "Banca d'Italia", link: "https://www.bancaditalia.it/", description: "Statistiche economiche, tassi di cambio e indicatori finanziari."},
+                    {name: "Eurostat", link: "https://ec.europa.eu/eurostat", description: "Ufficio statistico europeo con dati economici comparativi."},
+                    {name: "Registro Imprese", link: "https://www.registroimprese.it/", description: "Database ufficiale delle imprese italiane con bilanci e informazioni."},
+                    {name: "Corte di Cassazione", link: "https://www.cortedicassazione.it/", description: "Massimario giurisprudenza italiana e sentenze della Suprema Corte."}
+                ]
+            },
+            "Geografia": {
+                icon: "🗺️",
+                color: "#0891b2",
+                tools: [
+                    {name: "Google Earth", link: "https://earth.google.com/", description: "Esplorazione geografica 3D con immagini satellitari ad alta risoluzione."},
+                    {name: "ArcGIS Online", link: "https://www.arcgis.com/", description: "Piattaforma web per creazione mappe interattive e analisi geografiche."},
+                    {name: "OpenStreetMap", link: "https://www.openstreetmap.org/", description: "Mappa libera del mondo creata da community globale di mappatori."},
+                    {name: "National Geographic Education", link: "https://education.nationalgeographic.org/", description: "Risorse educative geografiche con mappe interattive e esplorazioni."},
+                    {name: "World Atlas Online", link: "https://www.worldatlas.com/", description: "Atlante mondiale digitale con dati demografici e geografici aggiornati."},
+                    {name: "CIA World Factbook", link: "https://www.cia.gov/the-world-factbook/", description: "Database completo di informazioni geografiche e statistiche mondiali."},
+                    {name: "GeoGuessr", link: "https://www.geoguessr.com/", description: "Gioco educativo per imparare geografia mondiale attraverso Street View."},
+                    {name: "QGIS", link: "https://qgis.org/", description: "Sistema informativo geografico open source per analisi territoriali."},
+                    {name: "MapQuest", link: "https://www.mapquest.com/", description: "Servizio mappe online con funzioni di routing e pianificazione viaggi."},
+                    {name: "TimeandDate Geography", link: "https://www.timeanddate.com/geography/", description: "Database geografico con fusi orari, coordinate e informazioni climatiche."}
+                ]
+            },
+            "Scienze Motorie": {
+                icon: "🏃‍♂️",
+                color: "#dc2626",
+                tools: [
+                    {name: "MyFitnessPal", link: "https://www.myfitnesspal.com/", description: "Tracker nutrizionale e fitness con database alimentare completo."},
+                    {name: "Strava", link: "https://www.strava.com/", description: "App per tracking attività sportive con analisi performance e community."},
+                    {name: "Nike Training Club", link: "https://www.nike.com/ntc-app", description: "Allenamenti guidati gratuiti per tutti i livelli di fitness."},
+                    {name: "Freeletics", link: "https://www.freeletics.com/", description: "Allenamenti personalizzati AI senza attrezzi per fitness funzionale."},
+                    {name: "Kinovea", link: "https://www.kinovea.org/", description: "Software gratuito per analisi video del movimento sportivo."},
+                    {name: "Coach by Strava", link: "https://www.strava.com/", description: "Piani di allenamento personalizzati basati su dati di performance."},
+                    {name: "Hudl Technique", link: "https://www.hudl.com/products/technique", description: "Analisi video tecnica per miglioramento gesti sportivi."},
+                    {name: "Google Fit", link: "https://www.google.com/fit/", description: "Piattaforma Google per monitoraggio attività fisica e benessere."},
+                    {name: "Fitbod", link: "https://fitbod.me/", description: "App per allenamenti personalizzati con progressione automatica."},
+                    {name: "Polar Flow", link: "https://flow.polar.com/", description: "Piattaforma Polar per analisi dati sportivi e pianificazione allenamenti."}
+                ]
+            },
+            "IRC (Religione)": {
+                icon: "⛪",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Vatican News", link: "https://www.vaticannews.va/", description: "Notizie ufficiali della Santa Sede in italiano e altre lingue."},
+                    {name: "Bibbia CEI Online", link: "https://www.bibbiaedu.it/", description: "Versione ufficiale italiana della Bibbia con ricerca avanzata."},
+                    {name: "YouCat", link: "https://www.youcat.org/", description: "Catechismo per giovani con contenuti multimediali interattivi."},
+                    {name: "Arte Sacra Digitale", link: "https://www.museivaticani.va/", description: "Collezioni digitali Musei Vaticani per studio arte religiosa."},
+                    {name: "Documentazione Conciliare", link: "https://www.vatican.va/archive/", description: "Archivio digitale documenti del Concilio e magistero papale."},
+                    {name: "Atlas Biblico", link: "https://www.bibleatlas.org/", description: "Mappe interattive dei luoghi biblici con contesto storico."},
+                    {name: "Liturgia delle Ore", link: "https://www.diocesimilano.it/breviario/", description: "Breviario digitale per la preghiera liturgica quotidiana."},
+                    {name: "Storia del Cristianesimo", link: "https://www.christianhistoryinstitute.org/", description: "Risorse storiche per studio evoluzione cristianesimo."},
+                    {name: "Avvenire Online", link: "https://www.avvenire.it/", description: "Quotidiano cattolico italiano con sezioni educative e culturali."},
+                    {name: "Famiglia Cristiana", link: "https://www.famigliacristiana.it/", description: "Rivista cattolica con contenuti formativi per famiglie e giovani."}
+                ]
+            },
+            "Genio Rurale": {
+                icon: "🏗️",
+                color: "#ea580c",
+                tools: [
+                    {name: "AutoCAD", link: "https://www.autodesk.com/products/autocad/", description: "Software CAD professionale per progettazione opere rurali e idrauliche."},
+                    {name: "SketchUp", link: "https://www.sketchup.com/", description: "Modellazione 3D semplificata per progettazione strutture agricole."},
+                    {name: "HEC-RAS", link: "https://www.hec.usace.army.mil/software/hec-ras/", description: "Software USACE per modellazione idraulica corsi d'acqua e canali."},
+                    {name: "SWMM", link: "https://www.epa.gov/water-research/storm-water-management-model-swmm", description: "Modello EPA per gestione acque meteoriche urbane e rurali."},
+                    {name: "Civil 3D", link: "https://www.autodesk.com/products/civil-3d/", description: "Progettazione civile e modellazione terreno per opere rurali."},
+                    {name: "Global Mapper", link: "https://www.bluemarblegeo.com/global-mapper/", description: "GIS e analisi territoriale per pianificazione interventi rurali."},
+                    {name: "Bentley WaterGEMS", link: "https://www.bentley.com/en/products/brands/watergems", description: "Modellazione reti idriche e sistemi irrigui avanzati."},
+                    {name: "QGIS", link: "https://qgis.org/", description: "Analisi territoriali open source per progettazione opere rurali."},
+                    {name: "EPANET", link: "https://www.epa.gov/water-research/epanet", description: "Software EPA per modellazione reti di distribuzione idrica."},
+                    {name: "ArcHydro", link: "https://www.esri.com/en-us/arcgis/products/arcgis-solutions/industries/water-utilities", description: "Estensione ArcGIS per analisi idrologiche e gestione bacini."}
+                ]
+            },
+            "Esercitazioni Agrarie": {
+                icon: "🚜",
+                color: "#15973e",
+                tools: [
+                    {name: "John Deere Operations Center", link: "https://www.deere.com/en/technology-products/precision-ag-technology/", description: "Piattaforma per gestione flotte agricole e precision farming."},
+                    {name: "Climate FieldView", link: "https://www.climate.com/", description: "Analisi dati campo per ottimizzazione operazioni colturali."},
+                    {name: "Trimble Ag", link: "https://agriculture.trimble.com/", description: "Soluzioni GPS e guida automatica per macchine agricole."},
+                    {name: "CLAAS TELEMATICS", link: "https://www.claas.com/telematics", description: "Monitoraggio remoto macchine agricole CLAAS per efficienza operativa."},
+                    {name: "New Holland PLM Connect", link: "https://www.newholland.com/eu/en-eu/about-us/whats-up/events-and-news/precision-land-management/plm-connect", description: "Gestione precisione New Holland per ottimizzazione lavorazioni."},
+                    {name: "Case IH AFS Connect", link: "https://www.caseih.com/northamerica/en-us/products/technology/afs-connect", description: "Sistema integrato Case IH per agricoltura di precisione."},
+                    {name: "Fendt VarioGuide", link: "https://www.fendt.com/int/varioguide", description: "Guida parallela Fendt per efficienza nelle lavorazioni agricole."},
+                    {name: "Massey Ferguson AgCommand", link: "https://www.masseyferguson.com/agcommand.html", description: "Telematica Massey Ferguson per gestione flotte e dati macchine."},
+                    {name: "Kubota Smart Agri", link: "https://www.kubota.com/innovation/smart-agri/", description: "Soluzioni IoT Kubota per automatizzazione operazioni agricole."},
+                    {name: "Raven Precision", link: "https://ravenprecision.com/", description: "Sistemi di guida GPS e controllo variabile per macchine agricole."}
+                ]
+            },
+            "Produz. e Trasformazioni": {
+                icon: "🏭",
+                color: "#f59e0b",
+                tools: [
+                    {name: "HACCP Builder", link: "https://www.haccpbuilder.com/", description: "Software per gestione sicurezza alimentare e piani HACCP."},
+                    {name: "FoodKeeper", link: "https://www.foodsafety.gov/keep-food-safe/foodkeeper-app", description: "App ufficiale USDA per conservazione e sicurezza alimentare."},
+                    {name: "Codex Alimentarius", link: "http://www.fao.org/fao-who-codexalimentarius/", description: "Standard internazionali FAO/WHO per sicurezza e qualità alimentare."},
+                    {name: "Normativa Alimenti", link: "https://www.salute.gov.it/", description: "Ministero Salute italiano per normative sicurezza alimentare."},
+                    {name: "BRC Global Standards", link: "https://www.brcgs.com/", description: "Standard internazionali per sicurezza alimentare e certificazioni."},
+                    {name: "ISO 22000 Tools", link: "https://www.iso.org/iso-22000-food-safety-management.html", description: "Strumenti per implementazione sistemi gestione sicurezza alimentare."},
+                    {name: "Food Safety Modernization Act", link: "https://www.fda.gov/food/food-safety-modernization-act-fsma", description: "Regolamentazione FDA per prevenzione contaminazioni alimentari."},
+                    {name: "EFSA Scientific Opinions", link: "https://www.efsa.europa.eu/", description: "Pareri scientifici EFSA su sicurezza alimentare europea."},
+                    {name: "IFS Standards", link: "https://www.ifs-certification.com/", description: "Standard internazionali per sicurezza e qualità prodotti alimentari."},
+                    {name: "SQF Institute", link: "https://www.sqfi.com/", description: "Programma certificazione globale per sicurezza alimentare SQF."}
+                ]
+            },
+            "PCTO (Ex Alternanza)": {
+                icon: "🎯",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "LinkedIn Learning", link: "https://www.linkedin.com/learning/", description: "Corsi professionali per sviluppo competenze trasversali e tecniche."},
+                    {name: "Coursera for Business", link: "https://www.coursera.org/business", description: "Certificazioni professionali riconosciute da università e aziende."},
+                    {name: "Google Digital Training", link: "https://learndigital.withgoogle.com/", description: "Certificazioni Google per competenze digitali e marketing."},
+                    {name: "Microsoft Learn", link: "https://docs.microsoft.com/en-us/learn/", description: "Percorsi formativi Microsoft per tecnologie cloud e produttività."},
+                    {name: "Camera di Commercio PCTO", link: "https://www.camcom.it/", description: "Registro nazionale alternanza scuola-lavoro e opportunità PCTO."},
+                    {name: "JobOrienta", link: "https://www.joborienta.info/", description: "Orientamento professionale e opportunità stage per studenti."},
+                    {name: "Educazione Digitale", link: "https://www.educazionedigitale.it/", description: "Piattaforma per progetti didattici aziende-scuole."},
+                    {name: "Junior Achievement", link: "https://www.jaitalia.org/", description: "Programmi educativi per imprenditorialità e competenze economiche."},
+                    {name: "Cisco Networking Academy", link: "https://www.netacad.com/", description: "Corsi Cisco per networking e cybersecurity con certificazioni."},
+                    {name: "IBM SkillsBuild", link: "https://www.ibm.org/initiatives/skillsbuild", description: "Programma IBM per sviluppo competenze digitali e tecnologiche."}
+                ]
+            },
+            "Agronomia Territorio": {
+                icon: "🌿",
+                color: "#15973e",
+                tools: [
+                    {name: "Soil Health Assessment", link: "https://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/health/", description: "Strumenti USDA per valutazione salute del suolo e pratiche sostenibili."},
+                    {name: "Climate Data Online", link: "https://www.ncdc.noaa.gov/cdo-web/", description: "Database climatici NOAA per analisi agroclimatiche territoriali."},
+                    {name: "FAO GAEZ", link: "http://www.fao.org/nr/gaez/en/", description: "Zonizzazione agroecologica globale FAO per pianificazione agricola."},
+                    {name: "European Soil Data Centre", link: "https://esdac.jrc.ec.europa.eu/", description: "Database europeo suoli per cartografia pedologica e classificazione."},
+                    {name: "ISPRA Consumo Suolo", link: "https://www.isprambiente.gov.it/it/attivita/suolo-e-territorio", description: "Monitoraggio ISPRA consumo suolo e trasformazioni territoriali."},
+                    {name: "Copernicus Land Monitoring", link: "https://land.copernicus.eu/", description: "Servizio europeo monitoraggio territorio con dati satellitari."},
+                    {name: "ARPA Regional Data", link: "https://www.arpa.veneto.it/", description: "Dati ambientali regionali ARPA per pianificazione territoriale."},
+                    {name: "Precision Agriculture Maps", link: "https://www.usgs.gov/centers/eros", description: "Mappe satellitari USGS per agricoltura di precisione."},
+                    {name: "SoilGrids", link: "https://www.soilgrids.org/", description: "Sistema globale informazioni pedologiche con mappe ad alta risoluzione."},
+                    {name: "WorldClim", link: "https://www.worldclim.org/", description: "Database climatologico globale per modellazione agronomica."}
+                ]
+            },
+            "Economia Agraria": {
+                icon: "📊",
+                color: "#0891b2",
+                tools: [
+                    {name: "ISTAT Agricoltura", link: "https://www.istat.it/it/agricoltura", description: "Statistiche ufficiali italiane settore primario e agroalimentare."},
+                    {name: "ISMEA", link: "https://www.ismea.it/", description: "Istituto servizi mercato agricolo alimentare - analisi economiche."},
+                    {name: "FAOSTAT", link: "http://www.fao.org/faostat/", description: "Database statistico FAO per economia agricola mondiale."},
+                    {name: "EUROSTAT Agriculture", link: "https://ec.europa.eu/eurostat/web/agriculture", description: "Statistiche agricole europee per analisi comparative."},
+                    {name: "Borsa Merci Telematica", link: "https://www.borsamerci.it/", description: "Prezzi agricoli nazionali e contrattazioni telematiche."},
+                    {name: "USDA Economic Research", link: "https://www.ers.usda.gov/", description: "Ricerca economica USDA per mercati agricoli globali."},
+                    {name: "AgriProFocus", link: "https://agriprofocus.com/", description: "Network internazionale per sviluppo agribusiness sostenibile."},
+                    {name: "World Bank Agriculture", link: "https://www.worldbank.org/en/topic/agriculture", description: "Dati Banca Mondiale per sviluppo agricolo e rurale."},
+                    {name: "OECD Agriculture", link: "https://www.oecd.org/agriculture/", description: "Statistiche e outlook OCSE per politiche agricole."},
+                    {name: "CREA", link: "https://www.crea.gov.it/", description: "Centro ricerca economia agraria italiano con dati settoriali."}
+                ]
+            },
+            "Agricoltura Sostenibile": {
+                icon: "♻️",
+                color: "#059669",
+                tools: [
+                    {name: "Organic Agriculture Research", link: "https://organic.org/", description: "Ricerca internazionale su agricoltura biologica e pratiche sostenibili."},
+                    {name: "Sustainable Agriculture Initiative", link: "https://saiplatform.org/", description: "Piattaforma globale per pratiche agricole sostenibili."},
+                    {name: "Regenerative Agriculture", link: "https://regenerativeagriculturefoundation.org/", description: "Fondazione per promozione agricoltura rigenerativa."},
+                    {name: "Carbon Farming Initiative", link: "https://www.climatechange.gov.au/government/initiatives/carbon-farming-initiative", description: "Programmi sequestro carbonio in agricoltura."},
+                    {name: "Precision Conservation", link: "https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/nra/ceap/?cid=nrcs143_014211", description: "Conservazione precisione USDA per sostenibilità agricola."},
+                    {name: "Agroecology Database", link: "https://www.agroecology.org/", description: "Database globale pratiche agroecologiche sostenibili."},
+                    {name: "Climate Smart Agriculture", link: "https://www.fao.org/climate-smart-agriculture/en/", description: "Iniziativa FAO per agricoltura resiliente ai cambiamenti climatici."},
+                    {name: "Integrated Pest Management", link: "https://www.epa.gov/pesticides/integrated-pest-management-ipm-principles", description: "Gestione integrata parassiti EPA per riduzione pesticidi."},
+                    {name: "FIBL Organic Research", link: "https://www.fibl.org/", description: "Istituto ricerca agricoltura biologica con database globale."},
+                    {name: "Sustainable Agriculture Research", link: "https://www.sare.org/", description: "Programma ricerca USDA per pratiche agricole sostenibili."}
+                ]
+            },
+            "Gestione Parchi & Fauna": {
+                icon: "🦌",
+                color: "#15973e",
+                tools: [
+                    {name: "Protected Planet", link: "https://www.protectedplanet.net/", description: "Database mondiale aree protette UNEP-WCMC."},
+                    {name: "IUCN Red List", link: "https://www.iucnredlist.org/", description: "Lista rossa specie minacciate per conservazione biodiversità."},
+                    {name: "eBird", link: "https://ebird.org/", description: "Monitoraggio avifauna Cornell Lab per gestione fauna selvatica."},
+                    {name: "GBIF Occurrence Data", link: "https://www.gbif.org/", description: "Dati occorrenza specie per pianificazione conservazione."},
+                    {name: "Wildlife Conservation Society", link: "https://www.wcs.org/", description: "Strumenti WCS per conservazione fauna e habitat."},
+                    {name: "Convention on Biological Diversity", link: "https://www.cbd.int/", description: "Convenzione biodiversità ONU per politiche conservazione."},
+                    {name: "European Environment Agency", link: "https://www.eea.europa.eu/", description: "Agenzia europea ambiente per monitoring ecosistemi."},
+                    {name: "Camera Trap Database", link: "https://wildlifeinsights.org/", description: "Piattaforma globale Google per monitoraggio fauna con fototrappole."},
+                    {name: "Panthera Project", link: "https://www.panthera.org/", description: "Conservazione grandi felini con tecnologie avanzate tracking."},
+                    {name: "WWF Conservation Technology", link: "https://www.worldwildlife.org/initiatives/wildlife-conservation-technology", description: "Tecnologie innovative WWF per conservazione wildlife."}
+                ]
+            },
+            "Matematica Avanzata": {
+                icon: "🧮",
+                color: "#dc2626",
+                tools: [
+                    {name: "GeoGebra", link: "https://www.geogebra.org/", description: "Software matematico dinamico per geometria, algebra e analisi."},
+                    {name: "Desmos Graphing Calculator", link: "https://www.desmos.com/calculator", description: "Calcolatrice grafica online avanzata per funzioni e equazioni."},
+                    {name: "Photomath", link: "https://photomath.com/", description: "AI per risoluzione problemi matematici tramite fotocamera."},
+                    {name: "Microsoft Math Solver", link: "https://mathsolver.microsoft.com/", description: "Risolutore Microsoft per equazioni con spiegazioni step-by-step."},
+                    {name: "Symbolab", link: "https://www.symbolab.com/", description: "Calcolatore simbolico per algebra, calcolo e geometria."},
+                    {name: "WolframAlpha Math", link: "https://www.wolframalpha.com/examples/mathematics/", description: "Motore computazionale Wolfram per matematica avanzata."},
+                    {name: "Khan Academy Math", link: "https://www.khanacademy.org/math", description: "Corsi gratuiti di matematica con esercizi adattivi."},
+                    {name: "Mathway", link: "https://www.mathway.com/", description: "Risolutore automatico per problemi di matematica."},
+                    {name: "Cymath", link: "https://www.cymath.com/", description: "Tutor matematico AI con soluzioni dettagliate."},
+                    {name: "MATLAB Online", link: "https://matlab.mathworks.com/", description: "Ambiente computazionale professionale per calcolo tecnico."}
+                ]
+            },
+            "AI Tools Multidisciplinari": {
+                icon: "🤖",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "ChatGPT", link: "https://chat.openai.com/", description: "Assistente AI per supporto studio, spiegazioni e risoluzione problemi."},
+                    {name: "Claude AI", link: "https://claude.ai/", description: "AI assistant Anthropic per analisi documenti e ragionamento complesso."},
+                    {name: "Wolfram Alpha", link: "https://www.wolframalpha.com/", description: "Motore computazionale per matematica, fisica, chimica e ingegneria."},
+                    {name: "Perplexity AI", link: "https://www.perplexity.ai/", description: "Motore ricerca AI con fonti scientifiche verificate."},
+                    {name: "Notion AI", link: "https://www.notion.so/product/ai", description: "AI integrata per organizzazione studio e progetti scolastici."},
+                    {name: "Grammarly", link: "https://www.grammarly.com/", description: "Assistente AI per scrittura e correzione testi tecnici."},
+                    {name: "Scholarcy", link: "https://www.scholarcy.com/", description: "AI per sintesi automatica articoli scientifici."},
+                    {name: "Elicit Research", link: "https://elicit.org/", description: "AI research assistant per letteratura scientifica."},
+                    {name: "Consensus", link: "https://consensus.app/", description: "Motore ricerca AI per paper scientifici peer-reviewed."},
+                    {name: "Gamma AI", link: "https://gamma.app/", description: "Creazione presentazioni AI per progetti scolastici."},
+                    {name: "Tome AI", link: "https://tome.app/", description: "Storytelling AI per narrativa e presentazioni educative."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 0;
+        let currentZoom = 1;
+        let isDarkMode = false;
+        let currentUser = null;
+        let isLoggedIn = false;
+
+        // Funzioni di autenticazione
+        function validateEmail(email) {
+            return email.endsWith('@agrariomendel.it');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = `<div class="error-message">${message}</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function login(email) {
+            if (!validateEmail(email)) {
+                showError('❌ Accesso negato: utilizzare esclusivamente l\'email istituzionale @agrariomendel.it');
+                return false;
+            }
+
+            currentUser = email;
+            isLoggedIn = true;
+            localStorage.setItem('mendel_all_subjects_user', email);
+            localStorage.setItem('mendel_all_subjects_login_time', Date.now());
+
+            // Nasconde login screen e mostra app
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.add('visible');
+            document.getElementById('userEmail').textContent = email;
+
+            return true;
+        }
+
+        function logout() {
+            currentUser = null;
+            isLoggedIn = false;
+            localStorage.removeItem('mendel_all_subjects_user');
+            localStorage.removeItem('mendel_all_subjects_login_time');
+
+            // Mostra login screen e nasconde app
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.remove('visible');
+            document.getElementById('emailInput').value = '';
+        }
+
+        function checkAutoLogin() {
+            const savedUser = localStorage.getItem('mendel_all_subjects_user');
+            const loginTime = localStorage.getItem('mendel_all_subjects_login_time');
+            
+            if (savedUser && loginTime) {
+                // Verifica se la sessione è ancora valida (24 ore)
+                const now = Date.now();
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                
+                if (now - parseInt(loginTime) < twentyFourHours) {
+                    currentUser = savedUser;
+                    isLoggedIn = true;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.add('visible');
+                    document.getElementById('userEmail').textContent = savedUser;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Event listener per il form di login
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value.trim();
+            const loginBtn = document.getElementById('loginButton');
+            
+            if (!email) {
+                showError('❌ Inserire l\'email istituzionale');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = '🔄 Verificando...';
+            
+            setTimeout(() => {
+                if (login(email)) {
+                    loginBtn.textContent = '✅ Accesso Autorizzato';
+                    setTimeout(() => {
+                        initializeMap();
+                        setupSearch();
+                        setupKeyboardControls();
+                    }, 500);
+                } else {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = '🌱 Accedi a tutte le materie IIS MENDEL';
+                }
+            }, 1000);
+        });
+
+        // Funzioni principali dell'app
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_all_subjects_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(stemData);
+            
+            // Calcola il totale degli strumenti
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += stemData[category].tools.length;
+            });
+            
+            // Pulisce la griglia
+            categoryGrid.innerHTML = '';
+            
+            // Crea i nodi delle categorie
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = stemData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${stemData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${stemData[category].tools.length} risorse</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                // Aggiungi supporto per navigazione da tastiera
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            // Rimuovi classe active da tutti i nodi
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            // Aggiungi classe active al nodo selezionato
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${stemData[categoryName].tools.length} risorse disponibili`;
+            
+            content.innerHTML = '';
+            
+            stemData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        🔧 ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi alla Risorsa
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                // Animazione di entrata
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            // Focus management per accessibilità
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            
+            // Rimuovi classe active da tutti i nodi
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(stemData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    // Cerca nel titolo della categoria
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        // Cerca negli strumenti della categoria
+                        isVisible = stemData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            // Aggiorna le statistiche
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount}/${Object.keys(stemData).length}`;
+                document.querySelector('.stats-label').textContent = 'Categorie\nVisibili';
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+                document.querySelector('.stats-label').innerHTML = 'Risorse<br>Disponibili';
+            }
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                // Controlli zoom
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '+':
+                        case '=':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                // Toggle tema
+                if (e.key === 't' && e.ctrlKey && e.altKey) {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                // Chiudi pannello con Escape
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+
+            // Zoom con rotella del mouse
+            document.addEventListener('wheel', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        zoomOut();
+                    } else {
+                        zoomIn();
+                    }
+                }
+            }, { passive: false });
+        }
+
+        // Utilità
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function loadUserPreferences() {
+            const savedTheme = localStorage.getItem('mendel_all_subjects_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserPreferences();
+            
+            // Controlla se c'è un login automatico valido
+            if (!checkAutoLogin()) {
+                // Se non c'è auto-login, mostra la schermata di login
+                document.getElementById('loginScreen').classList.remove('hidden');
+            } else {
+                // Se c'è auto-login, inizializza l'app
+                initializeMap();
+                setupSearch();
+                setupKeyboardControls();
+            }
+        });
+
+        // Chiudi pannello quando si clicca fuori
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('toolsPanel');
+            const isClickInsidePanel = panel.contains(e.target);
+            const isClickOnCategoryNode = e.target.closest('.category-node');
+            
+            if (!isClickInsidePanel && !isClickOnCategoryNode && panel.classList.contains('open')) {
+                closePanel();
+            }
+        });
+
+        // Placeholder per funzioni future
+        function toggleFilters() {
+            console.log('Filtri avanzati per tutte le materie in sviluppo!');
+        }
+
+        // Gestione responsive
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                currentZoom = 1;
+                updateZoom();
+            }
+        }
+
+        window.addEventListener('resize', debounce(handleResize, 250));
+
+        // Prevenzione errori
+        window.addEventListener('error', (e) => {
+            console.log('Errore gestito:', e.error);
+        });
+
+        // Service Worker per PWA (opzionale)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'mendel-all-subjects-v1';
+                    const urlsToCache = ['/'];
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => response || fetch(event.request))
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(() => console.log('PWA Service Worker registrato'))
+                    .catch(() => console.log('Service Worker non supportato'));
+            });
+        }
+    </script>
+
+<script>
+/* Draggable controls-container injected by ChatGPT */
+(function() {
+  const el = document.querySelector('.controls-container');
+  if (!el) return;
+  let isDown = false, offsetX = 0, offsetY = 0;
+
+  el.addEventListener('mousedown', (e) => {
+    isDown = true;
+    offsetX = e.clientX - el.offsetLeft;
+    offsetY = e.clientY - el.offsetTop;
+    el.style.right = 'auto'; // allow horizontal move
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    el.style.left = (e.clientX - offsetX) + 'px';
+    el.style.top = (e.clientY - offsetY) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDown = false;
+  });
+
+  /* Touch support */
+  el.addEventListener('touchstart', (e) => {
+    isDown = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - el.offsetLeft;
+    offsetY = touch.clientY - el.offsetTop;
+    el.style.right = 'auto';
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const touch = e.touches[0];
+    el.style.left = (touch.clientX - offsetX) + 'px';
+    el.style.top = (touch.clientY - offsetY) + 'px';
+  });
+
+  document.addEventListener('touchend', () => {
+    isDown = false;
+  });
+})();
+</script>
+
+
+<script>
+/* Auto-initialize STEM Hub bypassing login */
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof initializeMap === 'function') {
+    try {
+      initializeMap();
+      if (typeof setupSearch === 'function') setupSearch();
+      if (typeof setupKeyboardControls === 'function') setupKeyboardControls();
+    } catch(e) { console.error(e); }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚖️ Hub Diritto - IIS Mendel</title>
+    <meta name="description" content="Hub Diritto IIS Mendel - 200+ strumenti per diritto costituzionale, civile, penale, amministrativo e scienze giuridiche applicate">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #1d4ed8;
+            --secondary-color: #f59e0b;
+            --accent-color: #06b6d4;
+            --justice-blue: #1e40af;
+            --law-gold: #fbbf24;
+            --admin-purple: #8b5cf6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-justice: linear-gradient(135deg, #1d4ed8 0%, #fbbf24 50%, #1d4ed8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-justice);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-justice);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-justice);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-justice);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-justice);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-btn:hover {
+            background: var(--justice-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--justice-blue);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .category-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tools-list {
+            space-y: 0.5rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            justify-between;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .tool-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateX(4px);
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+        }
+
+        .external-icon {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .special-sections {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .special-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .special-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card.blue {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--justice-blue);
+        }
+
+        .feature-card.gold {
+            background: rgba(251, 191, 36, 0.1);
+            border-color: var(--law-gold);
+        }
+
+        .feature-card.green {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+
+        .feature-card.purple {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--admin-purple);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list {
+            text-align: left;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .feature-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ai-tool-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px dashed var(--border-light);
+            background: rgba(248, 250, 252, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ai-tool-card:hover {
+            border-style: solid;
+            border-color: var(--justice-blue);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .ai-tool-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .ai-tool-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .ai-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .ai-badge.new { background: #10b981; color: white; }
+        .ai-badge.popular { background: #ef4444; color: white; }
+        .ai-badge.pro { background: #6366f1; color: white; }
+        .ai-badge.enterprise { background: var(--admin-purple); color: white; }
+        .ai-badge.useful { background: #f97316; color: white; }
+        .ai-badge.advanced { background: var(--justice-blue); color: white; }
+
+        .ai-tool-desc {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-card {
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .team-card.blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2));
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .team-card.gold {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.2));
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .team-card.green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .team-card.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.2));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .team-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .team-desc {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(135deg, var(--justice-blue), var(--admin-purple));
+        }
+
+        .project-card.objectives {
+            background: linear-gradient(135deg, var(--law-gold), #f97316);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .project-list {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .project-list div {
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number.blue { color: var(--justice-blue); }
+        .stat-number.gold { color: var(--law-gold); }
+        .stat-number.green { color: #10b981; }
+        .stat-number.red { color: #ef4444; }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-container, .controls-container {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                justify-content: center;
+                margin: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .special-card {
+                padding: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>⚖️ Hub Diritto</h1>
+            <p>200+ Strumenti per Diritto Costituzionale, Civile, Penale, Amministrativo e Scienze Giuridiche</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Diritto IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di eccellenza per le <strong>scienze giuridiche</strong> dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>200+ strumenti specializzati</strong> per diritto costituzionale, civile, penale, 
+                amministrativo, del lavoro, commerciale, tributario e internazionale.
+            </p>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(29, 78, 216, 0.1); border-radius: 16px; border: 1px solid rgba(29, 78, 216, 0.2);">
+                <p style="color: var(--justice-blue); font-weight: 600; margin: 0;">
+                    ⚖️ <strong>Hub Diritto IIS Mendel:</strong> Strumenti digitali avanzati per 
+                    l'insegnamento e l'apprendimento delle scienze giuridiche. 
+                    200+ risorse per costruire il futuro giuridico della comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span style="color: var(--text-light); font-size: 1.125rem;">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 200+ strumenti giuridici..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button class="control-btn" onclick="toggleTheme()" title="Tema">🌙</button>
+        <button class="control-btn" onclick="showStats()" title="Statistiche">📊</button>
+    </div>
+
+    <div class="main-content">
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+
+        <div class="special-sections">
+            <!-- Sezione Speciale Concorsi e Esami -->
+            <div class="special-card">
+                <h3 class="special-title">⚖️ Preparazione Concorsi & Esami 2025</h3>
+                <div class="features-grid">
+                    <div class="feature-card blue">
+                        <h4 class="feature-title">📚 Esame Avvocato</h4>
+                        <div class="feature-list">
+                            <div>• Pareri di diritto civile</div>
+                            <div>• Pareri di diritto penale</div>
+                            <div>• Atto giudiziario</div>
+                            <div>• Prova orale - Deontologia</div>
+                        </div>
+                    </div>
+                    <div class="feature-card gold">
+                        <h4 class="feature-title">🏛️ Concorsi Pubblici</h4>
+                        <div class="feature-list">
+                            <div>• Magistratura ordinaria</div>
+                            <div>• Notariato</div>
+                            <div>• Amministrazioni pubbliche</div>
+                            <div>• Forze dell'ordine</div>
+                        </div>
+                    </div>
+                    <div class="feature-card green">
+                        <h4 class="feature-title">📋 Certificazioni</h4>
+                        <div class="feature-list">
+                            <div>• Privacy e GDPR</div>
+                            <div>• Mediazione civile</div>
+                            <div>• Arbitrato</div>
+                            <div>• Diritti umani</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tools per Diritto -->
+            <div class="special-card">
+                <h3 class="special-title">🤖 AI Tools per il Diritto</h3>
+                <div class="ai-tools-grid" id="aiToolsGrid">
+                    <!-- Gli strumenti AI verranno generati dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Sezione TEAM Buone Pratiche -->
+            <div class="special-card">
+                <h3 class="special-title">🏆 TEAM Buone Pratiche - Diritto Digitale</h3>
+                <div class="team-grid">
+                    <div class="team-card blue">
+                        <div class="team-icon">👥</div>
+                        <h4 class="team-title">Didattica Innovativa</h4>
+                        <p class="team-desc">Metodologie digitali per l'insegnamento del diritto</p>
+                    </div>
+                    <div class="team-card gold">
+                        <div class="team-icon">💡</div>
+                        <h4 class="team-title">Progetti Pilota</h4>
+                        <p class="team-desc">Sperimentazione di nuovi strumenti legali</p>
+                    </div>
+                    <div class="team-card green">
+                        <div class="team-icon">🔗</div>
+                        <h4 class="team-title">Condivisione</h4>
+                        <p class="team-desc">Scambio di best practices tra docenti</p>
+                    </div>
+                    <div class="team-card purple">
+                        <div class="team-icon">📈</div>
+                        <h4 class="team-title">Formazione</h4>
+                        <p class="team-desc">Corsi avanzati su tecnologie giuridiche</p>
+                    </div>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🚀</span>
+                            <h4 class="project-title">Progetti Attivi 2025</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Aula Virtuale Tribunale Simulato</div>
+                            <div>• AI-Powered Legal Research</div>
+                            <div>• Blockchain per Contratti Smart</div>
+                            <div>• VR per Formazione Giuridica</div>
+                        </div>
+                    </div>
+                    <div class="project-card objectives">
+                        <div class="project-header">
+                            <span style="font-size: 1.25rem;">🎯</span>
+                            <h4 class="project-title">Obiettivi PNRR</h4>
+                        </div>
+                        <div class="project-list">
+                            <div>• Digitalizzazione Didattica</div>
+                            <div>• Competenze Digitali Avanzate</div>
+                            <div>• Innovazione Metodologica</div>
+                            <div>• Networking Scuole</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3 class="special-title">Statistiche della Piattaforma</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number blue">237</div>
+                        <div class="stat-label">Risorse Legali</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number gold">189</div>
+                        <div class="stat-label">Studenti Attivi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number green">8</div>
+                        <div class="stat-label">Docenti</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number red">95%</div>
+                        <div class="stat-label">Tasso Successo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dati delle categorie giuridiche
+        const categories = [
+            {
+                id: 'costituzionale',
+                name: 'Diritto Costituzionale',
+                icon: '🏛️',
+                color: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
+                description: 'Costituzione, diritti fondamentali, ordinamento',
+                tools: [
+                    { name: 'Costituzione Commentata', url: 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:costituzione' },
+                    { name: 'Corte Costituzionale', url: 'https://www.cortecostituzionale.it/' },
+                    { name: 'Normattiva Costituzione', url: 'https://www.normattiva.it/' },
+                    { name: 'ECHR Database', url: 'https://hudoc.echr.coe.int/' },
+                    { name: 'Diritti Fondamentali EU', url: 'https://fra.europa.eu/it' },
+                    { name: 'Giurisprudenza Cost.', url: 'https://www.giurcost.org/' }
+                ]
+            },
+            {
+                id: 'civile',
+                name: 'Diritto Civile',
+                icon: '🏠',
+                color: 'linear-gradient(135deg, #10b981, #059669)',
+                description: 'Persone, famiglia, contratti, proprietà',
+                tools: [
+                    { name: 'Codice Civile Online', url: 'https://www.brocardi.it/codice-civile/' },
+                    { name: 'Formulario Civile', url: 'https://www.altalex.com/documents/formulario-civile' },
+                    { name: 'Cassazione Civile', url: 'https://www.cortedicassazione.it/' },
+                    { name: 'Contratti Tipo', url: 'https://www.contratti-tipo.it/' },
+                    { name: 'Successioni Online', url: 'https://www.successioni.it/' },
+                    { name: 'Family Law Tools', url: 'https://www.dirittodifamiglia.it/' }
+                ]
+            },
+            {
+                id: 'penale',
+                name: 'Diritto Penale',
+                icon: '🚨',
+                color: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                description: 'Reati, pene, procedura penale',
+                tools: [
+                    { name: 'Codice Penale', url: 'https://www.brocardi.it/codice-penale/' },
+                    { name: 'Cassazione Penale', url: 'https://www.cortedicassazione.it/' },
+                    { name: 'CPP Online', url: 'https://www.brocardi.it/codice-procedura-penale/' },
+                    { name: 'Reati e Pene', url: 'https://www.diritto.it/codici/cp' },
+                    { name: 'Giurisprudenza Penale', url: 'https://www.penalecontemporaneo.it/' },
+                    { name: 'Criminal Law AI', url: 'https://www.iusexplorer.it/' }
+                ]
+            },
+            {
+                id: 'amministrativo',
+                name: 'Diritto Amministrativo',
+                icon: '🏢',
+                color: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                description: 'PA, appalti, procedimenti amministrativi',
+                tools: [
+                    { name: 'Codice Amministrativo', url: 'https://www.pubblicoprivato.it/' },
+                    { name: 'TAR Database', url: 'https://www.giustizia-amministrativa.it/' },
+                    { name: 'Consiglio di Stato', url: 'https://www.giustizia-amministrativa.it/' },
+                    { name: 'Appalti Online', url: 'https://www.anac.it/' },
+                    { name: 'PA Digitale', url: 'https://www.agid.gov.it/' },
+                    { name: 'ANAC Tools', url: 'https://www.anticorruzione.it/' }
+                ]
+            },
+            {
+                id: 'lavoro',
+                name: 'Diritto del Lavoro',
+                icon: '💼',
+                color: 'linear-gradient(135deg, #f97316, #ea580c)',
+                description: 'Contratti, sicurezza, previdenza',
+                tools: [
+                    { name: 'Statuto Lavoratori', url: 'https://www.lavoro.gov.it/' },
+                    { name: 'CCNL Database', url: 'https://www.cnel.it/Archivio-Contratti' },
+                    { name: 'Cassazione Lavoro', url: 'https://www.cortedicassazione.it/' },
+                    { name: 'INPS Tools', url: 'https://www.inps.it/' },
+                    { name: 'Safety Compliance', url: 'https://www.inail.it/' },
+                    { name: 'HR Legal Hub', url: 'https://www.dirittoelavoro.com/' }
+                ]
+            },
+            {
+                id: 'commerciale',
+                name: 'Diritto Commerciale',
+                icon: '📈',
+                color: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+                description: 'Società, imprese, fallimento',
+                tools: [
+                    { name: 'Codice Civile - Libro V', url: 'https://www.brocardi.it/codice-civile/libro-quinto/' },
+                    { name: 'Registro Imprese', url: 'https://www.registroimprese.it/' },
+                    { name: 'Fallimentare Online', url: 'https://www.fallimentareonline.it/' },
+                    { name: 'Corporate Law', url: 'https://www.ipsoa.it/' },
+                    { name: 'M&A Tools', url: 'https://www.dirittobancario.it/' },
+                    { name: 'Business Compliance', url: 'https://www.confindustria.it/' }
+                ]
+            },
+            {
+                id: 'tributario',
+                name: 'Diritto Tributario',
+                icon: '🧮',
+                color: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                description: 'Imposte, tasse, contenzioso fiscale',
+                tools: [
+                    { name: 'TUIR Online', url: 'https://www.agenziaentrate.gov.it/' },
+                    { name: 'Agenzia Entrate', url: 'https://www.agenziaentrate.gov.it/portale/' },
+                    { name: 'Tax Calculator', url: 'https://www.fiscoetasse.com/' },
+                    { name: 'CTR Database', url: 'https://www.giustizia-tributaria.it/' },
+                    { name: 'IVA Tools', url: 'https://www.agenziaentrate.gov.it/portale/web/guest/iva' },
+                    { name: 'Fiscal Compliance', url: 'https://www.commercialisti.it/' }
+                ]
+            },
+            {
+                id: 'internazionale',
+                name: 'Diritto Internazionale',
+                icon: '🌍',
+                color: 'linear-gradient(135deg, #ec4899, #db2777)',
+                description: 'Trattati, diritto UE, diritti umani',
+                tools: [
+                    { name: 'EUR-Lex', url: 'https://eur-lex.europa.eu/' },
+                    { name: 'UN Treaties', url: 'https://treaties.un.org/' },
+                    { name: 'ECHR Cases', url: 'https://hudoc.echr.coe.int/' },
+                    { name: 'WTO Law', url: 'https://www.wto.org/' },
+                    { name: 'EU Case Law', url: 'https://curia.europa.eu/' },
+                    { name: 'Human Rights DB', url: 'https://www.ohchr.org/' }
+                ]
+            }
+        ];
+
+        const aiTools = [
+            { name: 'ChatGPT Legal Advisor', desc: 'Consulenza legale AI avanzata', badge: 'NUOVO', url: 'https://chat.openai.com/', badgeClass: 'new' },
+            { name: 'Claude Contracts', desc: 'Analisi e drafting contratti', badge: 'POPOLARE', url: 'https://claude.ai/', badgeClass: 'popular' },
+            { name: 'LawGeex AI', desc: 'Review automatico contratti', badge: 'PRO', url: 'https://www.lawgeex.com/', badgeClass: 'pro' },
+            { name: 'Kira Systems', desc: 'Due diligence automatizzata', badge: 'ENTERPRISE', url: 'https://kirasystems.com/', badgeClass: 'enterprise' },
+            { name: 'DoNotPay Legal AI', desc: 'Assistenza legale automatica', badge: 'UTILE', url: 'https://donotpay.com/', badgeClass: 'useful' },
+            { name: 'ROSS Intelligence', desc: 'Ricerca giurisprudenziale AI', badge: 'AVANZATO', url: 'https://www.rossintelligence.com/', badgeClass: 'advanced' }
+        ];
+
+        // Variabili globali
+        let isDarkMode = false;
+
+        // Funzioni principali
+        function initializeApp() {
+            renderCategories();
+            renderAITools();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            
+            grid.innerHTML = categories.map((category, index) => `
+                <div class="category-card animate-fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: ${category.color}">
+                            ${category.icon}
+                        </div>
+                        <h3 class="category-title">${category.name}</h3>
+                    </div>
+                    
+                    <p class="category-description">${category.description}</p>
+                    
+                    <div class="tools-list">
+                        ${category.tools.map(tool => `
+                            <div class="tool-item" onclick="window.open('${tool.url}', '_blank')">
+                                <span class="tool-name">${tool.name}</span>
+                                <span class="external-icon">🔗</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAITools() {
+            const container = document.getElementById('aiToolsGrid');
+            container.innerHTML = aiTools.map(ai => `
+                <div class="ai-tool-card" onclick="window.open('${ai.url}', '_blank')">
+                    <div class="ai-tool-header">
+                        <h4 class="ai-tool-name">${ai.name}</h4>
+                        <span class="ai-badge ${ai.badgeClass}">${ai.badge}</span>
+                    </div>
+                    <p class="ai-tool-desc">${ai.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.style.filter = isDarkMode ? 'invert(1) hue-rotate(180deg)' : '';
+            event.target.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function showStats() {
+            const stats = categories.map(cat => `${cat.name}: ${cat.tools.length} strumenti`).join('\n');
+            const totalTools = categories.reduce((sum, cat) => sum + cat.tools.length, 0);
+            alert(`⚖️ Statistiche Hub Diritto:\n\n${stats}\n\nTotale: ${totalTools} strumenti giuridici`);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const categoryCards = document.querySelectorAll('.category-card');
+                
+                categoryCards.forEach(card => {
+                    const categoryTitle = card.querySelector('.category-title').textContent.toLowerCase();
+                    const toolNames = Array.from(card.querySelectorAll('.tool-name'))
+                        .map(tool => tool.textContent.toLowerCase())
+                        .join(' ');
+                    
+                    const isVisible = categoryTitle.includes(searchTerm) || 
+                                    toolNames.includes(searchTerm) || 
+                                    searchTerm === '';
+                    
+                    card.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearch();
+        });
+
+        // Esponi funzioni globali
+        window.toggleTheme = toggleTheme;
+        window.showStats = showStats;
+    </script>
+</body>
+</html>

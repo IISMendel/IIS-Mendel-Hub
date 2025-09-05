@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💻 Hub Informatica - IIS Mendel (140 Strumenti)</title>
+    <meta name="description" content="Hub Informatica IIS Mendel - 140 strumenti digitali completi per biennio informatico e competenze digitali">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --mendel-green: #22c55e;
+            --mendel-blue: #3b82f6;
+            --info-cyan: #06b6d4;
+            --info-purple: #8b5cf6;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #ef4444 100%);
+            --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --gradient-mendel: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            --gradient-info: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-info);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-info);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-mendel);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-info);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--info-cyan);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--info-purple);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            background: var(--gradient-mendel);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover, .nav-btn:active {
+            background: var(--gradient-accent);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .category-node.active {
+            border-color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-info);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-info);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .legend:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+            border-color: var(--info-cyan);
+        }
+
+        .legend.dragging {
+            opacity: 0.9;
+            transform: rotate(1deg) scale(1.02);
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .legend-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+            cursor: grab;
+        }
+
+        .legend-header:active {
+            cursor: grabbing;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: var(--info-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .drag-handle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: grab;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            color: var(--info-cyan);
+            transform: scale(1.3);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn, .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>💻 Hub Informatica Completo</h1>
+            <p>140 Strumenti di Informatica per Biennio e Competenze Digitali</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Informatica IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di riferimento per l'apprendimento dell'informatica dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>140 strumenti informatici</strong> che spazia dalla programmazione alla cittadinanza digitale: 
+                algoritmi, web development, office automation, con particolare attenzione all'inclusività e ai bisogni educativi speciali.
+            </p>
+
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3 style="color: var(--info-cyan); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🎯 La Nostra Missione
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Supportare docenti e studenti dell'IIS Mendel nell'apprendimento e insegnamento dell'informatica 
+                        attraverso strumenti digitali all'avanguardia, con particolare attenzione alle competenze del biennio, 
+                        pensiero computazionale e cittadinanza digitale. Ogni risorsa è stata testata e validata per l'uso didattico inclusivo.
+                    </p>
+                </div>
+
+                <div class="intro-box">
+                    <h3 style="color: var(--info-purple); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🤝 Comunità Educativa
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Dagli editor di codice online ai simulatori di algoritmi per concetti fondamentali. 
+                        Include risorse per programmazione (Python, JavaScript, HTML/CSS), database, reti, sicurezza informatica 
+                        e strumenti compensativi per DSA/BES/DVA, favorendo lo scambio di esperienze didattiche innovative.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(6, 182, 212, 0.1); border-radius: 16px; border: 1px solid rgba(6, 182, 212, 0.2);">
+                <p style="color: var(--info-cyan); font-weight: 600; margin: 0;">
+                    💻 <strong>Hub Informatica IIS Mendel:</strong> Strumenti digitali avanzati per 
+                    l'apprendimento e l'insegnamento dell'informatica nel biennio e competenze digitali trasversali. 
+                    140 risorse educative per la comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 140 strumenti informatici..." id="searchInput">
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-btn" onclick="goToPhysicsHub()">⚡ Hub Fisica</a>
+            <button class="filter-btn" onclick="toggleFilters()">Statistiche</button>
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+            <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+            <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+        </div>
+    </div>
+
+    <div class="map-container" id="mapContainer">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+            <h3 id="panelTitle">Strumenti Informatici</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Gli strumenti verranno caricati dinamicamente -->
+        </div>
+    </div>
+
+    <div class="legend" id="legend">
+        <div class="legend-header" id="legendHeader">
+            <div class="legend-title">💻 Controlli</div>
+            <div class="drag-handle" title="🖱️ Trascina per spostare">💻</div>
+        </div>
+        • Clicca sui nodi per esplorare<br>
+        • 14 categorie, 140+ strumenti informatici<br>
+        • Usa la ricerca per filtrare<br>
+        • Zoom: Ctrl + (+/-) o rotella<br>
+        • Tema scuro: Ctrl + Alt + T<br>
+        • Reset zoom: Ctrl + 0<br>
+        • Doppio click per ripristinare posizione<br>
+        • <strong>💡 Trascinami se copro troppo!</strong>
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">140</div>
+        <div class="stats-label">Strumenti<br>Informatici</div>
+    </div>
+
+    <script>
+        // DATI COMPLETI 140 STRUMENTI DI INFORMATICA
+        const informaticsData = {
+            "Programmazione Base": {
+                icon: "💻",
+                color: "#3b82f6",
+                tools: [
+                    {name: "Scratch MIT", link: "https://scratch.mit.edu/", description: "Linguaggio visuale per imparare programmazione con blocchi. Perfetto per iniziare pensiero computazionale."},
+                    {name: "Code.org Hour of Code", link: "https://code.org/learn", description: "Attività guidate programmazione per principianti. Algoritmi, cicli e condizioni in modo divertente."},
+                    {name: "Python Tutor", link: "http://pythontutor.com/", description: "Visualizza esecuzione codice Python step-by-step. Comprendi variabili, funzioni e strutture dati."},
+                    {name: "Repl.it Python", link: "https://replit.com/languages/python3", description: "IDE online per programmare in Python. Progetti condivisi e collaborazione in tempo reale."},
+                    {name: "Codecademy Python", link: "https://www.codecademy.com/learn/learn-python-3", description: "Corso interattivo Python da zero. Sintassi, variabili, funzioni e programmazione orientata oggetti."},
+                    {name: "LightBot", link: "https://lightbot.com/", description: "Gioco per imparare concetti programmazione: sequenze, procedure, cicli e condizioni."},
+                    {name: "Alice Programming", link: "https://www.alice.org/", description: "Ambiente 3D per apprendere programmazione orientata oggetti. Animazioni e storytelling."},
+                    {name: "Blockly Games", link: "https://blockly.games/", description: "Giochi educativi Google per concetti programmazione: labirinti, uccello, puzzle e tartaruga."},
+                    {name: "Flowchart Maker", link: "https://app.diagrams.net/", description: "Crea diagrammi di flusso per algoritmi. Visualizza logica programmi prima di codificare."},
+                    {name: "GitHub Student Pack", link: "https://education.github.com/pack", description: "Strumenti gratuiti sviluppo per studenti. Repository, hosting e IDE professionali."}
+                ]
+            },
+            "Web Development": {
+                icon: "🌐",
+                color: "#ef4444",
+                tools: [
+                    {name: "CodePen", link: "https://codepen.io/", description: "Playground online per HTML, CSS e JavaScript. Sperimenta e condividi progetti web."},
+                    {name: "W3Schools Online", link: "https://www.w3schools.com/", description: "Tutorial completi HTML, CSS, JavaScript. Reference guide e esempi pratici."},
+                    {name: "MDN Web Docs", link: "https://developer.mozilla.org/", description: "Documentazione ufficiale Mozilla per tecnologie web. Standard e best practices."},
+                    {name: "Freecodecamp", link: "https://www.freecodecamp.org/", description: "Corso completo sviluppo web gratuito. HTML, CSS, JavaScript, React e backend."},
+                    {name: "CSS Grid Garden", link: "https://cssgridgarden.com/", description: "Gioco per imparare CSS Grid Layout. Posiziona elementi con proprietà grid."},
+                    {name: "Flexbox Froggy", link: "https://flexboxfroggy.com/", description: "Gioco per padroneggiare CSS Flexbox. Allinea rane con proprietà flex."},
+                    {name: "Bootstrap Playground", link: "https://www.bootply.com/", description: "Testa componenti Bootstrap online. Framework CSS responsive per sviluppo rapido."},
+                    {name: "JSFiddle", link: "https://jsfiddle.net/", description: "Editor online JavaScript, HTML, CSS. Test snippet e debug codice web."},
+                    {name: "Can I Use", link: "https://caniuse.com/", description: "Verifica compatibilità browser per feature web. Supporto CSS, HTML5 e JavaScript."},
+                    {name: "Lorem Picsum", link: "https://picsum.photos/", description: "Genera immagini placeholder per progetti web. Dimensioni personalizzabili."}
+                ]
+            },
+            "Algoritmi e Logica": {
+                icon: "🧠",
+                color: "#f59e0b",
+                tools: [
+                    {name: "VisuAlgo", link: "https://visualgo.net/", description: "Visualizzazione algoritmi e strutture dati. Ordinamento, grafi, alberi animati."},
+                    {name: "Algorithm Visualizer", link: "https://algorithm-visualizer.org/", description: "Animazioni algoritmi classici. Comprendi bubble sort, quick sort, ricerca binaria."},
+                    {name: "Sorting Algorithms", link: "https://www.sortvisualizer.com/", description: "Confronta algoritmi ordinamento. Velocità, complessità e visualizzazione grafica."},
+                    {name: "Graph Theory Interactive", link: "https://graphonline.ru/en/", description: "Crea e analizza grafi. Algoritmi cammini minimi, spanning tree, colorazione."},
+                    {name: "Recursion Visualizer", link: "https://recursion.vercel.app/", description: "Visualizza ricorsione step-by-step. Fibonacci, fattoriale, Torre di Hanoi."},
+                    {name: "Big O Notation", link: "https://www.bigocheatsheet.com/", description: "Reference complessità algoritmi. Notazione O grande, best/worst case."},
+                    {name: "Data Structure Vis", link: "https://www.cs.usfca.edu/~galles/visualization/", description: "Animazioni strutture dati. Stack, queue, linked list, binary search tree."},
+                    {name: "Pseudocode Generator", link: "https://www.pseudocode.io/", description: "Genera pseudocodice da flowchart. Traduci algoritmi in linguaggio naturale."},
+                    {name: "Truth Table Generator", link: "https://www.truthtable.com/", description: "Genera tavole verità per espressioni logiche. Algebra booleana e logica proposizionale."},
+                    {name: "Finite State Machine", link: "https://automatonsimulator.com/", description: "Simula automi finiti. Linguaggi regolari, automi deterministici e non."}
+                ]
+            },
+            "Database e SQL": {
+                icon: "🗄️",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "SQLiteOnline", link: "https://sqliteonline.com/", description: "Database SQLite nel browser. Pratica query SQL senza installazioni."},
+                    {name: "W3Schools SQL", link: "https://www.w3schools.com/sql/", description: "Tutorial SQL completo. SELECT, INSERT, UPDATE, JOIN e database design."},
+                    {name: "SQL Murder Mystery", link: "https://mystery.knightlab.com/", description: "Impara SQL risolvendo un mistero. Query detective per trovare l'assassino."},
+                    {name: "DB Fiddle", link: "https://www.db-fiddle.com/", description: "Testa query SQL online. MySQL, PostgreSQL, SQLite e SQL Server."},
+                    {name: "SQL Bolt", link: "https://sqlbolt.com/", description: "Esercizi interattivi SQL. Dalla base alle query complesse con JOIN."},
+                    {name: "ERD Plus", link: "https://erdplus.com/", description: "Crea diagrammi entità-relazione online. Progetta database relazionali."},
+                    {name: "MongoDB University", link: "https://university.mongodb.com/", description: "Corsi gratuiti database NoSQL. Documenti, collezioni e aggregation pipeline."},
+                    {name: "DataCamp SQL", link: "https://www.datacamp.com/courses/intro-to-sql-for-data-science", description: "SQL per data science. Analisi dati e business intelligence."},
+                    {name: "SQL Zoo", link: "https://sqlzoo.net/", description: "Tutorial SQL interattivi. Esercizi progressivi da principiante ad avanzato."},
+                    {name: "phpMyAdmin Demo", link: "https://demo.phpmyadmin.net/", description: "Interfaccia grafica MySQL. Gestione database attraverso web interface."}
+                ]
+            },
+            "Reti e Internet": {
+                icon: "🌍",
+                color: "#06b6d4",
+                tools: [
+                    {name: "Cisco Packet Tracer", link: "https://www.netacad.com/courses/packet-tracer", description: "Simulatore reti Cisco. Progetta topologie, configura router e switch."},
+                    {name: "Network Simulator", link: "https://www.gns3.com/", description: "Emula reti complesse. Cisco, Juniper, VMware in ambiente virtuale."},
+                    {name: "Wireshark", link: "https://www.wireshark.org/", description: "Analizzatore protocolli rete. Cattura e analizza traffico TCP/IP."},
+                    {name: "Ping Plotter", link: "https://www.pingplotter.com/", description: "Traccia percorsi rete. Diagnostica problemi connettività e latenza."},
+                    {name: "Subnet Calculator", link: "https://www.calculator.net/ip-subnet-calculator.html", description: "Calcola sottoreti IP. CIDR, VLSM e pianificazione indirizzi."},
+                    {name: "DNS Lookup Tools", link: "https://mxtoolbox.com/", description: "Strumenti diagnostica DNS. Lookup, reverse DNS, propagation check."},
+                    {name: "Speed Test", link: "https://www.speedtest.net/", description: "Testa velocità connessione. Download, upload e latenza in tempo reale."},
+                    {name: "Port Scanner", link: "https://www.yougetsignal.com/tools/open-ports/", description: "Scansiona porte aperte. Verifica servizi attivi su host remoti."},
+                    {name: "OSI Model Interactive", link: "https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/", description: "Esplora modello OSI. Livelli rete e protocolli associati."},
+                    {name: "HTTP Status Codes", link: "https://httpstatuses.com/", description: "Reference codici stato HTTP. 200, 404, 500 e significati completi."}
+                ]
+            },
+            "Sicurezza Informatica": {
+                icon: "🔐",
+                color: "#22c55e",
+                tools: [
+                    {name: "Cybrary", link: "https://www.cybrary.it/", description: "Corsi cybersecurity gratuiti. Ethical hacking, penetration testing, forensics."},
+                    {name: "OWASP WebGoat", link: "https://webgoat.github.io/WebGoat/", description: "Applicazione web volutamente vulnerabile. Impara sicurezza web hands-on."},
+                    {name: "HackerRank Security", link: "https://www.hackerrank.com/domains/security", description: "Sfide programmazione sicurezza. Crittografia, vulnerabilità, secure coding."},
+                    {name: "CyberChef", link: "https://gchq.github.io/CyberChef/", description: "Swiss army knife cyber operations. Encoding, encryption, compression."},
+                    {name: "OverTheWire", link: "https://overthewire.org/wargames/", description: "War games sicurezza. Bandit, Natas, Krypton per apprendere hacking."},
+                    {name: "Password Strength Test", link: "https://howsecureismypassword.net/", description: "Testa robustezza password. Tempo crack e suggerimenti sicurezza."},
+                    {name: "SSL Server Test", link: "https://www.ssllabs.com/ssltest/", description: "Analizza configurazione SSL/TLS. Vulnerabilità certificati e cifrari."},
+                    {name: "Malware Analysis", link: "https://www.hybrid-analysis.com/", description: "Sandbox online malware. Analisi comportamento file sospetti."},
+                    {name: "Cryptography Tools", link: "https://cryptii.com/", description: "Strumenti crittografia online. Cifrari classici, hash, encoding."},
+                    {name: "Vulnerability Scanner", link: "https://www.acunetix.com/", description: "Scanner vulnerabilità web. SQL injection, XSS, CSRF detection."}
+                ]
+            },
+            "Office Automation": {
+                icon: "📊",
+                color: "#dc2626",
+                tools: [
+                    {name: "Google Workspace", link: "https://workspace.google.com/", description: "Suite ufficio cloud. Docs, Sheets, Slides collaborative e sincronizzate."},
+                    {name: "Microsoft 365 Online", link: "https://office.com/", description: "Office online gratuito. Word, Excel, PowerPoint nel browser."},
+                    {name: "LibreOffice Online", link: "https://www.libreoffice.org/discover/libreoffice-online/", description: "Suite ufficio open source. Alternativa gratuita a Microsoft Office."},
+                    {name: "Canva", link: "https://www.canva.com/", description: "Design grafico facile. Presentazioni, poster, infografiche e social media."},
+                    {name: "Prezi", link: "https://prezi.com/", description: "Presentazioni dinamiche non lineari. Zoom, rotazioni e storytelling visuale."},
+                    {name: "Airtable", link: "https://airtable.com/", description: "Database ibrido spreadsheet. Relazioni, attachment, automazioni."},
+                    {name: "Notion", link: "https://www.notion.so/", description: "Workspace all-in-one. Note, database, wiki e project management."},
+                    {name: "Mindmeister", link: "https://www.mindmeister.com/", description: "Mappe mentali collaborative online. Brainstorming e organizzazione idee."},
+                    {name: "PDF24 Tools", link: "https://tools.pdf24.org/", description: "Strumenti PDF online. Converti, unisci, dividi, comprimi documenti."},
+                    {name: "Zapier", link: "https://zapier.com/", description: "Automazione workflow. Connetti app e automatizza task ripetitive."}
+                ]
+            },
+            "Multimedia e Grafica": {
+                icon: "🎨",
+                color: "#7c3aed",
+                tools: [
+                    {name: "GIMP Online", link: "https://www.photopea.com/", description: "Editor immagini avanzato browser. Layer, filtri, ritocco fotografico."},
+                    {name: "Figma", link: "https://www.figma.com/", description: "Design UI/UX collaborativo. Prototipi, wireframe, sistemi design."},
+                    {name: "Pixlr", link: "https://pixlr.com/", description: "Editor foto online. Effetti, overlay, ritaglio e ottimizzazione."},
+                    {name: "Unsplash", link: "https://unsplash.com/", description: "Foto stock gratuite alta risoluzione. Per progetti web e presentazioni."},
+                    {name: "Audacity Online", link: "https://audiomass.co/", description: "Editor audio nel browser. Taglia, unisci, applica effetti audio."},
+                    {name: "Loom", link: "https://www.loom.com/", description: "Registrazione schermo semplice. Video tutorial e presentazioni veloci."},
+                    {name: "Remove.bg", link: "https://www.remove.bg/", description: "Rimuovi sfondi automaticamente. AI per isolare soggetti da immagini."},
+                    {name: "TinyPNG", link: "https://tinypng.com/", description: "Comprimi immagini online. Riduci dimensioni PNG/JPEG senza perdita qualità."},
+                    {name: "Color Hunt", link: "https://colorhunt.co/", description: "Palette colori curate. Ispirazioni cromatiche per progetti design."},
+                    {name: "Blender Cloud", link: "https://cloud.blender.org/", description: "Risorse 3D open source. Tutorial, modelli e texture per Blender."}
+                ]
+            },
+            "Robotica Educativa": {
+                icon: "🤖",
+                color: "#059669",
+                tools: [
+                    {name: "mBlock", link: "https://mblock.makeblock.com/", description: "Programmazione robot Makeblock. Scratch-based per mBot e Ranger."},
+                    {name: "Arduino IDE Online", link: "https://create.arduino.cc/editor", description: "Programma Arduino nel browser. Sketch, librerie e progetti condivisi."},
+                    {name: "Tinkercad Circuits", link: "https://www.tinkercad.com/circuits", description: "Simula circuiti Arduino online. Breadboard virtuale con componenti."},
+                    {name: "LEGO Mindstorms", link: "https://education.lego.com/en-us/downloads/mindstorms-ev3/software", description: "Programma robot LEGO EV3. Sensori, motori e logica comportamentale."},
+                    {name: "Scratch for Arduino", link: "https://s4a.cat/", description: "Scratch modificato per Arduino. Programmazione visuale per microcontrollori."},
+                    {name: "MIT App Inventor", link: "https://appinventor.mit.edu/", description: "Crea app Android con blocchi. Controlla robot via Bluetooth."},
+                    {name: "VEX Robotics", link: "https://www.vexrobotics.com/vexcode", description: "VEXcode per robot VEX. Blocks e Text programming environments."},
+                    {name: "Sphero Edu", link: "https://edu.sphero.com/", description: "Programma robot Sphero. JavaScript, Scratch Blocks, disegna percorsi."},
+                    {name: "Robotics Simulator", link: "https://roboticsimulator.readthedocs.io/", description: "Simula robot in ambiente 3D. Test algoritmi prima implementazione fisica."},
+                    {name: "RobotC Virtual Worlds", link: "http://www.robotc.net/", description: "Mondi virtuali per programmazione robot. LEGO, VEX in simulazione."}
+                ]
+            },
+            "App Development": {
+                icon: "📱",
+                color: "#0891b2",
+                tools: [
+                    {name: "App Inventor MIT", link: "https://appinventor.mit.edu/", description: "Crea app Android senza codice. Interfaccia drag-drop con logica blocchi."},
+                    {name: "Thunkable", link: "https://thunkable.com/", description: "App native iOS/Android. Visual programming per mobile development."},
+                    {name: "Flutter Online", link: "https://flutter.dev/", description: "Framework Google multi-platform. Un codice per iOS, Android, web."},
+                    {name: "React Native Expo", link: "https://expo.dev/", description: "Sviluppo React Native semplificato. Test su device reali via app."},
+                    {name: "Kodular", link: "https://www.kodular.io/", description: "Piattaforma no-code Android. Monetizzazione, database, push notifications."},
+                    {name: "Adobe XD", link: "https://www.adobe.com/products/xd.html", description: "Design e prototipazione UX. Wireframe, mockup, animazioni interattive."},
+                    {name: "InVision", link: "https://www.invisionapp.com/", description: "Prototipazione collaborativa. Condividi design e raccogli feedback."},
+                    {name: "Firebase Console", link: "https://firebase.google.com/", description: "Backend-as-a-Service Google. Database, autenticazione, hosting, analytics."},
+                    {name: "Ionic Framework", link: "https://ionicframework.com/", description: "App ibride con web technologies. Angular, React, Vue per mobile."},
+                    {name: "PhoneGap Build", link: "https://build.phonegap.com/", description: "Compila app PhoneGap nel cloud. HTML/CSS/JS diventa app nativa."}
+                ]
+            },
+            "Strumenti Collaborativi": {
+                icon: "👥",
+                color: "#6366f1",
+                tools: [
+                    {name: "GitHub", link: "https://github.com/", description: "Version control e collaborazione codice. Git repository, issue tracking, wiki."},
+                    {name: "GitLab", link: "https://gitlab.com/", description: "DevOps platform completa. CI/CD, container registry, project management."},
+                    {name: "Slack", link: "https://slack.com/", description: "Comunicazione team. Canali, messaggi diretti, integrazioni app."},
+                    {name: "Discord", link: "https://discord.com/", description: "Chat vocale e testuale. Server per community, screen sharing."},
+                    {name: "Zoom", link: "https://zoom.us/", description: "Videochiamate e webinar. Condivisione schermo, registrazione, chat."},
+                    {name: "Trello", link: "https://trello.com/", description: "Project management kanban. Schede, liste, team collaboration."},
+                    {name: "Padlet", link: "https://padlet.com/", description: "Bacheche collaborative online. Post-it digitali, brainstorming, gallery."},
+                    {name: "Miro", link: "https://miro.com/", description: "Lavagna digitale infinita. Diagrammi, mind map, retrospective agili."},
+                    {name: "Mentimeter", link: "https://www.mentimeter.com/", description: "Presentazioni interattive. Sondaggi live, quiz, word cloud."},
+                    {name: "Google Jamboard", link: "https://jamboard.google.com/", description: "Lavagna collaborativa Google. Disegni, note, immagini condivise."}
+                ]
+            },
+            "Cittadinanza Digitale": {
+                icon: "🛡️",
+                color: "#f59e0b",
+                tools: [
+                    {name: "Common Sense Media", link: "https://www.commonsensemedia.org/", description: "Educazione media literacy. Valutazione contenuti, privacy, sicurezza online."},
+                    {name: "Be Internet Awesome", link: "https://beinternetawesome.withgoogle.com/", description: "Google per sicurezza online bambini. Interland game e risorse educative."},
+                    {name: "Digital Citizenship Institute", link: "https://www.digitalcitizenship.net/", description: "Risorse cittadinanza digitale. Netiquette, copyright, identità online."},
+                    {name: "Privacy Badger", link: "https://privacybadger.org/", description: "Estensione browser anti-tracking. Blocca tracker e pubblicità invasiva."},
+                    {name: "Have I Been Pwned", link: "https://haveibeenpwned.com/", description: "Verifica violazioni dati. Controlla se email/password sono state compromesse."},
+                    {name: "Fact Check Tools", link: "https://toolbox.google.com/factcheck/", description: "Strumenti verifica notizie Google. Combatti fake news e disinformazione."},
+                    {name: "Creative Commons", link: "https://creativecommons.org/", description: "Licenze aperte per contenuti. Usa e condividi legalmente opere creative."},
+                    {name: "Internet Archive", link: "https://archive.org/", description: "Biblioteca digitale universale. Wayback Machine, libri, software storici."},
+                    {name: "GDPR Info", link: "https://gdpr-info.eu/", description: "Regolamento protezione dati UE. Diritti privacy e conformità normativa."},
+                    {name: "Digital Wellbeing", link: "https://wellbeing.google/", description: "Benessere digitale Google. Controllo tempo schermo, app mindfulness."}
+                ]
+            },
+            "Supporto DSA/BES": {
+                icon: "🎯",
+                color: "#f59e0b",
+                tools: [
+                    {name: "LeggiXme", link: "https://sites.google.com/site/leggixme/", description: "Software compensativo gratuito. Sintesi vocale, mappe, calcolatrice parlante."},
+                    {name: "Natural Reader", link: "https://www.naturalreaders.com/", description: "Text-to-speech online. Legge testi con voci naturali, velocità regolabile."},
+                    {name: "CmapTools", link: "https://cmap.ihmc.us/", description: "Mappe concettuali collaborative. Organizza visivamente concetti informatici."},
+                    {name: "SimpleMind", link: "https://simplemind.eu/", description: "Mappe mentali intuitive. Struttura idee e progetti con nodi colorati."},
+                    {name: "OpenDyslexic Font", link: "https://opendyslexic.org/", description: "Font per dislessici. Caratteri con base pesante per ridurre confusione."},
+                    {name: "Immersive Reader", link: "https://www.onenote.com/learningtools", description: "Microsoft Learning Tools. Lettura immersiva, evidenziazione, traduzione."},
+                    {name: "Snap&Read", link: "https://www.donjohnston.com/snap-read/", description: "Legge testo da qualsiasi fonte. Screenshot, documenti, pagine web."},
+                    {name: "Co:Writer", link: "https://www.donjohnston.com/co-writer/", description: "Predizione parole intelligente. Aiuta scrittura con suggerimenti contestuali."},
+                    {name: "Ginger Software", link: "https://www.gingersoftware.com/", description: "Correzione grammaticale avanzata. Rephrase, traduzione, lettura."},
+                    {name: "Kurzweil 3000", link: "https://www.kurzweiledu.com/", description: "Piattaforma assistiva completa. Lettura, scrittura, studio per DSA."}
+                ]
+            },
+            "Supporto DVA": {
+                icon: "♿",
+                color: "#06b6d4",
+                tools: [
+                    {name: "NVDA Screen Reader", link: "https://www.nvaccess.org/", description: "Screen reader gratuito Windows. Sintesi vocale per non vedenti e ipovedenti."},
+                    {name: "JAWS Demo", link: "https://support.freedomscientific.com/Downloads/JAWS", description: "Screen reader professionale. Demo gratuita per accessibilità avanzata."},
+                    {name: "ZoomText", link: "https://www.freedomscientific.com/products/software/zoomtext/", description: "Ingrandimento schermo e sintesi vocale. Per utenti con disabilità visive."},
+                    {name: "On-Screen Keyboard", link: "https://support.microsoft.com/en-us/windows/use-the-on-screen-keyboard-osk-to-type-ecbb5e08-5b4e-d8c8-f794-81dbf896267a", description: "Tastiera virtuale Windows. Controllo tramite mouse o eye-tracking."},
+                    {name: "Switch Access Android", link: "https://support.google.com/accessibility/android/answer/6122836", description: "Controllo Android con interruttori. Per utenti con mobilità limitata."},
+                    {name: "Voice Control iOS", link: "https://support.apple.com/en-us/HT210417", description: "Controllo vocale iPhone/iPad. Navigazione e editing hands-free."},
+                    {name: "Eye Tracking Software", link: "https://www.tobiidynavox.com/", description: "Controllo computer con movimenti oculari. Interface adaptive technologies."},
+                    {name: "Head Mouse", link: "https://www.orin.com/access/headmouse/", description: "Controllo cursore con movimenti testa. Webcam tracking per accesso computer."},
+                    {name: "Symbol Communication", link: "https://www.boardmaker.com/", description: "Comunicazione aumentativa simboli PCS. Software per CAA Boardmaker."},
+                    {name: "NVDA Remote", link: "https://nvdaremote.com/", description: "Controllo remoto NVDA. Supporto a distanza per utenti screen reader."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 140;
+        let currentZoom = 1;
+        let isDarkMode = false;
+
+        // INIZIALIZZAZIONE APP DIRETTA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carica preferenza tema
+            const savedTheme = localStorage.getItem('mendel_informatics_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+            
+            // Inizializza l'app
+            initializeMap();
+            setupSearch();
+            setupKeyboardControls();
+            setupDraggableLegend();
+        });
+
+        // FUNZIONI PRINCIPALI DELL'APP
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_informatics_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function goToPhysicsHub() {
+            // Placeholder per navigazione all'hub fisica
+            alert('🔗 Navigazione all\'Hub Fisica\n\nQuesta funzione sarà disponibile quando avrai entrambi gli hub deployati. Puoi aprire il file hub-fisica-mendel.html separatamente.');
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(informaticsData);
+            
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += informaticsData[category].tools.length;
+            });
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = informaticsData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${informaticsData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${informaticsData[category].tools.length} strumenti</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${informaticsData[categoryName].tools.length} strumenti disponibili`;
+            
+            content.innerHTML = '';
+            
+            informaticsData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        ${informaticsData[categoryName].icon} ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi al Strumento
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(informaticsData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        isVisible = informaticsData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount} di ${totalTools}`;
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+            }
+        }
+
+        function toggleFilters() {
+            const categories = Object.keys(informaticsData);
+            const stats = categories.map(cat => `${cat}: ${informaticsData[cat].tools.length} strumenti`).join('\n');
+            alert(`📊 Statistiche Hub Informatica:\n\n${stats}\n\nTotale: ${totalTools} strumenti`);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey) {
+                    switch(e.key) {
+                        case '=':
+                        case '+':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                if (e.ctrlKey && e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+            
+            document.addEventListener('dblclick', () => {
+                resetZoom();
+            });
+        }
+
+        function setupDraggableLegend() {
+            const legend = document.getElementById('legend');
+            const legendHeader = document.getElementById('legendHeader');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            function dragStart(e) {
+                e.preventDefault();
+                
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                }
+
+                if (e.target.closest('.legend-header') || e.target.closest('.drag-handle')) {
+                    isDragging = true;
+                    legend.classList.add('dragging');
+                    document.body.style.userSelect = 'none';
+                }
+            }
+
+            function dragEnd(e) {
+                if (isDragging) {
+                    initialX = currentX;
+                    initialY = currentY;
+                    isDragging = false;
+                    legend.classList.remove('dragging');
+                    document.body.style.userSelect = '';
+                }
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    const rect = legend.getBoundingClientRect();
+                    const maxX = window.innerWidth - rect.width;
+                    const maxY = window.innerHeight - rect.height;
+                    
+                    currentX = Math.max(0, Math.min(currentX, maxX));
+                    currentY = Math.max(0, Math.min(currentY, maxY));
+
+                    legend.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                    legend.style.left = '2rem';
+                    legend.style.bottom = '2rem';
+                }
+            }
+
+            legendHeader.addEventListener("mousedown", dragStart);
+            document.addEventListener("mouseup", dragEnd);
+            document.addEventListener("mousemove", drag);
+
+            legendHeader.addEventListener("touchstart", dragStart, { passive: false });
+            document.addEventListener("touchend", dragEnd);
+            document.addEventListener("touchmove", drag, { passive: false });
+
+            legend.addEventListener("dblclick", () => {
+                xOffset = 0;
+                yOffset = 0;
+                currentX = 0;
+                currentY = 0;
+                legend.style.transform = 'translate(0px, 0px)';
+                
+                legend.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    legend.style.animation = '';
+                }, 500);
+            });
+
+            legendHeader.addEventListener("mouseenter", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--info-cyan)';
+                }
+            });
+
+            legendHeader.addEventListener("mouseleave", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--border-light)';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

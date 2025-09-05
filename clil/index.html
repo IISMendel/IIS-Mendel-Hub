@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.control-group,
+.filter-btn,
+.legend,
+#legend,
+[data-component="controls"],
+.controls-note,
+.controls,
+.controls-container{
+  display:none !important;
+}
+</style>
+
+<style>
+/* Hide leftover controls bar */
+.controls-container,
+.controls-bar,
+.controls,
+.controlsPanel,
+#controls,
+#controls-container {
+  display: none !important;
+}
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 CLIL IIS MENDEL - Villa Cortese</title>
+    <meta name="description" content="CLIL Official Platform for IIS Mendel Villa Cortese - Content and Language Integrated Learning">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ0xJTCBJSVMgTUVOREVMIiwic2hvcnRfbmFtZSI6IkNMSUxNZW5kZWwiLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJ0aGVtZV9jb2xvciI6IiMxNTk3MzMiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZmZmZmZiIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWwsXCIlM0Nzdmcgd2lkdGg9JzE5MicgaGVpZ2h0PScxOTInIHZpZXdCb3g9JzAgMCAxOTIgMTkyJyBmaWxsPSdub25lJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnJTNFJTNDY2lyY2xlIGN4PSc5NicgY3k9Jzk2JyByPSc5NicgZmlsbD0nJTIzMTU5NzMzJy8lM0UlM0N0ZXh0IHg9Jzk2JyB5PScxMDgnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzUwJyBmaWxsPSd3aGl0ZScgdGV4dC1hbmNob3I9J21pZGRsZSclM0VDTCUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #15973e;
+            --secondary-color: #0891b2;
+            --accent-color: #dc2626;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --clil-blue: #1e40af;
+            --clil-green: #15973e;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-clil: linear-gradient(135deg, #1e40af 0%, #15973e 50%, #0891b2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-clil);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-clil);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .school-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-clil);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .school-info {
+            margin-bottom: 2rem;
+        }
+
+        .school-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .school-location {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-light);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--clil-blue);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .login-button {
+            background: var(--gradient-clil);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-weight: 500;
+            margin-top: 1rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Main App */
+        .main-app {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .main-app.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-clil);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-clil);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-clil);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-medium);
+            z-index: 1001;
+        }
+
+        body.dark .user-info {
+            background: rgba(30, 41, 59, 0.9);
+            color: #e2e8f0;
+        }
+
+        .logout-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        /* Intro Section */
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .clil-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .clil-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--clil-blue);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--clil-green);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Controls */
+        .controls-container {
+            position: fixed;
+            top: 8rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--clil-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        /* Search */
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 300px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .filter-btn {
+            background: var(--clil-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--clil-green);
+            transform: translateY(-2px);
+        }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--clil-blue);
+        }
+
+        .category-node.active {
+            border-color: var(--clil-blue);
+            background: rgba(30, 64, 175, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-subtitle {
+            text-align: center;
+            color: var(--clil-blue);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Tools Panel */
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(600px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-clil);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .topic-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .topic-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .topic-item:hover, .topic-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--clil-blue);
+        }
+
+        .topic-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .topic-name {
+            color: #e2e8f0;
+        }
+
+        .topic-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .topic-level {
+            display: inline-block;
+            background: var(--gradient-clil);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .topic-resources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .resource-link:hover, .resource-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Stats */
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-clil);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 260px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+
+            .control-group {
+                flex-direction: row;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .user-info {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 1rem auto 0;
+                width: fit-content;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .login-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .school-logo {
+                font-size: 3rem;
+            }
+
+            .school-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 220px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+
+            .login-container {
+                padding: 1.5rem;
+            }
+
+            .school-logo {
+                font-size: 2.5rem;
+            }
+
+            .school-name {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading states */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus states */
+        .control-btn:focus,
+        .category-node:focus,
+        .resource-link:focus,
+        .search-input:focus,
+        .login-input:focus,
+        .login-button:focus {
+            outline: 2px solid var(--clil-blue);
+            outline-offset: 2px;
+        }
+
+        /* Touch improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" style="display:none;" id="loginScreen">
+        <div class="login-container">
+            <div class="school-logo">🌍</div>
+            <div class="school-info">
+                <div class="school-name">IIS MENDEL</div>
+                <div class="school-location">Villa Cortese (MI)</div>
+            </div>
+            <h2 style="color: var(--text-dark); margin-bottom: 1.5rem; font-weight: 600;">CLIL IIS MENDEL Platform</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.875rem;">
+                Access Content and Language Integrated Learning resources<br>
+                <strong>Enter your institutional credentials</strong>
+            </p>
+            <form class="login-form" id="loginForm">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        class="login-input" 
+                        placeholder="name.surname@agrariomendel.it"
+                        id="emailInput"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                <button type="submit" class="login-button" id="loginButton">
+                    🌍 Access CLIL IIS MENDEL
+                </button>
+            </form>
+            <div id="errorMessage"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="main-app visible" id="mainApp">
+        <div class="header">
+            <div class="user-info" id="userInfo">
+                <span id="userEmail"></span>
+                
+            </div>
+            <div class="header-content">
+                <div class="school-badge">
+                    🏫 IIS MENDEL • VILLA CORTESE (MI)
+                </div>
+                <h1>🌍 CLIL IIS MENDEL Platform</h1>
+                <p>Content and Language Integrated Learning Hub</p>
+            </div>
+        </div>
+
+        <div class="intro-section">
+            <div style="text-align: center;">
+                <div class="clil-badge">
+                    🇪🇺 PNRR SCUOLA FUTURA - TEAM Best Practices
+                </div>
+            </div>
+            
+            <div class="intro-card">
+                <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">CLIL Learning Hub</h2>
+                
+                <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                    The comprehensive platform for <strong>Content and Language Integrated Learning</strong> at 
+                    <strong>IIS Mendel Villa Cortese</strong>, developed within the PNRR "Scuola Futura" project - TEAM Best Practices. 
+                    A curated collection of <strong>300+ CLIL topics, resources and tools</strong> for teaching academic subjects in English.
+                </p>
+
+                <div class="intro-grid">
+                    <div class="intro-box">
+                        <h3 style="color: var(--clil-blue); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            🎯 Our CLIL Mission
+                        </h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Supporting IIS Mendel students and teachers in learning academic content through English 
+                            using innovative CLIL methodologies, cutting-edge technology, and research-validated 
+                            pedagogical approaches for enhanced language and content acquisition.
+                        </p>
+                    </div>
+
+                    <div class="intro-box">
+                        <h3 style="color: var(--clil-green); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            📚 Complete CLIL Resources
+                        </h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            From agricultural sciences to biotechnology, from chemistry to environmental management, 
+                            and from physics to economics. Includes resources for plant production, animal science, 
+                            topography, rural engineering, and all curriculum subjects with focus on bilingual education excellence.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(30, 64, 175, 0.1); border-radius: 16px; border: 1px solid rgba(30, 64, 175, 0.2);">
+                    <p style="color: var(--clil-blue); font-weight: 600; margin: 0;">
+                        💡 <strong>How to use the CLIL platform:</strong> Explore subjects by category, 
+                        search for specific topics, discover graded content for different language levels, 
+                        and access bilingual resources tailored for CLIL methodology.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="filter-btn" onclick="toggleFilters()">Language Level</button>
+        </div>
+
+        
+            <div class="control-group">
+                <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Zoom in">+</button>
+                <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Zoom out">−</button>
+                <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Reset zoom">⌂</button>
+            </div>
+        </div>
+
+        <div class="map-container" id="mapContainer">
+            <div class="category-grid" id="categoryGrid">
+                <!-- Categories will be generated dynamically -->
+            </div>
+        </div>
+
+        <div class="tools-panel" id="toolsPanel">
+            <div class="tools-header">
+                <button class="close-btn" onclick="closePanel()" aria-label="Close panel">×</button>
+                <h3 id="panelTitle">CLIL Topics</h3>
+                <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Select a subject</p>
+            </div>
+            <div class="tools-content" id="toolsContent">
+                <!-- Resources will be loaded dynamically -->
+            </div>
+        </div>
+
+        <div class="legend">
+            <strong style="color: var(--clil-blue);">📋 Controls:</strong><br>
+            • Click nodes to explore CLIL topics<br>
+            • Use search to filter content<br>
+            • Zoom: Ctrl + (+/-) or mouse wheel<br>
+            • Dark theme: Ctrl + Alt + T<br>
+            • Reset zoom: Ctrl + 0
+        </div>
+
+        <div class="stats-container">
+            <div class="stats-number" id="totalTopics">0</div>
+            <div class="stats-label">CLIL Topics<br>Available</div>
+        </div>
+    </div>
+
+    <script>
+        // COMPREHENSIVE CLIL DATA FOR IIS MENDEL
+        const clilData = {
+
+            "Plant Production & Agriculture": {
+                icon: "🌾",
+                color: "#15973e",
+                topics: [
+                    {
+                        name: "Sustainable Farming Practices",
+                        level: "B2",
+                        description: "Learn about organic farming, crop rotation, and sustainable agriculture techniques in English. Explore terminology and concepts related to environmental protection in agriculture.",
+                        resources: [
+                            {name: "Vocabulary Builder", link: "#"},
+                            {name: "Case Studies", link: "#"},
+                            {name: "Video Lessons", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Plant Genetics & Breeding",
+                        level: "C1",
+                        description: "Advanced study of plant genetics, selective breeding, and modern biotechnology applications in crop improvement, using scientific English terminology.",
+                        resources: [
+                            {name: "Scientific Articles", link: "#"},
+                            {name: "Laboratory Experiments", link: "#"},
+                            {name: "Research Projects", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Irrigation Systems & Water Management",
+                        level: "B1",
+                        description: "Study different irrigation methods, water conservation techniques, and smart farming technologies with technical English vocabulary.",
+                        resources: [
+                            {name: "Technical Drawings", link: "#"},
+                            {name: "System Comparisons", link: "#"},
+                            {name: "Problem Solving", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Pest Management Strategies",
+                        level: "B2",
+                        description: "Integrated Pest Management (IPM) approaches, biological control methods, and sustainable pesticide use in agricultural English.",
+                        resources: [
+                            {name: "Field Guides", link: "#"},
+                            {name: "Decision Trees", link: "#"},
+                            {name: "Case Studies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Climate Change & Agriculture",
+                        level: "B2",
+                        description: "Impact of climate change on crop production, adaptation strategies, and resilient farming systems discussed in English.",
+                        resources: [
+                            {name: "Climate Data Analysis", link: "#"},
+                            {name: "Adaptation Plans", link: "#"},
+                            {name: "Global Reports", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Animal Science & Livestock": {
+                icon: "🐄",
+                color: "#dc2626",
+                topics: [
+                    {
+                        name: "Animal Welfare & Ethics",
+                        level: "B2",
+                        description: "Study animal welfare standards, ethical considerations in livestock farming, and welfare assessment methods using English terminology.",
+                        resources: [
+                            {name: "Welfare Protocols", link: "#"},
+                            {name: "Ethical Debates", link: "#"},
+                            {name: "Assessment Tools", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Livestock Nutrition & Feed",
+                        level: "B1",
+                        description: "Animal nutritional requirements, feed composition, and feeding strategies for different livestock species in agricultural English.",
+                        resources: [
+                            {name: "Nutrition Charts", link: "#"},
+                            {name: "Feed Calculations", link: "#"},
+                            {name: "Diet Planning", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Breeding & Genetics",
+                        level: "C1",
+                        description: "Advanced concepts in animal breeding, genetic selection, artificial insemination, and modern reproductive technologies.",
+                        resources: [
+                            {name: "Breeding Programs", link: "#"},
+                            {name: "Genetic Analysis", link: "#"},
+                            {name: "Technology Reviews", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Disease Prevention & Health",
+                        level: "B2",
+                        description: "Veterinary concepts, disease prevention protocols, vaccination schedules, and health monitoring systems in English.",
+                        resources: [
+                            {name: "Health Protocols", link: "#"},
+                            {name: "Disease Atlas", link: "#"},
+                            {name: "Prevention Plans", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Dairy & Meat Production",
+                        level: "B1",
+                        description: "Commercial dairy farming, milk quality control, meat processing, and food safety standards using industry English.",
+                        resources: [
+                            {name: "Production Systems", link: "#"},
+                            {name: "Quality Standards", link: "#"},
+                            {name: "Safety Protocols", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Agricultural Biotechnology": {
+                icon: "🧬",
+                color: "#7c3aed",
+                topics: [
+                    {
+                        name: "GMO Technology & Applications",
+                        level: "C1",
+                        description: "Genetic modification techniques, gene editing (CRISPR), and biotechnology applications in agriculture using scientific English.",
+                        resources: [
+                            {name: "Lab Protocols", link: "#"},
+                            {name: "Scientific Papers", link: "#"},
+                            {name: "Ethics Debates", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Molecular Diagnostics",
+                        level: "B2",
+                        description: "DNA analysis, PCR techniques, genetic markers, and molecular identification methods in agricultural biotechnology.",
+                        resources: [
+                            {name: "Lab Manuals", link: "#"},
+                            {name: "Diagnostic Tools", link: "#"},
+                            {name: "Result Analysis", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Bioinformatics & Data Analysis",
+                        level: "C1",
+                        description: "Computational biology, genome analysis, database management, and bioinformatics tools in English.",
+                        resources: [
+                            {name: "Software Tutorials", link: "#"},
+                            {name: "Database Queries", link: "#"},
+                            {name: "Data Interpretation", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Tissue Culture & Micropropagation",
+                        level: "B2",
+                        description: "Plant tissue culture techniques, sterilization methods, growth media preparation, and aseptic techniques.",
+                        resources: [
+                            {name: "Culture Protocols", link: "#"},
+                            {name: "Media Recipes", link: "#"},
+                            {name: "Troubleshooting Guide", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Bioethics & Regulations",
+                        level: "B2",
+                        description: "Ethical considerations in biotechnology, regulatory frameworks, and international guidelines for agricultural biotech.",
+                        resources: [
+                            {name: "Regulatory Documents", link: "#"},
+                            {name: "Ethical Guidelines", link: "#"},
+                            {name: "Case Studies", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Land Surveying & Cartography": {
+                icon: "📐",
+                color: "#ea580c",
+                topics: [
+                    {
+                        name: "GPS & Satellite Technology",
+                        level: "B1",
+                        description: "Global positioning systems, satellite imagery, GIS applications, and modern surveying equipment in technical English.",
+                        resources: [
+                            {name: "Equipment Manuals", link: "#"},
+                            {name: "Technical Specs", link: "#"},
+                            {name: "Field Procedures", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Digital Mapping & CAD",
+                        level: "B2",
+                        description: "Computer-aided design, digital cartography, map projection systems, and spatial data analysis in English.",
+                        resources: [
+                            {name: "Software Tutorials", link: "#"},
+                            {name: "Map Standards", link: "#"},
+                            {name: "Project Examples", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Land Use Planning",
+                        level: "B2",
+                        description: "Urban planning principles, zoning regulations, environmental impact assessment, and sustainable development.",
+                        resources: [
+                            {name: "Planning Methods", link: "#"},
+                            {name: "Zoning Codes", link: "#"},
+                            {name: "Impact Studies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Property Law & Boundaries",
+                        level: "C1",
+                        description: "Property rights, legal boundaries, cadastral systems, and land registration procedures in legal English.",
+                        resources: [
+                            {name: "Legal Documents", link: "#"},
+                            {name: "Case Law", link: "#"},
+                            {name: "Procedures Manual", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Remote Sensing Applications",
+                        level: "B2",
+                        description: "Satellite imagery analysis, aerial photography, spectral analysis, and environmental monitoring techniques.",
+                        resources: [
+                            {name: "Image Analysis", link: "#"},
+                            {name: "Spectral Data", link: "#"},
+                            {name: "Monitoring Reports", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Environmental Management": {
+                icon: "🌍",
+                color: "#059669",
+                topics: [
+                    {
+                        name: "Environmental Impact Assessment",
+                        level: "B2",
+                        description: "EIA procedures, environmental monitoring, impact mitigation measures, and environmental reporting in English.",
+                        resources: [
+                            {name: "Assessment Methods", link: "#"},
+                            {name: "Monitoring Protocols", link: "#"},
+                            {name: "Report Templates", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Waste Management Systems",
+                        level: "B1",
+                        description: "Waste classification, recycling processes, composting techniques, and waste-to-energy technologies.",
+                        resources: [
+                            {name: "System Design", link: "#"},
+                            {name: "Process Flow", link: "#"},
+                            {name: "Best Practices", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Water Quality & Treatment",
+                        level: "B2",
+                        description: "Water quality parameters, treatment technologies, pollution control, and water resource management.",
+                        resources: [
+                            {name: "Quality Standards", link: "#"},
+                            {name: "Treatment Methods", link: "#"},
+                            {name: "Testing Procedures", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Renewable Energy Systems",
+                        level: "B2",
+                        description: "Solar, wind, biomass energy systems, energy efficiency, and sustainable energy planning in technical English.",
+                        resources: [
+                            {name: "Technology Reviews", link: "#"},
+                            {name: "Efficiency Calculations", link: "#"},
+                            {name: "Planning Tools", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Carbon Footprint & Climate",
+                        level: "B2",
+                        description: "Greenhouse gas emissions, carbon accounting, climate mitigation strategies, and environmental policy.",
+                        resources: [
+                            {name: "Calculation Methods", link: "#"},
+                            {name: "Mitigation Plans", link: "#"},
+                            {name: "Policy Analysis", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Chemistry & Biochemistry": {
+                icon: "⚗️",
+                color: "#be123c",
+                topics: [
+                    {
+                        name: "Organic Chemistry in Agriculture",
+                        level: "B2",
+                        description: "Pesticide chemistry, plant hormones, soil organic matter, and biochemical processes in agricultural systems.",
+                        resources: [
+                            {name: "Reaction Mechanisms", link: "#"},
+                            {name: "Compound Database", link: "#"},
+                            {name: "Lab Experiments", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Soil Chemistry & Fertility",
+                        level: "B1",
+                        description: "Soil pH, nutrient cycles, fertilizer chemistry, and soil-plant interactions using chemical terminology in English.",
+                        resources: [
+                            {name: "Chemical Analysis", link: "#"},
+                            {name: "Fertility Tests", link: "#"},
+                            {name: "Nutrient Management", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Food Chemistry & Analysis",
+                        level: "B2",
+                        description: "Food composition, nutritional analysis, food additives, and quality control methods in food science English.",
+                        resources: [
+                            {name: "Analysis Methods", link: "#"},
+                            {name: "Quality Protocols", link: "#"},
+                            {name: "Safety Standards", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Environmental Chemistry",
+                        level: "C1",
+                        description: "Pollution chemistry, environmental fate of chemicals, remediation techniques, and analytical methods.",
+                        resources: [
+                            {name: "Analytical Techniques", link: "#"},
+                            {name: "Remediation Case Studies", link: "#"},
+                            {name: "Environmental Data", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Laboratory Safety & Procedures",
+                        level: "B1",
+                        description: "Chemical safety protocols, laboratory equipment, hazard identification, and emergency procedures in English.",
+                        resources: [
+                            {name: "Safety Protocols", link: "#"},
+                            {name: "Equipment Manuals", link: "#"},
+                            {name: "Emergency Procedures", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Physics & Engineering": {
+                icon: "⚡",
+                color: "#f59e0b",
+                topics: [
+                    {
+                        name: "Agricultural Machinery Physics",
+                        level: "B1",
+                        description: "Mechanical principles, engine technology, hydraulic systems, and precision agriculture equipment in technical English.",
+                        resources: [
+                            {name: "Mechanics Principles", link: "#"},
+                            {name: "Equipment Specs", link: "#"},
+                            {name: "Maintenance Guides", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Solar Energy Applications",
+                        level: "B2",
+                        description: "Photovoltaic systems, solar thermal applications, energy storage, and renewable energy calculations.",
+                        resources: [
+                            {name: "System Design", link: "#"},
+                            {name: "Efficiency Calculations", link: "#"},
+                            {name: "Installation Guides", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Fluid Mechanics & Irrigation",
+                        level: "B2",
+                        description: "Water flow principles, pressure systems, pump technology, and irrigation system design in engineering English.",
+                        resources: [
+                            {name: "Flow Calculations", link: "#"},
+                            {name: "System Design", link: "#"},
+                            {name: "Troubleshooting", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Thermodynamics in Agriculture",
+                        level: "C1",
+                        description: "Heat transfer, greenhouse climate control, food preservation, and energy conservation principles.",
+                        resources: [
+                            {name: "Heat Transfer Models", link: "#"},
+                            {name: "Climate Control", link: "#"},
+                            {name: "Energy Audits", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Optics & Spectroscopy",
+                        level: "B2",
+                        description: "Light principles, remote sensing, spectral analysis, and optical instruments in agricultural applications.",
+                        resources: [
+                            {name: "Spectral Analysis", link: "#"},
+                            {name: "Instrument Guides", link: "#"},
+                            {name: "Data Interpretation", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Computer Science & IT": {
+                icon: "💻",
+                color: "#3b82f6",
+                topics: [
+                    {
+                        name: "Precision Agriculture Technology",
+                        level: "B2",
+                        description: "GPS systems, drones, sensors, data collection, and farm management software in technical English.",
+                        resources: [
+                            {name: "Technology Overview", link: "#"},
+                            {name: "Software Tutorials", link: "#"},
+                            {name: "Data Analysis", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Agricultural Databases & GIS",
+                        level: "B2",
+                        description: "Geographic Information Systems, spatial data management, database design, and agricultural informatics.",
+                        resources: [
+                            {name: "GIS Tutorials", link: "#"},
+                            {name: "Database Design", link: "#"},
+                            {name: "Spatial Analysis", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "IoT in Smart Farming",
+                        level: "B2",
+                        description: "Internet of Things applications, sensor networks, automated systems, and smart agriculture solutions.",
+                        resources: [
+                            {name: "IoT Systems", link: "#"},
+                            {name: "Sensor Technology", link: "#"},
+                            {name: "Automation Guides", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Data Analysis & Machine Learning",
+                        level: "C1",
+                        description: "Statistical analysis, machine learning algorithms, agricultural data mining, and predictive modeling.",
+                        resources: [
+                            {name: "Analysis Tools", link: "#"},
+                            {name: "ML Algorithms", link: "#"},
+                            {name: "Model Building", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Agricultural Apps & Software",
+                        level: "B1",
+                        description: "Farm management applications, mobile technology, software evaluation, and digital tools for agriculture.",
+                        resources: [
+                            {name: "App Reviews", link: "#"},
+                            {name: "Feature Comparison", link: "#"},
+                            {name: "User Guides", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Earth Sciences & Geology": {
+                icon: "🌋",
+                color: "#dc2626",
+                topics: [
+                    {
+                        name: "Soil Science & Pedology",
+                        level: "B2",
+                        description: "Soil formation, classification systems, soil profiles, and soil-landscape relationships using geological English.",
+                        resources: [
+                            {name: "Classification Keys", link: "#"},
+                            {name: "Profile Analysis", link: "#"},
+                            {name: "Field Guides", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Geological Hazards & Risk",
+                        level: "B2",
+                        description: "Landslides, earthquakes, volcanic activity, and geological risk assessment for agricultural areas.",
+                        resources: [
+                            {name: "Hazard Maps", link: "#"},
+                            {name: "Risk Assessment", link: "#"},
+                            {name: "Mitigation Plans", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Mineral Resources & Mining",
+                        level: "B1",
+                        description: "Rock and mineral identification, mining techniques, environmental impacts, and resource management.",
+                        resources: [
+                            {name: "Mineral Identification", link: "#"},
+                            {name: "Mining Methods", link: "#"},
+                            {name: "Environmental Impact", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Hydrology & Water Cycles",
+                        level: "B2",
+                        description: "Water cycle processes, groundwater systems, surface water, and hydrological modeling.",
+                        resources: [
+                            {name: "Cycle Diagrams", link: "#"},
+                            {name: "Flow Models", link: "#"},
+                            {name: "Quality Monitoring", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Climate & Weather Systems",
+                        level: "B1",
+                        description: "Meteorology basics, climate patterns, weather forecasting, and agricultural meteorology in English.",
+                        resources: [
+                            {name: "Weather Data", link: "#"},
+                            {name: "Climate Analysis", link: "#"},
+                            {name: "Forecast Methods", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Ecology & Environmental Science": {
+                icon: "🦋",
+                color: "#15973e",
+                topics: [
+                    {
+                        name: "Biodiversity & Conservation",
+                        level: "B2",
+                        description: "Species diversity, ecosystem services, conservation strategies, and biodiversity assessment methods.",
+                        resources: [
+                            {name: "Assessment Methods", link: "#"},
+                            {name: "Conservation Plans", link: "#"},
+                            {name: "Species Catalogs", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Ecosystem Dynamics",
+                        level: "B2",
+                        description: "Food webs, energy flow, nutrient cycling, and ecological interactions in natural and agricultural systems.",
+                        resources: [
+                            {name: "System Models", link: "#"},
+                            {name: "Energy Flow Diagrams", link: "#"},
+                            {name: "Interaction Studies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Sustainable Agriculture & Ecology",
+                        level: "B2",
+                        description: "Agroecology principles, sustainable farming systems, organic agriculture, and ecological farming methods.",
+                        resources: [
+                            {name: "Farming Systems", link: "#"},
+                            {name: "Sustainability Metrics", link: "#"},
+                            {name: "Case Studies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Wildlife Management",
+                        level: "B1",
+                        description: "Wildlife populations, habitat management, conservation techniques, and human-wildlife interactions.",
+                        resources: [
+                            {name: "Management Plans", link: "#"},
+                            {name: "Monitoring Methods", link: "#"},
+                            {name: "Habitat Design", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Environmental Monitoring",
+                        level: "B2",
+                        description: "Monitoring techniques, data collection, environmental indicators, and assessment protocols.",
+                        resources: [
+                            {name: "Monitoring Protocols", link: "#"},
+                            {name: "Data Collection", link: "#"},
+                            {name: "Analysis Methods", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Economics & Business": {
+                icon: "⚖️",
+                color: "#374151",
+                topics: [
+                    {
+                        name: "Agricultural Economics",
+                        level: "B2",
+                        description: "Farm economics, cost-benefit analysis, agricultural markets, and economic principles in farming business.",
+                        resources: [
+                            {name: "Economic Models", link: "#"},
+                            {name: "Market Analysis", link: "#"},
+                            {name: "Financial Planning", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "International Trade & Agriculture",
+                        level: "C1",
+                        description: "Global food markets, trade policies, export-import regulations, and international agricultural economics.",
+                        resources: [
+                            {name: "Trade Data", link: "#"},
+                            {name: "Policy Analysis", link: "#"},
+                            {name: "Market Reports", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Farm Business Management",
+                        level: "B1",
+                        description: "Business planning, financial management, marketing strategies, and entrepreneurship in agriculture.",
+                        resources: [
+                            {name: "Business Plans", link: "#"},
+                            {name: "Financial Tools", link: "#"},
+                            {name: "Marketing Strategies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Agricultural Policy & Law",
+                        level: "C1",
+                        description: "Agricultural legislation, EU Common Agricultural Policy, environmental regulations, and legal frameworks.",
+                        resources: [
+                            {name: "Policy Documents", link: "#"},
+                            {name: "Legal Framework", link: "#"},
+                            {name: "Compliance Guides", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Supply Chain Management",
+                        level: "B2",
+                        description: "Food supply chains, logistics, quality assurance, traceability systems, and distribution networks.",
+                        resources: [
+                            {name: "Chain Analysis", link: "#"},
+                            {name: "Quality Systems", link: "#"},
+                            {name: "Logistics Planning", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Geography & Regional Studies": {
+                icon: "🗺️",
+                color: "#0891b2",
+                topics: [
+                    {
+                        name: "Agricultural Geography",
+                        level: "B1",
+                        description: "Global agricultural systems, climate zones, farming regions, and geographical factors affecting agriculture.",
+                        resources: [
+                            {name: "Regional Maps", link: "#"},
+                            {name: "Climate Data", link: "#"},
+                            {name: "Agricultural Atlas", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Urban vs Rural Development",
+                        level: "B2",
+                        description: "Rural development strategies, urbanization impacts, land use changes, and sustainable development.",
+                        resources: [
+                            {name: "Development Plans", link: "#"},
+                            {name: "Impact Studies", link: "#"},
+                            {name: "Sustainability Reports", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Global Food Security",
+                        level: "B2",
+                        description: "World food systems, food security challenges, population growth, and global nutrition issues.",
+                        resources: [
+                            {name: "Security Reports", link: "#"},
+                            {name: "Global Statistics", link: "#"},
+                            {name: "Solution Strategies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Climate Change Geography",
+                        level: "B2",
+                        description: "Regional climate impacts, adaptation strategies, vulnerable areas, and geographical climate patterns.",
+                        resources: [
+                            {name: "Climate Maps", link: "#"},
+                            {name: "Impact Assessment", link: "#"},
+                            {name: "Adaptation Plans", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Natural Resource Management",
+                        level: "B2",
+                        description: "Resource distribution, sustainable use, conservation areas, and geographical resource planning.",
+                        resources: [
+                            {name: "Resource Maps", link: "#"},
+                            {name: "Management Plans", link: "#"},
+                            {name: "Conservation Strategies", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Sports Science & Health": {
+                icon: "🏃‍♂️",
+                color: "#dc2626",
+                topics: [
+                    {
+                        name: "Exercise Physiology",
+                        level: "B2",
+                        description: "Body systems, exercise responses, fitness testing, and physiological adaptations using medical English.",
+                        resources: [
+                            {name: "Physiology Charts", link: "#"},
+                            {name: "Testing Protocols", link: "#"},
+                            {name: "Training Methods", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Sports Nutrition",
+                        level: "B1",
+                        description: "Nutritional requirements, sports supplements, hydration, and performance nutrition in health English.",
+                        resources: [
+                            {name: "Nutrition Plans", link: "#"},
+                            {name: "Supplement Guide", link: "#"},
+                            {name: "Hydration Strategies", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Biomechanics & Movement",
+                        level: "B2",
+                        description: "Movement analysis, technique optimization, injury prevention, and biomechanical principles.",
+                        resources: [
+                            {name: "Movement Analysis", link: "#"},
+                            {name: "Technique Videos", link: "#"},
+                            {name: "Prevention Programs", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Sports Psychology",
+                        level: "B2",
+                        description: "Mental training, motivation theories, performance psychology, and psychological skills in sports.",
+                        resources: [
+                            {name: "Mental Training", link: "#"},
+                            {name: "Motivation Strategies", link: "#"},
+                            {name: "Performance Psychology", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Occupational Health & Safety",
+                        level: "B1",
+                        description: "Workplace safety in agriculture, ergonomics, health risks, and safety protocols in agricultural settings.",
+                        resources: [
+                            {name: "Safety Protocols", link: "#"},
+                            {name: "Risk Assessment", link: "#"},
+                            {name: "Ergonomic Guidelines", link: "#"}
+                        ]
+                    }
+                ]
+            },
+            "Mathematical Applications": {
+                icon: "🧮",
+                color: "#dc2626",
+                topics: [
+                    {
+                        name: "Agricultural Statistics",
+                        level: "B2",
+                        description: "Statistical analysis in agriculture, experimental design, data interpretation, and statistical software.",
+                        resources: [
+                            {name: "Statistical Methods", link: "#"},
+                            {name: "Experimental Design", link: "#"},
+                            {name: "Software Tutorials", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Financial Mathematics",
+                        level: "B1",
+                        description: "Farm financial calculations, investment analysis, loan calculations, and financial planning in English.",
+                        resources: [
+                            {name: "Financial Formulas", link: "#"},
+                            {name: "Investment Analysis", link: "#"},
+                            {name: "Planning Tools", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Geometric Applications",
+                        level: "B1",
+                        description: "Land measurement, area calculations, geometric principles in surveying, and spatial mathematics.",
+                        resources: [
+                            {name: "Measurement Methods", link: "#"},
+                            {name: "Calculation Tools", link: "#"},
+                            {name: "Geometric Principles", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Modeling & Optimization",
+                        level: "C1",
+                        description: "Mathematical modeling, optimization problems, linear programming, and decision analysis.",
+                        resources: [
+                            {name: "Modeling Techniques", link: "#"},
+                            {name: "Optimization Methods", link: "#"},
+                            {name: "Decision Tools", link: "#"}
+                        ]
+                    },
+                    {
+                        name: "Calculus in Agriculture",
+                        level: "C1",
+                        description: "Applications of calculus in agricultural problems, growth models, optimization, and rate calculations.",
+                        resources: [
+                            {name: "Growth Models", link: "#"},
+                            {name: "Rate Calculations", link: "#"},
+                            {name: "Application Examples", link: "#"}
+                        ]
+                    }
+                ]
+            },
+
+            "History (CLIL)": {
+                icon: "🏛️",
+                color: "#6b7280",
+                topics: [
+                    {
+                        name: "Ancient Civilizations & Agriculture",
+                        level: "B1",
+                        description: "How agriculture shaped early societies: irrigation, surplus and the rise of cities.",
+                        resources: [
+                            { name: "World History Encyclopedia – Agriculture in the Ancient World", link: "https://www.worldhistory.org/agriculture/" },
+                            { name: "British Museum – Ancient Egypt resources", link: "https://www.britishmuseum.org/learn/teachers/schools/ages-7-11/ancient-egypt" }
+                        ]
+                    },
+                    {
+                        name: "Middle Ages: Feudalism & Rural Life",
+                        level: "B1",
+                        description: "Feudal system, manorial life, three‑field rotation, tools and daily routines.",
+                        resources: [
+                            { name: "BBC Bitesize – The Middle Ages (overview)", link: "https://www.bbc.co.uk/bitesize/topics/zsks4wx" },
+                            { name: "Teaching History with 100 Objects – Medieval Life", link: "https://teachinghistory100.org/" }
+                        ]
+                    },
+                    {
+                        name: "Age of Exploration & Columbian Exchange",
+                        level: "B2",
+                        description: "Global trade networks, new crops/animals, demographic and ecological impacts.",
+                        resources: [
+                            { name: "Khan Academy – The Columbian Exchange", link: "https://www.khanacademy.org/humanities/ap-us-history/period-1/apush-the-columbian-exchange/a/the-columbian-exchange" },
+                            { name: "National Geographic – Columbian Exchange", link: "https://education.nationalgeographic.org/resource/columbian-exchange/" }
+                        ]
+                    },
+                    {
+                        name: "Industrial Revolution & Agricultural Change",
+                        level: "B2",
+                        description: "Enclosures, mechanization, yields, urbanization and social change.",
+                        resources: [
+                            { name: "BBC Bitesize – Industrial Revolution", link: "https://www.bbc.co.uk/bitesize/topics/zm7qtfr" },
+                            { name: "Economic History – Industrial Revolution (US focus)", link: "https://eh.net/encyclopedia/the-industrial-revolution-in-the-united-states/" }
+                        ]
+                    },
+                    {
+                        name: "World Wars: Rationing, Food Supply & Propaganda",
+                        level: "B1–B2",
+                        description: "Rationing and propaganda on the Home Front: interpreting posters and primary sources.",
+                        resources: [
+                            { name: "Imperial War Museums – First World War Recruitment Posters", link: "https://www.iwm.org.uk/learning/resources/first-world-war-recruitment-posters" },
+                            { name: "Imperial War Museums – Second World War Posters (KS3)", link: "https://www.iwm.org.uk/learning/resources/second-world-war-posters" }
+                        ]
+                    },
+                    {
+                        name: "Cold War: Origins & Conflicts",
+                        level: "B2",
+                        description: "Origins, crises, détente; reading primary sources, speeches and propaganda.",
+                        resources: [
+                            { name: "DocsTeach – Cold War Conflicts (activity)", link: "https://www.docsteach.org/activities/teacher/cold-war-conflicts" },
+                            { name: "DocsTeach – Tensions of the Cold War", link: "https://www.docsteach.org/activities/teacher/tensions-of-the-cold-war" }
+                        ]
+                    }
+                ]
+            }
+,
+
+            "War in Ukraine (CLIL)": {
+                icon: "🟦",
+                color: "#1e40af",
+                topics: [
+                    {
+                        name: "War in Ukraine: Timeline & Background",
+                        level: "B2",
+                        description: "From 2014 to full‑scale invasion; causes, actors and turning points.",
+                        resources: [
+                            { name: "CFR – Global Conflict Tracker: War in Ukraine", link: "https://www.cfr.org/global-conflict-tracker/conflict/conflict-ukraine" },
+                            { name: "ACLED – Ukraine Conflict Monitor (maps/data)", link: "https://acleddata.com/monitor/ukraine-conflict-monitor" }
+                        ]
+                    },
+                    {
+                        name: "Geography & Society in Ukraine",
+                        level: "B1–B2",
+                        description: "Map skills, regions, demographics; connecting places and events.",
+                        resources: [
+                            { name: "National Geographic Education – Ukraine Map Supplement", link: "https://education.nationalgeographic.org/resource/ukraine-map-supplement/" },
+                            { name: "National Geographic Kids – Ukraine (country profile)", link: "https://kids.nationalgeographic.com/geography/countries/article/ukraine" }
+                        ]
+                    }
+                ]
+            }
+,
+
+            "Gaza Conflict (CLIL)": {
+                icon: "🕊️",
+                color: "#dc2626",
+                topics: [
+                    {
+                        name: "Gaza Conflict: Background & Humanitarian Impact",
+                        level: "B2",
+                        description: "Context, current situation and humanitarian law in practice.",
+                        resources: [
+                            { name: "CFR – Israeli‑Palestinian Conflict (background & tracker)", link: "https://www.cfr.org/israeli-palestinian-conflict" },
+                            { name: "OCHA oPt – Situation Updates (Gaza Strip)", link: "https://www.ochaopt.org/" }
+                        ]
+                    },
+                    {
+                        name: "Education in Emergencies: Gaza",
+                        level: "B1–B2",
+                        description: "Schooling, temporary learning spaces and protection for children.",
+                        resources: [
+                            { name: "UNICEF – Children in Gaza need life‑saving support (Education)", link: "https://www.unicef.org/emergencies/children-gaza-need-lifesaving-support" },
+                            { name: "UNICEF – Education (State of Palestine)", link: "https://www.unicef.org/sop/topics/education" }
+                        ]
+                    }
+                ]
+            }
+,
+
+        };
+
+        // Global variables
+        let totalTopics = 0;
+        let currentZoom = 1;
+        let isDarkMode = false;
+        let currentUser = null;
+        let isLoggedIn = false;
+
+        // Authentication functions
+        function validateEmail(email) {
+            return email.endsWith('@agrariomendel.it');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = `<div class="error-message">${message}</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function login(email) {
+            if (!validateEmail(email)) {
+                showError('❌ Access denied: Use only institutional email @agrariomendel.it');
+                return false;
+            }
+
+            currentUser = email;
+            isLoggedIn = true;
+            localStorage.setItem('clil_mendel_user', email);
+            localStorage.setItem('clil_mendel_login_time', Date.now());
+
+            // Hide login screen and show app
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.add('visible');
+            document.getElementById('userEmail').textContent = email;
+
+            return true;
+        }
+
+        function logout() {
+            currentUser = null;
+            isLoggedIn = false;
+            localStorage.removeItem('clil_mendel_user');
+            localStorage.removeItem('clil_mendel_login_time');
+
+            // Show login screen and hide app
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.remove('visible');
+            document.getElementById('emailInput').value = '';
+        }
+
+        function checkAutoLogin() {
+            const savedUser = localStorage.getItem('clil_mendel_user');
+            const loginTime = localStorage.getItem('clil_mendel_login_time');
+            
+            if (savedUser && loginTime) {
+                // Check if session is still valid (24 hours)
+                const now = Date.now();
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                
+                if (now - parseInt(loginTime) < twentyFourHours) {
+                    currentUser = savedUser;
+                    isLoggedIn = true;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.add('visible');
+                    document.getElementById('userEmail').textContent = savedUser;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Event listener for login form
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value.trim();
+            const loginBtn = document.getElementById('loginButton');
+            
+            if (!email) {
+                showError('❌ Please enter your institutional email');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = '🔄 Verifying...';
+            
+            setTimeout(() => {
+                if (login(email)) {
+                    loginBtn.textContent = '✅ Access Granted';
+                    setTimeout(() => {
+                        initializeMap();
+                        setupSearch();
+                        setupKeyboardControls();
+                    }, 500);
+                } else {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = '🌍 Access CLIL IIS MENDEL';
+                }
+            }, 1000);
+        });
+
+        // Main app functions
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('clil_mendel_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(clilData);
+            
+            
+            categories.sort((a, b) => a.localeCompare(b));
+// Calculate total topics
+            totalTopics = 0;
+            categories.forEach(category => {
+                totalTopics += clilData[category].topics.length;
+            });
+            
+            // Clear grid
+            categoryGrid.innerHTML = '';
+            
+            // Create category nodes
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Open category ${category}`);
+                
+                const topicsPreview = clilData[category].topics.slice(0, 2).map(topic => topic.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${clilData[category].icon}</div>
+                    <div class="category-subtitle">CLIL Subject</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${topicsPreview}...</div>
+                    </div>
+                `;
+                
+                // Add keyboard navigation support
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTopics').textContent = totalTopics;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            // Remove active class from all nodes
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            // Add active class to selected node
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${clilData[categoryName].topics.length} CLIL topics available`;
+            
+            content.innerHTML = '';
+            
+            clilData[categoryName].topics.forEach((topic, index) => {
+                const topicItem = document.createElement('div');
+                topicItem.className = 'topic-item';
+                topicItem.style.opacity = '0';
+                topicItem.style.transform = 'translateY(20px)';
+                
+                const resourcesHTML = topic.resources.map(resource => 
+                    `<a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="resource-link">
+                        📚 ${resource.name}
+                    </a>`
+                ).join('');
+                
+                topicItem.innerHTML = `
+                    <div class="topic-name">
+                        🎯 ${topic.name}
+                    </div>
+                    <div class="topic-level">Level: ${topic.level}</div>
+                    <div class="topic-description">${topic.description}</div>
+                    <div class="topic-resources">
+                        ${resourcesHTML}
+                    </div>
+                `;
+                
+                content.appendChild(topicItem);
+                
+                // Entry animation
+                setTimeout(() => {
+                    topicItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    topicItem.style.opacity = '1';
+                    topicItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            // Focus management for accessibility
+            setTimeout(() => {
+                const firstTopic = content.querySelector('.resource-link');
+                if (firstTopic) firstTopic.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            
+            // Remove active class from all nodes
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(clilData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    // Search in category title
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        // Search in topics
+                        isVisible = clilData[categoryName].topics.some(topic =>
+                            topic.name.toLowerCase().includes(searchTerm) ||
+                            topic.description.toLowerCase().includes(searchTerm) ||
+                            topic.level.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            // Update statistics
+            if (searchTerm) {
+                document.getElementById('totalTopics').textContent = `${visibleCount}/${Object.keys(clilData).length}`;
+                document.querySelector('.stats-label').textContent = 'Categories\nVisible';
+            } else {
+                document.getElementById('totalTopics').textContent = totalTopics;
+                document.querySelector('.stats-label').innerHTML = 'CLIL Topics<br>Available';
+            }
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                // Zoom controls
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '+':
+                        case '=':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                // Toggle theme
+                if (e.key === 't' && e.ctrlKey && e.altKey) {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                // Close panel with Escape
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+
+            // Zoom with mouse wheel
+            document.addEventListener('wheel', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        zoomOut();
+                    } else {
+                        zoomIn();
+                    }
+                }
+            }, { passive: false });
+        }
+
+        // Utilities
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function loadUserPreferences() {
+            const savedTheme = localStorage.getItem('clil_mendel_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserPreferences();
+            
+            // Check for valid auto-login
+            if (!checkAutoLogin()) {
+                // If no auto-login, show login screen
+                document.getElementById('loginScreen').classList.remove('hidden');
+            } else {
+                // If auto-login, initialize app
+                initializeMap();
+                setupSearch();
+                setupKeyboardControls();
+            }
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('toolsPanel');
+            const isClickInsidePanel = panel.contains(e.target);
+            const isClickOnCategoryNode = e.target.closest('.category-node');
+            
+            if (!isClickInsidePanel && !isClickOnCategoryNode && panel.classList.contains('open')) {
+                closePanel();
+            }
+        });
+
+        // Placeholder for future functions
+        function toggleFilters() {
+            console.log('Advanced language level filters coming soon!');
+        }
+
+        // Responsive handling
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                currentZoom = 1;
+                updateZoom();
+            }
+        }
+
+        window.addEventListener('resize', debounce(handleResize, 250));
+
+        // Error prevention
+        window.addEventListener('error', (e) => {
+            console.log('Handled error:', e.error);
+        });
+
+        // Service Worker for PWA (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'clil-mendel-v1';
+                    const urlsToCache = ['/'];
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => response || fetch(event.request))
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(() => console.log('PWA Service Worker registered'))
+                    .catch(() => console.log('Service Worker not supported'));
+            });
+        }
+    </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Hide login screen if still present
+    var loginScreen = document.getElementById('loginScreen');
+    if (loginScreen) {
+        loginScreen.style.display = 'none';
+    }
+    // Ensure main app is visible
+    var mainApp = document.getElementById('mainApp');
+    if (mainApp && !mainApp.classList.contains('visible')) {
+        mainApp.classList.add('visible');
+    }
+
+    // Initialize core functions
+    if (typeof initializeMap === 'function') initializeMap();
+    if (typeof setupSearch === 'function') setupSearch();
+    if (typeof setupKeyboardControls === 'function') setupKeyboardControls();
+
+    // Restore saved theme
+    var savedTheme = localStorage.getItem('clil_mendel_darkMode');
+    if (savedTheme === 'true') {
+        document.body.classList.add('dark');
+        var themeIcon = document.getElementById('themeIcon');
+        if (themeIcon) themeIcon.textContent = '☀️';
+    }
+});
+</script>
+
+</body>
+</html>

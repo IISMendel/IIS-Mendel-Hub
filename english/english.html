@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇬🇧 English Learning Hub - IIS Mendel</title>
+    <meta name="description" content="Piattaforma per l'apprendimento dell'inglese dell'IIS Mendel - Oltre 200 strumenti AI e risorse">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #dc2626;
+            --secondary-color: #1d4ed8;
+            --accent-color: #059669;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --uk-red: #dc2626;
+            --uk-blue: #1d4ed8;
+            --google-blue: #4285f4;
+            --google-red: #ea4335;
+            --google-green: #34a853;
+            --google-yellow: #fbbc05;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #dc2626 0%, #1d4ed8 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-uk: linear-gradient(135deg, #dc2626 0%, #ffffff 50%, #1d4ed8 100%);
+            --gradient-google: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-uk);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-google);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--uk-red);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--uk-blue);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--uk-red);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .filter-btn {
+            background: var(--uk-red);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--uk-blue);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--uk-red);
+        }
+
+        .category-node.active {
+            border-color: var(--uk-red);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-uk);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--uk-red);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-uk);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-uk);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .legend:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+        }
+
+        .legend.dragging {
+            opacity: 0.8;
+            transform: rotate(2deg) scale(1.05);
+            z-index: 2000;
+        }
+
+        .legend-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: var(--uk-red);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drag-handle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            cursor: grab;
+            transition: all 0.3s ease;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            color: var(--uk-red);
+            transform: scale(1.2);
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus {
+            outline: 2px solid var(--uk-red);
+            outline-offset: 2px;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div style="text-align: center;">
+                <div class="pnrr-badge">
+                    🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+                </div>
+            </div>
+            <h1>🇬🇧 English Learning Hub</h1>
+            <p>Piattaforma Completa per l'Apprendimento della Lingua Inglese</p>
+        </div>
+    </div>
+
+    <div class="intro-section">            
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">English Learning Hub IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                La piattaforma completa per l'apprendimento dell'inglese dell'<strong>IIS Mendel di Villa Cortese</strong>, 
+                sviluppata nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta curata di oltre <strong>200+ strumenti AI, app e risorse</strong> per migliorare tutte le competenze linguistiche 
+                attraverso l'innovazione didattica e la condivisione di esperienze.
+            </p>
+
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3 style="color: var(--uk-red); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🎯 La Nostra Missione
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Supportare studenti e docenti nell'apprendimento e insegnamento dell'inglese 
+                        attraverso tecnologie all'avanguardia, preparazione alle certificazioni internazionali e 
+                        valorizzazione delle comunità di pratiche educative. Ogni risorsa è stata testata e validata 
+                        dalla comunità educativa.
+                    </p>
+                </div>
+
+                <div class="intro-box">
+                    <h3 style="color: var(--uk-blue); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🤝 Comunità di Pratiche
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Dalle nuove sezioni per listening e learning con le canzoni, ai tool AI per conversation practice, 
+                        alle risorse per certificazioni Cambridge e IELTS. Include le risorse curate dal Prof. Crespi 
+                        e una selezione delle migliori app validata dalla comunità educativa per 
+                        favorire lo scambio di esperienze e metodologie innovative.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(34, 168, 83, 0.1); border-radius: 16px; border: 1px solid rgba(34, 168, 83, 0.2);">
+                <p style="color: var(--google-green); font-weight: 600; margin: 0;">
+                    🌐 <strong>Versione Pubblica Espansa:</strong> Esplora liberamente tutte le risorse 
+                    per l'apprendimento dell'inglese curate dall'IIS Mendel. Clicca sulle categorie 
+                    per scoprire oltre 200+ strumenti AI e risorse didattiche innovative divise in 12 categorie specializzate.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca risorse per l'inglese..." id="searchInput">
+        </div>
+        <button class="filter-btn" onclick="toggleFilters()">Filtri</button>
+    </div>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+            <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+            <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+        </div>
+    </div>
+
+    <div class="map-container" id="mapContainer">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+            <h3 id="panelTitle">Risorse Inglese</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Le risorse verranno caricate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="legend" id="legend">
+        <div class="legend-header">
+            <div class="legend-title">📋 Controlli</div>
+            <div class="drag-handle" title="Trascina per spostare">⚡</div>
+        </div>
+        • Clicca sui nodi per esplorare<br>
+        • Usa la ricerca per filtrare<br>
+        • Zoom: Ctrl + (+/-) o rotella<br>
+        • Tema scuro: Ctrl + Alt + T<br>
+        • Reset zoom: Ctrl + 0<br>
+        • Doppio click per ripristinare posizione
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">0</div>
+        <div class="stats-label">Risorse<br>Disponibili</div>
+    </div>
+
+    <script>
+        // DATI COMPLETI ESPANSI PER L'APPRENDIMENTO DELL'INGLESE
+        const englishData = {
+            "🎧 Listening Practice": {
+                icon: "🎧",
+                color: "#dc2626",
+                tools: [
+                    {name: "TED Talks", link: "https://www.ted.com/", description: "Video ispiratori in inglese con transcript disponibili. Ideali per migliorare listening e vocabulary attraverso contenuti interessanti."},
+                    {name: "BBC Learning English", link: "https://www.bbc.co.uk/learningenglish/", description: "Contenuti audio e video della BBC specificamente progettati per learners di inglese, con diversi livelli di difficoltà."},
+                    {name: "British Council Listening", link: "https://learnenglish.britishcouncil.org/skills/listening", description: "Esercizi di listening strutturati con audio autentici e attività interattive per tutti i livelli."},
+                    {name: "Elllo.org", link: "https://www.elllo.org/", description: "Migliaia di conversazioni in inglese autentiche con speaker da tutto il mondo, complete di transcript e exercises."},
+                    {name: "ESL Lab", link: "https://www.esl-lab.com/", description: "Listening comprehension exercises con audio di qualità e quiz interattivi per diversi livelli."},
+                    {name: "Voice of America Learning English", link: "https://learningenglish.voanews.com/", description: "News e storie narrate lentamente e chiaramente, perfette per intermediate learners."},
+                    {name: "News in Slow English", link: "https://www.newsinslowenglish.com/", description: "Notizie attuali raccontate a velocità ridotta per facilitare la comprensione."},
+                    {name: "English Listening Lesson Library", link: "https://www.englishlistening.com/", description: "Vasta collezione di listening lessons organizzate per livello e argomento."},
+                    {name: "Breaking News English", link: "https://breakingnewsenglish.com/", description: "Notizie attuali con audio MP3 e esercizi di comprensione per tutti i livelli."},
+                    {name: "Sounds of English", link: "https://soundsofenglish.org/", description: "Focus sui suoni dell'inglese americano con video esplicativi e practice exercises."},
+                    {name: "6 Minute English BBC", link: "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english", description: "Podcast settimanali di 6 minuti su argomenti interessanti con vocabulary e transcript."},
+                    {name: "Listen A Minute", link: "http://listenaminute.com/", description: "Mini listening lessons di un minuto su centinaia di argomenti diversi."},
+                    {name: "ESL Podcast", link: "https://www.eslpod.com/", description: "Podcast progettati specificamente per ESL learners con spiegazioni dettagliate del vocabulary."},
+                    {name: "Randall's ESL Cyber Listening Lab", link: "https://www.esl-lab.com/", description: "Laboratorio virtuale con listening exercises organizzati per livello di difficoltà."},
+                    {name: "English Class 101", link: "https://www.englishclass101.com/", description: "Video lessons con native speakers e focus su situazioni di vita reale."}
+                ]
+            },
+            "🎵 Learn English with Songs": {
+                icon: "🎵",
+                color: "#e91e63",
+                tools: [
+                    {name: "Lyrics Training", link: "https://lyricstraining.com/", description: "Impara inglese completando i testi delle canzoni mentre ascolti. Vari livelli di difficoltà e migliaia di canzoni."},
+                    {name: "English Songs for Learning", link: "https://www.englishsongs.com/", description: "Collezione curata di canzoni con lyrics analysis e exercises di grammar e vocabulary."},
+                    {name: "FluentU Music", link: "https://www.fluentu.com/blog/english/english-songs/", description: "Video musicali autentici con sottotitoli interattivi e definizioni contestuali."},
+                    {name: "Genius English Songs", link: "https://genius.com/", description: "Lyrics con annotazioni e spiegazioni del significato, perfetto per capire slang e cultural references."},
+                    {name: "Song Lyrics Generator", link: "https://www.songlyrics.com/", description: "Ampia database di lyrics con funzione di ricerca per artista, titolo o frase."},
+                    {name: "Learn English Through Songs", link: "https://www.youtube.com/c/LearnEnglishThroughSongs", description: "Canale YouTube dedicato all'apprendimento dell'inglese attraverso canzoni popolari."},
+                    {name: "English Listening Songs", link: "https://englishlistening.com/songs/", description: "Canzoni specificamente scelte per learners con exercises di listening comprehension."},
+                    {name: "Musical English Lessons", link: "https://www.musicalenglishlessons.org/", description: "Lezioni strutturate che usano canzoni per insegnare grammar, pronunciation e vocabulary."},
+                    {name: "Sing English", link: "https://www.singenglish.com/", description: "Piattaforma che combina karaoke con learning activities per migliorare pronunciation."},
+                    {name: "English Through Music", link: "https://elt-resourceful.com/2019/03/04/10-great-songs-for-teaching-english/", description: "Risorse per insegnanti e studenti per usare la musica nell'apprendimento linguistico."},
+                    {name: "Spotify English Learning Playlists", link: "https://open.spotify.com/", description: "Playlist curate specificamente per English learners con canzoni di diversi generi e livelli."},
+                    {name: "Song-based ESL Activities", link: "https://www.teachingenglish.org.uk/article/using-songs", description: "British Council resources per utilizzare le canzoni nell'insegnamento dell'inglese."},
+                    {name: "English Music Therapy", link: "https://www.englishmusictherapy.com/", description: "Approccio terapeutico all'apprendimento dell'inglese attraverso la musica."},
+                    {name: "Learn English Kids Songs", link: "https://learnenglishkids.britishcouncil.org/songs", description: "Canzoni per bambini del British Council per imparare inglese in modo divertente."}
+                ]
+            },
+            "🗣️ AI Conversation Practice": {
+                icon: "🗣️",
+                color: "#dc2626",
+                tools: [
+                    {name: "Langua", link: "https://langua.io/", description: "Piattaforma AI avanzata per conversation practice con feedback in tempo reale e roleplay personalizzati."},
+                    {name: "Talkpal AI", link: "https://talkpal.ai/", description: "Chat interattiva con AI tutor per conversazioni in inglese con correzione istantanea."},
+                    {name: "Univerbal AI", link: "https://univerbal.app/", description: "Conversazioni AI in 20+ lingue con scenari realistici per praticare speaking e listening."},
+                    {name: "Andy English Bot", link: "https://andychatbot.com/", description: "Chatbot AI specializzato nell'insegnamento dell'inglese con lezioni di grammatica giornaliere."},
+                    {name: "MakesYouFluent", link: "https://makesyoufluent.com/", description: "AI tutor con feedback istantaneo e simulazioni di conversazioni reali per migliorare la fluency."},
+                    {name: "LangAI", link: "https://www.langai.app/", description: "Pratica conversazionale AI con dialoghi interattivi e correzioni grammaticali."},
+                    {name: "Heylama AI", link: "https://www.heylama.com/", description: "Tutor AI Anka per conversation practice immersiva in inglese, tedesco, francese e spagnolo."},
+                    {name: "Loora AI", link: "https://www.loora.ai/", description: "AI conversation partner per business English e preparazione a colloqui di lavoro."},
+                    {name: "Speak AI", link: "https://www.speak.com/", description: "App mobile con AI tutoring per conversation practice e pronunciation feedback."},
+                    {name: "Replika English Practice", link: "https://replika.ai/", description: "AI companion personalizzato per conversazioni naturali in inglese."},
+                    {name: "Character.AI English Tutors", link: "https://character.ai/", description: "Crea e chatta con AI tutors personalizzati per practice specifici."},
+                    {name: "ChatGPT for English Learning", link: "https://chat.openai.com/", description: "Usa ChatGPT come conversation partner e tutor personale per inglese."},
+                    {name: "Botlanguages", link: "https://botlanguages.com/", description: "Bot telegram AI per praticare inglese attraverso conversazioni quotidiane."},
+                    {name: "Speechify Conversation AI", link: "https://speechify.com/conversation/", description: "AI-powered conversation practice con voice recognition e feedback."}
+                ]
+            },
+            "✍️ AI Grammar & Writing": {
+                icon: "✍️",
+                color: "#1d4ed8",
+                tools: [
+                    {name: "Grammarly", link: "https://www.grammarly.com/", description: "Assistente AI per correzione grammaticale, stile e tono in tempo reale."},
+                    {name: "WriteCoach AI", link: "https://writecoach.ai/", description: "Feedback avanzato per migliorare la scrittura accademica e professionale con ML."},
+                    {name: "QuillBot", link: "https://quillbot.com/", description: "Parafrasi AI, controllo grammaticale e suggerimenti per migliorare la scrittura."},
+                    {name: "DeepL Write", link: "https://www.deepl.com/write", description: "Assistente di scrittura AI per correzioni e miglioramenti stilistici."},
+                    {name: "CorrectMyGrammar", link: "https://correctmygrammar.com/", description: "Tool AI per correggere grammatica, punteggiatura e sintassi con spiegazioni dettagliate."},
+                    {name: "Scribbr AI Proofreader", link: "https://www.scribbr.com/ai-proofreader/", description: "Revisione automatica di testi accademici con feedback personalizzato."},
+                    {name: "ProWritingAid", link: "https://prowritingaid.com/", description: "Editor avanzato con analisi stilistica, grammaticale e di readability."},
+                    {name: "Hemingway Editor", link: "https://hemingwayapp.com/", description: "Analizzatore di testo per migliorare chiarezza e leggibilità della scrittura."},
+                    {name: "Ludwig Guru", link: "https://ludwig.guru/", description: "Motore di ricerca linguistico che mostra come le parole sono usate in contesti reali."},
+                    {name: "Ginger Grammar Checker", link: "https://www.gingersoftware.com/", description: "Correzione grammaticale con AI e suggerimenti per migliorare il writing style."},
+                    {name: "LanguageTool", link: "https://languagetool.org/", description: "Grammar checker open-source con supporto per multiple lingue e style checking."},
+                    {name: "Wordtune", link: "https://www.wordtune.com/", description: "AI writing companion che aiuta a riscrivere e migliorare frasi per chiarezza."},
+                    {name: "Sapling Grammar Checker", link: "https://sapling.ai/", description: "AI-powered grammar checker progettato per team e business communication."},
+                    {name: "WhiteSmoke", link: "https://www.whitesmoke.com/", description: "All-in-one writing solution con grammar check, style checker e translator."},
+                    {name: "Reverso Grammar Check", link: "https://www.reverso.net/spell-checker/english-spelling-grammar/", description: "Grammar e spell checker con esempi di uso in contesti reali."}
+                ]
+            },
+            "🎤 AI Pronunciation & Speaking": {
+                icon: "🎤",
+                color: "#059669",
+                tools: [
+                    {name: "ELSA Speak", link: "https://elsaspeak.com/", description: "AI coach per pronuncia inglese con feedback personalizzato basato su machine learning."},
+                    {name: "Speechify", link: "https://speechify.com/", description: "Text-to-speech avanzato per migliorare listening e pronuncia."},
+                    {name: "VocabAI Pronunciation", link: "https://vocabai.co/", description: "Allenamento pronuncia AI con riconoscimento vocale avanzato."},
+                    {name: "YouGlish", link: "https://youglish.com/", description: "Cerca parole inglesi in video reali per sentire la pronuncia autentica nel contesto."},
+                    {name: "Forvo", link: "https://forvo.com/", description: "Dizionario di pronuncia con audio di madrelingua da tutto il mondo."},
+                    {name: "Sounds Pronunciation App", link: "https://soundspronapp.com/", description: "Chart interattivo dei suoni inglesi con esempi audio e video."},
+                    {name: "English Pronunciation Trainer", link: "https://pronunciation.englishcentral.com/", description: "Allenamento intensivo della pronuncia con riconoscimento vocale AI."},
+                    {name: "FluentU Pronunciation", link: "https://www.fluentu.com/", description: "Video autentici con pronuncia contestualizzata e feedback AI."},
+                    {name: "Speechling", link: "https://speechling.com/", description: "Coach di pronuncia AI con feedback da insegnanti madrelingua."},
+                    {name: "Pronunciation Power", link: "https://www.pronunciationpower.com/", description: "Software completo per migliorare pronuncia e accent reduction."},
+                    {name: "Say It Better", link: "https://sayitbetter.speakapps.eu/", description: "App europea per pronunciation training con recognition technology."},
+                    {name: "FluentTalk", link: "https://www.fluenttalk.com/", description: "AI-powered speech coaching per migliorare fluency e pronunciation."},
+                    {name: "Nemo English Pronunciation", link: "https://www.nemoapps.com/", description: "App mobile con focus su pronunciation training e listening skills."},
+                    {name: "Rocket Languages Pronunciation", link: "https://www.rocketlanguages.com/", description: "Voice recognition system per pronunciation practice con feedback immediato."}
+                ]
+            },
+            "📖 AI Vocabulary & Reading": {
+                icon: "📖",
+                color: "#7c3aed",
+                tools: [
+                    {name: "VocabAI", link: "https://vocabai.co/", description: "Apprendimento vocabulary personalizzato con spaced repetition e AI contextual learning."},
+                    {name: "Memrise", link: "https://www.memrise.com/", description: "Apprendimento vocabulary gamificato con video di madrelingua e spaced repetition."},
+                    {name: "LingQ", link: "https://www.lingq.com/", description: "Lettura immersiva con dizionario integrato e tracking del vocabolario appreso."},
+                    {name: "ReadTheory", link: "https://www.readtheory.org/", description: "Reading comprehension adattivo con AI che personalizza i testi al tuo livello."},
+                    {name: "Rewordify", link: "https://rewordify.com/", description: "Semplifica testi complessi per migliorare comprensione e vocabulary building."},
+                    {name: "Anki", link: "https://apps.ankiweb.net/", description: "Spaced repetition flashcards per memorizzazione duratura del vocabolario."},
+                    {name: "Knowji Vocabulary Builder", link: "https://knowji.com/", description: "App intelligente per costruire vocabulary con audio, immagini e spaced repetition."},
+                    {name: "WordUp Vocabulary", link: "https://wordupapp.co/", description: "Vocabulary building personalizzato basato sui tuoi interessi e livello."},
+                    {name: "Vocabulary.com", link: "https://www.vocabulary.com/", description: "Adaptive learning system che insegna vocabulary attraverso domande intelligenti."},
+                    {name: "Quizlet", link: "https://quizlet.com/", description: "Flashcards digitali e study modes diversi per memorizzare vocabulary."},
+                    {name: "News in Levels", link: "https://www.newsinlevels.com/", description: "Same news stories in 3 different levels per vocabulary building progressivo."},
+                    {name: "Word Dynamo", link: "https://www.worddynamo.com/", description: "Vocabulary builder con etymology, word families e contextual learning."},
+                    {name: "Magoosh Vocabulary Builder", link: "https://magoosh.com/english-speaking/vocabulary-builder/", description: "Vocabulary app con focus su parole accademiche e test preparation."},
+                    {name: "English Vocabulary in Use", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item3647162/", description: "Cambridge resource per vocabulary building sistematico e organizzato."},
+                    {name: "Free Rice Vocabulary", link: "https://freerice.com/", description: "Vocabulary quiz che dona riso per ogni risposta corretta, learning with purpose."}
+                ]
+            },
+            "🎓 Cambridge Certifications": {
+                icon: "🎓",
+                color: "#0891b2",
+                tools: [
+                    {name: "Cambridge English Practice Tests", link: "https://www.cambridgeenglish.org/exams-and-tests/", description: "Test practice ufficiali per KET, PET, FCE, CAE e CPE dal Cambridge Assessment."},
+                    {name: "Exam English Cambridge Tests", link: "https://www.examenglish.com/cambridge_esol.php", description: "Test practice gratuiti per tutti i livelli Cambridge con scoring automatico."},
+                    {name: "Cambridge Exam Preparation Course", link: "https://cambridgeschool.online/", description: "Corsi di preparazione online per certificazioni Cambridge English."},
+                    {name: "British Council Cambridge Prep", link: "https://www.britishcouncil.org/exam/cambridge", description: "Preparazione ufficiale British Council per esami Cambridge."},
+                    {name: "FutureLearn Cambridge Courses", link: "https://www.futurelearn.com/partners/cambridge-english", description: "Corsi gratuiti Cambridge English per preparazione certificazioni."},
+                    {name: "Cambridge English Test Your Level", link: "https://www.cambridgeenglish.org/test-your-english/", description: "Test gratuito per determinare il tuo livello Cambridge e scegliere l'esame giusto."},
+                    {name: "Objective KET/PET/FCE", link: "https://www.cambridge.org/elt/catalogue/", description: "Libri digitali ufficiali Cambridge per preparazione esami."},
+                    {name: "Complete Cambridge Practice", link: "https://www.macmillaneducation.com/cambridge/", description: "Risorse complete Macmillan per preparazione esami Cambridge."},
+                    {name: "Cambridge English Skills", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item7292207/", description: "Serie di libri per sviluppare skills specifiche per esami Cambridge."},
+                    {name: "Cambridge One Practice Tests", link: "https://www.cambridge.org/elt/cambridgeone/", description: "Piattaforma digitale Cambridge con practice tests interattivi."},
+                    {name: "English Profile", link: "https://www.englishprofile.org/", description: "Ricerca Cambridge sui livelli del CEFR con examples e can-do statements."},
+                    {name: "Cambridge Preparation Centre", link: "https://www.cambridgeenglish.org/find-a-centre/", description: "Trova centri autorizzati Cambridge per preparation courses."},
+                    {name: "Cambridge Mock Tests", link: "https://www.cambridgeenglish.org/test-your-english/cambridge-english-scale/", description: "Mock tests ufficiali per familiarizzare con il format degli esami."},
+                    {name: "Cambridge English Corpus", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item3647005/", description: "Real English examples dal Cambridge Learner Corpus per study authentico."}
+                ]
+            },
+            "📋 IELTS Preparation": {
+                icon: "📋",
+                color: "#ea580c",
+                tools: [
+                    {name: "IELTS Official Practice", link: "https://ielts.org/for-test-takers/how-to-prepare/practice-tests", description: "Test practice ufficiali IELTS Academic e General Training."},
+                    {name: "British Council IELTS Prep", link: "https://www.britishcouncil.org/exam/ielts/prepare", description: "Preparazione IELTS ufficiale British Council con mock tests."},
+                    {name: "IELTS Liz", link: "https://ieltsliz.com/", description: "Risorsa completa gratuita per preparazione IELTS con tips e practice tests."},
+                    {name: "IELTS Buddy", link: "https://www.ieltsbuddy.com/", description: "Guide dettagliate e practice per tutte le sezioni IELTS."},
+                    {name: "Cambridge IELTS Books", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item3646603/", description: "Collezione ufficiale di test IELTS passati con audio e chiavi."},
+                    {name: "IELTS Online Tests", link: "https://ieltsonlinetests.com/", description: "Simulazioni complete IELTS con scoring automatico e feedback."},
+                    {name: "E2 IELTS", link: "https://www.e2language.com/ielts/", description: "Piattaforma completa per preparazione IELTS con video lessons."},
+                    {name: "IELTS Advantage", link: "https://www.ieltsadvantage.com/", description: "Strategie e tecniche avanzate per massimizzare il punteggio IELTS."},
+                    {name: "IELTS Simon", link: "https://ielts-simon.com/", description: "Blog di un ex-IELTS examiner con tips autentici e practice tasks."},
+                    {name: "IELTS Academic Reading", link: "https://ieltstrainingonline.com/", description: "Practice specifico per Academic Reading con passage authentic."},
+                    {name: "IELTS Writing Task 1 & 2", link: "https://www.ieltsessentials.com/", description: "Guide specifiche per writing tasks con model answers e feedback."},
+                    {name: "IELTS Speaking Practice", link: "https://www.ielts.org/for-test-takers/how-to-prepare/test-format", description: "Mock speaking tests con questions bank aggiornate."},
+                    {name: "Road to IELTS", link: "https://www.britishcouncil.org/exam/ielts/prepare/free-practice-tests", description: "Course online gratuito del British Council per IELTS preparation."},
+                    {name: "IELTS Progress Check", link: "https://www.ielts.org/for-test-takers/how-to-prepare/ielts-progress-check", description: "Official practice test con scoring da certified IELTS teachers."}
+                ]
+            },
+            "📱 English Learning Apps": {
+                icon: "📱",
+                color: "#be123c",
+                tools: [
+                    {name: "Duolingo", link: "https://www.duolingo.com/", description: "App gamificata per apprendimento inglese con lezioni quotidiane e AI features."},
+                    {name: "Babbel", link: "https://www.babbel.com/", description: "Corsi di inglese strutturati per adulti con focus su conversazioni reali."},
+                    {name: "Busuu", link: "https://www.busuu.com/", description: "App completa con certificazioni McGraw-Hill e feedback da madrelingua."},
+                    {name: "Rosetta Stone", link: "https://www.rosettastone.com/", description: "Metodo immersivo per apprendimento inglese senza traduzioni."},
+                    {name: "Cake English", link: "https://snow.dog/cake/", description: "Impara inglese con video virali e contenuti social media."},
+                    {name: "HelloTalk", link: "https://www.hellotalk.com/", description: "Scambio linguistico con madrelingua inglesi da tutto il mondo."},
+                    {name: "Cambly", link: "https://www.cambly.com/", description: "Conversation practice 1-on-1 con tutor madrelingua inglesi."},
+                    {name: "Preply", link: "https://preply.com/", description: "Lezioni private di inglese online con tutor qualificati."},
+                    {name: "FluentU", link: "https://www.fluentu.com/", description: "Apprendimento inglese attraverso video autentici con sottotitoli interattivi."},
+                    {name: "EWA English", link: "https://ewa.edu.pl/", description: "Impara inglese con film, libri e corsi personalizzati."},
+                    {name: "Mondly", link: "https://www.mondly.com/", description: "App AI-powered con conversation practice e AR experiences."},
+                    {name: "Speaky", link: "https://www.speaky.com/", description: "Community per language exchange con native speakers."},
+                    {name: "Tandem", link: "https://www.tandem.net/", description: "Language exchange app con video chiamate e text chat."},
+                    {name: "BBC Learning English App", link: "https://www.bbc.co.uk/learningenglish/", description: "App ufficiale BBC con news, video e audio lessons."},
+                    {name: "Sounds Pronunciation App", link: "https://www.macmillaneducation.com/catalogue/sounds-pronunciation-app/", description: "Macmillan app per pronunciation con IPA chart interattivo."}
+                ]
+            },
+            "💼 Professional English": {
+                icon: "💼",
+                color: "#059669",
+                tools: [
+                    {name: "Business English Pod", link: "https://www.businessenglishpod.com/", description: "Podcast e lezioni per Business English con vocabulary specialistico."},
+                    {name: "EnglishCentral Business", link: "https://www.englishcentral.com/business", description: "Video-based learning per inglese aziendale e professionale."},
+                    {name: "LinkedIn Learning English", link: "https://www.linkedin.com/learning/", description: "Corsi professionali di inglese per crescita carriera."},
+                    {name: "Cambridge Business English", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item3647015/", description: "Risorse ufficiali per preparazione BEC (Business English Certificate)."},
+                    {name: "Market Leader Digital", link: "https://www.pearson.com/english/catalogue/business-english/market-leader/", description: "Corso digitale di Business English con case studies reali."},
+                    {name: "English for Work", link: "https://www.futurelearn.com/courses/english-for-the-workplace", description: "Inglese per il mondo del lavoro con simulazioni professionali."},
+                    {name: "Macmillan Business English", link: "https://www.macmillaneducation.com/business-english/", description: "Risorse complete per inglese aziendale e management."},
+                    {name: "BBC Learning English Business", link: "https://www.bbc.co.uk/learningenglish/business/", description: "News e contenuti BBC per migliorare Business English."},
+                    {name: "Business English Site", link: "https://www.businessenglishsite.com/", description: "Risorse gratuite per business communication e professional writing."},
+                    {name: "Perfect English Grammar Business", link: "https://www.perfect-english-grammar.com/business-english.html", description: "Grammar lessons specifici per business contexts."},
+                    {name: "FluentBusiness English", link: "https://www.fluentu.com/blog/business-english/", description: "Blog con tips e resources per professional English development."},
+                    {name: "English for Business Communication", link: "https://www.edx.org/learn/business-english", description: "Corsi online universitari per business communication skills."},
+                    {name: "Wall Street English Business", link: "https://www.wallstreetenglish.com/", description: "Corsi specializzati per business professionals e executives."},
+                    {name: "GlobalExam Business English", link: "https://www.globalexam.com/", description: "Platform per preparation di certificazioni business English come TOEIC e BEC."}
+                ]
+            },
+            "👨‍🏫 Risorse Dipartimento Inglese_Mendel": {
+                icon: "👨‍🏫",
+                color: "#dc2626",
+                tools: [
+                    {name: "English Corner Blog IIS Mendel", link: "http://englishcornerblog.altervista.org/", description: "Blog curato dal Prof. Crespi dell'IIS Mendel: raccolta del meglio disponibile online per lo studio dell'inglese, materiali didattici testati e risorse validate per studenti."},
+                    {name: "English Corner Listening Section", link: "http://englishcornerblog.altervista.org/listening/", description: "Sezione specifica del blog dedicata al listening con TED Talks, BBC Learning English e risorse audio curate."},
+                    {name: "Cambridge English Materials", link: "https://www.cambridgeenglish.org/learning-english/", description: "Materiali ufficiali Cambridge selezionati dal Prof. Crespi per preparazione certificazioni."},
+                    {name: "BBC Learning English", link: "https://www.bbc.co.uk/learningenglish/", description: "Contenuti BBC validati per apprendimento inglese di qualità."},
+                    {name: "British Council LearnEnglish", link: "https://learnenglish.britishcouncil.org/", description: "Piattaforma ufficiale British Council con resources per tutti i livelli."},
+                    {name: "English Grammar in Use", link: "https://www.cambridge.org/elt/catalogue/subject/custom/item3647162/", description: "Grammatica inglese essenziale consigliata per studenti IIS Mendel."},
+                    {name: "Authentic English Videos", link: "https://www.youtube.com/c/EngVid", description: "Video autentici selezionati per migliorare listening e pronunciation."},
+                    {name: "English Exercises Online", link: "https://www.perfect-english-grammar.com/", description: "Esercizi di grammatica progressivi validati per il curriculum Mendel."},
+                    {name: "Oxford Dictionaries", link: "https://www.oxfordlearnersdictionaries.com/", description: "Dizionario di riferimento per studenti con esempi audio e usage notes."},
+                    {name: "134 YouTube Channels for Listening", link: "https://medium.com/the-graph/the-nominees-134-youtube-channels-that-will-make-you-smarter-e4cc9e359811", description: "Lista curata dal Prof. Crespi di canali YouTube per praticare listening skills."},
+                    {name: "World Radio Map for Listening", link: "https://radio.garden/", description: "Mappa mondiale delle radio per listening practice con accenti diversi."},
+                    {name: "Larry Ferlazzo's Listening Sites", link: "http://larryferlazzo.edublogs.org/2008/05/28/the-best-listening-sites-for-english-language-learners/", description: "Collezione di siti per listening curata da esperti e validata dal Prof. Crespi."},
+                    {name: "ESL Podcasts Collection", link: "https://www.eslpod.com/", description: "Podcast collection specifically recommended for IIS Mendel students."},
+                    {name: "English Corner Grammar Section", link: "http://englishcornerblog.altervista.org/grammar/", description: "Sezione grammatica del blog con exercises e spiegazioni dettagliate."}
+                ]
+            },
+            "🌐 Google AI Language Tools": {
+                icon: "🌐",
+                color: "#f59e0b",
+                tools: [
+                    {name: "NotebookLM", link: "https://notebooklm.google/", description: "Assistente AI Google per studio personalizzato con i tuoi materiali inglesi."},
+                    {name: "Google Translate Advanced", link: "https://translate.google.com/", description: "Traduttore avanzato con context awareness per apprendimento."},
+                    {name: "Google Socratic", link: "https://socratic.org/", description: "AI homework helper per domande di inglese e letteratura."},
+                    {name: "Google Arts & Culture", link: "https://artsandculture.google.com/", description: "Explore cultura inglese e americana attraverso virtual tours e exhibitions."},
+                    {name: "Google Books English Learning", link: "https://books.google.com/", description: "Accesso a milioni di libri in inglese per reading practice."},
+                    {name: "YouTube Learning English Channels", link: "https://www.youtube.com/results?search_query=learn+english", description: "Vast collection di canali YouTube per English learning con AI recommendations."},
+                    {name: "Google Podcasts English", link: "https://podcasts.google.com/", description: "Podcasts in inglese con transcriptions automatiche per listening practice."},
+                    {name: "Google Scholar English Articles", link: "https://scholar.google.com/", description: "Academic articles in inglese per advanced reading practice."},
+                    {name: "Google News English", link: "https://news.google.com/", description: "Current news in inglese per stay updated e improve reading skills."},
+                    {name: "Google Earth Storytelling", link: "https://earth.google.com/web/", description: "Explore il mondo con narrations in inglese per geographical vocabulary."},
+                    {name: "Chrome Extensions for English", link: "https://chrome.google.com/webstore/category/extensions", description: "Extensions del Chrome Web Store per enhance English learning experience."},
+                    {name: "Google Assistant English Practice", link: "https://assistant.google.com/", description: "Practice English conversation con Google Assistant per pronunciation."},
+                    {name: "Google Docs Voice Typing", link: "https://docs.google.com/", description: "Use voice typing per practice pronunciation e improve writing."},
+                    {name: "Google Meet Language Exchange", link: "https://meet.google.com/", description: "Connect con English speakers per virtual language exchange sessions."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 0;
+        let currentZoom = 1;
+        let isDarkMode = false;
+
+        // FUNZIONI PRINCIPALI DELL'APP
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_english_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(englishData);
+            
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += englishData[category].tools.length;
+            });
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = englishData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${englishData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${englishData[category].tools.length} risorse</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${englishData[categoryName].tools.length} risorse disponibili`;
+            
+            content.innerHTML = '';
+            
+            englishData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        🔧 ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi alla Risorsa
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(englishData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        isVisible = englishData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount}/${Object.keys(englishData).length}`;
+                document.querySelector('.stats-label').textContent = 'Categorie\nVisibili';
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+                document.querySelector('.stats-label').innerHTML = 'Risorse<br>Disponibili';
+            }
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '+':
+                        case '=':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                if (e.key === 't' && e.ctrlKey && e.altKey) {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+
+            document.addEventListener('wheel', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        zoomOut();
+                    } else {
+                        zoomIn();
+                    }
+                }
+            }, { passive: false });
+        }
+
+        // FUNZIONE PER RENDERE LA LEGENDA SPOSTABILE
+        function setupDraggableLegend() {
+            const legend = document.getElementById('legend');
+            const dragHandle = legend.querySelector('.drag-handle');
+            let isDragging = false;
+            let dragOffset = { x: 0, y: 0 };
+
+            // Inizia dragging
+            const startDrag = (e) => {
+                isDragging = true;
+                legend.classList.add('dragging');
+                
+                const rect = legend.getBoundingClientRect();
+                dragOffset.x = (e.clientX || e.touches[0].clientX) - rect.left;
+                dragOffset.y = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', endDrag);
+                document.addEventListener('touchmove', drag, { passive: false });
+                document.addEventListener('touchend', endDrag);
+                
+                e.preventDefault();
+            };
+
+            // Durante il dragging
+            const drag = (e) => {
+                if (!isDragging) return;
+                
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                
+                const newX = clientX - dragOffset.x;
+                const newY = clientY - dragOffset.y;
+                
+                // Limiti della finestra
+                const maxX = window.innerWidth - legend.offsetWidth;
+                const maxY = window.innerHeight - legend.offsetHeight;
+                
+                const clampedX = Math.max(0, Math.min(newX, maxX));
+                const clampedY = Math.max(0, Math.min(newY, maxY));
+                
+                legend.style.left = clampedX + 'px';
+                legend.style.top = clampedY + 'px';
+                legend.style.bottom = 'auto';
+                legend.style.right = 'auto';
+                
+                e.preventDefault();
+            };
+
+            // Fine dragging
+            const endDrag = () => {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                legend.classList.remove('dragging');
+                
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', endDrag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('touchend', endDrag);
+                
+                // Salva posizione
+                const rect = legend.getBoundingClientRect();
+                localStorage.setItem('mendel_legend_position', JSON.stringify({
+                    x: rect.left,
+                    y: rect.top
+                }));
+            };
+
+            // Event listeners
+            dragHandle.addEventListener('mousedown', startDrag);
+            dragHandle.addEventListener('touchstart', startDrag, { passive: false });
+            legend.addEventListener('mousedown', startDrag);
+            legend.addEventListener('touchstart', startDrag, { passive: false });
+
+            // Carica posizione salvata
+            const savedPosition = localStorage.getItem('mendel_legend_position');
+            if (savedPosition) {
+                try {
+                    const pos = JSON.parse(savedPosition);
+                    legend.style.left = pos.x + 'px';
+                    legend.style.top = pos.y + 'px';
+                    legend.style.bottom = 'auto';
+                    legend.style.right = 'auto';
+                } catch (e) {
+                    console.log('Errore caricamento posizione legenda:', e);
+                }
+            }
+
+            // Reset posizione su doppio click
+            legend.addEventListener('dblclick', () => {
+                legend.style.left = '2rem';
+                legend.style.top = 'auto';
+                legend.style.bottom = '2rem';
+                legend.style.right = 'auto';
+                localStorage.removeItem('mendel_legend_position');
+            });
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function loadUserPreferences() {
+            const savedTheme = localStorage.getItem('mendel_english_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+        }
+
+        function toggleFilters() {
+            console.log('Filtri avanzati per livelli di inglese in sviluppo!');
+        }
+
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                currentZoom = 1;
+                updateZoom();
+            }
+        }
+
+        // EVENT LISTENERS E INIZIALIZZAZIONE
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserPreferences();
+            initializeMap();
+            setupSearch();
+            setupKeyboardControls();
+            setupDraggableLegend();
+        });
+
+        // Chiudi pannello quando si clicca fuori
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('toolsPanel');
+            const isClickInsidePanel = panel.contains(e.target);
+            const isClickOnCategoryNode = e.target.closest('.category-node');
+            
+            if (!isClickInsidePanel && !isClickOnCategoryNode && panel.classList.contains('open')) {
+                closePanel();
+            }
+        });
+
+        window.addEventListener('resize', debounce(handleResize, 250));
+
+        // Esponi funzioni globali necessarie
+        window.toggleTheme = toggleTheme;
+        window.zoomIn = zoomIn;
+        window.zoomOut = zoomOut;
+        window.resetZoom = resetZoom;
+        window.closePanel = closePanel;
+        window.toggleFilters = toggleFilters;
+    </script>
+</body>
+</html>

@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Hub Fisica - IIS Mendel (140 Strumenti)</title>
+    <meta name="description" content="Hub Fisica IIS Mendel - 140 strumenti fisici completi per scuola agraria e fisica generale">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --mendel-green: #22c55e;
+            --mendel-blue: #3b82f6;
+            --physics-orange: #f97316;
+            --physics-purple: #8b5cf6;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --gradient-mendel: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            --gradient-physics: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-physics);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-physics);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-mendel);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pnrr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pnrr-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            background: var(--gradient-physics);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark .header h1 {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .intro-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-large);
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .intro-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--physics-orange);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .intro-box {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left-color: var(--physics-purple);
+        }
+
+        .intro-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .controls-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+        }
+
+        body.dark .control-group {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--light-card);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        body.dark .control-btn {
+            background: var(--dark-card);
+            color: #e2e8f0;
+        }
+
+        .control-btn:hover, .control-btn:active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-accent);
+        }
+
+        .search-container {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 280px;
+        }
+
+        body.dark .search-wrapper {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .search-icon {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        body.dark .search-input {
+            color: #e2e8f0;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            background: var(--gradient-mendel);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover, .nav-btn:active {
+            background: var(--gradient-accent);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            touch-action: manipulation;
+        }
+
+        .filter-btn:hover, .filter-btn:active {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            position: relative;
+            min-height: 600px;
+            padding: 4rem 2rem;
+            transform-origin: center center;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-node {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            touch-action: manipulation;
+        }
+
+        body.dark .category-node {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .category-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-node:hover::before, .category-node:active::before {
+            opacity: 0.05;
+        }
+
+        .category-node:hover, .category-node:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .category-node.active {
+            border-color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        body.dark .category-title {
+            color: #e2e8f0;
+        }
+
+        .category-count {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .category-preview {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        body.dark .category-preview {
+            border-top-color: var(--border-dark);
+        }
+
+        .preview-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .tools-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(500px, 100vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+        }
+
+        body.dark .tools-panel {
+            background: rgba(15, 23, 42, 0.98);
+            border-left-color: var(--border-dark);
+        }
+
+        .tools-panel.open {
+            right: 0;
+        }
+
+        .tools-header {
+            padding: 2rem;
+            background: var(--gradient-physics);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-btn:hover, .close-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tools-content {
+            padding: 2rem;
+        }
+
+        .tool-item {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .tool-item {
+            background: var(--dark-card);
+            border-color: var(--border-dark);
+        }
+
+        .tool-item:hover, .tool-item:active {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark .tool-name {
+            color: #e2e8f0;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .tool-link:hover, .tool-link:active {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stats-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        body.dark .stats-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-physics);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-light);
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 300px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .legend:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-2px);
+            border-color: var(--physics-orange);
+        }
+
+        .legend.dragging {
+            opacity: 0.9;
+            transform: rotate(1deg) scale(1.02);
+            z-index: 2000;
+            box-shadow: var(--shadow-large);
+            border-color: var(--primary-color);
+        }
+
+        .legend-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+            cursor: grab;
+        }
+
+        .legend-header:active {
+            cursor: grabbing;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: var(--physics-orange);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .drag-handle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: grab;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            color: var(--physics-orange);
+            transform: scale(1.3);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        body.dark .legend {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--border-dark);
+            color: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .search-wrapper {
+                min-width: 240px;
+            }
+
+            .controls-container {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .search-container {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .legend,
+            .stats-container {
+                position: relative;
+                margin: 1rem;
+                bottom: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .map-container {
+                padding: 2rem 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-wrapper {
+                min-width: 200px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .filter-btn, .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .category-node {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .control-btn:focus,
+        .category-node:focus,
+        .tool-link:focus,
+        .search-input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .category-node:hover {
+                transform: none;
+            }
+            
+            .category-node:active {
+                transform: scale(0.98);
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+            
+            .control-btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                🏫 IIS MENDEL • Via Ferrazzi 15 - 20035 - Villa Cortese (MI)
+            </div>
+            <h1>⚡ Hub Fisica Completo</h1>
+            <p>140 Strumenti di Fisica per Istituto Tecnico Agrario e Fisica Generale</p>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <div style="text-align: center;">
+            <div class="pnrr-badge">
+                🇪🇺 PNRR SCUOLA FUTURA - Valorizzare le comunità di pratiche
+            </div>
+        </div>
+        
+        <div class="intro-card">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hub Fisica IIS Mendel</h2>
+            
+            <p style="text-align: center; font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-light); line-height: 1.6;">
+                Il centro di riferimento per l'apprendimento della fisica dell'<strong>IIS Mendel (Via Ferrazzi 15 - Villa Cortese)</strong>, 
+                sviluppato nell'ambito del progetto PNRR "Scuola Futura" per valorizzare le comunità di pratiche educative. 
+                Una raccolta completa di <strong>140 strumenti di fisica</strong> che spazia dalla meccanica all'agricoltura applicata: 
+                termodinamica, elettromagnetismo, ottica, con particolare attenzione all'inclusività e ai bisogni educativi speciali.
+            </p>
+
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3 style="color: var(--physics-orange); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🎯 La Nostra Missione
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Supportare docenti e studenti dell'IIS Mendel nell'apprendimento e insegnamento della fisica 
+                        attraverso strumenti digitali all'avanguardia, con particolare attenzione ai settori agrario, 
+                        alimentare e ambientale. Ogni risorsa è stata testata e validata per l'uso didattico inclusivo.
+                    </p>
+                </div>
+
+                <div class="intro-box">
+                    <h3 style="color: var(--physics-purple); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🤝 Comunità Educativa
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Dai simulatori di fenomeni fisici ai laboratori virtuali per esperimenti complessi. 
+                        Include risorse per fisica classica (meccanica, termodinamica, elettromagnetismo), fisica moderna 
+                        (relatività, quantistica), fisica applicata all'agricoltura e strumenti compensativi per DSA/BES/DVA, 
+                        favorendo lo scambio di esperienze didattiche innovative.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(249, 115, 22, 0.1); border-radius: 16px; border: 1px solid rgba(249, 115, 22, 0.2);">
+                <p style="color: var(--physics-orange); font-weight: 600; margin: 0;">
+                    ⚡ <strong>Hub Fisica IIS Mendel:</strong> Strumenti digitali avanzati per 
+                    l'apprendimento e l'insegnamento della fisica applicata alle scienze agrarie e ambientali. 
+                    140 risorse educative per la comunità Mendel.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Cerca tra 140 strumenti di fisica..." id="searchInput">
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-btn" onclick="goToMathHub()">📐 Hub Matematica</a>
+            <button class="filter-btn" onclick="toggleFilters()">Statistiche</button>
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <button class="control-btn theme-toggle" onclick="toggleTheme()" title="Cambia tema" aria-label="Cambia tema">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" onclick="zoomIn()" title="Zoom In" aria-label="Aumenta zoom">+</button>
+            <button class="control-btn" onclick="zoomOut()" title="Zoom Out" aria-label="Diminuisci zoom">−</button>
+            <button class="control-btn" onclick="resetZoom()" title="Reset Zoom" aria-label="Ripristina zoom">⌂</button>
+        </div>
+    </div>
+
+    <div class="map-container" id="mapContainer">
+        <div class="category-grid" id="categoryGrid">
+            <!-- Le categorie verranno generate dinamicamente -->
+        </div>
+    </div>
+
+    <div class="tools-panel" id="toolsPanel">
+        <div class="tools-header">
+            <button class="close-btn" onclick="closePanel()" aria-label="Chiudi pannello">×</button>
+            <h3 id="panelTitle">Strumenti di Fisica</h3>
+            <p id="panelSubtitle" style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Seleziona una categoria</p>
+        </div>
+        <div class="tools-content" id="toolsContent">
+            <!-- Gli strumenti verranno caricati dinamicamente -->
+        </div>
+    </div>
+
+    <div class="legend" id="legend">
+        <div class="legend-header" id="legendHeader">
+            <div class="legend-title">⚡ Controlli</div>
+            <div class="drag-handle" title="🖱️ Trascina per spostare">⚡</div>
+        </div>
+        • Clicca sui nodi per esplorare<br>
+        • 15 categorie, 140+ strumenti di fisica<br>
+        • Usa la ricerca per filtrare<br>
+        • Zoom: Ctrl + (+/-) o rotella<br>
+        • Tema scuro: Ctrl + Alt + T<br>
+        • Reset zoom: Ctrl + 0<br>
+        • Doppio click per ripristinare posizione<br>
+        • <strong>💡 Trascinami se copro troppo!</strong>
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-number" id="totalTools">140</div>
+        <div class="stats-label">Strumenti<br>di Fisica</div>
+    </div>
+
+    <script>
+        // DATI COMPLETI 140 STRUMENTI DI FISICA
+        const physicsData = {
+            "Meccanica e Cinematica": {
+                icon: "🚀",
+                color: "#3b82f6",
+                tools: [
+                    {name: "Motion Simulator PhET", link: "https://phet.colorado.edu/en/simulations/motion", description: "Simulatori interattivi di moti: rettilineo, circolare, oscillatorio. Perfetti per visualizzare traiettorie e forze in agronomia."},
+                    {name: "Projectile Motion Calculator", link: "https://www.calculator.net/projectile-motion-calculator.html", description: "Calcola gittata, tempo di volo e traiettorie per sistemi di irrigazione e dispersione semi/fertilizzanti."},
+                    {name: "Forces and Motion PhET", link: "https://phet.colorado.edu/en/simulations/forces-and-motion", description: "Simulazioni di forze, attrito e moti per comprendere meccanica di macchinari agricoli e attrezzature."},
+                    {name: "Pendulum Lab", link: "https://phet.colorado.edu/en/simulations/pendulum-lab", description: "Laboratorio pendolo virtuale per studiare oscillazioni e periodo in sistemi di sospensioni agricole."},
+                    {name: "Energy Skate Park", link: "https://phet.colorado.edu/en/simulations/energy-skate-park", description: "Conservazione energia meccanica applicata a sistemi di trasporto e sollevamento in agricoltura."},
+                    {name: "Newton's Laws Simulator", link: "https://www.walter-fendt.de/html5/phEN/", description: "Visualizza le tre leggi di Newton applicate a macchinari agricoli, trattori e sistemi di trazione."},
+                    {name: "Friction Calculator", link: "https://www.omnicalculator.com/physics/friction", description: "Calcola forze di attrito per pneumatici, ruote e sistemi di trasmissione in macchinari agricoli."},
+                    {name: "Torque and Rotational Motion", link: "https://phet.colorado.edu/en/simulations/torque", description: "Dinamica rotazionale per progettare sistemi di trasmissione, mulini e macchine rotanti agricole."},
+                    {name: "Simple Harmonic Motion", link: "https://www.physicsclassroom.com/Physics-Interactives/Waves-and-Sound/Simple-Harmonic-Motion/Simple-Harmonic-Motion-Interactive", description: "Oscillazioni armoniche per vibrazioni di macchinari e sistemi di sospensione in agricoltura."},
+                    {name: "Collision Lab PhET", link: "https://phet.colorado.edu/en/simulations/collision-lab", description: "Laboratorio urti per studiare impatti e trasferimento energia in sistemi meccanici agricoli."}
+                ]
+            },
+            "Termodinamica e Calore": {
+                icon: "🌡️",
+                color: "#ef4444",
+                tools: [
+                    {name: "Gas Properties PhET", link: "https://phet.colorado.edu/en/simulations/gas-properties", description: "Leggi dei gas perfetti per studiare comportamento gas in serre, sistemi pneumatici e conservazione."},
+                    {name: "Heat Transfer Simulator", link: "https://phet.colorado.edu/en/simulations/energy-forms-and-changes", description: "Trasferimento di calore per progettare sistemi di riscaldamento serre e raffreddamento prodotti."},
+                    {name: "Thermodynamics Calculator", link: "https://www.omnicalculator.com/physics/thermodynamics", description: "Calcoli termodinamici per motori agricoli, compressori e sistemi di refrigerazione."},
+                    {name: "Phase Changes Simulation", link: "https://phet.colorado.edu/en/simulations/states-of-matter", description: "Stati della materia per processi di essiccazione, congelamento e conservazione prodotti agricoli."},
+                    {name: "Carnot Engine Simulator", link: "https://www.walter-fendt.de/html5/phEN/carnotengine_en.htm", description: "Ciclo di Carnot per ottimizzare rendimento motori diesel e sistemi energetici agricoli."},
+                    {name: "Greenhouse Effect Lab", link: "https://phet.colorado.edu/en/simulations/greenhouse-effect", description: "Effetto serra per ottimizzare climatizzazione e bilanci energetici in agricoltura protetta."},
+                    {name: "Specific Heat Calculator", link: "https://www.calculator.net/specific-heat-calculator.html", description: "Calcola calore specifico per processi di riscaldamento, raffreddamento e trasformazione alimenti."},
+                    {name: "Entropy and Energy", link: "https://phet.colorado.edu/en/simulations/energy-forms-and-changes", description: "Trasformazioni energetiche per ottimizzare sistemi di conversione energia in aziende agricole."},
+                    {name: "Steam Tables Calculator", link: "https://www.steamtablesonline.com/", description: "Proprietà vapore acqueo per sistemi di sterilizzazione, cottura e processi termici agricoli."},
+                    {name: "Blackbody Radiation", link: "https://phet.colorado.edu/en/simulations/blackbody-spectrum", description: "Radiazione termica per sistemi di riscaldamento infrarosso e analisi temperature colture."}
+                ]
+            },
+            "Elettromagnetismo": {
+                icon: "⚡",
+                color: "#f59e0b",
+                tools: [
+                    {name: "Circuit Construction Kit", link: "https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc", description: "Progetta circuiti elettrici per impianti di illuminazione, automazione e controllo in agricoltura."},
+                    {name: "Faraday's Electromagnetic Lab", link: "https://phet.colorado.edu/en/simulations/faraday", description: "Induzione elettromagnetica per generatori, motori elettrici e trasformatori in aziende agricole."},
+                    {name: "Electric Field Simulator", link: "https://phet.colorado.edu/en/simulations/charges-and-fields", description: "Campi elettrici per sistemi di separazione elettrostatica semi e purificazione aria in serre."},
+                    {name: "Ohm's Law Calculator", link: "https://www.calculator.net/ohms-law-calculator.html", description: "Calcoli di resistenza, corrente e tensione per progettare impianti elettrici agricoli sicuri."},
+                    {name: "Capacitor Lab", link: "https://phet.colorado.edu/en/simulations/capacitor-lab-basics", description: "Condensatori per sistemi di accumulo energia e correzione fattore di potenza in aziende."},
+                    {name: "Magnetic Field Simulator", link: "https://phet.colorado.edu/en/simulations/magnets-and-electromagnets", description: "Campi magnetici per separatori magnetici, sensori e sistemi di rilevamento metalli."},
+                    {name: "Transformer Calculator", link: "https://www.calculator.net/transformer-calculator.html", description: "Dimensiona trasformatori per alimentazione macchinari e distribuzione energia in aziende."},
+                    {name: "AC/DC Circuit Simulator", link: "https://www.falstad.com/circuit/", description: "Simula circuiti complessi per sistemi di controllo automatico e monitoraggio in agricoltura."},
+                    {name: "Electromagnetic Waves", link: "https://phet.colorado.edu/en/simulations/radio-waves", description: "Onde elettromagnetiche per sistemi di comunicazione wireless e telemetria agricola."},
+                    {name: "Motor and Generator Lab", link: "https://phet.colorado.edu/en/simulations/generator", description: "Motori e generatori per sistemi eolici, idroelettrici e cogenerazione in aziende sostenibili."}
+                ]
+            },
+            "Ottica e Onde": {
+                icon: "🌈",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "Geometric Optics PhET", link: "https://phet.colorado.edu/en/simulations/geometric-optics", description: "Ottica geometrica per progettare sistemi di illuminazione serre e concentratori solari."},
+                    {name: "Wave Interference Lab", link: "https://phet.colorado.edu/en/simulations/wave-interference", description: "Interferenza onde per acustica ambientale e controllo rumore in allevamenti e serre."},
+                    {name: "Refraction Calculator", link: "https://www.calculator.net/snells-law-calculator.html", description: "Legge di Snell per progettare coperture ottiche serre e sistemi di concentrazione luce."},
+                    {name: "Laser Simulation", link: "https://phet.colorado.edu/en/simulations/lasers", description: "Tecnologie laser per taglio, saldatura e misurazioni di precisione in agricoltura."},
+                    {name: "Polarization Lab", link: "https://phet.colorado.edu/en/simulations/polarization", description: "Polarizzazione luce per filtri ottici, analisi stress materiali e controllo qualità."},
+                    {name: "Diffraction Simulator", link: "https://www.walter-fendt.de/html5/phEN/diffraction_en.htm", description: "Diffrazione per sistemi di misura granulometrica semi e particelle in sospensione."},
+                    {name: "Photoelectric Effect", link: "https://phet.colorado.edu/en/simulations/photoelectric", description: "Effetto fotoelettrico per celle fotovoltaiche e sensori di radiazione solare."},
+                    {name: "Color Vision Lab", link: "https://phet.colorado.edu/en/simulations/color-vision", description: "Visione colori per analisi spettroscopica qualità frutti e controllo maturazione."},
+                    {name: "Spectroscopy Simulator", link: "https://phet.colorado.edu/en/simulations/neon-lights", description: "Spettroscopia per analisi composizione chimica suoli, piante e prodotti agricoli."},
+                    {name: "Fiber Optics Lab", link: "https://www.walter-fendt.de/html5/phEN/", description: "Fibre ottiche per sistemi di comunicazione e sensori distribuiti in precision farming."}
+                ]
+            },
+            "Fisica Moderna": {
+                icon: "⚛️",
+                color: "#06b6d4",
+                tools: [
+                    {name: "Quantum Tunneling PhET", link: "https://phet.colorado.edu/en/simulations/quantum-tunneling", description: "Tunnel quantistico per comprendere sensori avanzati e tecnologie quantistiche in agricoltura."},
+                    {name: "Photoelectric Effect Lab", link: "https://phet.colorado.edu/en/simulations/photoelectric", description: "Laboratorio effetto fotoelettrico per ottimizzare pannelli fotovoltaici e sensori luce."},
+                    {name: "Rutherford Scattering", link: "https://phet.colorado.edu/en/simulations/rutherford-scattering", description: "Scattering per tecniche di analisi non distruttiva materiali e controllo qualità prodotti."},
+                    {name: "Nuclear Decay Simulator", link: "https://phet.colorado.edu/en/simulations/alpha-decay", description: "Decadimento radioattivo per tecniche di datazione e tracciabilità prodotti alimentari."},
+                    {name: "Particle Physics Lab", link: "https://phet.colorado.edu/en/simulations/build-an-atom", description: "Fisica particelle per comprendere irraggiamento alimenti e sterilizzazione prodotti."},
+                    {name: "Relativity Calculator", link: "https://www.omnicalculator.com/physics/relativity", description: "Relatività per sistemi GPS precisione centimetrica e navigazione macchinari autonomi."},
+                    {name: "Wave-Particle Duality", link: "https://phet.colorado.edu/en/simulations/davisson-germer", description: "Dualità onda-particella per microscopia elettronica e analisi microstrutture biologiche."},
+                    {name: "Quantum States Simulator", link: "https://phet.colorado.edu/en/simulations/quantum-bound-states", description: "Stati quantici per sensori quantistici ultra-sensibili e misure di precisione."},
+                    {name: "Compton Scattering", link: "https://www.walter-fendt.de/html5/phEN/", description: "Scattering Compton per tecniche radiografiche non invasive e controllo interno prodotti."},
+                    {name: "Fusion Reactor Sim", link: "https://phet.colorado.edu/en/simulations/nuclear-physics", description: "Energia nucleare per comprendere future tecnologie energetiche sostenibili in agricoltura."}
+                ]
+            },
+            "Fisica Applicata Agricoltura": {
+                icon: "🌱",
+                color: "#22c55e",
+                tools: [
+                    {name: "Solar Panel Calculator", link: "https://www.calculator.net/solar-panel-calculator.html", description: "Dimensiona impianti fotovoltaici per autosufficienza energetica aziende agricole e serre."},
+                    {name: "Wind Energy Calculator", link: "https://www.omnicalculator.com/ecology/wind-power", description: "Potenza eolica per mini-turbine aziendali e sistemi ibridi energia rinnovabile."},
+                    {name: "Fluid Dynamics Simulator", link: "https://phet.colorado.edu/en/simulations/fluid-pressure-and-flow", description: "Fluidodinamica per progettare sistemi di irrigazione, drenaggio e pompaggio efficiente."},
+                    {name: "Pressure Systems Calculator", link: "https://www.calculator.net/pressure-calculator.html", description: "Calcoli pressione per sistemi pneumatici, idraulici e impianti di nebulizzazione."},
+                    {name: "Heat Pump Efficiency", link: "https://www.calculator.net/heat-pump-calculator.html", description: "Pompe di calore per riscaldamento/raffreddamento serre con massima efficienza energetica."},
+                    {name: "Photosynthesis Light Calculator", link: "https://www.calculator.net/photosynthesis-calculator.html", description: "Ottimizza spettro luminoso e intensità per massimizzare fotosintesi in colture protette."},
+                    {name: "Soil Moisture Sensor Physics", link: "https://www.calculator.net/soil-moisture-calculator.html", description: "Fisica sensori umidità suolo: capacitivi, resistivi e tensiometrici per precision farming."},
+                    {name: "Greenhouse Climate Physics", link: "https://www.omnicalculator.com/ecology/greenhouse-gas", description: "Fisica climatizzazione serre: ventilazione, umidità, CO2 e bilanci energetici ottimali."},
+                    {name: "Biomass Energy Calculator", link: "https://www.calculator.net/biomass-calculator.html", description: "Calcola energia da biomasse agricole per cogenerazione e sistemi energetici circolari."},
+                    {name: "Irrigation Physics Simulator", link: "https://www.calculator.net/irrigation-calculator.html", description: "Fisica irrigazione: perdite di carico, portate, pressioni per sistemi a goccia e aspersione."}
+                ]
+            },
+            "Laboratori Virtuali Fisica": {
+                icon: "🔬",
+                color: "#dc2626",
+                tools: [
+                    {name: "Virtual Physics Lab", link: "https://phet.colorado.edu/en/simulations/category/physics", description: "Laboratorio virtuale completo Colorado University con oltre 100 simulazioni fisiche interattive."},
+                    {name: "ExploreLearning Gizmos", link: "https://www.explorelearning.com/", description: "Simulazioni STEM premium per esperimenti virtuali sicuri e riproducibili in fisica."},
+                    {name: "Walter Fendt Physics", link: "https://www.walter-fendt.de/html5/phEN/", description: "Simulazioni fisiche tedesche di alta qualità per meccanica, ottica e elettromagnetismo."},
+                    {name: "Physics Classroom Interactive", link: "https://www.physicsclassroom.com/Physics-Interactives", description: "Laboratorio interattivo per concetti fondamentali di fisica con tutorial step-by-step."},
+                    {name: "NOVA Labs Physics", link: "https://www.pbs.org/wgbh/nova/labs/", description: "Laboratori PBS per ricerca scientifica e sperimentazione virtuale in fisica applicata."},
+                    {name: "Virtual Lab Experiments", link: "https://www.vlab.co.in/", description: "Esperimenti virtuali IIT per fisica avanzata e ingegneria applicata all'agricoltura."},
+                    {name: "ChemCollective Virtual Labs", link: "https://chemcollective.org/vlabs", description: "Laboratori virtuali per chimica fisica e processi chimici in industria alimentare."},
+                    {name: "LabXchange Harvard", link: "https://www.labxchange.org/", description: "Piattaforma Harvard per esperimenti virtuali e laboratori remoti in scienze fisiche."},
+                    {name: "PhysicsLAB Online", link: "https://dev.physicslab.org/", description: "Laboratorio online per esperimenti guidati e raccolta dati in fisica sperimentale."},
+                    {name: "Virtual Physics Experiments", link: "https://physics.bu.edu/~duffy/HTML5/index.html", description: "Esperimenti Boston University per fisica teorica e applicata con modellazione avanzata."}
+                ]
+            },
+            "Simulatori e Esperimenti": {
+                icon: "🎯",
+                color: "#7c3aed",
+                tools: [
+                    {name: "Circuit Simulator Falstad", link: "https://www.falstad.com/circuit/", description: "Simulatore circuiti avanzato per progettare sistemi elettronici e automazione agricola."},
+                    {name: "Oscilloscope Simulator", link: "https://www.academia.edu/", description: "Oscilloscopio virtuale per analisi segnali e misure elettroniche in strumentazione."},
+                    {name: "Function Generator Online", link: "https://www.szynalski.com/tone-generator/", description: "Generatore onde per test acustici, vibrazioni e controllo sistemi meccanici."},
+                    {name: "Spectrum Analyzer Virtual", link: "https://www.prosig.com/", description: "Analizzatore spettro per analisi frequenze, rumore e vibrazioni macchinari agricoli."},
+                    {name: "Multimeter Simulator", link: "https://www.virtual-multimeter.com/", description: "Multimetro digitale virtuale per misure elettriche precise in impianti agricoli."},
+                    {name: "Logic Gate Simulator", link: "https://logic.ly/", description: "Simulatore porte logiche per progettare sistemi di controllo digitale e automazione."},
+                    {name: "Thermal Imaging Simulator", link: "https://www.flir.com/", description: "Termografia virtuale per analisi termiche edifici, serre e efficienza energetica."},
+                    {name: "Vibration Analysis Tool", link: "https://www.prosig.com/vibration-analysis-software.html", description: "Analisi vibrazioni per manutenzione predittiva macchinari e diagnosi guasti."},
+                    {name: "Sound Level Meter Virtual", link: "https://www.prosig.com/sound-level-meters.html", description: "Fonometro digitale per controllo inquinamento acustico e comfort ambientale."},
+                    {name: "Force Gauge Simulator", link: "https://www.omega.com/", description: "Dinamometro virtuale per misure forze, carichi e test meccanici materiali."}
+                ]
+            },
+            "Strumenti Misura Digitali": {
+                icon: "📏",
+                color: "#059669",
+                tools: [
+                    {name: "Online Ruler Tool", link: "https://www.ginifab.com/feeds/cm_to_inch/", description: "Righello digitale calibrato per misure precise su schermo in progettazione layout."},
+                    {name: "Protractor Online", link: "https://www.ginifab.com/feeds/angle_measurement/", description: "Goniometro digitale per misure angolari in progettazione e costruzioni agricole."},
+                    {name: "Digital Caliper Simulator", link: "https://www.calculator.net/caliper-calculator.html", description: "Calibro digitale virtuale per misure di precisione componenti e materiali."},
+                    {name: "Scale Calculator", link: "https://www.calculator.net/scale-calculator.html", description: "Calcolatore scale per disegni tecnici, planimetrie e progetti ingegneristici."},
+                    {name: "Area Measurement Tool", link: "https://www.calculator.net/area-calculator.html", description: "Misuratore aree per calcolare superfici terreni, edifici e coltivazioni."},
+                    {name: "Volume Calculator 3D", link: "https://www.calculator.net/volume-calculator.html", description: "Calcola volumi 3D per serbatoi, silos, magazzini e strutture di stoccaggio."},
+                    {name: "GPS Coordinate Converter", link: "https://www.calculator.net/gps-calculator.html", description: "Convertitore coordinate GPS per precision farming e mappatura terreni."},
+                    {name: "Density Meter Virtual", link: "https://www.calculator.net/density-calculator.html", description: "Densimetro digitale per controllo qualità prodotti e analisi materiali."},
+                    {name: "pH Meter Simulator", link: "https://www.calculator.net/ph-calculator.html", description: "pH-metro virtuale per analisi acidità suoli e soluzioni nutritive."},
+                    {name: "Conductivity Meter", link: "https://www.calculator.net/conductivity-calculator.html", description: "Conduttivimetro per misurare salinità, TDS e qualità acque irrigue."}
+                ]
+            },
+            "Supporto DSA/BES Fisica": {
+                icon: "🎯",
+                color: "#f59e0b",
+                tools: [
+                    {name: "Visual Physics Concepts", link: "https://www.physicsclassroom.com/", description: "Concetti fisici visuali con animazioni per studenti con difficoltà di apprendimento."},
+                    {name: "Physics Equation Solver", link: "https://www.wolframalpha.com/", description: "Risolve equazioni fisiche step-by-step con spiegazioni vocali per DSA."},
+                    {name: "Concept Mapping Physics", link: "https://cmap.ihmc.us/", description: "Mappe concettuali per organizzare visivamente leggi fisiche e formule."},
+                    {name: "Physics Formula Sheet", link: "https://www.physicsforums.com/", description: "Formulario digitale interattivo con sintesi vocale per studenti dislessici."},
+                    {name: "Animated Physics Laws", link: "https://www.animations.physics.unsw.edu.au/", description: "Animazioni leggi fisiche per apprendimento multisensoriale e memorizzazione."},
+                    {name: "Physics Text-to-Speech", link: "https://www.naturalreaders.com/", description: "Lettura vocale di testi di fisica con velocità regolabile per DSA."},
+                    {name: "Visual Equation Editor", link: "https://www.mathtype.com/", description: "Editor visuale per scrivere equazioni fisiche complesse con supporto DSA."},
+                    {name: "Physics Mind Maps", link: "https://www.mindmeister.com/", description: "Mappe mentali collaborative per organizzare concetti fisici complessi."},
+                    {name: "Dyslexia-Friendly Physics", link: "https://www.readingrockets.org/", description: "Risorse fisiche adattate per studenti dislessici con font speciali."},
+                    {name: "Physics Study Cards", link: "https://quizlet.com/", description: "Flashcard digitali con audio per memorizzare formule e leggi fisiche."}
+                ]
+            },
+            "Supporto DVA Fisica": {
+                icon: "♿",
+                color: "#06b6d4",
+                tools: [
+                    {name: "Accessible Physics Simulations", link: "https://phet.colorado.edu/en/accessibility", description: "Simulazioni PhET accessibili con supporto screen reader e navigazione tastiera."},
+                    {name: "Voice-Controlled Physics", link: "https://www.speechrecognition.com/", description: "Controllo vocale per esperimenti e simulazioni fisiche accessibili."},
+                    {name: "Large Text Physics Tools", link: "https://www.zoomtext.com/", description: "Strumenti fisici con testo ingrandito e alto contrasto per ipovedenti."},
+                    {name: "Audio Physics Descriptions", link: "https://www.audiodescriptive.com/", description: "Audiodescrizioni dettagliate di fenomeni fisici e esperimenti virtuali."},
+                    {name: "Tactile Physics Models", link: "https://www.thingiverse.com/", description: "Modelli 3D stampabili per esplorazione tattile di concetti fisici."},
+                    {name: "Switch-Adapted Physics", link: "https://www.ablenetinc.com/", description: "Strumenti fisici adattati per studenti con disabilità motorie gravi."},
+                    {name: "Eye-Tracking Physics", link: "https://www.tobiidynavox.com/", description: "Controllo oculare per interagire con simulazioni e esperimenti fisici."},
+                    {name: "Simplified Physics Interface", link: "https://www.boardmaker.com/", description: "Interfacce semplificate con simboli PCS per fisica di base."},
+                    {name: "Physics Communication Boards", link: "https://www.saltillo.com/", description: "Tavole comunicative per esprimere concetti fisici con CAA."},
+                    {name: "Adaptive Physics Lab", link: "https://www.inclusive.tki.org.nz/", description: "Laboratorio fisico adattivo per tutti i livelli di abilità cognitive."}
+                ]
+            },
+            "Fisica Computazionale": {
+                icon: "💻",
+                color: "#8b5cf6",
+                tools: [
+                    {name: "Python Physics Simulations", link: "https://repl.it/", description: "Programmazione Python per simulazioni fisiche avanzate e modellazione numerica."},
+                    {name: "MATLAB Physics Toolbox", link: "https://www.mathworks.com/", description: "Toolbox MATLAB per calcoli fisici complessi e analisi dati sperimentali."},
+                    {name: "NumPy Scientific Computing", link: "https://numpy.org/", description: "Libreria NumPy per calcoli numerici fisici ad alte prestazioni."},
+                    {name: "SciPy Physics Modules", link: "https://scipy.org/", description: "Moduli SciPy specializzati per ottimizzazione e risoluzione problemi fisici."},
+                    {name: "Matplotlib Physics Plots", link: "https://matplotlib.org/", description: "Visualizzazione avanzata dati fisici con grafici scientifici professionali."},
+                    {name: "Jupyter Physics Notebooks", link: "https://jupyter.org/", description: "Notebook interattivi per documentare esperimenti e analisi fisiche."},
+                    {name: "OpenFOAM CFD", link: "https://www.openfoam.com/", description: "Fluidodinamica computazionale open source per simulazioni avanzate."},
+                    {name: "COMSOL Multiphysics", link: "https://www.comsol.com/", description: "Simulazioni multifisiche professionali per ricerca e sviluppo."},
+                    {name: "Ansys Physics Simulation", link: "https://www.ansys.com/", description: "Simulazioni ingegneristiche avanzate per analisi strutturali e termiche."},
+                    {name: "GNU Octave Physics", link: "https://octave.org/", description: "Alternativa open source a MATLAB per calcoli fisici e ingegneristici."}
+                ]
+            },
+            "Analisi Dati Sperimentali": {
+                icon: "📊",
+                color: "#dc2626",
+                tools: [
+                    {name: "Origin Physics Graphing", link: "https://www.originlab.com/", description: "Software professionale per analisi e visualizzazione dati fisici sperimentali."},
+                    {name: "Excel Physics Templates", link: "https://templates.office.com/", description: "Template Excel per raccolta e analisi dati esperimenti fisici."},
+                    {name: "R Physics Statistics", link: "https://www.r-project.org/", description: "Analisi statistica avanzata per interpretazione dati fisici e test ipotesi."},
+                    {name: "Python Pandas Physics", link: "https://pandas.pydata.org/", description: "Manipolazione e analisi dataset fisici con libreria Pandas."},
+                    {name: "Vernier Graphical Analysis", link: "https://www.vernier.com/", description: "App per raccogliere e analizzare dati da sensori fisici digitali."},
+                    {name: "DataStudio Physics", link: "https://www.pasco.com/", description: "Software PASCO per acquisizione dati e analisi esperimenti fisici."},
+                    {name: "Physics Error Analysis", link: "https://www.physics.umd.edu/courses/Phys374/Wallace/", description: "Strumenti per calcolo incertezze e propagazione errori in misure fisiche."},
+                    {name: "Curve Fitting Physics", link: "https://zunzun.com/", description: "Fitting automatico curve per modellare relazioni tra variabili fisiche."},
+                    {name: "Signal Processing Physics", link: "https://www.mathworks.com/products/signal.html", description: "Elaborazione segnali per filtraggio e analisi dati acquisiti da sensori."},
+                    {name: "Statistical Physics Tools", link: "https://www.statgraphics.com/", description: "Strumenti statistici specializzati per analisi dati fisici complessi."}
+                ]
+            },
+            "Apprendimento Fisica": {
+                icon: "📚",
+                color: "#0891b2",
+                tools: [
+                    {name: "Khan Academy Physics", link: "https://www.khanacademy.org/science/physics", description: "Corsi gratuiti di fisica da base ad avanzata con video e esercizi interattivi."},
+                    {name: "Coursera Physics Courses", link: "https://www.coursera.org/browse/physical-science-and-engineering/physics-and-astronomy", description: "Corsi universitari di fisica da Yale, MIT e Stanford accessibili online."},
+                    {name: "edX Physics Programs", link: "https://www.edx.org/learn/physics", description: "Programmi certificati di fisica da università internazionali prestigiose."},
+                    {name: "MIT OpenCourseWare Physics", link: "https://ocw.mit.edu/courses/physics/", description: "Corsi MIT completi di fisica teorica e applicata con materiali originali."},
+                    {name: "Physics Classroom", link: "https://www.physicsclassroom.com/", description: "Risorse complete per insegnamento e apprendimento fisica liceale e universitaria."},
+                    {name: "HyperPhysics", link: "http://hyperphysics.phy-astr.gsu.edu/", description: "Enciclopedia fisica interattiva GSU con collegamenti concettuali avanzati."},
+                    {name: "Brilliant Physics", link: "https://brilliant.org/courses/#physics", description: "Apprendimento interattivo fisica con problem-solving guidato e gamificazione."},
+                    {name: "Physics Forums", link: "https://www.physicsforums.com/", description: "Community internazionale per discussioni, aiuto e approfondimenti fisici."},
+                    {name: "Fundamentals of Physics", link: "https://www.wiley.com/", description: "Risorse digitali Halliday-Resnick per fisica universitaria completa."},
+                    {name: "ArXiv Physics Papers", link: "https://arxiv.org/list/physics/recent", description: "Archivio preprint per ricerca fisica all'avanguardia e pubblicazioni scientifiche."}
+                ]
+            },
+            "Strumenti Specializzati": {
+                icon: "⚙️",
+                color: "#6366f1",
+                tools: [
+                    {name: "Astronomical Calculator", link: "https://www.timeanddate.com/astronomy/", description: "Calcoli astronomici per ottimizzare tempi semina e raccolta basati su cicli lunari."},
+                    {name: "Solar Calculator", link: "https://www.calculator.net/solar-calculator.html", description: "Calcola irraggiamento solare, angoli pannelli e produzione energia fotovoltaica."},
+                    {name: "Wind Calculator", link: "https://www.calculator.net/wind-chill-calculator.html", description: "Analizza velocità vento, direzione e impatti su coltivazioni e strutture."},
+                    {name: "Atmospheric Pressure", link: "https://www.calculator.net/barometric-pressure-calculator.html", description: "Monitora pressione atmosferica per previsioni meteo e stress colture."},
+                    {name: "Humidity Calculator", link: "https://www.calculator.net/humidity-calculator.html", description: "Calcola umidità relativa, assoluta e punto rugiada per controllo clima."},
+                    {name: "Sound Propagation", link: "https://www.calculator.net/decibel-calculator.html", description: "Propagazione suono per progettare barriere acustiche e comfort animale."},
+                    {name: "Electromagnetic Compatibility", link: "https://www.emcfastpass.com/emc-calculators/", description: "EMC per garantire compatibilità elettromagnetica sistemi elettronici agricoli."},
+                    {name: "Radiation Detector", link: "https://www.calculator.net/radiation-calculator.html", description: "Calcoli radiazione per sicurezza e applicazioni tecnologiche in agricoltura."},
+                    {name: "Crystallography Tools", link: "https://www.iucr.org/", description: "Analisi strutture cristalline per controllo qualità minerali e fertilizzanti."},
+                    {name: "Plasma Physics Calculator", link: "https://www.calculator.net/plasma-calculator.html", description: "Fisica plasma per tecnologie innovative sterilizzazione e trattamenti superfici."}
+                ]
+            }
+        };
+
+        // Variabili globali
+        let totalTools = 140;
+        let currentZoom = 1;
+        let isDarkMode = false;
+
+        // INIZIALIZZAZIONE APP DIRETTA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carica preferenza tema
+            const savedTheme = localStorage.getItem('mendel_physics_darkMode');
+            if (savedTheme === 'true') {
+                toggleTheme();
+            }
+            
+            // Inizializza l'app
+            initializeMap();
+            setupSearch();
+            setupKeyboardControls();
+            setupDraggableLegend();
+        });
+
+        // FUNZIONI PRINCIPALI DELL'APP
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('mendel_physics_darkMode', isDarkMode);
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 3);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.3);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.transform = `scale(${currentZoom})`;
+        }
+
+        function goToMathHub() {
+            // Placeholder per navigazione all'hub matematica
+            alert('🔗 Navigazione all\'Hub Matematica\n\nQuesta funzione sarà disponibile quando avrai entrambi gli hub deployati. Puoi aprire il file hub-matematica-completo.html separatamente.');
+        }
+
+        function initializeMap() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = Object.keys(physicsData);
+            
+            totalTools = 0;
+            categories.forEach(category => {
+                totalTools += physicsData[category].tools.length;
+            });
+            
+            categoryGrid.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const categoryNode = document.createElement('div');
+                categoryNode.className = 'category-node animate-fade-in';
+                categoryNode.style.animationDelay = `${index * 0.1}s`;
+                categoryNode.onclick = () => openCategory(category);
+                categoryNode.setAttribute('tabindex', '0');
+                categoryNode.setAttribute('role', 'button');
+                categoryNode.setAttribute('aria-label', `Apri categoria ${category}`);
+                
+                const toolsPreview = physicsData[category].tools.slice(0, 3).map(tool => tool.name).join(', ');
+                
+                categoryNode.innerHTML = `
+                    <div class="category-icon">${physicsData[category].icon}</div>
+                    <div class="category-title">${category}</div>
+                    <div class="category-count">${physicsData[category].tools.length} strumenti</div>
+                    <div class="category-preview">
+                        <div class="preview-text">${toolsPreview}...</div>
+                    </div>
+                `;
+                
+                categoryNode.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCategory(category);
+                    }
+                });
+                
+                categoryGrid.appendChild(categoryNode);
+            });
+            
+            document.getElementById('totalTools').textContent = totalTools;
+        }
+
+        function openCategory(categoryName) {
+            const panel = document.getElementById('toolsPanel');
+            const title = document.getElementById('panelTitle');
+            const subtitle = document.getElementById('panelSubtitle');
+            const content = document.getElementById('toolsContent');
+            
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            event.target.closest('.category-node').classList.add('active');
+            
+            title.textContent = categoryName;
+            subtitle.textContent = `${physicsData[categoryName].tools.length} strumenti disponibili`;
+            
+            content.innerHTML = '';
+            
+            physicsData[categoryName].tools.forEach((tool, index) => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                toolItem.style.opacity = '0';
+                toolItem.style.transform = 'translateY(20px)';
+                
+                toolItem.innerHTML = `
+                    <div class="tool-name">
+                        ${physicsData[categoryName].icon} ${tool.name}
+                    </div>
+                    <div class="tool-description">${tool.description}</div>
+                    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link">
+                        🚀 Accedi al Strumento
+                        <span class="sr-only"> - si apre in una nuova finestra</span>
+                    </a>
+                `;
+                
+                content.appendChild(toolItem);
+                
+                setTimeout(() => {
+                    toolItem.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    toolItem.style.opacity = '1';
+                    toolItem.style.transform = 'translateY(0)';
+                }, index * 50 + 100);
+            });
+            
+            panel.classList.add('open');
+            
+            setTimeout(() => {
+                const firstTool = content.querySelector('.tool-link');
+                if (firstTool) firstTool.focus();
+            }, 500);
+        }
+
+        function closePanel() {
+            document.getElementById('toolsPanel').classList.remove('open');
+            document.querySelectorAll('.category-node').forEach(node => {
+                node.classList.remove('active');
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', debounce((e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                filterCategories(searchTerm);
+            }, 300));
+        }
+
+        function filterCategories(searchTerm) {
+            const categoryNodes = document.querySelectorAll('.category-node');
+            let visibleCount = 0;
+            
+            categoryNodes.forEach(node => {
+                const categoryTitle = node.querySelector('.category-title').textContent.toLowerCase();
+                const categoryName = Object.keys(physicsData).find(cat => cat.toLowerCase() === categoryTitle);
+                
+                let isVisible = false;
+                
+                if (searchTerm === '') {
+                    isVisible = true;
+                } else {
+                    if (categoryTitle.includes(searchTerm)) {
+                        isVisible = true;
+                    } else if (categoryName) {
+                        isVisible = physicsData[categoryName].tools.some(tool =>
+                            tool.name.toLowerCase().includes(searchTerm) ||
+                            tool.description.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                }
+                
+                if (isVisible) {
+                    node.style.display = 'block';
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                    visibleCount++;
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform = 'scale(0.95)';
+                }
+            });
+            
+            if (searchTerm) {
+                document.getElementById('totalTools').textContent = `${visibleCount} di ${totalTools}`;
+            } else {
+                document.getElementById('totalTools').textContent = totalTools;
+            }
+        }
+
+        function toggleFilters() {
+            const categories = Object.keys(physicsData);
+            const stats = categories.map(cat => `${cat}: ${physicsData[cat].tools.length} strumenti`).join('\n');
+            alert(`📊 Statistiche Hub Fisica:\n\n${stats}\n\nTotale: ${totalTools} strumenti`);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey) {
+                    switch(e.key) {
+                        case '=':
+                        case '+':
+                            e.preventDefault();
+                            zoomIn();
+                            break;
+                        case '-':
+                            e.preventDefault();
+                            zoomOut();
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            resetZoom();
+                            break;
+                    }
+                }
+                
+                if (e.ctrlKey && e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+            
+            document.addEventListener('dblclick', () => {
+                resetZoom();
+            });
+        }
+
+        function setupDraggableLegend() {
+            const legend = document.getElementById('legend');
+            const legendHeader = document.getElementById('legendHeader');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            function dragStart(e) {
+                e.preventDefault();
+                
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                }
+
+                if (e.target.closest('.legend-header') || e.target.closest('.drag-handle')) {
+                    isDragging = true;
+                    legend.classList.add('dragging');
+                    document.body.style.userSelect = 'none';
+                }
+            }
+
+            function dragEnd(e) {
+                if (isDragging) {
+                    initialX = currentX;
+                    initialY = currentY;
+                    isDragging = false;
+                    legend.classList.remove('dragging');
+                    document.body.style.userSelect = '';
+                }
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    const rect = legend.getBoundingClientRect();
+                    const maxX = window.innerWidth - rect.width;
+                    const maxY = window.innerHeight - rect.height;
+                    
+                    currentX = Math.max(0, Math.min(currentX, maxX));
+                    currentY = Math.max(0, Math.min(currentY, maxY));
+
+                    legend.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                    legend.style.left = '2rem';
+                    legend.style.bottom = '2rem';
+                }
+            }
+
+            legendHeader.addEventListener("mousedown", dragStart);
+            document.addEventListener("mouseup", dragEnd);
+            document.addEventListener("mousemove", drag);
+
+            legendHeader.addEventListener("touchstart", dragStart, { passive: false });
+            document.addEventListener("touchend", dragEnd);
+            document.addEventListener("touchmove", drag, { passive: false });
+
+            legend.addEventListener("dblclick", () => {
+                xOffset = 0;
+                yOffset = 0;
+                currentX = 0;
+                currentY = 0;
+                legend.style.transform = 'translate(0px, 0px)';
+                
+                legend.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    legend.style.animation = '';
+                }, 500);
+            });
+
+            legendHeader.addEventListener("mouseenter", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--physics-orange)';
+                }
+            });
+
+            legendHeader.addEventListener("mouseleave", () => {
+                if (!isDragging) {
+                    legend.style.borderColor = 'var(--border-light)';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
