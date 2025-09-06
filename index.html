@@ -134,8 +134,8 @@ function buildHome(){
     const ext = SUBJECT_LINKS[s.id] || null;
     const card = document.createElement('div');
     card.className = 'card'; card.setAttribute('tabindex','0'); card.style.setProperty('--idx', idx);
-    card.onclick = () => showPage(s.id);
-    card.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); showPage(s.id);} };
+    card.onclick = () => { const go = SUBJECT_LINKS[s.id] || (s.id + '/index.html'); window.location.href = go; };
+    card.onkeydown = (e) => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); const go = SUBJECT_LINKS[s.id] || (s.id + '/index.html'); window.location.href = go; } };
     card.innerHTML = `<div class="emoji">${s.emoji||"📘"}</div>
       <div><div class="title">${s.name}</div>
       <div class="path">${s.id}${ext ? ` <a class="extlink" href="${ext}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Apri pagina esterna">↗</a>` : ''}</div></div>`;
@@ -271,16 +271,7 @@ async function verifyLinks(){
 }
 
 // Navigation
-function showPage(pageId){
-  // Auto-redirect: nessuna risorsa interna ma link esterno presente
-  const extLink = SUBJECT_LINKS[pageId] || null;
-  const dataTry = HUB_DATA[pageId] || [];
-  if ((Array.isArray(dataTry) ? dataTry.length === 0 : !dataTry) && extLink){
-    window.location.href = extLink;
-    return;
-  }
-
-  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.opacity=0; p.style.transform='translateY(20px)'; });
+function showPage(pageId){ const go = (SUBJECT_LINKS[pageId] || (pageId + '/index.html')); window.location.href = go; });
   ensurePage(pageId);
   const data = HUB_DATA[pageId] || [];
   buildTags(pageId, data);
