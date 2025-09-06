@@ -271,7 +271,11 @@ async function verifyLinks(){
 }
 
 // Navigation
-function showPage(pageId){ const go = (SUBJECT_LINKS[pageId] || (pageId + '/index.html')); window.location.href = go; });
+function showPage(pageId){
+  const ext = SUBJECT_LINKS[pageId] || null;
+  if(ext){ window.location.href = ext; return; }
+
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.opacity=0; p.style.transform='translateY(20px)'; });
   ensurePage(pageId);
   const data = HUB_DATA[pageId] || [];
   buildTags(pageId, data);
