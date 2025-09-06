@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIS Mendel — Hub Religione (IRC)</title>
+<meta name="description" content="Raccolta di risorse per IRC: Bibbia CEI, Magistero, cittadinanza, educazione digitale, video-lezioni, materiali operativi.">
+<style>
+  :root{
+    --bg: linear-gradient(135deg, #2d5f3f 0%, #4a7c59 25%, #66bb6a 50%, #43a047 75%, #2e7d32 100%);
+    --card: rgba(255,255,255,.96);
+    --card-hover: rgba(255,255,255,1);
+    --shadow: 0 8px 32px rgba(0,0,0,.12);
+    --shadow-hover: 0 24px 48px rgba(0,0,0,.22);
+    --text:#1a202c;
+    --text-light:#4a5568;
+    --accent:#2e7d32;
+    --accent-2:#388e3c;
+    --pnrr-bg: rgba(255,255,255,.94);
+    --pnrr-border: rgba(46,125,50,.28);
+    --success:#4caf50;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family: 'Inter', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); background-size:400% 400%; animation:grad 16s ease infinite;
+    color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  body::before{content:'';position:fixed;inset:0;background:
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,.10) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(46,125,50,.05) 0%, transparent 50%);
+    pointer-events:none; z-index:0;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:2rem; position:relative; z-index:1}
+  header{color:#fff; text-align:center; margin-bottom:2rem}
+  h1{font-size:3rem; font-weight:900; margin:.25rem 0 0.75rem;
+     background:linear-gradient(135deg,#fff,#f0fff0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+     text-shadow:0 4px 16px rgba(0,0,0,.25);
+  }
+  .subtitle{font-size:1.15rem; opacity:.95; text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .info{background:var(--pnrr-bg); border:1px solid var(--pnrr-border); border-radius:20px; padding:1.25rem 1.5rem; box-shadow:var(--shadow); margin:1.25rem 0}
+  .info strong{color:var(--accent);}
+  .toolbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center; justify-content:space-between; margin:1rem 0 1.25rem}
+  .search{flex:1; min-width:220px}
+  .search input{width:100%; padding:.8rem 1rem; border:1px solid rgba(0,0,0,.12); border-radius:12px; font-size:.95rem; outline:none}
+  .badges{display:flex; gap:.6rem; flex-wrap:wrap}
+  .badge{background:linear-gradient(135deg,var(--accent),var(--accent-2)); border:1px solid rgba(255,255,255,.25); color:#fff; font-weight:700; padding:.5rem .9rem; border-radius:999px; cursor:pointer; user-select:none; font-size:.9rem; box-shadow:0 3px 8px rgba(0,0,0,.25)}
+  .badge.active{background:#fff; color:var(--accent); border:2px solid var(--accent); box-shadow:0 4px 10px rgba(0,0,0,.3)}
+  .grid{display:grid; gap:1.25rem; margin-top:1rem}
+  @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--card); border-radius:18px; padding:1.25rem; border:1px solid rgba(255,255,255,.38);
+        backdrop-filter:blur(12px); box-shadow:var(--shadow); transition:all .35s ease; position:relative; overflow:hidden}
+  .card:hover{transform:translateY(-6px); box-shadow:var(--shadow-hover); background:var(--card-hover)}
+  .name{font-weight:800; font-size:1.1rem; background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.45rem}
+  .desc{color:var(--text-light); font-size:.95rem; margin-bottom:1rem}
+  .meta{display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:.8rem}
+  .chip{font-size:.78rem; background:#eef7ef; color:var(--accent); border-radius:999px; padding:.25rem .55rem; font-weight:700}
+  .link{display:inline-flex; align-items:center; gap:.6rem; background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        color:#fff; text-decoration:none; padding:.6rem .9rem; border-radius:12px; font-weight:800; box-shadow:0 6px 16px rgba(46,125,50,.28)}
+  .counter{display:inline-block; background:linear-gradient(135deg,var(--success),#388e3c); color:#fff; font-weight:800; padding:.4rem .7rem; border-radius:999px; box-shadow:0 4px 12px rgba(76,175,80,.28)}
+  footer{margin-top:2rem; color:rgba(255,255,255,.92); text-align:center; font-weight:600; text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .school{margin-top:1.25rem; background:var(--pnrr-bg); border:1px solid var(--pnrr-border); border-radius:16px; padding:1rem; color:var(--text); text-align:center}
+  .school a{color:var(--accent); text-decoration:none; font-weight:700}
+  /* Side panel */
+  .side-overlay{position:fixed; inset:0; background:rgba(0,0,0,.32); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity .25s;}
+  .side-overlay.open{opacity:1; pointer-events:auto}
+  .side{position:fixed; top:0; right:0; height:100vh; width:min(480px,92vw); background:#fff; border-left:1px solid rgba(0,0,0,.08);
+        transform:translateX(100%); transition:transform .28s cubic-bezier(.4,0,.2,1); box-shadow:var(--shadow-hover); display:flex; flex-direction:column; z-index:10}
+  .side.open{transform:translateX(0)}
+  .side-h{display:flex; align-items:center; justify-content:space-between; padding:.9rem 1rem; border-bottom:1px solid rgba(0,0,0,.08); background:var(--pnrr-bg)}
+  .side-h strong{color:var(--accent)}
+  .side-s{padding:.75rem 1rem; border-bottom:1px solid rgba(0,0,0,.06)}
+  .side-s input{width:100%; padding:.65rem .85rem; border:1px solid rgba(0,0,0,.15); border-radius:10px}
+  .side-b{padding:.6rem 1rem; border-top:1px solid rgba(0,0,0,.06); display:flex; gap:.5rem; justify-content:space-between}
+  .btn{border:none; border-radius:10px; padding:.55rem .8rem; font-weight:800; cursor:pointer}
+  .btn-open{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff}
+  .btn-copy{background:#eef7ef; color:var(--accent)}
+  .side-list{flex:1; overflow:auto; padding:.75rem 1rem}
+  .item{border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:.65rem .8rem; margin:.45rem 0; background:linear-gradient(135deg,rgba(46,125,50,.04),#fff)}
+  .item a{text-decoration:none; color:var(--accent); font-weight:800}
+  .panel-trigger{border:2px solid var(--accent); position:relative; z-index:1; border-radius:999px; padding:.6rem 1rem; color:var(--accent); background:#fff; font-weight:800; box-shadow:var(--shadow); cursor:pointer; transition:all .25s ease}
+.panel-trigger:hover{background:var(--accent); color:#fff}
+</style>
+</head>
+<body>
+<div class="side-overlay" id="ovl"></div>
+<aside class="side" id="side" aria-hidden="true">
+  <div class="side-h"><div><strong>Elenco risorse</strong> <span class="counter" id="cnt">0</span></div>
+    <button class="btn" onclick="closePanel()" aria-label="Chiudi pannello">✕</button></div>
+  <div class="side-s"><input id="srch2" type="text" placeholder="Cerca nell’elenco…" oninput="filterPanel()"></div>
+  <div id="list" class="side-list"></div>
+  <div class="side-b">
+    <button class="btn btn-copy" onclick="copyLinks()">Copia elenco</button>
+    <button class="btn btn-open" onclick="openAll()">Apri 5 schede</button>
+  </div>
+</aside>
+
+<div class="container">
+  <header>
+    <button class="panel-trigger" onclick="openPanel()">Elenco laterale</button>
+    <h1>Hub Religione (IRC)</h1>
+    <p class="subtitle">Risorse ufficiali e strumenti operativi per l’insegnamento della Religione Cattolica</p>
+  </header>
+
+  <div class="info">
+    <p><span class="counter" id="cCounter">–</span> risorse verificate. Sottosezioni rapide: <strong>Bibbia e strumenti</strong> • <strong>Magistero</strong> • <strong>Cittadinanza e carità</strong> • <strong>Competenze digitali</strong> • <strong>Video‑lezioni</strong>.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><input id="q" type="search" placeholder="Cerca per titolo o descrizione…" oninput="filter()"></div>
+    <div class="badges" id="badges">
+      <span class="badge" data-tag="Bibbia">Bibbia</span>
+      <span class="badge" data-tag="Magistero">Magistero</span>
+      <span class="badge" data-tag="Cittadinanza">Cittadinanza</span>
+      <span class="badge" data-tag="Digitale">Digitale</span>
+      <span class="badge" data-tag="Video">Video</span>
+      <span class="badge" data-tag="Islam">Islam</span>
+      <span class="badge" data-tag="Ebraismo">Ebraismo</span>
+      <span class="badge" data-tag="Buddhismo">Buddhismo</span>
+      <span class="badge" data-tag="Induismo">Induismo</span>
+      <span class="badge" data-tag="Ortodossia">Ortodossia</span>
+      <span class="badge" data-tag="Protestanti">Protestanti</span>
+      <span class="badge" data-tag="Sikh">Sikh</span>
+      <span class="badge" data-tag="Bahai">Bahá’í</span>
+      <span class="badge" data-tag="Interreligioso">Interreligioso</span>
+    </div>
+  </div>
+
+  <section class="grid" id="grid">
+    <!-- Cards are data‑annotated for filtering and for side panel scraping -->
+    <article class="card" data-tags="Bibbia">
+      <div class="name">Bibbia CEI — Bibbia EDU</div>
+      <div class="desc">Testo biblico ufficiale CEI con strumenti di ricerca e confronto.</div>
+      <div class="meta"><span class="chip">Bibbia</span><span class="chip">Ufficiale</span></div>
+      <a class="link" href="https://www.bibbiaedu.it/" target="_blank" rel="noopener" data-url="https://www.bibbiaedu.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Magistero Cittadinanza">
+      <div class="name">Vatican.va — Documenti del Magistero</div>
+      <div class="desc">Encicliche e testi per percorsi su etica, ambiente, cittadinanza (Laudato si’, Laudate Deum, ecc.).</div>
+      <div class="meta"><span class="chip">Magistero</span><span class="chip">Cittadinanza</span></div>
+      <a class="link" href="https://www.vatican.va/content/vatican/it.html" target="_blank" rel="noopener" data-url="https://www.vatican.va/content/vatican/it.html">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Magistero Cittadinanza">
+      <div class="name">Laudato si’ — testo integrale</div>
+      <div class="desc">Ecologia integrale, custodia del creato; ponte con Educazione Civica e Agenda 2030.</div>
+      <div class="meta"><span class="chip">Magistero</span><span class="chip">Ambiente</span></div>
+      <a class="link" href="https://www.vatican.va/content/francesco/it/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html" target="_blank" rel="noopener" data-url="https://www.vatican.va/content/francesco/it/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Cittadinanza">
+      <div class="name">Caritas Italiana — Scuola e giovani</div>
+      <div class="desc">Percorsi su pace, legalità, corresponsabilità e cittadinanza attiva.</div>
+      <div class="meta"><span class="chip">Cittadinanza</span><span class="chip">Percorsi</span></div>
+      <a class="link" href="https://www.caritas.it/" target="_blank" rel="noopener" data-url="https://www.caritas.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Digitale">
+      <div class="name">WeCa — WebCattolici Italiani</div>
+      <div class="desc">Educazione digitale e toolkit per competenze digitali in chiave valoriale.</div>
+      <div class="meta"><span class="chip">Digitale</span><span class="chip">Toolkit</span></div>
+      <a class="link" href="https://www.webcattolici.it/" target="_blank" rel="noopener" data-url="https://www.webcattolici.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Video Bibbia">
+      <div class="name">BibleProject (IT)</div>
+      <div class="desc">Video‑lezioni animate su Bibbia e teologia narrativa; adatte a flipped classroom.</div>
+      <div class="meta"><span class="chip">Video</span><span class="chip">Bibbia</span></div>
+      <a class="link" href="https://bibleproject.com/it/" target="_blank" rel="noopener" data-url="https://bibleproject.com/it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Bibbia">
+      <div class="name">Bibbia CEEI — comparatore testi (alternativa)</div>
+      <div class="desc">Strumenti di lettura/comparazione: utile per analisi testuale (alternativa complementare).</div>
+      <div class="meta"><span class="chip">Bibbia</span></div>
+      <a class="link" href="https://www.bibbiaedu.it/" target="_blank" rel="noopener" data-url="https://www.bibbiaedu.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Musei Cittadinanza">
+      <div class="name">Musei Vaticani — Offerta didattica</div>
+      <div class="desc">Itinerari e laboratori per scuole; materiali e visite guidate tematiche.</div>
+      <div class="meta"><span class="chip">Cittadinanza</span><span class="chip">Musei</span></div>
+      <a class="link" href="https://m.museivaticani.va/content/museivaticani/it/collezioni/musei/offerta-didattica.html" target="_blank" rel="noopener" data-url="https://m.museivaticani.va/content/museivaticani/it/collezioni/musei/offerta-didattica.html">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Normativa">
+      <div class="name">Servizio Nazionale IRC — CEI</div>
+      <div class="desc">Portale ufficiale dell’IRC: materiali, aggiornamenti, riferimenti normativi.</div>
+      <div class="meta"><span class="chip">Ufficiale</span><span class="chip">Normativa</span></div>
+      <a class="link" href="https://irc.chiesacattolica.it/" target="_blank" rel="noopener" data-url="https://irc.chiesacattolica.it/">Apri risorsa</a>
+    </article>
+
+  
+    <!-- ===== Altre religioni: risorse ufficiali / autorevoli ===== -->
+    <article class="card" data-tags="Islam Interreligioso">
+      <div class="name">COREIS — Comunità Religiosa Islamica Italiana</div>
+      <div class="desc">Materiali divulgativi e iniziative educative sul dialogo e la conoscenza dell’Islam in Italia.</div>
+      <div class="meta"><span class="chip">Islam</span><span class="chip">Interreligioso</span></div>
+      <a class="link" href="https://www.coreis.it/" target="_blank" rel="noopener" data-url="https://www.coreis.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Islam">
+      <div class="name">Centro Islamico Culturale d’Italia (Grande Moschea di Roma)</div>
+      <div class="desc">Centro di riferimento nazionale: comunicati, attività culturali e educative.</div>
+      <div class="meta"><span class="chip">Islam</span></div>
+      <a class="link" href="https://www.centroislamicoculturaleditalia.it/" target="_blank" rel="noopener" data-url="https://www.centroislamicoculturaleditalia.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Islam Testi">
+      <div class="name">Quran.com — Corano (multilingue)</div>
+      <div class="desc">Testo del Corano con traduzioni e ricerca; utile per letture comparative (interfaccia multilingue).</div>
+      <div class="meta"><span class="chip">Islam</span><span class="chip">Testi</span></div>
+      <a class="link" href="https://quran.com/" target="_blank" rel="noopener" data-url="https://quran.com/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Ebraismo Bibbia">
+      <div class="name">UCEI — Unione delle Comunità Ebraiche Italiane</div>
+      <div class="desc">Portale ufficiale dell’ebraismo italiano: cultura, didattica, eventi e materiali.</div>
+      <div class="meta"><span class="chip">Ebraismo</span></div>
+      <a class="link" href="https://ucei.it/" target="_blank" rel="noopener" data-url="https://ucei.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Ebraismo Testi">
+      <div class="name">Torah.it — Testi ebraici (risorse)</div>
+      <div class="desc">Raccolta di testi e risorse educative sull’ebraismo (letture, studio, materiali).</div>
+      <div class="meta"><span class="chip">Ebraismo</span><span class="chip">Testi</span></div>
+      <a class="link" href="https://www.torah.it/" target="_blank" rel="noopener" data-url="https://www.torah.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Buddhismo">
+      <div class="name">Unione Buddhista Italiana (UBI)</div>
+      <div class="desc">Sito ufficiale dell’UBI: informazioni, comunità, progetti per scuole e società.</div>
+      <div class="meta"><span class="chip">Buddhismo</span></div>
+      <a class="link" href="https://www.buddhismo.it/" target="_blank" rel="noopener" data-url="https://www.buddhismo.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Induismo">
+      <div class="name">Unione Induista Italiana — Sanatana Dharma Samgha</div>
+      <div class="desc">Portale ufficiale dell’induismo in Italia: cultura, formazione, materiali.</div>
+      <div class="meta"><span class="chip">Induismo</span></div>
+      <a class="link" href="https://www.uilweb.it/" target="_blank" rel="noopener" data-url="https://www.uilweb.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Ortodossia">
+      <div class="name">Arcidiocesi Ortodossa d’Italia (Patriarcato Ecumenico)</div>
+      <div class="desc">Sito istituzionale: comunità, documenti, attività pastorali e culturali.</div>
+      <div class="meta"><span class="chip">Ortodossia</span></div>
+      <a class="link" href="https://www.orthodoxchurch.it/" target="_blank" rel="noopener" data-url="https://www.orthodoxchurch.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Protestanti">
+      <div class="name">FCEI — Federazione delle Chiese Evangeliche in Italia</div>
+      <div class="desc">Riferimento nazionale per le chiese evangeliche: materiali e iniziative educative.</div>
+      <div class="meta"><span class="chip">Protestanti</span></div>
+      <a class="link" href="https://www.fcei.it/" target="_blank" rel="noopener" data-url="https://www.fcei.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sikh">
+      <div class="name">Comunità Sikh in Italia — risorse</div>
+      <div class="desc">Portali e riferimenti per conoscere il Sikhismo e le comunità presenti in Italia.</div>
+      <div class="meta"><span class="chip">Sikh</span></div>
+      <a class="link" href="https://it.sikhwiki.org/index.php/Pagina_principale" target="_blank" rel="noopener" data-url="https://it.sikhwiki.org/index.php/Pagina_principale">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Bahai Interreligioso">
+      <div class="name">Comunità Bahá’í d’Italia</div>
+      <div class="desc">Sito ufficiale della comunità Bahá’í: educazione, unità nella diversità, progetti sociali.</div>
+      <div class="meta"><span class="chip">Bahá’í</span><span class="chip">Interreligioso</span></div>
+      <a class="link" href="https://www.bahai.it/" target="_blank" rel="noopener" data-url="https://www.bahai.it/">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Interreligioso Cittadinanza">
+      <div class="name">Religions for Peace Italia</div>
+      <div class="desc">Rete interreligiosa per la pace e il dialogo: spunti per Educazione Civica e cittadinanza globale.</div>
+      <div class="meta"><span class="chip">Interreligioso</span><span class="chip">Cittadinanza</span></div>
+      <a class="link" href="https://www.religionsforpeaceitalia.org/" target="_blank" rel="noopener" data-url="https://www.religionsforpeaceitalia.org/">Apri risorsa</a>
+    </article>
+
+  </section>
+
+  <div class="school">
+    <strong>IIS MENDEL — Team Buone Pratiche</strong><br>Via Ferrazzi 15 — 20035 Villa Cortese (MI) ·
+    <a href="https://agrariomendel.edu.it/" target="_blank" rel="noopener">agrariomendel.edu.it</a>
+  </div>
+  <footer>© 2025 IIS Mendel — Hub Religione (IRC)</footer>
+</div>
+
+<script>
+  // Badges toggle
+  const badges = document.querySelectorAll('.badge');
+  const grid = document.getElementById('grid');
+  const search = document.getElementById('q');
+  const counter = document.getElementById('cCounter');
+  const ovl = document.getElementById('ovl');
+  const side = document.getElementById('side');
+  const list = document.getElementById('list');
+  const cnt = document.getElementById('cnt');
+  const srch2 = document.getElementById('srch2');
+
+  badges.forEach(b => b.addEventListener('click', () => {
+    b.classList.toggle('active');
+    filter();
+  }));
+
+  function filter(){
+    const activeTags = Array.from(badges).filter(b=>b.classList.contains('active')).map(b=>b.dataset.tag.toLowerCase());
+    const q = (search.value || '').toLowerCase();
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    let visible = 0;
+    cards.forEach(card=>{
+      const tags = (card.dataset.tags||'').toLowerCase();
+      const text = (card.innerText||'').toLowerCase();
+      const passTag = activeTags.length===0 || activeTags.every(t=>tags.includes(t));
+      const passQ = q==='' || text.includes(q);
+      const show = passTag && passQ;
+      card.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    counter.textContent = visible;
+  }
+
+  // Side panel
+  function openPanel(){
+    buildPanel();
+    ovl.classList.add('open');
+    side.classList.add('open');
+  }
+  function closePanel(){
+    ovl.classList.remove('open');
+    side.classList.remove('open');
+  }
+  ovl.addEventListener('click', closePanel);
+
+  function buildPanel(){
+    const links = Array.from(document.querySelectorAll('.card a.link'));
+    list.innerHTML = '';
+    links.forEach(a=>{
+      const it = document.createElement('div');
+      it.className = 'item';
+      it.innerHTML = `<a href="${a.href}" target="_blank" rel="noopener">${a.closest('.card').querySelector('.name').textContent}</a>
+                      <p style="margin:.25rem 0 0; font-size:.85rem; color:#555;">${a.href}</p>`;
+      list.appendChild(it);
+    });
+    cnt.textContent = links.length;
+    counter.textContent = links.length;
+  }
+
+  function filterPanel(){
+    const q = (srch2.value||'').toLowerCase();
+    Array.from(list.children).forEach(div=>{
+      const t = (div.innerText||'').toLowerCase();
+      div.style.display = t.includes(q) ? '' : 'none';
+    });
+  }
+
+  function openAll(){
+    // Apri fino a 5 schede per evitare blocchi popup
+    const links = Array.from(document.querySelectorAll('.card a.link')).slice(0,5);
+    links.forEach(a=>window.open(a.href, '_blank', 'noopener'));
+  }
+
+  function copyLinks(){
+    const lines = Array.from(document.querySelectorAll('.card a.link')).map(a => `${a.closest('.card').querySelector('.name').textContent} — ${a.href}`);
+    navigator.clipboard.writeText(lines.join('\n')).then(()=>{
+      alert('Elenco copiato negli appunti.');
+    });
+  }
+
+  // Init
+  buildPanel();
+  filter();
+</script>
+</body>
+</html>

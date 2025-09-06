@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIS Mendel — Hub Scienze Motorie</title>
+<meta name="description" content="Risorse per Scienze Motorie: linee guida OMS/ISS, didattica, inclusione, analisi video del movimento, benessere e sicurezza.">
+<style>
+  :root{
+    --bg: linear-gradient(135deg, #2d5f3f 0%, #4a7c59 25%, #66bb6a 50%, #43a047 75%, #2e7d32 100%);
+    --card: rgba(255,255,255,.96);
+    --card-hover: rgba(255,255,255,1);
+    --shadow: 0 8px 32px rgba(0,0,0,.12);
+    --shadow-hover: 0 24px 48px rgba(0,0,0,.22);
+    --text:#1a202c;
+    --text-light:#4a5568;
+    --accent:#2e7d32;
+    --accent-2:#388e3c;
+    --pnrr-bg: rgba(255,255,255,.94);
+    --pnrr-border: rgba(46,125,50,.28);
+    --success:#4caf50;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family: 'Inter', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); background-size:400% 400%; animation:grad 16s ease infinite;
+    color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden;
+  }
+  @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  body::before{content:'';position:fixed;inset:0;background:
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,.10) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(46,125,50,.05) 0%, transparent 50%);
+    pointer-events:none; z-index:0;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:2rem; position:relative; z-index:1}
+  header{color:#fff; text-align:center; margin-bottom:2rem}
+  h1{font-size:3rem; font-weight:900; margin:.25rem 0 0.75rem;
+     background:linear-gradient(135deg,#fff,#f0fff0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+     text-shadow:0 4px 16px rgba(0,0,0,.25);
+  }
+  .subtitle{font-size:1.15rem; opacity:.95; text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .info{background:var(--pnrr-bg); border:1px solid var(--pnrr-border); border-radius:20px; padding:1.25rem 1.5rem; box-shadow:var(--shadow); margin:1.25rem 0}
+  .info strong{color:var(--accent)}
+  .toolbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center; justify-content:space-between; margin:1rem 0 1.25rem}
+  .search{flex:1; min-width:220px}
+  .search input{width:100%; padding:.8rem 1rem; border:1px solid rgba(0,0,0,.12); border-radius:12px; font-size:.95rem; outline:none}
+  .badges{display:flex; gap:.6rem; flex-wrap:wrap}
+  /* Badge style: green with white text; active inverted */
+  .badge{background:linear-gradient(135deg,var(--accent),var(--accent-2)); 
+         border:1px solid rgba(255,255,255,.25); color:#fff; font-weight:700;
+         padding:.5rem .9rem; border-radius:999px; cursor:pointer; user-select:none; font-size:.9rem;
+         box-shadow:0 3px 8px rgba(0,0,0,.25)}
+  .badge.active{background:#fff; color:var(--accent); border:2px solid var(--accent);
+                box-shadow:0 4px 10px rgba(0,0,0,.3)}
+  .grid{display:grid; gap:1.25rem; margin-top:1rem}
+  @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--card); border-radius:18px; padding:1.25rem; border:1px solid rgba(255,255,255,.38);
+        backdrop-filter:blur(12px); box-shadow:var(--shadow); transition:all .35s ease; position:relative; overflow:hidden}
+  .card:hover{transform:translateY(-6px); box-shadow:var(--shadow-hover); background:var(--card-hover)}
+  .name{font-weight:800; font-size:1.1rem; background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.45rem}
+  .desc{color:var(--text-light); font-size:.95rem; margin-bottom:1rem}
+  .meta{display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:.8rem}
+  .chip{font-size:.78rem; background:#eef7ef; color:var(--accent); border-radius:999px; padding:.25rem .55rem; font-weight:700}
+  .link{display:inline-flex; align-items:center; gap:.6rem; background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        color:#fff; text-decoration:none; padding:.6rem .9rem; border-radius:12px; font-weight:800; box-shadow:0 6px 16px rgba(46,125,50,.28)}
+  .counter{display:inline-block; background:linear-gradient(135deg,var(--success),#388e3c); color:#fff; font-weight:800; padding:.4rem .7rem; border-radius:999px; box-shadow:0 4px 12px rgba(76,175,80,.28)}
+  footer{margin-top:2rem; color:rgba(255,255,255,.92); text-align:center; font-weight:600; text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .school{margin-top:1.25rem; background:var(--pnrr-bg); border:1px solid var(--pnrr-border); border-radius:16px; padding:1rem; color:var(--text); text-align:center}
+  .school a{color:var(--accent); text-decoration:none; font-weight:700}
+  /* Panel trigger button (top) */
+  .panel-trigger{border:2px solid var(--accent); position:relative; z-index:1; border-radius:999px; padding:.6rem 1rem; color:var(--accent); background:#fff; font-weight:800; box-shadow:var(--shadow); cursor:pointer; transition:all .25s ease}
+  .panel-trigger:hover{background:var(--accent); color:#fff}
+  /* Side panel */
+  .side-overlay{position:fixed; inset:0; background:rgba(0,0,0,.32); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity .25s;}
+  .side-overlay.open{opacity:1; pointer-events:auto}
+  .side{position:fixed; top:0; right:0; height:100vh; width:min(480px,92vw); background:#fff; border-left:1px solid rgba(0,0,0,.08);
+        transform:translateX(100%); transition:transform .28s cubic-bezier(.4,0,.2,1); box-shadow:var(--shadow-hover); display:flex; flex-direction:column; z-index:10}
+  .side.open{transform:translateX(0)}
+  .side-h{display:flex; align-items:center; justify-content:space-between; padding:.9rem 1rem; border-bottom:1px solid rgba(0,0,0,.08); background:var(--pnrr-bg)}
+  .side-h strong{color:var(--accent)}
+  .side-s{padding:.75rem 1rem; border-bottom:1px solid rgba(0,0,0,.06)}
+  .side-s input{width:100%; padding:.65rem .85rem; border:1px solid rgba(0,0,0,.15); border-radius:10px}
+  .side-b{padding:.6rem 1rem; border-top:1px solid rgba(0,0,0,.06); display:flex; gap:.5rem; justify-content:space-between}
+  .btn{border:none; border-radius:10px; padding:.55rem .8rem; font-weight:800; cursor:pointer}
+  .btn-open{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff}
+  .btn-copy{background:#eef7ef; color:var(--accent)}
+  .side-list{flex:1; overflow:auto; padding:.75rem 1rem}
+  .item{border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:.65rem .8rem; margin:.45rem 0; background:linear-gradient(135deg,rgba(46,125,50,.04),#fff)}
+  .item a{text-decoration:none; color:var(--accent); font-weight:800}
+</style>
+</head>
+<body>
+<div class="side-overlay" id="ovl"></div>
+<aside class="side" id="side" aria-hidden="true">
+  <div class="side-h"><div><strong>Elenco risorse</strong> <span class="counter" id="cnt">0</span></div>
+    <button class="btn" onclick="closePanel()" aria-label="Chiudi pannello">✕</button></div>
+  <div class="side-s"><input id="srch2" type="text" placeholder="Cerca nell’elenco…" oninput="filterPanel()"></div>
+  <div id="list" class="side-list"></div>
+  <div class="side-b">
+    <button class="btn btn-copy" onclick="copyLinks()">Copia elenco</button>
+    <button class="btn btn-open" onclick="openAll()">Apri 5 schede</button>
+  </div>
+</aside>
+
+<div class="container">
+  <header>
+    <button class="panel-trigger" onclick="openPanel()">Elenco laterale</button>
+    <h1>Hub Scienze Motorie</h1>
+    <p class="subtitle">Linee guida, didattica, inclusione e strumenti per l’educazione fisica e il benessere</p>
+  </header>
+
+  <div class="info">
+    <p><span class="counter" id="cCounter">–</span> risorse verificate. Sottosezioni rapide: <strong>Linee guida</strong> • <strong>Didattica</strong> • <strong>Analisi video</strong> • <strong>Inclusione</strong> • <strong>Benessere e salute</strong> • <strong>Sicurezza</strong>.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><input id="q" type="search" placeholder="Cerca per titolo o descrizione…" oninput="filter()"></div>
+    <div class="badges" id="badges">
+      <span class="badge" data-tag="Linee guida">Linee guida</span>
+      <span class="badge" data-tag="Didattica">Didattica</span>
+      <span class="badge" data-tag="Analisi video">Analisi video</span>
+      <span class="badge" data-tag="Inclusione">Inclusione</span>
+      <span class="badge" data-tag="Benessere">Benessere</span>
+      <span class="badge" data-tag="Benessere mentale">Benessere mentale</span>
+      <span class="badge" data-tag="Sicurezza">Sicurezza</span>
+      <span class="badge" data-tag="Primo soccorso">Primo soccorso</span>
+      <span class="badge" data-tag="Alimentazione">Alimentazione</span>
+      <span class="badge" data-tag="Allenamento">Allenamento</span>
+      <span class="badge" data-tag="Test motori">Test motori</span>
+      <span class="badge" data-tag="Sport">Sport</span>
+      <span class="badge" data-tag="Federazioni">Federazioni</span>
+      <span class="badge" data-tag="CLIL">CLIL</span>
+    </div>
+  </div>
+
+  <section class="grid" id="grid">
+    <!-- Linee guida / istituzionali -->
+    <article class="card" data-tags="Linee guida Benessere">
+      <div class="name">Epicentro (ISS) — Attività fisica</div>
+      <div class="desc">Sintesi in italiano delle Linee guida OMS, con focus per età scolare e salute pubblica.</div>
+      <div class="meta"><span class="chip">Linee guida</span><span class="chip">Benessere</span></div>
+      <a class="link" href="https://www.epicentro.iss.it/attivita-fisica/linee-guida-oms" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Linee guida Benessere">
+      <div class="name">WHO — Guidelines on Physical Activity</div>
+      <div class="desc">Raccomandazioni OMS (5–17 anni: almeno 60 min/die MVPA), documenti e infografiche.</div>
+      <div class="meta"><span class="chip">Linee guida</span></div>
+      <a class="link" href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Linee guida Didattica">
+      <div class="name">Sport e Salute — Scuola Attiva</div>
+      <div class="desc">Kit didattici, pause attive e percorsi motori per la scuola.</div>
+      <div class="meta"><span class="chip">Didattica</span><span class="chip">Linee guida</span></div>
+      <a class="link" href="https://www.sportesalute.eu/pnrr-scuola-attiva.html" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Aggiornamento Didattica">
+      <div class="name">CONI — Scuola dello Sport</div>
+      <div class="desc">Corsi, materiali e aggiornamento docenti su sport di base e inclusione.</div>
+      <div class="meta"><span class="chip">Aggiornamento</span></div>
+      <a class="link" href="https://www.coni.it/it/scuola-dello-sport.html" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Inclusione Benessere">
+      <div class="name">Sport e Inclusione</div>
+      <div class="desc">Progetti e risorse per attività motorie inclusive e sport adattati.</div>
+      <div class="meta"><span class="chip">Inclusione</span></div>
+      <a class="link" href="https://www.sportesalute.eu/progetti/inclusione.html" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Analisi del movimento / strumenti -->
+    <article class="card" data-tags="Analisi video Didattica">
+      <div class="name">Kinovea (open source)</div>
+      <div class="desc">Analisi video del movimento: rallenty, misure, comparazioni per feedback tecnico.</div>
+      <div class="meta"><span class="chip">Analisi video</span></div>
+      <a class="link" href="https://www.kinovea.org/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Didattica / materiali -->
+    <article class="card" data-tags="Didattica CLIL">
+      <div class="name">Loescher — Scienze motorie</div>
+      <div class="desc">Schede operative, glossari, spunti CLIL e verifiche.</div>
+      <div class="meta"><span class="chip">Didattica</span><span class="chip">CLIL</span></div>
+      <a class="link" href="https://loescher.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Didattica">
+      <div class="name">DeA Scuola — Educazione fisica</div>
+      <div class="desc">Percorsi per competenze, unità di apprendimento e materiali operativi.</div>
+      <div class="meta"><span class="chip">Didattica</span></div>
+      <a class="link" href="https://deascuola.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Didattica Gamification">
+      <div class="name">Wordwall — Scienze motorie (superiori)</div>
+      <div class="desc">Attività gamificate e personalizzabili per teoria e terminologia.</div>
+      <div class="meta"><span class="chip">Didattica</span></div>
+      <a class="link" href="https://wordwall.net/it/community/scienze-motorie-scuola-superiore" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Evidence-based / position stands -->
+    <article class="card" data-tags="Linee guida Benessere">
+      <div class="name">ACSM — Position Stands</div>
+      <div class="desc">Documenti evidence-based su allenamento, salute e programmazione dell’esercizio.</div>
+      <div class="meta"><span class="chip">Linee guida</span></div>
+      <a class="link" href="https://www.acsm.org/education-resources/trending-topics-landing/position-stands" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+  
+    <!-- Alimentazione -->
+    <article class="card" data-tags="Alimentazione Benessere Linee guida">
+      <div class="name">Ministero della Salute — Alimentazione</div>
+      <div class="desc">Linee guida, campagne e materiali per una corretta educazione alimentare.</div>
+      <div class="meta"><span class="chip">Alimentazione</span><span class="chip">Linee guida</span></div>
+      <a class="link" href="https://www.salute.gov.it/portale/nutrizione/homeNutrizione.jsp" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Alimentazione Benessere">
+      <div class="name">CREA — Centro Ricerca Alimenti e Nutrizione</div>
+      <div class="desc">Linee guida per una sana alimentazione, tabelle nutrizionali, materiali educativi.</div>
+      <div class="meta"><span class="chip">Alimentazione</span></div>
+      <a class="link" href="https://www.crea.gov.it/web/alimenti-e-nutrizione" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Alimentazione Benessere">
+      <div class="name">OMS — Healthy Diet</div>
+      <div class="desc">Raccomandazioni OMS su alimentazione sana per età e popolazioni diverse.</div>
+      <div class="meta"><span class="chip">Alimentazione</span><span class="chip">Linee guida</span></div>
+      <a class="link" href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Sport specifici / Federazioni -->
+    <article class="card" data-tags="Sport Federazioni Didattica">
+      <div class="name">CONI — Federazioni Sportive Nazionali</div>
+      <div class="desc">Elenco delle FSN con link diretti alle pagine ufficiali (materiali e regolamenti).</div>
+      <div class="meta"><span class="chip">Federazioni</span><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.coni.it/it/federazioni-sportive-nazionali.html" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sport Federazioni">
+      <div class="name">FIGC — Settore Giovanile e Scolastico</div>
+      <div class="desc">Materiali per scuole e formazione di base nel calcio.</div>
+      <div class="meta"><span class="chip">Sport</span><span class="chip">Federazioni</span></div>
+      <a class="link" href="https://www.figc.it/it/giovani/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sport Federazioni">
+      <div class="name">FIDAL — Atletica Leggera</div>
+      <div class="desc">Regolamenti, progetti scuola, materiali tecnici per atletica.</div>
+      <div class="meta"><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.fidal.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sport Federazioni">
+      <div class="name">FIN — Federazione Italiana Nuoto</div>
+      <div class="desc">Attività giovanile, regolamenti, progetti scuola e corsi di formazione.</div>
+      <div class="meta"><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.federnuoto.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sport Federazioni">
+      <div class="name">FIPAV — Pallavolo</div>
+      <div class="desc">Materiali tecnici e iniziative giovanili per la pallavolo scolastica.</div>
+      <div class="meta"><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.federvolley.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Sport Federazioni">
+      <div class="name">FITP — Tennis & Padel</div>
+      <div class="desc">Progetti scuola, regolamenti e attività di base per tennis e padel.</div>
+      <div class="meta"><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.fitp.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Benessere mentale / psicologia dello sport -->
+    <article class="card" data-tags="Benessere mentale Didattica">
+      <div class="name">AIPS — Psicologia dello Sport</div>
+      <div class="desc">Risorse e aggiornamenti su motivazione, gestione ansia e clima motivazionale.</div>
+      <div class="meta"><span class="chip">Benessere mentale</span></div>
+      <a class="link" href="https://www.aipsweb.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Primo soccorso / sicurezza -->
+    <article class="card" data-tags="Primo soccorso Sicurezza">
+      <div class="name">Croce Rossa Italiana — Formazione</div>
+      <div class="desc">Moduli base di primo soccorso e corsi per comunità scolastiche.</div>
+      <div class="meta"><span class="chip">Primo soccorso</span><span class="chip">Sicurezza</span></div>
+      <a class="link" href="https://www.cri.it/formazione/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Test motori / valutazione -->
+    <article class="card" data-tags="Test motori Didattica">
+      <div class="name">Test di Cooper — guida pratica</div>
+      <div class="desc">Protocolli, tabelle e calcolo VO₂ stimato per il test di resistenza.</div>
+      <div class="meta"><span class="chip">Test motori</span></div>
+      <a class="link" href="https://www.topendsports.com/testing/tests/cooper.htm" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Test motori Didattica">
+      <div class="name">Shuttle Run (Beep Test)</div>
+      <div class="desc">Procedure e strumenti per test incrementali di capacità aerobica.</div>
+      <div class="meta"><span class="chip">Test motori</span></div>
+      <a class="link" href="https://www.topendsports.com/testing/tests/20mshuttle.htm" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Allenamento / app e strumenti -->
+    <article class="card" data-tags="Allenamento Benessere App">
+      <div class="name">Nike Training Club (App)</div>
+      <div class="desc">Programmi di allenamento guidati, video e piani per diversi livelli.</div>
+      <div class="meta"><span class="chip">Allenamento</span></div>
+      <a class="link" href="https://www.nike.com/ntc-app" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Allenamento Benessere App">
+      <div class="name">Adidas Training (App)</div>
+      <div class="desc">Allenamenti a corpo libero, piani personalizzati e monitoraggio.</div>
+      <div class="meta"><span class="chip">Allenamento</span></div>
+      <a class="link" href="https://www.runtastic.com/apps/training" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Allenamento Sport App">
+      <div class="name">Strava</div>
+      <div class="desc">Analisi di performance e community per corsa e ciclismo scolastico.</div>
+      <div class="meta"><span class="chip">Sport</span></div>
+      <a class="link" href="https://www.strava.com/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <article class="card" data-tags="Allenamento Benessere App">
+      <div class="name">PhysiApp</div>
+      <div class="desc">Esercizi guidati con video per prevenzione e riatletizzazione.</div>
+      <div class="meta"><span class="chip">Allenamento</span></div>
+      <a class="link" href="https://www.physitrack.com/physiapp" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+    <!-- Inclusione / adattato -->
+    <article class="card" data-tags="Inclusione Didattica">
+      <div class="name">CIP — Comitato Italiano Paralimpico</div>
+      <div class="desc">Materiali e progetti per sport inclusivo e attività adattate.</div>
+      <div class="meta"><span class="chip">Inclusione</span></div>
+      <a class="link" href="https://www.comitatoparalimpico.it/" target="_blank" rel="noopener">Apri risorsa</a>
+    </article>
+
+  </section>
+
+  <div class="school">
+    <strong>IIS MENDEL — Team Buone Pratiche</strong><br>Via Ferrazzi 15 — 20035 Villa Cortese (MI) ·
+    <a href="https://agrariomendel.edu.it/" target="_blank" rel="noopener">agrariomendel.edu.it</a>
+  </div>
+  <footer>© 2025 IIS Mendel — Hub Scienze Motorie</footer>
+</div>
+
+<script>
+  // Badges toggle & filtering
+  const badges = document.querySelectorAll('.badge');
+  const grid = document.getElementById('grid');
+  const search = document.getElementById('q');
+  const counter = document.getElementById('cCounter');
+  const ovl = document.getElementById('ovl');
+  const side = document.getElementById('side');
+  const list = document.getElementById('list');
+  const cnt = document.getElementById('cnt');
+  const srch2 = document.getElementById('srch2');
+
+  badges.forEach(b => b.addEventListener('click', () => {
+    b.classList.toggle('active');
+    filter();
+  }));
+
+  function filter(){
+    const activeTags = Array.from(badges).filter(b=>b.classList.contains('active')).map(b=>b.dataset.tag.toLowerCase());
+    const q = (search.value || '').toLowerCase();
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    let visible = 0;
+    cards.forEach(card=>{
+      const tags = (card.dataset.tags||'').toLowerCase();
+      const text = (card.innerText||'').toLowerCase();
+      const passTag = activeTags.length===0 || activeTags.every(t=>tags.includes(t));
+      const passQ = q==='' || text.includes(q) || tags.includes(q);
+      const show = passTag && passQ;
+      card.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    counter.textContent = visible;
+  }
+
+  // Side panel
+  function openPanel(){
+    buildPanel();
+    ovl.classList.add('open');
+    side.classList.add('open');
+  }
+  function closePanel(){
+    ovl.classList.remove('open');
+    side.classList.remove('open');
+  }
+  ovl.addEventListener('click', closePanel);
+
+  function buildPanel(){
+    const links = Array.from(document.querySelectorAll('.card a.link'));
+    list.innerHTML = '';
+    links.forEach(a=>{
+      const it = document.createElement('div');
+      it.className = 'item';
+      it.innerHTML = `<a href="${a.href}" target="_blank" rel="noopener">${a.closest('.card').querySelector('.name').textContent}</a>
+                      <p style="margin:.25rem 0 0; font-size:.85rem; color:#555;">${a.href}</p>`;
+      list.appendChild(it);
+    });
+    cnt.textContent = links.length;
+    counter.textContent = links.length;
+  }
+
+  function filterPanel(){
+    const q = (srch2.value||'').toLowerCase();
+    Array.from(list.children).forEach(div=>{
+      const t = (div.innerText||'').toLowerCase();
+      div.style.display = t.includes(q) ? '' : 'none';
+    });
+  }
+
+  function openAll(){
+    // Apri fino a 5 schede per evitare blocchi popup
+    const links = Array.from(document.querySelectorAll('.card a.link')).slice(0,5);
+    links.forEach(a=>window.open(a.href, '_blank', 'noopener'));
+  }
+
+  function copyLinks(){
+    const lines = Array.from(document.querySelectorAll('.card a.link')).map(a => `${a.closest('.card').querySelector('.name').textContent} — ${a.href}`);
+    navigator.clipboard.writeText(lines.join('\n')).then(()=>{
+      alert('Elenco copiato negli appunti.');
+    });
+  }
+
+  // Init
+  buildPanel();
+  filter();
+</script>
+</body>
+</html>
