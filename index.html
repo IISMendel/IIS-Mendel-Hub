@@ -6,901 +6,139 @@
 <title>HUB MATERIE - IIS Mendel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg1:#0f766e; 
-  --bg2:#10b981; 
-  --bg3:#065f46; 
-  --card:#ffffff; 
-  --text:#0f172a; 
-  --muted:#475569;
-  --accent:#0f766e; 
-  --accent-2:#0ea5a4; 
-  --ring: rgba(14,165,164,.25);
-  --glass: rgba(255,255,255,0.08);
-  --glass-border: rgba(255,255,255,0.18);
-  --shadow-light: 0 8px 32px rgba(0,0,0,.08);
-  --shadow-medium: 0 16px 48px rgba(0,0,0,.15);
-  --shadow-heavy: 0 24px 64px rgba(0,0,0,.25);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  height:100%;
-  overflow-x:hidden;
-}
-
-body{
-  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-  color:var(--text);
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(120,218,180,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(79,172,254,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255,183,77,0.2) 0%, transparent 50%),
-    linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 35%, var(--bg3) 100%);
-  background-size: 100% 100%;
-  background-attachment: fixed;
-  animation: gradientShift 20s ease infinite;
-  position: relative;
-}
-
-@keyframes gradientShift{
-  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
-  50% { filter: hue-rotate(10deg) brightness(1.05); }
-}
-
-/* Floating particles animation */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  animation: float 30s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-100vh) rotate(360deg); }
-}
-
-.topbar{
-  position:sticky; 
-  top:0; 
-  z-index:100; 
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background: rgba(255,255,255,0.85);
-  border-bottom:1px solid rgba(255,255,255,0.3); 
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.topbar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-}
-
-.topbar-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:1rem 1.5rem;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-}
-
-.brand{
-  font-weight:800;
-  font-size: 1.1rem;
-  letter-spacing:-0.025em;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.badge-small{
-  margin-left:0.75rem;
-  display:inline-block;
-  padding:0.25rem 0.75rem;
-  border-radius:50px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  font-weight:700;
-  font-size:0.75rem;
-  box-shadow: var(--shadow-light);
-  animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.container{
-  max-width:1200px;
-  margin:0 auto;
-  padding:2rem 1.5rem;
-  position: relative;
-  z-index: 2;
-}
-
-.hero{
-  color:#fff;
-  text-align:center;
-  margin:2rem 0 3rem;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: heroEnter 1s ease-out 0.2s forwards;
-}
-
-@keyframes heroEnter {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero h1{
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height:1.1;
-  font-weight:900;
-  text-shadow:0 8px 32px rgba(0,0,0,0.3);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero p{
-  opacity:0.95;
-  font-weight:500;
-  font-size: 1.1rem;
-  text-shadow:0 4px 16px rgba(0,0,0,0.25);
-}
-
-.grid{
-  margin-top:2rem;
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-@media(min-width:768px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(min-width:1024px){
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-.card{
-  --h:170; 
-  position:relative; 
-  display:flex;
-  align-items:center;
-  gap:1.25rem;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding:1.5rem;
-  border-radius:24px;
-  border:1px solid rgba(255,255,255,0.3);
-  box-shadow: var(--shadow-medium);
-  text-decoration:none;
-  color:var(--text);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor:pointer; 
-  will-change: transform;
-  opacity: 0;
-  transform: translateY(60px) scale(0.9);
-  animation: cardEnter 0.8s ease-out calc(var(--idx) * 0.1s) forwards;
-  overflow: hidden;
-}
-
-@keyframes cardEnter {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 24px;
-}
-
-.card:focus{
-  outline:3px solid var(--ring); 
-  outline-offset:4px;
-}
-
-.card::after{
-  content:''; 
-  position:absolute; 
-  inset:-2px; 
-  border-radius:26px;
-  background: conic-gradient(from 180deg at 50% 50%, 
-    hsla(var(--h),70%,60%,0.3) 0deg,
-    transparent 60deg,
-    transparent 300deg, 
-    hsla(var(--h),70%,60%,0.3) 360deg);
-  filter:blur(20px); 
-  opacity:0; 
-  transition: all 0.4s ease;
-  z-index: -1;
-}
-
-.card:hover{
-  transform:translateY(-12px) scale(1.02) rotateX(5deg); 
-  box-shadow: var(--shadow-heavy);
-  border-color:rgba(255,255,255,0.5);
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.card:hover::after{
-  opacity:0.7;
-}
-
-.card:hover .emoji {
-  transform: scale(1.1) rotateY(15deg);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.card .emoji{
-  width:70px;
-  height:70px;
-  display:grid;
-  place-items:center;
-  font-size:2rem;
-  background: linear-gradient(135deg, 
-    hsla(var(--h),85%,65%,0.9) 0%, 
-    hsla(var(--h),70%,50%,0.9) 100%);
-  color:#fff;
-  border-radius:20px;
-  box-shadow: var(--shadow-medium);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-}
-
-.card .emoji::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
-  transition: transform 0.6s ease;
-  transform: translateX(-100%) translateY(-100%) rotate(45deg);
-}
-
-.card:hover .emoji::before {
-  transform: translateX(100%) translateY(100%) rotate(45deg);
-}
-
-.title{
-  font-weight:800;
-  font-size:1.2rem;
-  margin-bottom:0.25rem;
-  line-height: 1.3;
-}
-
-.path{
-  font-size:0.9rem;
-  color:var(--muted);
-  font-weight: 500;
-} 
-
-.extlink{
-  margin-left:0.5rem;
-  font-weight:700;
-  text-decoration:none;
-  color: var(--accent);
-  transition: all 0.2s ease;
-}
-
-.extlink:hover{
-  text-decoration:underline;
-  color: var(--accent-2);
-}
-
-.page{
-  display:none;
-  opacity:0;
-  transform:translateY(40px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.page.active{
-  display:block;
-}
-
-.page-header{
-  position:sticky; 
-  top:100px; 
-  z-index:50; 
-  background: rgba(255,255,255,0.95); 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border:1px solid rgba(255,255,255,0.3); 
-  border-radius:20px; 
-  padding:1.5rem; 
-  margin:1.5rem 0; 
-  box-shadow: var(--shadow-medium);
-  transition: all 0.3s ease;
-}
-
-.page-header:hover {
-  box-shadow: var(--shadow-heavy);
-}
-
-.page-title{
-  font-size:1.75rem;
-  font-weight:900;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
-
-.page-sub{
-  color:var(--muted);
-  margin:0.5rem 0 1rem;
-  font-weight: 500;
-}
-
-.counter{
-  display:inline-block;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  font-weight:700;
-  padding:0.5rem 1rem;
-  border-radius:50px; 
-  box-shadow: var(--shadow-light); 
-  font-size:0.9rem;
-  transition: all 0.3s ease;
-}
-
-.counter:hover {
-  transform: scale(1.05);
-  box-shadow: var(--shadow-medium);
-}
-
-.back{
-  display:inline-block;
-  margin-top:0.75rem;
-  text-decoration:none;
-  color:var(--accent);
-  font-weight:700;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  background: rgba(15, 118, 110, 0.1);
-}
-
-.back:hover {
-  background: rgba(15, 118, 110, 0.2);
-  transform: translateX(-4px);
-}
-
-.page-actions{
-  float:right;
-  display:flex;
-  gap:0.75rem;
-  flex-wrap:wrap;
-}
-
-.btn{
-  border:none; 
-  border-radius:12px; 
-  padding:0.75rem 1.25rem; 
-  font-weight:700; 
-  cursor:pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-family: inherit;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-secondary{
-  background: rgba(255,255,255,0.9);
-  color:var(--accent);
-  border:1px solid rgba(15, 118, 110, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover {
-  background: rgba(255,255,255,1);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-light);
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  box-shadow: var(--shadow-light);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.tags{
-  display:flex;
-  gap:0.5rem;
-  flex-wrap:wrap;
-  margin-top:1rem;
-}
-
-.tag{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  padding:0.5rem 1rem;
-  border-radius:50px;
-  border:1px solid rgba(0,0,0,0.1);
-  background:rgba(255,255,255,0.9);
-  color:var(--text);
-  cursor:pointer;
-  font-weight:600;
-  font-size:0.85rem;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(10px);
-}
-
-.tag:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-light);
-}
-
-.tag.active{
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  border-color:transparent;
-  box-shadow: var(--shadow-light);
-}
-
-.resources-grid{
-  display:grid;
-  gap:1.5rem;
-  margin:2rem 0;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-@media(min-width:768px){
-  .resources-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(min-width:1024px){
-  .resources-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-.resource-card{
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border:1px solid rgba(255,255,255,0.3);
-  border-radius:20px;
-  padding:1.5rem;
-  box-shadow: var(--shadow-medium);
-  display:flex; 
-  flex-direction:column; 
-  justify-content:space-between;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-}
-
-.resource-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.resource-card:hover::before {
-  transform: scaleX(1);
-}
-
-.resource-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-heavy);
-  border-color: rgba(255,255,255,0.5);
-}
-
-.resource-name{
-  font-weight:800;
-  margin-bottom:0.5rem;
-  font-size: 1.1rem;
-  line-height: 1.4;
-}
-
-.resource-description{
-  color:var(--muted);
-  font-size:0.95rem;
-  margin-bottom:1.25rem; 
-  flex:1;
-  line-height: 1.6;
-}
-
-.resource-link{
-  display:inline-flex;
-  align-items:center;
-  gap:0.75rem;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  text-decoration:none;
-  padding:0.75rem 1.25rem;
-  border-radius:12px;
-  font-weight:700;
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.resource-link:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.status-dot{
-  display:inline-block;
-  width:8px;
-  height:8px;
-  border-radius:50px;
-  margin-left:0.75rem;
-  vertical-align:middle;
-  background:#d1d5db;
-  transition: all 0.3s ease;
-}
-
-.status-ok{
-  background:#22c55e;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
-} 
-
-.status-fail{
-  background:#ef4444;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
-} 
-
-.status-unk{
-  background:#d1d5db;
-}
-
-.side-overlay{
-  position:fixed; 
-  inset:0; 
-  background:rgba(0,0,0,0.4); 
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px); 
-  opacity:0; 
-  pointer-events:none; 
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 200;
-}
-
-.side-overlay.open{
-  opacity:1; 
-  pointer-events:auto;
-}
-
-.side{
-  position:fixed; 
-  top:0; 
-  right:0; 
-  height:100vh; 
-  width:min(480px,92vw); 
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-left:1px solid rgba(255,255,255,0.3);
-  transform:translateX(100%); 
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-  box-shadow: var(--shadow-heavy); 
-  display:flex; 
-  flex-direction:column; 
-  z-index:300;
-}
-
-.side.open{
-  transform:translateX(0);
-}
-
-.side-h{
-  display:flex; 
-  align-items:center; 
-  justify-content:space-between; 
-  padding:1.5rem; 
-  border-bottom:1px solid rgba(0,0,0,0.1); 
-  background: rgba(255,255,255,0.98);
-}
-
-.side-h strong{
-  color:var(--accent);
-  font-size: 1.1rem;
-}
-
-.side-s{
-  padding:1rem 1.5rem; 
-  border-bottom:1px solid rgba(0,0,0,0.06);
-}
-
-.side-s input{
-  width:100%; 
-  padding:0.75rem 1rem; 
-  border:1px solid rgba(0,0,0,0.15); 
-  border-radius:12px;
-  font-family: inherit;
-  transition: all 0.3s ease;
-  background: rgba(255,255,255,0.9);
-}
-
-.side-s input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--ring);
-}
-
-.side-b{
-  padding:1rem 1.5rem; 
-  border-top:1px solid rgba(0,0,0,0.06); 
-  display:flex; 
-  gap:0.75rem; 
-  justify-content:space-between;
-}
-
-.btn-open{
-  background:linear-gradient(135deg,var(--accent),var(--accent-2)); 
-  color:#fff;
-}
-
-.btn-copy{
-  background:rgba(15, 118, 110, 0.1); 
-  color:var(--accent);
-}
-
-.side-list{
-  flex:1; 
-  overflow:auto; 
-  padding:1rem 1.5rem;
-}
-
-.item{
-  border:1px solid rgba(0,0,0,0.06); 
-  border-radius:16px; 
-  padding:1rem; 
-  margin:0.75rem 0; 
-  background: linear-gradient(135deg,rgba(14,165,164,0.08),rgba(255,255,255,0.9));
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.item:hover {
-  transform: translateX(4px);
-  box-shadow: var(--shadow-light);
-}
-
-.item a{
-  text-decoration:none; 
-  color:var(--accent); 
-  font-weight:700;
-}
-
-.footer{
-  color:#fff;
-  text-align:center;
-  margin:4rem 0 2rem;
-  font-weight:600;
-  text-shadow:0 2px 8px rgba(0,0,0,0.25);
-  opacity: 0.9;
-}
-
-.footer a{
-  color:#fff;
-  text-decoration:underline;
-  transition: opacity 0.3s ease;
-}
-
-.footer a:hover {
-  opacity: 0.8;
-}
-
-/* Loading animation */
-.loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255,255,255,.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive improvements */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .card {
-    padding: 1.25rem;
-    gap: 1rem;
-  }
-  
-  .card .emoji {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-  }
-  
-  .page-actions {
-    float: none;
-    margin-top: 1rem;
-  }
-  
-  .tags {
-    gap: 0.25rem;
-  }
-  
-  .tag {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Focus improvements for accessibility */
-.card:focus-visible,
-.btn:focus-visible,
-.tag:focus-visible {
-  outline: 3px solid var(--ring);
-  outline-offset: 2px;
-}
+:root{--bg1:#0f766e; --bg2:#10b981; --bg3:#065f46; --card:#ffffff; --text:#0f172a; --muted:#475569;
+  --accent:#0f766e; --accent-2:#0ea5a4; --ring: rgba(14,165,164,.25)}
+*{box-sizing:border-box;margin:0;padding:0} html,body{height:100%}
+body{font-family:'Inter',system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);overflow-x:hidden;
+  background:radial-gradient(1200px 800px at 10% 20%, rgba(255,255,255,.18), transparent 50%),
+             radial-gradient(900px 700px at 90% 10%, rgba(255,255,255,.14), transparent 45%),
+             linear-gradient(270deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
+  background-size:800% 800%;animation:gradientFlow 26s ease infinite}
+@keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.topbar{position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
+  border-bottom:1px solid rgba(255,255,255,.5); box-shadow: 0 8px 20px rgba(0,0,0,.08)}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem}
+.brand{font-weight:900;letter-spacing:.2px}
+.badge-small{margin-left:.5rem;display:inline-block;padding:.15rem .5rem;border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;font-size:.75rem}
+.container{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
+.hero{color:#fff;text-align:center;margin:1rem 0 1rem}
+.hero h1{font-size:2.4rem;line-height:1.1;font-weight:900;text-shadow:0 8px 28px rgba(0,0,0,.28)}
+.hero p{opacity:.96;font-weight:600;text-shadow:0 4px 16px rgba(0,0,0,.25)}
+.grid{margin-top:1rem;display:grid;gap:1.1rem}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{--h:170; position:relative; display:flex;align-items:center;gap:1rem;background:var(--card);
+  padding:1.05rem 1.15rem;border-radius:18px;border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 10px 26px rgba(0,0,0,.10); text-decoration:none;color:var(--text);
+  transition: transform .2s, box-shadow .2s, border-color .2s; cursor:pointer; will-change: transform}
+.card:focus{outline:3px solid var(--ring); outline-offset:2px}
+.card::after{content:''; position:absolute; inset:-1px; border-radius:19px;
+  background: conic-gradient(from 180deg, hsla(var(--h),70%,60%,.25), transparent 35%, transparent 65%, hsla(var(--h),70%,60%,.25));
+  filter:blur(16px); opacity:0; transition:opacity .18s ease}
+.card:hover{transform:translateY(-4px) scale(1.01); box-shadow:0 18px 40px rgba(0,0,0,.18); border-color:hsla(var(--h),50%,40%,.25)}
+.card:hover::after{opacity:.9}
+.card .emoji{width:58px;height:58px;display:grid;place-items:center;font-size:1.75rem;
+  background: radial-gradient(circle at 30% 30%, hsla(var(--h),85%,60%,.9), hsla(var(--h),70%,45%,.9));
+  color:#fff;border-radius:14px;box-shadow:0 10px 20px rgba(0,0,0,.18)}
+.title{font-weight:900;font-size:1.12rem;margin-bottom:.15rem}
+.path{font-size:.86rem;color:var(--muted)} .extlink{margin-left:.45rem;font-weight:900;text-decoration:none}
+.extlink:hover{text-decoration:underline}
+.page{display:none;opacity:0;transform:translateY(20px);transition:opacity .25s ease, transform .25s ease}
+.page.active{display:block}
+.page-header{position:sticky; top:68px; z-index:10; background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
+  border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:.9rem 1rem; margin:1rem 0; box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.page-title{font-size:1.5rem;font-weight:900}
+.page-sub{color:var(--muted);margin:.25rem 0 .5rem}
+.counter{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;
+  padding:.35rem .7rem;border-radius:999px; box-shadow:0 4px 12px rgba(14,165,164,.28); font-size:.9rem}
+.back{display:inline-block;margin-top:.5rem;text-decoration:none;color:var(--accent);font-weight:800}
+.page-actions{float:right;display:flex;gap:.5rem;flex-wrap:wrap}
+.btn{border:none; border-radius:999px; padding:.5rem .8rem; font-weight:800; cursor:pointer}
+.btn-secondary{background:#eef7f6;color:#0f766e;border:1px solid rgba(0,0,0,.06)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.tag{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .6rem;border-radius:999px;border:1px solid rgba(0,0,0,.1);
+     background:#fff;color:#0f172a;cursor:pointer;font-weight:700;font-size:.85rem}
+.tag.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
+.resources-grid{display:grid;gap:1.1rem;margin:1rem 0}
+@media(min-width:640px){.resources-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.resources-grid{grid-template-columns:repeat(3,1fr)}}
+.resource-card{background:var(--card);border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:1rem;
+  box-shadow:0 8px 22px rgba(0,0,0,.08); display:flex; flex-direction:column; justify-content:space-between}
+.resource-name{font-weight:900;margin-bottom:.25rem}
+.resource-description{color:var(--muted);font-size:.95rem;margin-bottom:.8rem; flex:1}
+.resource-link{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;text-decoration:none;padding:.55rem .8rem;border-radius:10px;font-weight:800;box-shadow:0 6px 16px rgba(14,165,164,.28)}
+.status-dot{display:inline-block;width:.6rem;height:.6rem;border-radius:999px;margin-left:.4rem;vertical-align:middle;background:#d1d5db}
+.status-ok{background:#22c55e} .status-fail{background:#ef4444} .status-unk{background:#d1d5db}
+.side-overlay{position:fixed; inset:0; background:rgba(0,0,0,.32); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity .25s;}
+.side-overlay.open{opacity:1; pointer-events:auto}
+.side{position:fixed; top:0; right:0; height:100vh; width:min(480px,92vw); background:#fff; border-left:1px solid rgba(0,0,0,.08);
+      transform:translateX(100%); transition:transform .28s cubic-bezier(.4,0,.2,1); box-shadow:0 24px 48px rgba(0,0,0,.22); display:flex; flex-direction:column; z-index:60}
+.side.open{transform:translateX(0)}
+.side-h{display:flex; align-items:center; justify-content:space-between; padding:.9rem 1rem; border-bottom:1px solid rgba(0,0,0,.08); background:rgba(255,255,255,.95)}
+.side-h strong{color:var(--accent)}
+.side-s{padding:.75rem 1rem; border-bottom:1px solid rgba(0,0,0,.06)}
+.side-s input{width:100%; padding:.65rem .85rem; border:1px solid rgba(0,0,0,.15); border-radius:10px}
+.side-b{padding:.6rem 1rem; border-top:1px solid rgba(0,0,0,.06); display:flex; gap:.5rem; justify-content:space-between}
+.btn-open{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff}
+.btn-copy{background:#eef7ef; color:#0f766e}
+.side-list{flex:1; overflow:auto; padding:.75rem 1rem}
+.item{border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:.65rem .8rem; margin:.45rem 0; background:linear-gradient(135deg,rgba(14,165,164,.05),#fff)}
+.item a{text-decoration:none; color:var(--accent); font-weight:800}
+.footer{color:#fff;text-align:center;margin:2rem 0 1rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+.footer a{color:#fff;text-decoration:underline}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">IIS MENDEL — Hub materie</div>
-  </div>
-</div>
-
-<div class="container">
-  <section class="hero">
-    <h1>HUB MATERIE - IIS Mendel</h1>
-    <p>Risorse didattiche innovative per il futuro dell'apprendimento</p>
-  </section>
+<div class="topbar"><div class="topbar-inner">
+  <div class="brand">IIS MENDEL — Hub materie</div>
   
+</div></div>
+<div class="container">
+  <section class="hero"><h1>HUB MATERIE - IIS Mendel</h1></section>
   <div class="page active" id="home" style="display:block;opacity:1;transform:none">
     <div class="grid" id="homeGrid"></div>
   </div>
-  
   <div class="side-overlay" id="ovl"></div>
   <aside class="side" id="side" aria-hidden="true">
-    <div class="side-h">
-      <div>
-        <strong>Elenco risorse</strong> 
-        <span class="counter" id="cnt">0</span>
-      </div>
-      <button class="btn btn-secondary" onclick="closePanel()" aria-label="Chiudi pannello">✕</button>
-    </div>
-    <div class="side-s">
-      <input id="srch2" type="text" placeholder="Cerca nell'elenco…" oninput="filterPanel()">
-    </div>
+    <div class="side-h"><div><strong>Elenco risorse</strong> <span class="counter" id="cnt">0</span></div>
+      <button class="btn btn-secondary" onclick="closePanel()" aria-label="Chiudi pannello">✕</button></div>
+    <div class="side-s"><input id="srch2" type="text" placeholder="Cerca nell’elenco…" oninput="filterPanel()"></div>
     <div id="list" class="side-list"></div>
     <div class="side-b">
       <button class="btn btn-copy" onclick="copyLinks()">Copia elenco</button>
       <button class="btn btn-open" onclick="openAll()">Apri 5 schede</button>
     </div>
   </aside>
-  
   <div class="footer">
     Pagina dell'IIS MENDEL creata dal <strong>Team Buone Pratiche</strong><br>
-    Via Ferrazzi 15 — 20035 Villa Cortese (MI)<br>
+    Via Ferrazzi 15 – 20035 Villa Cortese (MI)<br>
     🌐 <a href="https://agrariomendel.edu.it/" target="_blank" rel="noopener">agrariomendel.edu.it</a>
   </div>
 </div>
-
 <script>
-const SUBJECTS = [{"id": "agricoltura-di-precisione", "name": "Agricoltura di precisione", "emoji": "🚜"}, {"id": "ambiente-sostenibilita", "name": "Ambiente Sostenibilita", "emoji": "♻️"}, {"id": "chimica", "name": "Chimica", "emoji": "⚗️"}, {"id": "clil", "name": "Clil", "emoji": "🌍"}, {"id": "cybersecurity", "name": "Cybersecurity", "emoji": "🔒"}, {"id": "diritto", "name": "Diritto", "emoji": "⚖️"}, {"id": "educazione-civica", "name": "Educazione Civica", "emoji": "🏛️"}, {"id": "inglese", "name": "English", "emoji": "🇬🇧"}, {"id": "fisica", "name": "Fisica", "emoji": "🔭"}, {"id": "gamification", "name": "Gamification", "emoji": "🎮"}, {"id": "informatica", "name": "Informatica", "emoji": "💻"}, {"id": "italiano-storia", "name": "Italiano Storia", "emoji": "🖋️"}, {"id": "matematica", "name": "Matematica", "emoji": "➗"}, {"id": "pv-eeml", "name": "Pv Eeml", "emoji": "🔋"}, {"id": "scienze-integrate", "name": "Scienze Integrate", "emoji": "🔬"}, {"id": "stem-restanti", "name": "Stem Restanti", "emoji": "✏️"}, {"id": "valutazione", "name": "Valutazione", "emoji": "📊"}];
-
-const SUBJECT_LINKS = {"agricoltura-di-precisione": "agricoltura-di-precisione.html", "ambiente-sostenibilita": "ambiente-sostenibilita/index.html", "chimica": "chimica/index.html", "clil": "clil/index.html", "cybersecurity": "cybersecurity/index.html", "diritto": "diritto/index.html", "educazione-civica": "educazione-civica/index.html", "inglese": "english.html", "fisica": "fisica/index.html", "gamification": "gamification/index.html", "informatica": "informatica/index.html", "italiano-storia": "italiano-storia/index.html", "matematica": "matematica/index.html", "pv-eeml": "pv_eeml/index.html", "scienze-integrate": "scienze-integrate/index.html", "stem-restanti": "stem-restanti/index.html", "valutazione": "valutazione/index.html", "scienze-motorie": "scienze motorie/index.html", "pv_eeml": "pv_eeml/index.html"};
-
-const HUB_DATA = {"agricoltura-di-precisione": [{"title": "Sentinel Hub", "desc": "Immagini satellitari e NDVI.", "url": "https://www.sentinel-hub.com/", "tags": ["Satellite"]}, {"title": "DroneDeploy", "desc": "Piattaforma cloud leader per mapping aereo agricolo: mappe NDVI, conteggio piante, analisi stress idrico.", "url": "https://www.dronedeploy.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Pix4D Agriculture", "desc": "Software fotogrammetrico per agricoltura di precisione: elaborazione immagini drone.", "url": "https://www.pix4d.com/product/pix4dfields", "tags": ["Precision Farming", "Import"]}], "ambiente-sostenibilita": [], "chimica": [{"title": "PhET — Simulazioni di chimica", "desc": "Interattivi su atomi, legami, soluzioni.", "url": "https://phet.colorado.edu/it/simulations/category/chemistry", "tags": ["Simulazioni"]}], "clil": [], "cybersecurity": [], "diritto": [], "educazione-civica": [], "inglese": [{"title": "BBC Learning English", "desc": "Lezioni audio/video.", "url": "https://www.bbc.co.uk/learningenglish", "tags": ["Video"]}, {"title": "British Council — LearnEnglish", "desc": "Esercizi graduati.", "url": "https://learnenglish.britishcouncil.org/", "tags": ["Grammar"]}], "fisica": [], "gamification": [], "informatica": [], "italiano-storia": [{"title": "anki.com", "desc": "Risorsa importata.", "url": "https://anki.com", "tags": ["Import"]}], "matematica": [{"title": "GeoGebra", "desc": "Strumenti dinamici.", "url": "https://www.geogebra.org/", "tags": ["Strumenti"]}], "pv-eeml": [], "scienze-integrate": [], "stem-restanti": [], "valutazione": []};
-
-// Assign colors to cards based on index
-const colors = [
-  170, 200, 230, 260, 290, 320, 350, 20, 50, 80, 110, 140, 170, 200, 230, 260, 290
-];
+const SUBJECTS = [{"id": "agricoltura-di-precisione", "name": "Agricoltura di precisione", "emoji": "🚁"}, {"id": "ambiente-sostenibilita", "name": "Ambiente Sostenibilita", "emoji": "♻️"}, {"id": "chimica", "name": "Chimica", "emoji": "⚗️"}, {"id": "clil", "name": "Clil", "emoji": "🌍"}, {"id": "cybersecurity", "name": "Cybersecurity", "emoji": "🔒"}, {"id": "diritto", "name": "Diritto", "emoji": "⚖️"}, {"id": "educazione-civica", "name": "Educazione Civica", "emoji": "🏛️"}, {"id": "inglese", "name": "English", "emoji": "🇬🇧"}, {"id": "fisica", "name": "Fisica", "emoji": "🔭"}, {"id": "gamification", "name": "Gamification", "emoji": "🎮"}, {"id": "informatica", "name": "Informatica", "emoji": "💻"}, {"id": "italiano-storia", "name": "Italiano Storia", "emoji": "🖋️"}, {"id": "matematica", "name": "Matematica", "emoji": "➗"}, {"id": "pv-eeml", "name": "Pv Eeml", "emoji": "🔋"}, {"id": "scienze-integrate", "name": "Scienze Integrate", "emoji": "🔬"}, {"id": "stem-restanti", "name": "Stem Restanti", "emoji": "✏️"}, {"id": "valutazione", "name": "Valutazione", "emoji": "📊"}];
+const SUBJECT_LINKS = {"agricoltura-di-precisione": "agricoltura-di-precisione/index.html", "ambiente-sostenibilita": "ambiente-sostenibilita/index.html", "chimica": "chimica/index.html", "clil": "clil/index.html", "cybersecurity": "cybersecurity/index.html", "diritto": "diritto/index.html", "educazione-civica": "educazione-civica/index.html", "inglese": "english/index.html", "fisica": "fisica/index.html", "gamification": "gamification/index.html", "informatica": "informatica/index.html", "italiano-storia": "italiano-storia/index.html", "matematica": "matematica/index.html", "pv-eeml": "pv-eeml/index.html", "scienze-integrate": "scienze-integrate/index.html", "stem-restanti": "stem-restanti/index.html", "valutazione": "valutazione/index.html", "scienze-motorie": "scienze motorie/index.html", "pv_eeml": "pv_eeml/index.html"};
+const HUB_DATA = {"agricoltura-di-precisione": [{"title": "Sentinel Hub", "desc": "Immagini satellitari e NDVI.", "url": "https://www.sentinel-hub.com/", "tags": ["Satellite"]}, {"title": "DroneDeploy", "desc": "Piattaforma cloud leader per mapping aereo agricolo: mappe NDVI, conteggio piante, analisi stress idrico.", "url": "https://www.dronedeploy.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Pix4D Agriculture", "desc": "Software fotogrammetrico per agricoltura di precisione: elaborazione immagini drone.", "url": "https://www.pix4d.com/product/pix4dfields", "tags": ["Precision Farming", "Import"]}, {"title": "Sentera AgVault", "desc": "Piattaforma analisi dati drone per agricoltura con sensori multispettrali.", "url": "https://sentera.com/", "tags": ["Precision Farming", "Import"]}, {"title": "PrecisionHawk", "desc": "Soluzione end-to-end per droni agricoli: hardware, software analytics.", "url": "https://www.precisionhawk.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Parrot Agriculture", "desc": "Droni professionali con sensori NDVI integrati.", "url": "https://www.parrot.com/business-solutions-us/parrot-professional/parrot-bluegrass", "tags": ["Precision Farming", "Import"]}, {"title": "MicaSense", "desc": "Sensori multispettrali per droni agricoli: RedEdge e Altum.", "url": "https://micasense.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgEagle Aerial Systems", "desc": "Sistemi UAV per agricoltura commerciale.", "url": "https://ageagle.com/", "tags": ["Precision Farming", "Import"]}, {"title": "DJI Agriculture", "desc": "Droni DJI per precision farming: T40, T30 con spraying system.", "url": "https://ag.dji.com/", "tags": ["Precision Farming", "Import"]}, {"title": "SLANTRANGE", "desc": "Sistemi imaging multispettrali per agricoltura.", "url": "https://slantrange.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Rantizo Drone Services", "desc": "Servizi drone per applicazione prodotti fitosanitari.", "url": "https://rantizo.com/", "tags": ["Precision Farming", "Import"]}, {"title": "CropX", "desc": "Sistema IoT per soil monitoring con sensori wireless.", "url": "https://www.cropx.com/", "tags": ["Precision Farming", "Import"]}, {"title": "The Things Network Agriculture", "desc": "Rete LoRaWAN open source per IoT agricolo.", "url": "https://www.thethingsnetwork.org/", "tags": ["Precision Farming", "Import"]}, {"title": "Farm Beats Microsoft", "desc": "Piattaforma Microsoft Azure per IoT agricolo.", "url": "https://www.microsoft.com/en-us/research/project/farmbeats-iot-agriculture/", "tags": ["Precision Farming", "Import"]}, {"title": "Semios Agriculture IoT", "desc": "Rete sensori wireless per pest management.", "url": "https://semios.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgroSense", "desc": "Sensori wireless per greenhouse automation.", "url": "https://agrosense.nl/", "tags": ["Precision Farming", "Import"]}, {"title": "Libelium Smart Agriculture", "desc": "Sensori IoT per smart farming.", "url": "https://www.libelium.com/iot-solutions/smart-agriculture/", "tags": ["Precision Farming", "Import"]}, {"title": "Davis Instruments", "desc": "Weather stations e sensori per agricoltura.", "url": "https://www.davisinstruments.com/pages/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "Onset HOBO", "desc": "Data loggers per agricultural research.", "url": "https://www.onsetcomp.com/applications/agriculture-research", "tags": ["Precision Farming", "Import"]}, {"title": "Campbell Scientific", "desc": "Sistemi acquisizione dati per agricoltura.", "url": "https://www.campbellsci.com/applications/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "Bosch Connected Agriculture", "desc": "Sensori Bosch per smart farming.", "url": "https://www.bosch.com/explore-and-experience/connected-agriculture/", "tags": ["Precision Farming", "Import"]}, {"title": "Google Earth Engine", "desc": "Piattaforma Google per analisi geospaziale.", "url": "https://earthengine.google.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Sentinel Hub", "desc": "API per accesso dati satellitari Copernicus.", "url": "https://www.sentinel-hub.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Planet Labs", "desc": "Imagery satellitare giornaliero.", "url": "https://www.planet.com/", "tags": ["Precision Farming", "Import"]}, {"title": "NASA MODIS Agriculture", "desc": "Prodotti MODIS per agricultural monitoring.", "url": "https://modis.gsfc.nasa.gov/data/dataprod/mod13.php", "tags": ["Precision Farming", "Import"]}, {"title": "ESA Climate Change Initiative", "desc": "Dataset ESA per climate agriculture.", "url": "https://climate.esa.int/en/projects/agriculture/", "tags": ["Precision Farming", "Import"]}, {"title": "USGS EarthExplorer", "desc": "Database USGS per satellite imagery.", "url": "https://earthexplorer.usgs.gov/", "tags": ["Precision Farming", "Import"]}, {"title": "EUMETSAT Agriculture", "desc": "Prodotti EUMETSAT per agricoltura.", "url": "https://www.eumetsat.int/applications/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "DESCARTES Labs", "desc": "AI platform per satellite analytics.", "url": "https://www.descarteslabs.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Orbital Insight Agriculture", "desc": "Geospatial analytics per agriculture.", "url": "https://orbitalinsight.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Airbus OneAtlas", "desc": "Satellite imagery Airbus per precision agriculture.", "url": "https://oneatlas.airbus.com/", "tags": ["Precision Farming", "Import"]}, {"title": "IBM Watson Agriculture", "desc": "AI IBM per agricoltura: weather prediction, crop disease detection.", "url": "https://www.ibm.com/watson", "tags": ["Precision Farming", "Import"]}, {"title": "John Deere See & Spray", "desc": "Tecnologia computer vision per precision spraying.", "url": "https://www.deere.com/en/sprayers/see-spray/", "tags": ["Precision Farming", "Import"]}, {"title": "Climate FieldView", "desc": "Piattaforma Bayer per digital farming.", "url": "https://climate.com/", "tags": ["Precision Farming", "Import"]}, {"title": "aWhere API", "desc": "Agricultural intelligence platform.", "url": "https://www.awhere.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Prospera Technologies", "desc": "Computer vision per greenhouse agriculture.", "url": "https://prospera.ag/", "tags": ["Precision Farming", "Import"]}, {"title": "Taranis Precision Agriculture", "desc": "AI-powered crop intelligence.", "url": "https://www.taranis.ag/", "tags": ["Precision Farming", "Import"]}, {"title": "PEAT Plantix", "desc": "Mobile app AI per crop disease diagnosis.", "url": "https://plantix.net/", "tags": ["Precision Farming", "Import"]}, {"title": "Blue River Technology", "desc": "Computer vision e machine learning per See & Spray.", "url": "https://www.bluerivertechnology.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgriData", "desc": "Machine learning platform per predictive agriculture.", "url": "https://agridata.io/", "tags": ["Precision Farming", "Import"]}, {"title": "Farmers Edge Intelligence", "desc": "Digital agriculture platform.", "url": "https://farmersedge.ca/", "tags": ["Precision Farming", "Import"]}, {"title": "Trimble Agriculture", "desc": "Sistemi GPS per guidance agricolo.", "url": "https://agriculture.trimble.com/", "tags": ["Precision Farming", "Import"]}, {"title": "John Deere Operations Center", "desc": "Piattaforma John Deere per precision agriculture.", "url": "https://www.deere.com/en/technology-products/precision-ag-technology/", "tags": ["Precision Farming", "Import"]}, {"title": "Topcon Agriculture", "desc": "Soluzioni GPS Topcon per farming.", "url": "https://www.topconpositioning.com/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "AgJunction", "desc": "Tecnologie guidance per agricultural equipment.", "url": "https://agjunction.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Hemisphere GNSS", "desc": "Sistemi GNSS per agricultura.", "url": "https://www.hemisferegnss.com/", "tags": ["Precision Farming", "Import"]}, {"title": "CNH Industrial Precision", "desc": "Tecnologie precision farming CNH.", "url": "https://www.cnhindustrial.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Raven Precision", "desc": "Sistemi Raven per precision agriculture.", "url": "https://ravenind.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgLeader Technology", "desc": "Display e sistemi controllo per precision farming.", "url": "https://www.agleader.com/", "tags": ["Precision Farming", "Import"]}, {"title": "TeeJet Technologies", "desc": "Precision application equipment.", "url": "https://www.teejet.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Field Rover", "desc": "Mobile GPS mapping app per agriculture.", "url": "https://fieldrover.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Iron Ox Robotics", "desc": "Robotica per greenhouse automation.", "url": "https://ironox.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Naïo Technologies", "desc": "Robot agricoli autonomi: Oz, Dino e Ted.", "url": "https://www.naio-technologies.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Blue White Robotics", "desc": "Autonomous retrofit solutions.", "url": "https://www.bluewhiterobotics.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Abundant Robotics", "desc": "Robot per apple harvesting.", "url": "https://www.abundantrobotics.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Bear Flag Robotics", "desc": "Autonomous farming machines.", "url": "https://www.bearflagrobotics.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Carbon Robotics", "desc": "LaserWeeder technology.", "url": "https://carbonrobotics.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Harvest CROO Robotics", "desc": "Strawberry picking robots.", "url": "https://harvestcroo.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Root AI", "desc": "Greenhouse robotics: Virgo robot.", "url": "https://root-ai.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Small Robot Company", "desc": "Per-plant farming robots.", "url": "https://www.smallrobotcompany.com/", "tags": ["Precision Farming", "Import"]}, {"title": "SwarmFarm Robotics", "desc": "Light autonomous robots.", "url": "https://www.swarmfarm.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Farmers Business Network", "desc": "Network data-driven per farmers.", "url": "https://www.fbn.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Granular Software", "desc": "Farm management software.", "url": "https://granular.ag/", "tags": ["Precision Farming", "Import"]}, {"title": "AgriDigital", "desc": "Blockchain platform per grain trading.", "url": "https://www.agridigital.io/", "tags": ["Precision Farming", "Import"]}, {"title": "Conservis", "desc": "Farm management platform.", "url": "https://conservis.ag/", "tags": ["Precision Farming", "Import"]}, {"title": "Cropio", "desc": "Satellite-based crop monitoring.", "url": "https://www.cropio.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgCode", "desc": "Farm data management.", "url": "https://agcode.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Adapt-N", "desc": "Nitrogen management tool.", "url": "https://adapt-n.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AGDATA", "desc": "Australian farm data platform.", "url": "https://www.agdata.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Agrian", "desc": "Farm management system.", "url": "https://www.agrian.com/", "tags": ["Precision Farming", "Import"]}, {"title": "OneSoil Platform", "desc": "Piattaforma gratuita per precision agriculture.", "url": "https://onesoil.ai/en", "tags": ["Precision Farming", "Import"]}, {"title": "Weather Underground API", "desc": "API Weather Underground per hyperlocal data.", "url": "https://www.wunderground.com/weather/api", "tags": ["Precision Farming", "Import"]}, {"title": "AccuWeather MinuteCast", "desc": "Hyper-local precipitation forecasting.", "url": "https://www.accuweather.com/en/weather-api", "tags": ["Precision Farming", "Import"]}, {"title": "WeatherBug Agriculture", "desc": "Weather monitoring network.", "url": "https://www.weatherbug.com/", "tags": ["Precision Farming", "Import"]}, {"title": "DTN ProphetX", "desc": "Agricultural weather intelligence.", "url": "https://www.dtn.com/agriculture/", "tags": ["Precision Farming", "Import"]}, {"title": "Météo-France Agriculture", "desc": "Servizi meteorologici per agricoltura.", "url": "https://meteofrance.com/", "tags": ["Precision Farming", "Import"]}, {"title": "NOAA Agricultural Weather", "desc": "US National Weather Service.", "url": "https://www.weather.gov/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "Environment Canada AgWeather", "desc": "Canadian agricultural weather.", "url": "https://weather.gc.ca/agrimeteorology/", "tags": ["Precision Farming", "Import"]}, {"title": "MeteoBlue Agriculture", "desc": "High-resolution weather forecasting.", "url": "https://www.meteoblue.com/", "tags": ["Precision Farming", "Import"]}, {"title": "SoilOptix", "desc": "Gamma ray soil mapping.", "url": "https://soiloptix.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgriAnalytics", "desc": "Soil testing laboratories network.", "url": "https://www.agrianalytics.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Veris Technologies", "desc": "Soil sensors e mapping.", "url": "https://www.veristech.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgroScout", "desc": "Plant tissue analysis.", "url": "https://agroscout.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Hach Agricultural Testing", "desc": "Water quality testing.", "url": "https://www.hach.com/agriculture", "tags": ["Precision Farming", "Import"]}, {"title": "Lamotte Agriculture", "desc": "Field testing kits.", "url": "https://www.lamotte.com/en/agricultural", "tags": ["Precision Farming", "Import"]}, {"title": "Spectrum Technologies", "desc": "Portable meters per agriculture.", "url": "https://www.specmeters.com/", "tags": ["Precision Farming", "Import"]}, {"title": "PASCO Scientific Agriculture", "desc": "Educational sensors per agricultural science.", "url": "https://www.pasco.com/", "tags": ["Precision Farming", "Import"]}, {"title": "YSI Agriculture Instruments", "desc": "Professional instruments.", "url": "https://www.ysi.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Horiba Agriculture", "desc": "Analytical instruments.", "url": "https://www.horiba.com/en_en/applications/", "tags": ["Precision Farming", "Import"]}, {"title": "Farmer's Almanac Digital", "desc": "Traditional farming wisdom digitized.", "url": "https://www.farmersalmanac.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgSquared", "desc": "Farm record keeping software.", "url": "https://agsquared.com/", "tags": ["Precision Farming", "Import"]}, {"title": "FarmLogs", "desc": "Free farm management.", "url": "https://farmlogs.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Agrivi", "desc": "Farm management system.", "url": "https://www.agrivi.com/", "tags": ["Precision Farming", "Import"]}, {"title": "FarmERP", "desc": "Enterprise resource planning per agriculture.", "url": "https://farmerp.com/", "tags": ["Precision Farming", "Import"]}, {"title": "CropRecords", "desc": "Field record keeping.", "url": "https://croprecords.com/", "tags": ["Precision Farming", "Import"]}, {"title": "AgriWebb", "desc": "Livestock e pasture management.", "url": "https://www.agriwebb.com/", "tags": ["Precision Farming", "Import"]}, {"title": "Trimble Ag Software", "desc": "Precision agriculture software.", "url": "https://agriculture.trimble.com/product/trimble-ag-software/", "tags": ["Precision Farming", "Import"]}, {"title": "Raven FieldHub", "desc": "Universal display per precision agriculture.", "url": "https://ravenind.com/products/field-computers/fieldhub", "tags": ["Precision Farming", "Import"]}], "ambiente-sostenibilita": [], "chimica": [{"title": "PhET — Simulazioni di chimica", "desc": "Interattivi su atomi, legami, soluzioni.", "url": "https://phet.colorado.edu/it/simulations/category/chemistry", "tags": ["Simulazioni"]}], "clil": [], "cybersecurity": [], "diritto": [], "educazione-civica": [], "inglese": [{"title": "BBC Learning English", "desc": "Lezioni audio/video.", "url": "https://www.bbc.co.uk/learningenglish", "tags": ["Video"]}, {"title": "British Council — LearnEnglish", "desc": "Esercizi graduati.", "url": "https://learnenglish.britishcouncil.org/", "tags": ["Grammar"]}, {"title": "TED Talks", "desc": "Video ispiratori in inglese con transcript disponibili. Ideali per migliorare listening e vocabulary attraverso contenuti interessanti.", "url": "https://www.ted.com/", "tags": ["Inglese", "Import"]}, {"title": "BBC Learning English", "desc": "Contenuti audio e video della BBC specificamente progettati per learners di inglese, con diversi livelli di difficoltà.", "url": "https://www.bbc.co.uk/learningenglish/", "tags": ["Inglese", "Import"]}, {"title": "British Council Listening", "desc": "Esercizi di listening strutturati con audio autentici e attività interattive per tutti i livelli.", "url": "https://learnenglish.britishcouncil.org/skills/listening", "tags": ["Inglese", "Import"]}, {"title": "Elllo.org", "desc": "Migliaia di conversazioni in inglese autentiche con speaker da tutto il mondo, complete di transcript e exercises.", "url": "https://www.elllo.org/", "tags": ["Inglese", "Import"]}, {"title": "ESL Lab", "desc": "Listening comprehension exercises con audio di qualità e quiz interattivi per diversi livelli.", "url": "https://www.esl-lab.com/", "tags": ["Inglese", "Import"]}, {"title": "Voice of America Learning English", "desc": "News e storie narrate lentamente e chiaramente, perfette per intermediate learners.", "url": "https://learningenglish.voanews.com/", "tags": ["Inglese", "Import"]}, {"title": "News in Slow English", "desc": "Notizie attuali raccontate a velocità ridotta per facilitare la comprensione.", "url": "https://www.newsinslowenglish.com/", "tags": ["Inglese", "Import"]}, {"title": "English Listening Lesson Library", "desc": "Vasta collezione di listening lessons organizzate per livello e argomento.", "url": "https://www.englishlistening.com/", "tags": ["Inglese", "Import"]}, {"title": "Breaking News English", "desc": "Notizie attuali con audio MP3 e esercizi di comprensione per tutti i livelli.", "url": "https://breakingnewsenglish.com/", "tags": ["Inglese", "Import"]}, {"title": "Sounds of English", "desc": "Focus sui suoni dell'inglese americano con video esplicativi e practice exercises.", "url": "https://soundsofenglish.org/", "tags": ["Inglese", "Import"]}, {"title": "6 Minute English BBC", "desc": "Podcast settimanali di 6 minuti su argomenti interessanti con vocabulary e transcript.", "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english", "tags": ["Inglese", "Import"]}, {"title": "Listen A Minute", "desc": "Mini listening lessons di un minuto su centinaia di argomenti diversi.", "url": "http://listenaminute.com/", "tags": ["Inglese", "Import"]}, {"title": "ESL Podcast", "desc": "Podcast progettati specificamente per ESL learners con spiegazioni dettagliate del vocabulary.", "url": "https://www.eslpod.com/", "tags": ["Inglese", "Import"]}, {"title": "English Class 101", "desc": "Video lessons con native speakers e focus su situazioni di vita reale.", "url": "https://www.englishclass101.com/", "tags": ["Inglese", "Import"]}, {"title": "Lyrics Training", "desc": "Impara inglese completando i testi delle canzoni mentre ascolti. Vari livelli di difficoltà e migliaia di canzoni.", "url": "https://lyricstraining.com/", "tags": ["Inglese", "Import"]}, {"title": "English Songs for Learning", "desc": "Collezione curata di canzoni con lyrics analysis e exercises di grammar e vocabulary.", "url": "https://www.englishsongs.com/", "tags": ["Inglese", "Import"]}, {"title": "FluentU Music", "desc": "Video musicali autentici con sottotitoli interattivi e definizioni contestuali.", "url": "https://www.fluentu.com/blog/english/english-songs/", "tags": ["Inglese", "Import"]}, {"title": "Genius English Songs", "desc": "Lyrics con annotazioni e spiegazioni del significato, perfetto per capire slang e cultural references.", "url": "https://genius.com/", "tags": ["Inglese", "Import"]}, {"title": "Song Lyrics Generator", "desc": "Ampia database di lyrics con funzione di ricerca per artista, titolo o frase.", "url": "https://www.songlyrics.com/", "tags": ["Inglese", "Import"]}, {"title": "Learn English Through Songs", "desc": "Canale YouTube dedicato all'apprendimento dell'inglese attraverso canzoni popolari.", "url": "https://www.youtube.com/c/LearnEnglishThroughSongs", "tags": ["Inglese", "Import"]}, {"title": "English Listening Songs", "desc": "Canzoni specificamente scelte per learners con exercises di listening comprehension.", "url": "https://englishlistening.com/songs/", "tags": ["Inglese", "Import"]}, {"title": "Musical English Lessons", "desc": "Lezioni strutturate che usano canzoni per insegnare grammar, pronunciation e vocabulary.", "url": "https://www.musicalenglishlessons.org/", "tags": ["Inglese", "Import"]}, {"title": "Sing English", "desc": "Piattaforma che combina karaoke con learning activities per migliorare pronunciation.", "url": "https://www.singenglish.com/", "tags": ["Inglese", "Import"]}, {"title": "English Through Music", "desc": "Risorse per insegnanti e studenti per usare la musica nell'apprendimento linguistico.", "url": "https://elt-resourceful.com/2019/03/04/10-great-songs-for-teaching-english/", "tags": ["Inglese", "Import"]}, {"title": "Spotify English Learning Playlists", "desc": "Playlist curate specificamente per English learners con canzoni di diversi generi e livelli.", "url": "https://open.spotify.com/", "tags": ["Inglese", "Import"]}, {"title": "Song-based ESL Activities", "desc": "British Council resources per utilizzare le canzoni nell'insegnamento dell'inglese.", "url": "https://www.teachingenglish.org.uk/article/using-songs", "tags": ["Inglese", "Import"]}, {"title": "English Music Therapy", "desc": "Approccio terapeutico all'apprendimento dell'inglese attraverso la musica.", "url": "https://www.englishmusictherapy.com/", "tags": ["Inglese", "Import"]}, {"title": "Learn English Kids Songs", "desc": "Canzoni per bambini del British Council per imparare inglese in modo divertente.", "url": "https://learnenglishkids.britishcouncil.org/songs", "tags": ["Inglese", "Import"]}, {"title": "Langua", "desc": "Piattaforma AI avanzata per conversation practice con feedback in tempo reale e roleplay personalizzati.", "url": "https://langua.io/", "tags": ["Inglese", "Import"]}, {"title": "Talkpal AI", "desc": "Chat interattiva con AI tutor per conversazioni in inglese con correzione istantanea.", "url": "https://talkpal.ai/", "tags": ["Inglese", "Import"]}, {"title": "Univerbal AI", "desc": "Conversazioni AI in 20+ lingue con scenari realistici per praticare speaking e listening.", "url": "https://univerbal.app/", "tags": ["Inglese", "Import"]}, {"title": "Andy English Bot", "desc": "Chatbot AI specializzato nell'insegnamento dell'inglese con lezioni di grammatica giornaliere.", "url": "https://andychatbot.com/", "tags": ["Inglese", "Import"]}, {"title": "MakesYouFluent", "desc": "AI tutor con feedback istantaneo e simulazioni di conversazioni reali per migliorare la fluency.", "url": "https://makesyoufluent.com/", "tags": ["Inglese", "Import"]}, {"title": "LangAI", "desc": "Pratica conversazionale AI con dialoghi interattivi e correzioni grammaticali.", "url": "https://www.langai.app/", "tags": ["Inglese", "Import"]}, {"title": "Heylama AI", "desc": "Tutor AI Anka per conversation practice immersiva in inglese, tedesco, francese e spagnolo.", "url": "https://www.heylama.com/", "tags": ["Inglese", "Import"]}, {"title": "Loora AI", "desc": "AI conversation partner per business English e preparazione a colloqui di lavoro.", "url": "https://www.loora.ai/", "tags": ["Inglese", "Import"]}, {"title": "Speak AI", "desc": "App mobile con AI tutoring per conversation practice e pronunciation feedback.", "url": "https://www.speak.com/", "tags": ["Inglese", "Import"]}, {"title": "Replika English Practice", "desc": "AI companion personalizzato per conversazioni naturali in inglese.", "url": "https://replika.ai/", "tags": ["Inglese", "Import"]}, {"title": "Character.AI English Tutors", "desc": "Crea e chatta con AI tutors personalizzati per practice specifici.", "url": "https://character.ai/", "tags": ["Inglese", "Import"]}, {"title": "ChatGPT for English Learning", "desc": "Usa ChatGPT come conversation partner e tutor personale per inglese.", "url": "https://chat.openai.com/", "tags": ["Inglese", "Import"]}, {"title": "Botlanguages", "desc": "Bot telegram AI per praticare inglese attraverso conversazioni quotidiane.", "url": "https://botlanguages.com/", "tags": ["Inglese", "Import"]}, {"title": "Speechify Conversation AI", "desc": "AI-powered conversation practice con voice recognition e feedback.", "url": "https://speechify.com/conversation/", "tags": ["Inglese", "Import"]}, {"title": "Grammarly", "desc": "Assistente AI per correzione grammaticale, stile e tono in tempo reale.", "url": "https://www.grammarly.com/", "tags": ["Inglese", "Import"]}, {"title": "WriteCoach AI", "desc": "Feedback avanzato per migliorare la scrittura accademica e professionale con ML.", "url": "https://writecoach.ai/", "tags": ["Inglese", "Import"]}, {"title": "QuillBot", "desc": "Parafrasi AI, controllo grammaticale e suggerimenti per migliorare la scrittura.", "url": "https://quillbot.com/", "tags": ["Inglese", "Import"]}, {"title": "DeepL Write", "desc": "Assistente di scrittura AI per correzioni e miglioramenti stilistici.", "url": "https://www.deepl.com/write", "tags": ["Inglese", "Import"]}, {"title": "CorrectMyGrammar", "desc": "Tool AI per correggere grammatica, punteggiatura e sintassi con spiegazioni dettagliate.", "url": "https://correctmygrammar.com/", "tags": ["Inglese", "Import"]}, {"title": "Scribbr AI Proofreader", "desc": "Revisione automatica di testi accademici con feedback personalizzato.", "url": "https://www.scribbr.com/ai-proofreader/", "tags": ["Inglese", "Import"]}, {"title": "ProWritingAid", "desc": "Editor avanzato con analisi stilistica, grammaticale e di readability.", "url": "https://prowritingaid.com/", "tags": ["Inglese", "Import"]}, {"title": "Hemingway Editor", "desc": "Analizzatore di testo per migliorare chiarezza e leggibilità della scrittura.", "url": "https://hemingwayapp.com/", "tags": ["Inglese", "Import"]}, {"title": "Ludwig Guru", "desc": "Motore di ricerca linguistico che mostra come le parole sono usate in contesti reali.", "url": "https://ludwig.guru/", "tags": ["Inglese", "Import"]}, {"title": "Ginger Grammar Checker", "desc": "Correzione grammaticale con AI e suggerimenti per migliorare il writing style.", "url": "https://www.gingersoftware.com/", "tags": ["Inglese", "Import"]}, {"title": "LanguageTool", "desc": "Grammar checker open-source con supporto per multiple lingue e style checking.", "url": "https://languagetool.org/", "tags": ["Inglese", "Import"]}, {"title": "Wordtune", "desc": "AI writing companion che aiuta a riscrivere e migliorare frasi per chiarezza.", "url": "https://www.wordtune.com/", "tags": ["Inglese", "Import"]}, {"title": "Sapling Grammar Checker", "desc": "AI-powered grammar checker progettato per team e business communication.", "url": "https://sapling.ai/", "tags": ["Inglese", "Import"]}, {"title": "WhiteSmoke", "desc": "All-in-one writing solution con grammar check, style checker e translator.", "url": "https://www.whitesmoke.com/", "tags": ["Inglese", "Import"]}, {"title": "Reverso Grammar Check", "desc": "Grammar e spell checker con esempi di uso in contesti reali.", "url": "https://www.reverso.net/spell-checker/english-spelling-grammar/", "tags": ["Inglese", "Import"]}, {"title": "ELSA Speak", "desc": "AI coach per pronuncia inglese con feedback personalizzato basato su machine learning.", "url": "https://elsaspeak.com/", "tags": ["Inglese", "Import"]}, {"title": "Speechify", "desc": "Text-to-speech avanzato per migliorare listening e pronuncia.", "url": "https://speechify.com/", "tags": ["Inglese", "Import"]}, {"title": "VocabAI Pronunciation", "desc": "Allenamento pronuncia AI con riconoscimento vocale avanzato.", "url": "https://vocabai.co/", "tags": ["Inglese", "Import"]}, {"title": "YouGlish", "desc": "Cerca parole inglesi in video reali per sentire la pronuncia autentica nel contesto.", "url": "https://youglish.com/", "tags": ["Inglese", "Import"]}, {"title": "Forvo", "desc": "Dizionario di pronuncia con audio di madrelingua da tutto il mondo.", "url": "https://forvo.com/", "tags": ["Inglese", "Import"]}, {"title": "Sounds Pronunciation App", "desc": "Chart interattivo dei suoni inglesi con esempi audio e video.", "url": "https://soundspronapp.com/", "tags": ["Inglese", "Import"]}, {"title": "English Pronunciation Trainer", "desc": "Allenamento intensivo della pronuncia con riconoscimento vocale AI.", "url": "https://pronunciation.englishcentral.com/", "tags": ["Inglese", "Import"]}, {"title": "FluentU Pronunciation", "desc": "Video autentici con pronuncia contestualizzata e feedback AI.", "url": "https://www.fluentu.com/", "tags": ["Inglese", "Import"]}, {"title": "Speechling", "desc": "Coach di pronuncia AI con feedback da insegnanti madrelingua.", "url": "https://speechling.com/", "tags": ["Inglese", "Import"]}, {"title": "Pronunciation Power", "desc": "Software completo per migliorare pronuncia e accent reduction.", "url": "https://www.pronunciationpower.com/", "tags": ["Inglese", "Import"]}, {"title": "Say It Better", "desc": "App europea per pronunciation training con recognition technology.", "url": "https://sayitbetter.speakapps.eu/", "tags": ["Inglese", "Import"]}, {"title": "FluentTalk", "desc": "AI-powered speech coaching per migliorare fluency e pronunciation.", "url": "https://www.fluenttalk.com/", "tags": ["Inglese", "Import"]}, {"title": "Nemo English Pronunciation", "desc": "App mobile con focus su pronunciation training e listening skills.", "url": "https://www.nemoapps.com/", "tags": ["Inglese", "Import"]}, {"title": "Rocket Languages Pronunciation", "desc": "Voice recognition system per pronunciation practice con feedback immediato.", "url": "https://www.rocketlanguages.com/", "tags": ["Inglese", "Import"]}, {"title": "Memrise", "desc": "Apprendimento vocabulary gamificato con video di madrelingua e spaced repetition.", "url": "https://www.memrise.com/", "tags": ["Inglese", "Import"]}, {"title": "LingQ", "desc": "Lettura immersiva con dizionario integrato e tracking del vocabolario appreso.", "url": "https://www.lingq.com/", "tags": ["Inglese", "Import"]}, {"title": "ReadTheory", "desc": "Reading comprehension adattivo con AI che personalizza i testi al tuo livello.", "url": "https://www.readtheory.org/", "tags": ["Inglese", "Import"]}, {"title": "Rewordify", "desc": "Semplifica testi complessi per migliorare comprensione e vocabulary building.", "url": "https://rewordify.com/", "tags": ["Inglese", "Import"]}, {"title": "Anki", "desc": "Spaced repetition flashcards per memorizzazione duratura del vocabolario.", "url": "https://apps.ankiweb.net/", "tags": ["Inglese", "Import"]}, {"title": "Knowji Vocabulary Builder", "desc": "App intelligente per costruire vocabulary con audio, immagini e spaced repetition.", "url": "https://knowji.com/", "tags": ["Inglese", "Import"]}, {"title": "WordUp Vocabulary", "desc": "Vocabulary building personalizzato basato sui tuoi interessi e livello.", "url": "https://wordupapp.co/", "tags": ["Inglese", "Import"]}, {"title": "Vocabulary.com", "desc": "Adaptive learning system che insegna vocabulary attraverso domande intelligenti.", "url": "https://www.vocabulary.com/", "tags": ["Inglese", "Import"]}, {"title": "Quizlet", "desc": "Flashcards digitali e study modes diversi per memorizzare vocabulary.", "url": "https://quizlet.com/", "tags": ["Inglese", "Import"]}, {"title": "News in Levels", "desc": "Same news stories in 3 different levels per vocabulary building progressivo.", "url": "https://www.newsinlevels.com/", "tags": ["Inglese", "Import"]}, {"title": "Word Dynamo", "desc": "Vocabulary builder con etymology, word families e contextual learning.", "url": "https://www.worddynamo.com/", "tags": ["Inglese", "Import"]}, {"title": "Magoosh Vocabulary Builder", "desc": "Vocabulary app con focus su parole accademiche e test preparation.", "url": "https://magoosh.com/english-speaking/vocabulary-builder/", "tags": ["Inglese", "Import"]}, {"title": "English Vocabulary in Use", "desc": "Cambridge resource per vocabulary building sistematico e organizzato.", "url": "https://www.cambridge.org/elt/catalogue/subject/custom/item3647162/", "tags": ["Inglese", "Import"]}, {"title": "Free Rice Vocabulary", "desc": "Vocabulary quiz che dona riso per ogni risposta corretta, learning with purpose.", "url": "https://freerice.com/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge English Practice Tests", "desc": "Test practice ufficiali per KET, PET, FCE, CAE e CPE dal Cambridge Assessment.", "url": "https://www.cambridgeenglish.org/exams-and-tests/", "tags": ["Inglese", "Import"]}, {"title": "Exam English Cambridge Tests", "desc": "Test practice gratuiti per tutti i livelli Cambridge con scoring automatico.", "url": "https://www.examenglish.com/cambridge_esol.php", "tags": ["Inglese", "Import"]}, {"title": "Cambridge Exam Preparation Course", "desc": "Corsi di preparazione online per certificazioni Cambridge English.", "url": "https://cambridgeschool.online/", "tags": ["Inglese", "Import"]}, {"title": "British Council Cambridge Prep", "desc": "Preparazione ufficiale British Council per esami Cambridge.", "url": "https://www.britishcouncil.org/exam/cambridge", "tags": ["Inglese", "Import"]}, {"title": "FutureLearn Cambridge Courses", "desc": "Corsi gratuiti Cambridge English per preparazione certificazioni.", "url": "https://www.futurelearn.com/partners/cambridge-english", "tags": ["Inglese", "Import"]}, {"title": "Cambridge English Test Your Level", "desc": "Test gratuito per determinare il tuo livello Cambridge e scegliere l'esame giusto.", "url": "https://www.cambridgeenglish.org/test-your-english/", "tags": ["Inglese", "Import"]}, {"title": "Objective KET/PET/FCE", "desc": "Libri digitali ufficiali Cambridge per preparazione esami.", "url": "https://www.cambridge.org/elt/catalogue/", "tags": ["Inglese", "Import"]}, {"title": "Complete Cambridge Practice", "desc": "Risorse complete Macmillan per preparazione esami Cambridge.", "url": "https://www.macmillaneducation.com/cambridge/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge English Skills", "desc": "Serie di libri per sviluppare skills specifiche per esami Cambridge.", "url": "https://www.cambridge.org/elt/catalogue/subject/custom/item7292207/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge One Practice Tests", "desc": "Piattaforma digitale Cambridge con practice tests interattivi.", "url": "https://www.cambridge.org/elt/cambridgeone/", "tags": ["Inglese", "Import"]}, {"title": "English Profile", "desc": "Ricerca Cambridge sui livelli del CEFR con examples e can-do statements.", "url": "https://www.englishprofile.org/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge Preparation Centre", "desc": "Trova centri autorizzati Cambridge per preparation courses.", "url": "https://www.cambridgeenglish.org/find-a-centre/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge Mock Tests", "desc": "Mock tests ufficiali per familiarizzare con il format degli esami.", "url": "https://www.cambridgeenglish.org/test-your-english/cambridge-english-scale/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge English Corpus", "desc": "Real English examples dal Cambridge Learner Corpus per study authentico.", "url": "https://www.cambridge.org/elt/catalogue/subject/custom/item3647005/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Official Practice", "desc": "Test practice ufficiali IELTS Academic e General Training.", "url": "https://ielts.org/for-test-takers/how-to-prepare/practice-tests", "tags": ["Inglese", "Import"]}, {"title": "British Council IELTS Prep", "desc": "Preparazione IELTS ufficiale British Council con mock tests.", "url": "https://www.britishcouncil.org/exam/ielts/prepare", "tags": ["Inglese", "Import"]}, {"title": "IELTS Liz", "desc": "Risorsa completa gratuita per preparazione IELTS con tips e practice tests.", "url": "https://ieltsliz.com/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Buddy", "desc": "Guide dettagliate e practice per tutte le sezioni IELTS.", "url": "https://www.ieltsbuddy.com/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge IELTS Books", "desc": "Collezione ufficiale di test IELTS passati con audio e chiavi.", "url": "https://www.cambridge.org/elt/catalogue/subject/custom/item3646603/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Online Tests", "desc": "Simulazioni complete IELTS con scoring automatico e feedback.", "url": "https://ieltsonlinetests.com/", "tags": ["Inglese", "Import"]}, {"title": "E2 IELTS", "desc": "Piattaforma completa per preparazione IELTS con video lessons.", "url": "https://www.e2language.com/ielts/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Advantage", "desc": "Strategie e tecniche avanzate per massimizzare il punteggio IELTS.", "url": "https://www.ieltsadvantage.com/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Simon", "desc": "Blog di un ex-IELTS examiner con tips autentici e practice tasks.", "url": "https://ielts-simon.com/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Academic Reading", "desc": "Practice specifico per Academic Reading con passage authentic.", "url": "https://ieltstrainingonline.com/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Writing Task 1 & 2", "desc": "Guide specifiche per writing tasks con model answers e feedback.", "url": "https://www.ieltsessentials.com/", "tags": ["Inglese", "Import"]}, {"title": "IELTS Speaking Practice", "desc": "Mock speaking tests con questions bank aggiornate.", "url": "https://www.ielts.org/for-test-takers/how-to-prepare/test-format", "tags": ["Inglese", "Import"]}, {"title": "Road to IELTS", "desc": "Course online gratuito del British Council per IELTS preparation.", "url": "https://www.britishcouncil.org/exam/ielts/prepare/free-practice-tests", "tags": ["Inglese", "Import"]}, {"title": "IELTS Progress Check", "desc": "Official practice test con scoring da certified IELTS teachers.", "url": "https://www.ielts.org/for-test-takers/how-to-prepare/ielts-progress-check", "tags": ["Inglese", "Import"]}, {"title": "Duolingo", "desc": "App gamificata per apprendimento inglese con lezioni quotidiane e AI features.", "url": "https://www.duolingo.com/", "tags": ["Inglese", "Import"]}, {"title": "Babbel", "desc": "Corsi di inglese strutturati per adulti con focus su conversazioni reali.", "url": "https://www.babbel.com/", "tags": ["Inglese", "Import"]}, {"title": "Busuu", "desc": "App completa con certificazioni McGraw-Hill e feedback da madrelingua.", "url": "https://www.busuu.com/", "tags": ["Inglese", "Import"]}, {"title": "Rosetta Stone", "desc": "Metodo immersivo per apprendimento inglese senza traduzioni.", "url": "https://www.rosettastone.com/", "tags": ["Inglese", "Import"]}, {"title": "Cake English", "desc": "Impara inglese con video virali e contenuti social media.", "url": "https://snow.dog/cake/", "tags": ["Inglese", "Import"]}, {"title": "HelloTalk", "desc": "Scambio linguistico con madrelingua inglesi da tutto il mondo.", "url": "https://www.hellotalk.com/", "tags": ["Inglese", "Import"]}, {"title": "Cambly", "desc": "Conversation practice 1-on-1 con tutor madrelingua inglesi.", "url": "https://www.cambly.com/", "tags": ["Inglese", "Import"]}, {"title": "Preply", "desc": "Lezioni private di inglese online con tutor qualificati.", "url": "https://preply.com/", "tags": ["Inglese", "Import"]}, {"title": "EWA English", "desc": "Impara inglese con film, libri e corsi personalizzati.", "url": "https://ewa.edu.pl/", "tags": ["Inglese", "Import"]}, {"title": "Mondly", "desc": "App AI-powered con conversation practice e AR experiences.", "url": "https://www.mondly.com/", "tags": ["Inglese", "Import"]}, {"title": "Speaky", "desc": "Community per language exchange con native speakers.", "url": "https://www.speaky.com/", "tags": ["Inglese", "Import"]}, {"title": "Tandem", "desc": "Language exchange app con video chiamate e text chat.", "url": "https://www.tandem.net/", "tags": ["Inglese", "Import"]}, {"title": "Sounds Pronunciation App", "desc": "Macmillan app per pronunciation con IPA chart interattivo.", "url": "https://www.macmillaneducation.com/catalogue/sounds-pronunciation-app/", "tags": ["Inglese", "Import"]}, {"title": "Business English Pod", "desc": "Podcast e lezioni per Business English con vocabulary specialistico.", "url": "https://www.businessenglishpod.com/", "tags": ["Inglese", "Import"]}, {"title": "EnglishCentral Business", "desc": "Video-based learning per inglese aziendale e professionale.", "url": "https://www.englishcentral.com/business", "tags": ["Inglese", "Import"]}, {"title": "LinkedIn Learning English", "desc": "Corsi professionali di inglese per crescita carriera.", "url": "https://www.linkedin.com/learning/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge Business English", "desc": "Risorse ufficiali per preparazione BEC (Business English Certificate).", "url": "https://www.cambridge.org/elt/catalogue/subject/custom/item3647015/", "tags": ["Inglese", "Import"]}, {"title": "Market Leader Digital", "desc": "Corso digitale di Business English con case studies reali.", "url": "https://www.pearson.com/english/catalogue/business-english/market-leader/", "tags": ["Inglese", "Import"]}, {"title": "English for Work", "desc": "Inglese per il mondo del lavoro con simulazioni professionali.", "url": "https://www.futurelearn.com/courses/english-for-the-workplace", "tags": ["Inglese", "Import"]}, {"title": "Macmillan Business English", "desc": "Risorse complete per inglese aziendale e management.", "url": "https://www.macmillaneducation.com/business-english/", "tags": ["Inglese", "Import"]}, {"title": "BBC Learning English Business", "desc": "News e contenuti BBC per migliorare Business English.", "url": "https://www.bbc.co.uk/learningenglish/business/", "tags": ["Inglese", "Import"]}, {"title": "Business English Site", "desc": "Risorse gratuite per business communication e professional writing.", "url": "https://www.businessenglishsite.com/", "tags": ["Inglese", "Import"]}, {"title": "Perfect English Grammar Business", "desc": "Grammar lessons specifici per business contexts.", "url": "https://www.perfect-english-grammar.com/business-english.html", "tags": ["Inglese", "Import"]}, {"title": "FluentBusiness English", "desc": "Blog con tips e resources per professional English development.", "url": "https://www.fluentu.com/blog/business-english/", "tags": ["Inglese", "Import"]}, {"title": "English for Business Communication", "desc": "Corsi online universitari per business communication skills.", "url": "https://www.edx.org/learn/business-english", "tags": ["Inglese", "Import"]}, {"title": "Wall Street English Business", "desc": "Corsi specializzati per business professionals e executives.", "url": "https://www.wallstreetenglish.com/", "tags": ["Inglese", "Import"]}, {"title": "GlobalExam Business English", "desc": "Platform per preparation di certificazioni business English come TOEIC e BEC.", "url": "https://www.globalexam.com/", "tags": ["Inglese", "Import"]}, {"title": "English Corner Blog IIS Mendel", "desc": "Blog curato dal Prof. Crespi dell'IIS Mendel: raccolta del meglio disponibile online per lo studio dell'inglese, materiali didattici testati e risorse validate per studenti.", "url": "http://englishcornerblog.altervista.org/", "tags": ["Inglese", "Import"]}, {"title": "English Corner Listening Section", "desc": "Sezione specifica del blog dedicata al listening con TED Talks, BBC Learning English e risorse audio curate.", "url": "http://englishcornerblog.altervista.org/listening/", "tags": ["Inglese", "Import"]}, {"title": "Cambridge English Materials", "desc": "Materiali ufficiali Cambridge selezionati dal Prof. Crespi per preparazione certificazioni.", "url": "https://www.cambridgeenglish.org/learning-english/", "tags": ["Inglese", "Import"]}, {"title": "British Council LearnEnglish", "desc": "Piattaforma ufficiale British Council con resources per tutti i livelli.", "url": "https://learnenglish.britishcouncil.org/", "tags": ["Inglese", "Import"]}, {"title": "Authentic English Videos", "desc": "Video autentici selezionati per migliorare listening e pronunciation.", "url": "https://www.youtube.com/c/EngVid", "tags": ["Inglese", "Import"]}, {"title": "English Exercises Online", "desc": "Esercizi di grammatica progressivi validati per il curriculum Mendel.", "url": "https://www.perfect-english-grammar.com/", "tags": ["Inglese", "Import"]}, {"title": "Oxford Dictionaries", "desc": "Dizionario di riferimento per studenti con esempi audio e usage notes.", "url": "https://www.oxfordlearnersdictionaries.com/", "tags": ["Inglese", "Import"]}, {"title": "134 YouTube Channels for Listening", "desc": "Lista curata dal Prof. Crespi di canali YouTube per praticare listening skills.", "url": "https://medium.com/the-graph/the-nominees-134-youtube-channels-that-will-make-you-smarter-e4cc9e359811", "tags": ["Inglese", "Import"]}, {"title": "World Radio Map for Listening", "desc": "Mappa mondiale delle radio per listening practice con accenti diversi.", "url": "https://radio.garden/", "tags": ["Inglese", "Import"]}, {"title": "Larry Ferlazzo's Listening Sites", "desc": "Collezione di siti per listening curata da esperti e validata dal Prof. Crespi.", "url": "http://larryferlazzo.edublogs.org/2008/05/28/the-best-listening-sites-for-english-language-learners/", "tags": ["Inglese", "Import"]}, {"title": "English Corner Grammar Section", "desc": "Sezione grammatica del blog con exercises e spiegazioni dettagliate.", "url": "http://englishcornerblog.altervista.org/grammar/", "tags": ["Inglese", "Import"]}, {"title": "NotebookLM", "desc": "Assistente AI Google per studio personalizzato con i tuoi materiali inglesi.", "url": "https://notebooklm.google/", "tags": ["Inglese", "Import"]}, {"title": "Google Translate Advanced", "desc": "Traduttore avanzato con context awareness per apprendimento.", "url": "https://translate.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Socratic", "desc": "AI homework helper per domande di inglese e letteratura.", "url": "https://socratic.org/", "tags": ["Inglese", "Import"]}, {"title": "Google Arts & Culture", "desc": "Explore cultura inglese e americana attraverso virtual tours e exhibitions.", "url": "https://artsandculture.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Books English Learning", "desc": "Accesso a milioni di libri in inglese per reading practice.", "url": "https://books.google.com/", "tags": ["Inglese", "Import"]}, {"title": "YouTube Learning English Channels", "desc": "Vast collection di canali YouTube per English learning con AI recommendations.", "url": "https://www.youtube.com/results?search_query=learn+english", "tags": ["Inglese", "Import"]}, {"title": "Google Podcasts English", "desc": "Podcasts in inglese con transcriptions automatiche per listening practice.", "url": "https://podcasts.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Scholar English Articles", "desc": "Academic articles in inglese per advanced reading practice.", "url": "https://scholar.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google News English", "desc": "Current news in inglese per stay updated e improve reading skills.", "url": "https://news.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Earth Storytelling", "desc": "Explore il mondo con narrations in inglese per geographical vocabulary.", "url": "https://earth.google.com/web/", "tags": ["Inglese", "Import"]}, {"title": "Chrome Extensions for English", "desc": "Extensions del Chrome Web Store per enhance English learning experience.", "url": "https://chrome.google.com/webstore/category/extensions", "tags": ["Inglese", "Import"]}, {"title": "Google Assistant English Practice", "desc": "Practice English conversation con Google Assistant per pronunciation.", "url": "https://assistant.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Docs Voice Typing", "desc": "Use voice typing per practice pronunciation e improve writing.", "url": "https://docs.google.com/", "tags": ["Inglese", "Import"]}, {"title": "Google Meet Language Exchange", "desc": "Connect con English speakers per virtual language exchange sessions.", "url": "https://meet.google.com/", "tags": ["Inglese", "Import"]}], "fisica": [], "gamification": [], "informatica": [], "italiano-storia": [{"title": "anki.com", "desc": "Risorsa importata.", "url": "https://anki.com", "tags": ["Import"]}, {"title": "artsandculture.google.com", "desc": "Risorsa importata.", "url": "https://artsandculture.google.com", "tags": ["Import"]}, {"title": "chat.openai.com", "desc": "Risorsa importata.", "url": "https://chat.openai.com", "tags": ["Import"]}, {"title": "claude.ai", "desc": "Risorsa importata.", "url": "https://claude.ai", "tags": ["Import"]}, {"title": "evernote.com", "desc": "Risorsa importata.", "url": "https://evernote.com", "tags": ["Import"]}, {"title": "historyextra.com — Podcasts", "desc": "Risorsa importata.", "url": "https://historyextra.com/podcasts", "tags": ["Import"]}, {"title": "immersivereader.education.microsoft.com", "desc": "Risorsa importata.", "url": "https://immersivereader.education.microsoft.com", "tags": ["Import"]}, {"title": "languagetool.org", "desc": "Risorsa importata.", "url": "https://languagetool.org", "tags": ["Import"]}, {"title": "obsidian.md", "desc": "Risorsa importata.", "url": "https://obsidian.md", "tags": ["Import"]}, {"title": "otter.ai", "desc": "Risorsa importata.", "url": "https://otter.ai", "tags": ["Import"]}, {"title": "quillbot.com", "desc": "Risorsa importata.", "url": "https://quillbot.com", "tags": ["Import"]}, {"title": "rytr.me", "desc": "Risorsa importata.", "url": "https://rytr.me", "tags": ["Import"]}, {"title": "simplemind.eu", "desc": "Risorsa importata.", "url": "https://simplemind.eu", "tags": ["Import"]}, {"title": "timeline.knightlab.com", "desc": "Risorsa importata.", "url": "https://timeline.knightlab.com", "tags": ["Import"]}, {"title": "worldhistoryconnected.press.uillinois.edu — Games", "desc": "Risorsa importata.", "url": "https://worldhistoryconnected.press.uillinois.edu/games", "tags": ["Import"]}, {"title": "writeroom.com", "desc": "Risorsa importata.", "url": "https://writeroom.com", "tags": ["Import"]}, {"title": "accademiadellacrusca.it", "desc": "Risorsa importata.", "url": "https://www.accademiadellacrusca.it", "tags": ["Import"]}, {"title": "amberscript.com", "desc": "Risorsa importata.", "url": "https://www.amberscript.com", "tags": ["Import"]}, {"title": "anpi.it", "desc": "Risorsa importata.", "url": "https://www.anpi.it", "tags": ["Import"]}, {"title": "audible.it", "desc": "Risorsa importata.", "url": "https://www.audible.it", "tags": ["Import"]}, {"title": "baby-flash.com — Italiano", "desc": "Risorsa importata.", "url": "https://www.baby-flash.com/italiano.html", "tags": ["Import"]}, {"title": "balabolka.site", "desc": "Risorsa importata.", "url": "https://www.balabolka.site", "tags": ["Import"]}, {"title": "britannica.com", "desc": "Risorsa importata.", "url": "https://www.britannica.com", "tags": ["Import"]}, {"title": "canva.com — Mind Maps", "desc": "Risorsa importata.", "url": "https://www.canva.com/graphs/mind-maps", "tags": ["Import"]}, {"title": "claroread.com", "desc": "Risorsa importata.", "url": "https://www.claroread.com", "tags": ["Import"]}, {"title": "coggle.it", "desc": "Risorsa importata.", "url": "https://www.coggle.it", "tags": ["Import"]}, {"title": "conceptboard.com", "desc": "Risorsa importata.", "url": "https://www.conceptboard.com", "tags": ["Import"]}, {"title": "consensus.app", "desc": "Risorsa importata.", "url": "https://www.consensus.app", "tags": ["Import"]}, {"title": "descript.com", "desc": "Risorsa importata.", "url": "https://www.descript.com", "tags": ["Import"]}, {"title": "draw.io", "desc": "Risorsa importata.", "url": "https://www.draw.io", "tags": ["Import"]}, {"title": "europeana.eu", "desc": "Risorsa importata.", "url": "https://www.europeana.eu", "tags": ["Import"]}, {"title": "focuswriter.org", "desc": "Risorsa importata.", "url": "https://www.focuswriter.org", "tags": ["Import"]}, {"title": "geacron.com", "desc": "Risorsa importata.", "url": "https://www.geacron.com", "tags": ["Import"]}, {"title": "ginger.com", "desc": "Risorsa importata.", "url": "https://www.ginger.com", "tags": ["Import"]}, {"title": "google.com — Earth", "desc": "Risorsa importata.", "url": "https://www.google.com/earth", "tags": ["Import"]}, {"title": "grammarly.com", "desc": "Risorsa importata.", "url": "https://www.grammarly.com", "tags": ["Import"]}, {"title": "grammaticaitaliana.net — Giochi", "desc": "Risorsa importata.", "url": "https://www.grammaticaitaliana.net/giochi", "tags": ["Import"]}, {"title": "happyscribe.com", "desc": "Risorsa importata.", "url": "https://www.happyscribe.com", "tags": ["Import"]}, {"title": "hemingwayapp.com", "desc": "Risorsa importata.", "url": "https://www.hemingwayapp.com", "tags": ["Import"]}, {"title": "historyextra.com", "desc": "Risorsa importata.", "url": "https://www.historyextra.com", "tags": ["Import"]}, {"title": "illibraio.it — Podcast", "desc": "Risorsa importata.", "url": "https://www.illibraio.it/podcast", "tags": ["Import"]}, {"title": "internetculturale.it", "desc": "Risorsa importata.", "url": "https://www.internetculturale.it", "tags": ["Import"]}, {"title": "jstor.org", "desc": "Risorsa importata.", "url": "https://www.jstor.org", "tags": ["Import"]}, {"title": "letteraturaitaliana.net", "desc": "Risorsa importata.", "url": "https://www.letteraturaitaliana.net", "tags": ["Import"]}, {"title": "liberliber.it", "desc": "Risorsa importata.", "url": "https://www.liberliber.it", "tags": ["Import"]}, {"title": "liberliber.it — Autori A", "desc": "Risorsa importata.", "url": "https://www.liberliber.it/online/autori/autori-a", "tags": ["Import"]}, {"title": "louvre.fr — Visites En Ligne", "desc": "Risorsa importata.", "url": "https://www.louvre.fr/en/visites-en-ligne", "tags": ["Import"]}, {"title": "lucidchart.com", "desc": "Risorsa importata.", "url": "https://www.lucidchart.com", "tags": ["Import"]}, {"title": "mendeley.com", "desc": "Risorsa importata.", "url": "https://www.mendeley.com", "tags": ["Import"]}, {"title": "milanote.com", "desc": "Risorsa importata.", "url": "https://www.milanote.com", "tags": ["Import"]}, {"title": "mindmeister.com", "desc": "Risorsa importata.", "url": "https://www.mindmeister.com", "tags": ["Import"]}, {"title": "museodellashoah.it", "desc": "Risorsa importata.", "url": "https://www.museodellashoah.it", "tags": ["Import"]}, {"title": "naturalreaders.com", "desc": "Risorsa importata.", "url": "https://www.naturalreaders.com", "tags": ["Import"]}, {"title": "notion.so", "desc": "Risorsa importata.", "url": "https://www.notion.so", "tags": ["Import"]}, {"title": "oldmapsonline.org", "desc": "Risorsa importata.", "url": "https://www.oldmapsonline.org", "tags": ["Import"]}, {"title": "opendyslexic.org", "desc": "Risorsa importata.", "url": "https://www.opendyslexic.org", "tags": ["Import"]}, {"title": "perplexity.ai", "desc": "Risorsa importata.", "url": "https://www.perplexity.ai", "tags": ["Import"]}, {"title": "poetidelparco.it", "desc": "Risorsa importata.", "url": "https://www.poetidelparco.it", "tags": ["Import"]}, {"title": "prowritingaid.com", "desc": "Risorsa importata.", "url": "https://www.prowritingaid.com", "tags": ["Import"]}, {"title": "rai.it — Passatoefuturo", "desc": "Risorsa importata.", "url": "https://www.rai.it/raiplay/programmi/passatoefuturo", "tags": ["Import"]}, {"title": "raiplay.it — Passatoepresente", "desc": "Risorsa importata.", "url": "https://www.raiplay.it/programmi/passatoepresente", "tags": ["Import"]}, {"title": "raiplayradio.it — Adaltavoce", "desc": "Risorsa importata.", "url": "https://www.raiplayradio.it/programmi/adaltavoce", "tags": ["Import"]}, {"title": "raiplayradio.it — Ilcielo", "desc": "Risorsa importata.", "url": "https://www.raiplayradio.it/programmi/ilcielo", "tags": ["Import"]}, {"title": "readandwrite.com", "desc": "Risorsa importata.", "url": "https://www.readandwrite.com", "tags": ["Import"]}, {"title": "rev.com", "desc": "Risorsa importata.", "url": "https://www.rev.com", "tags": ["Import"]}, {"title": "scrivener.com", "desc": "Risorsa importata.", "url": "https://www.scrivener.com", "tags": ["Import"]}, {"title": "sheppardsoftware.com — History Games", "desc": "Risorsa importata.", "url": "https://www.sheppardsoftware.com/History/history_games.htm", "tags": ["Import"]}, {"title": "skuola.net", "desc": "Risorsa importata.", "url": "https://www.skuola.net", "tags": ["Import"]}, {"title": "sonix.ai", "desc": "Risorsa importata.", "url": "https://www.sonix.ai", "tags": ["Import"]}, {"title": "speechtexter.com", "desc": "Risorsa importata.", "url": "https://www.speechtexter.com", "tags": ["Import"]}, {"title": "storiainfoto.it", "desc": "Risorsa importata.", "url": "https://www.storiainfoto.it", "tags": ["Import"]}, {"title": "storiainfoto.it — Podcast", "desc": "Risorsa importata.", "url": "https://www.storiainfoto.it/podcast", "tags": ["Import"]}, {"title": "storico.org", "desc": "Risorsa importata.", "url": "https://www.storico.org", "tags": ["Import"]}, {"title": "storytel.com", "desc": "Risorsa importata.", "url": "https://www.storytel.com", "tags": ["Import"]}, {"title": "studenti.it", "desc": "Risorsa importata.", "url": "https://www.studenti.it", "tags": ["Import"]}, {"title": "tiki-toki.com", "desc": "Risorsa importata.", "url": "https://www.tiki-toki.com", "tags": ["Import"]}, {"title": "timetoast.com", "desc": "Risorsa importata.", "url": "https://www.timetoast.com", "tags": ["Import"]}, {"title": "treccani.it", "desc": "Risorsa importata.", "url": "https://www.treccani.it", "tags": ["Import"]}, {"title": "trint.com", "desc": "Risorsa importata.", "url": "https://www.trint.com", "tags": ["Import"]}, {"title": "ulysses.app", "desc": "Risorsa importata.", "url": "https://www.ulysses.app", "tags": ["Import"]}, {"title": "virtualmuseums.io", "desc": "Risorsa importata.", "url": "https://www.virtualmuseums.io", "tags": ["Import"]}, {"title": "wikisource.org", "desc": "Risorsa importata.", "url": "https://www.wikisource.org", "tags": ["Import"]}, {"title": "worldhistory.org", "desc": "Risorsa importata.", "url": "https://www.worldhistory.org", "tags": ["Import"]}, {"title": "worldhistoryatlas.com", "desc": "Risorsa importata.", "url": "https://www.worldhistoryatlas.com", "tags": ["Import"]}, {"title": "writesonic.com", "desc": "Risorsa importata.", "url": "https://www.writesonic.com", "tags": ["Import"]}, {"title": "xmind.net", "desc": "Risorsa importata.", "url": "https://www.xmind.net", "tags": ["Import"]}, {"title": "youtube.com — @Crashcourse", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@CrashCourse", "tags": ["Import"]}, {"title": "youtube.com — @Kurzgesagtin A Nutshell", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@KurzgesagtIn-a-Nutshell", "tags": ["Import"]}, {"title": "youtube.com — @Lastoria", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@LaStoria", "tags": ["Import"]}, {"title": "youtube.com — @Scuolazoo", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@ScuolaZoo", "tags": ["Import"]}, {"title": "youtube.com — @Adaltavoce", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@adaltavoce", "tags": ["Import"]}, {"title": "youtube.com — @Alessandro Barbero", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@alessandro_barbero", "tags": ["Import"]}, {"title": "youtube.com — @Audiolibrigratis", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@audiolibrigratis", "tags": ["Import"]}, {"title": "youtube.com — @Leggoperitalia", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@leggoperitalia", "tags": ["Import"]}, {"title": "youtube.com — @Lezioniditaliano", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@lezioniditaliano", "tags": ["Import"]}, {"title": "youtube.com — @Oversimplified", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@oversimplified", "tags": ["Import"]}, {"title": "youtube.com — @Redooc", "desc": "Risorsa importata.", "url": "https://www.youtube.com/@redooc", "tags": ["Import"]}, {"title": "ywriter.com", "desc": "Risorsa importata.", "url": "https://www.ywriter.com", "tags": ["Import"]}, {"title": "zotero.org", "desc": "Risorsa importata.", "url": "https://www.zotero.org", "tags": ["Import"]}], "matematica": [{"title": "GeoGebra", "desc": "Strumenti dinamici.", "url": "https://www.geogebra.org/", "tags": ["Strumenti"]}], "pv-eeml": [], "scienze-integrate": [], "stem-restanti": [], "valutazione": []};
 
 // BUILD HOME
 function buildHome(){
   const grid = document.getElementById('homeGrid');
   grid.innerHTML = '';
-  SUBJECTS.sort((a,b)=>a.name.localeCompare(b,'it')).forEach((s, idx) => {
+  SUBJECTS.sort((a,b)=>a.name.localeCompare(b.name,'it')).forEach((s, idx) => {
     const ext = SUBJECT_LINKS[s.id] || null;
     const card = document.createElement('div');
-    card.className = 'card'; 
-    card.setAttribute('tabindex','0'); 
-    card.style.setProperty('--idx', idx);
-    card.style.setProperty('--h', colors[idx % colors.length]);
-    
+    card.className = 'card'; card.setAttribute('tabindex','0'); card.style.setProperty('--idx', idx);
     card.onclick = () => showPage(s.id);
-    card.onkeydown = (e)=>{ 
-      if(e.key==='Enter' || e.key===' '){ 
-        e.preventDefault(); 
-        showPage(s.id);
-      } 
-    };
-    
-    card.innerHTML = `
-      <div class="emoji">${s.emoji||"📘"}</div>
-      <div>
-        <div class="title">${s.name}</div>
-        <div class="path">${s.id}${ext ? ` <a class="extlink" href="${ext}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Apri pagina esterna">↗</a>` : ''}</div>
-      </div>`;
+    card.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); showPage(s.id);} };
+    card.innerHTML = `<div class="emoji">${s.emoji||"📘"}</div>
+      <div><div class="title">${s.name}</div>
+      <div class="path">${s.id}${ext ? ` <a class="extlink" href="${ext}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Apri pagina esterna">↗</a>` : ''}</div></div>`;
     grid.appendChild(card);
   });
 }
@@ -911,9 +149,7 @@ function ensurePage(id){
   const s = SUBJECTS.find(x=>x.id===id) || {name:id, emoji:"📘"};
   const ext = SUBJECT_LINKS[id] || null;
   const page = document.createElement('div');
-  page.className = 'page'; 
-  page.id = id;
-  
+  page.className = 'page'; page.id = id;
   page.innerHTML = `
     <div class="page-header">
       <div class="page-title">${s.name}</div>
@@ -922,8 +158,8 @@ function ensurePage(id){
       <span class="counter" id="${id}Counter">0</span>
       <div class="page-actions">
         ${ext ? `<a class="btn btn-primary" href="${ext}" target="_blank" rel="noopener">↗ Pagina esterna</a>` : ''}
-        <button class="btn btn-secondary" onclick="openPanelFromCurrent()">🔍 Elenco</button>
-        <button class="btn btn-secondary" onclick="verifyLinks()">✔️ Verifica link</button>
+        <button class="btn btn-secondary" onclick="openPanelFromCurrent()">📝 Elenco</button>
+        <button class="btn btn-secondary" onclick="verifyLinks()">✔︎ Verifica link</button>
       </div>
       <div class="tags" id="${id}Tags"></div>
     </div>
@@ -938,20 +174,13 @@ function uniqueTags(list){
 }
 
 function buildTags(pageId, list){
-  const wrap = document.getElementById(pageId+'Tags'); 
-  if(!wrap) return;
+  const wrap = document.getElementById(pageId+'Tags'); if(!wrap) return;
   wrap.innerHTML = '';
   const tags = uniqueTags(list);
-  
-  tags.forEach((t, idx) => {
+  tags.forEach(t => {
     const span = document.createElement('button');
-    span.className = 'tag'; 
-    span.textContent = t;
-    span.style.animationDelay = `${idx * 0.05}s`;
-    span.onclick = () => { 
-      span.classList.toggle('active'); 
-      applyFilters(pageId); 
-    };
+    span.className = 'tag'; span.textContent = t;
+    span.onclick = () => { span.classList.toggle('active'); applyFilters(pageId); };
     wrap.appendChild(span);
   });
 }
@@ -960,30 +189,21 @@ function applyFilters(pageId){
   const grid = document.getElementById(pageId+'Resources');
   const active = Array.from(document.querySelectorAll('#'+pageId+'Tags .tag.active')).map(el=>el.textContent);
   const cards = Array.from(grid.children);
-  
   cards.forEach(card => {
-    const tags = (card.getAttribute('data-tags')||'').split(/\s+/).filter(Boolean);
+    const tags = (card.getAttribute('data-tags')||'').split(/\\s+/).filter(Boolean);
     const show = active.length===0 || active.every(t => tags.includes(t));
     card.style.display = show ? '' : 'none';
   });
-  
   const visible = cards.filter(c => c.style.display !== 'none').length;
-  const counter = document.getElementById(pageId+'Counter'); 
-  if(counter) counter.textContent = visible + ' risorse';
+  const counter = document.getElementById(pageId+'Counter'); if(counter) counter.textContent = visible + ' risorse';
 }
 
 function createResourceCards(containerId, list){
-  const grid = document.getElementById(containerId); 
-  if(!grid) return; 
-  grid.innerHTML = '';
-  
-  list.forEach((item, idx) => {
-    const el = document.createElement('div'); 
-    el.className = 'resource-card';
-    el.style.animationDelay = `${idx * 0.1}s`;
+  const grid = document.getElementById(containerId); if(!grid) return; grid.innerHTML = '';
+  list.forEach(item => {
+    const el = document.createElement('div'); el.className = 'resource-card';
     const tagStr = (item.tags||[]).join(' ');
     el.setAttribute('data-tags', tagStr);
-    
     el.innerHTML = `
       <div class="resource-name">${item.title}</div>
       <div class="resource-description">${item.desc||''}</div>
@@ -993,156 +213,77 @@ function createResourceCards(containerId, list){
   });
 }
 
-// Side panel functionality
-const ovl = document.getElementById('ovl'); 
-const side = document.getElementById('side');
-const listEl = document.getElementById('list'); 
-const cnt = document.getElementById('cnt'); 
-const srch2 = document.getElementById('srch2');
-
-function openPanel(){ 
-  ovl.classList.add('open'); 
-  side.classList.add('open'); 
-}
-
-function closePanel(){ 
-  ovl.classList.remove('open'); 
-  side.classList.remove('open'); 
-}
-
+// Side panel
+const ovl = document.getElementById('ovl'); const side = document.getElementById('side');
+const listEl = document.getElementById('list'); const cnt = document.getElementById('cnt'); const srch2 = document.getElementById('srch2');
+function openPanel(){ ovl.classList.add('open'); side.classList.add('open'); }
+function closePanel(){ ovl.classList.remove('open'); side.classList.remove('open'); }
 ovl.addEventListener('click', closePanel);
-
 function buildPanelFrom(pageId){
   const links = Array.from(document.querySelectorAll('#'+pageId+'Resources a.resource-link'));
   listEl.innerHTML = '';
-  
-  links.forEach((a, idx) => {
-    const it = document.createElement('div'); 
-    it.className = 'item';
-    it.style.animationDelay = `${idx * 0.05}s`;
+  links.forEach(a=>{
+    const it = document.createElement('div'); it.className = 'item';
     const name = a.closest('.resource-card').querySelector('.resource-name').textContent;
-    it.innerHTML = `
-      <a href="${a.href}" target="_blank" rel="noopener">${name}</a>
-      <p style="margin:.25rem 0 0; font-size:.85rem; color:#555;">${a.href}</p>`;
+    it.innerHTML = `<a href="${a.href}" target="_blank" rel="noopener">${name}</a>
+                    <p style="margin:.25rem 0 0; font-size:.85rem; color:#555;">${a.href}</p>`;
     listEl.appendChild(it);
   });
   cnt.textContent = links.length;
 }
-
 function openPanelFromCurrent(){
-  const currentPage = document.querySelector('.page.active'); 
-  if(!currentPage) return;
-  buildPanelFrom(currentPage.id); 
-  openPanel();
+  const currentPage = document.querySelector('.page.active'); if(!currentPage) return;
+  buildPanelFrom(currentPage.id); openPanel();
 }
-
 function filterPanel(){
   const q = (srch2.value||'').toLowerCase();
-  Array.from(listEl.children).forEach(div=>{ 
-    const t = (div.innerText||'').toLowerCase(); 
-    div.style.display = t.includes(q) ? '' : 'none'; 
-  });
+  Array.from(listEl.children).forEach(div=>{ const t = (div.innerText||'').toLowerCase(); div.style.display = t.includes(q) ? '' : 'none'; });
 }
-
 function openAll(){
-  const currentPage = document.querySelector('.page.active'); 
-  if(!currentPage) return;
+  const currentPage = document.querySelector('.page.active'); if(!currentPage) return;
   const links = Array.from(document.querySelectorAll('#'+currentPage.id+'Resources a.resource-link')).slice(0,5);
   links.forEach(a=>window.open(a.href,'_blank','noopener'));
 }
-
 function copyLinks(){
-  const currentPage = document.querySelector('.page.active'); 
-  if(!currentPage) return;
+  const currentPage = document.querySelector('.page.active'); if(!currentPage) return;
   const lines = Array.from(document.querySelectorAll('#'+currentPage.id+'Resources .resource-card'))
     .map(card => card.querySelector('.resource-name').textContent + ' — ' + card.querySelector('a').href);
-  navigator.clipboard.writeText(lines.join('\n')).then(()=>alert('Elenco copiato negli appunti.'));
+  navigator.clipboard.writeText(lines.join('\\n')).then(()=>alert('Elenco copiato negli appunti.'));
 }
 
-// Enhanced link verifier with visual feedback
+// Link verifier (best-effort, CORS-safe)
 async function verifyLinks(){
   const currentPage = document.querySelector('.page.active');
   if(!currentPage) return;
-  
   const cards = Array.from(currentPage.querySelectorAll('.resource-card'));
-  const button = currentPage.querySelector('button[onclick="verifyLinks()"]');
-  const originalText = button.textContent;
-  
-  button.innerHTML = '<span class="loading"></span> Verificando...';
-  button.disabled = true;
-  
   for(const card of cards){
     const url = card.querySelector('a').href;
     const dot = card.querySelector('.status-dot');
     dot.className = 'status-dot status-unk';
-    
     try{
       await fetch(url, {mode:'no-cors', cache:'no-store'});
       dot.className = 'status-dot status-ok';
-      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay for visual effect
     }catch(err){
       dot.className = 'status-dot status-fail';
     }
   }
-  
-  button.textContent = originalText;
-  button.disabled = false;
-  alert('Verifica completata! I pallini verdi indicano link raggiungibili.');
+  alert('Verifica completata (best-effort). I pallini verdi indicano link raggiungibili.');
 }
 
-// Enhanced navigation with smooth transitions
+// Navigation
 function showPage(pageId){
-  document.querySelectorAll('.page').forEach(p => { 
-    p.classList.remove('active'); 
-    p.style.opacity=0; 
-    p.style.transform='translateY(40px)'; 
-  });
-  
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.opacity=0; p.style.transform='translateY(20px)'; });
   ensurePage(pageId);
   const data = HUB_DATA[pageId] || [];
   buildTags(pageId, data);
   createResourceCards(pageId+'Resources', data);
   applyFilters(pageId);
-  
-  setTimeout(()=>{ 
-    const el = document.getElementById(pageId); 
-    el.classList.add('active');
-    setTimeout(()=>{ 
-      el.style.opacity=1; 
-      el.style.transform='translateY(0)' 
-    }, 50); 
-  }, 150);
-  
+  setTimeout(()=>{ const el = document.getElementById(pageId); el.classList.add('active');
+                   setTimeout(()=>{ el.style.opacity=1; el.style.transform='translateY(0)' }, 20); }, 60);
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// Initialize on load
-window.addEventListener('DOMContentLoaded', function(){ 
-  buildHome(); 
-  
-  // Add some startup animations
-  setTimeout(() => {
-    document.body.style.overflow = 'visible';
-  }, 500);
-});
-
-// Add smooth scrolling for better UX
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('back')) {
-    e.preventDefault();
-    showPage('home');
-  }
-});
-
-// Enhanced keyboard navigation
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    const openPanel = document.querySelector('.side.open');
-    if (openPanel) {
-      closePanel();
-    }
-  }
-});
+window.addEventListener('DOMContentLoaded', function(){ buildHome(); });
 </script>
 </body>
 </html>
