@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IIS Mendel – Learning Hub</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IIS Mendel – Learning Hub</title>
+<style>
     :root {
-      --bg: linear-gradient(135deg, #22c55e 0%, #16a34a 25%, #667eea 75%, #764ba2 100%);
+      --bg: linear-gradient(135deg, #2d5f3f 0%, #4a7c59 25%, #66bb6a 50%, #43a047 75%, #2e7d32 100%);
       --card: rgba(255, 255, 255, 0.95);
       --card-hover: rgba(255, 255, 255, 1);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.2);
-      --text: #1f2b3a;
-      --text-light: #64748b;
-      --accent: #16a34a;
-      --pnrr-bg: rgba(255, 255, 255, 0.9);
-      --pnrr-border: rgba(34, 197, 94, 0.3);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
+      --text: #1a202c;
+      --text-light: #4a5568;
+      --accent: #2e7d32;
+      --accent-secondary: #388e3c;
+      --pnrr-bg: rgba(255, 255, 255, 0.92);
+      --pnrr-border: rgba(46, 125, 50, 0.3);
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+      --tertiary: #00695c;
+      --filter-bg: rgba(255, 255, 255, 0.1);
+      --search-bg: rgba(255, 255, 255, 0.9);
+    }
+
+    [data-theme="dark"] {
+      --bg: linear-gradient(135deg, #0f1419 0%, #1a2332 25%, #2d3748 50%, #1a202c 75%, #0f1419 100%);
+      --card: rgba(45, 55, 72, 0.95);
+      --card-hover: rgba(45, 55, 72, 1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.6);
+      --text: #f7fafc;
+      --text-light: #a0aec0;
+      --accent: #68d391;
+      --accent-secondary: #9ae6b4;
+      --pnrr-bg: rgba(45, 55, 72, 0.92);
+      --pnrr-border: rgba(104, 211, 145, 0.3);
+      --filter-bg: rgba(45, 55, 72, 0.3);
+      --search-bg: rgba(45, 55, 72, 0.9);
     }
 
     * {
@@ -25,15 +48,211 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+      transition: all 0.3s ease;
     }
 
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 50px;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .theme-icon {
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    /* Advanced Search & Filter Panel */
+    .search-filter-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--search-bg);
+      backdrop-filter: blur(20px);
+      padding: 1rem 2rem;
+      z-index: 500;
+      border-bottom: 1px solid var(--pnrr-border);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .search-filter-panel.active {
+      transform: translateY(0);
+    }
+
+    .search-toggle {
+      position: fixed;
+      top: 6rem;
+      right: 2rem;
+      z-index: 1000;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .search-toggle:hover {
+      transform: scale(1.05);
+      background: var(--accent-secondary);
+    }
+
+    .search-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid var(--accent);
+      border-radius: 25px;
+      font-size: 1.1rem;
+      background: var(--card);
+      color: var(--text);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 0.8rem 1rem;
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-select:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .close-search {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .close-search:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Particelle animate */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: particleFloat 20s linear infinite;
+    }
+
+    [data-theme="dark"] .particle {
+      background: rgba(104, 211, 145, 0.4);
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Overlay con pattern */
     body::before {
       content: '';
       position: fixed;
@@ -42,405 +261,1298 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(46, 125, 50, 0.05) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem;
       position: relative;
       z-index: 1;
+      margin-top: 2rem;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       color: white;
+      position: relative;
     }
 
     h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      background: linear-gradient(45deg, #fff, #e0e7ff);
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #fff 0%, #f0fff0 50%, #e8f5e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    [data-theme="dark"] h1 {
+      background: linear-gradient(135deg, #68d391 0%, #9ae6b4 50%, #c6f6d5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .tagline {
-      font-size: 1.3rem;
-      opacity: 0.9;
-      font-weight: 300;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      margin-bottom: 3rem;
+    @keyframes titleGlow {
+      0% { text-shadow: 0 4px 20px rgba(255,255,255,0.3); }
+      100% { text-shadow: 0 8px 40px rgba(255,255,255,0.6); }
     }
 
-    /* Sezioni PNRR e Buone Pratiche */
+    .tagline {
+      font-size: 1.4rem;
+      opacity: 0.95;
+      font-weight: 400;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: var(--card);
+      padding: 1rem 2rem;
+      border-radius: 20px;
+      border: 2px solid var(--accent);
+      transition: all 0.3s ease;
+      text-align: center;
+      min-width: 150px;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    /* Sezioni PNRR e Buone Pratiche - MIGLIORATE */
     .info-section {
       background: var(--pnrr-bg);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 2rem;
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2.5rem;
       margin: 2rem 0;
       border: 1px solid var(--pnrr-border);
       box-shadow: var(--shadow);
       text-align: center;
-    }
-
-    .info-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .info-description {
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .info-badges {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      background: rgba(34, 197, 94, 0.1);
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      font-weight: 600;
-      color: var(--accent);
-      font-size: 0.9rem;
-      border: 1px solid rgba(34, 197, 94, 0.2);
-    }
-
-    /* Grid delle materie */
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    @media(min-width: 560px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(min-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    a.card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-      border-radius: 20px;
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      text-decoration: none;
-      color: var(--text);
-      box-shadow: var(--shadow);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 1.2rem;
-      font-weight: 600;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
     }
 
-    a.card::before {
+    .info-section::before {
       content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(46, 125, 50, 0.1), transparent);
+      transition: left 0.8s ease;
     }
 
-    a.card:hover::before {
+    .info-section:hover::before {
       left: 100%;
     }
 
-    a.card:hover {
-      transform: translateY(-8px) scale(1.02);
+    .info-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .info-description {
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.15), rgba(56, 142, 60, 0.1));
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+      border: 1px solid rgba(46, 125, 50, 0.25);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.25), rgba(56, 142, 60, 0.2));
+      box-shadow: 0 8px 15px rgba(46, 125, 50, 0.2);
+    }
+
+    /* Pagine */
+    .page {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Grid delle materie - MIGLIORATO */
+    .grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    @media(min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(min-width: 1400px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 25px;
+      background: var(--card);
+      backdrop-filter: blur(15px);
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1.3rem;
+      font-weight: 700;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      min-height: 200px;
+    }
+
+    [data-theme="dark"] .card {
+      border: 1px solid rgba(104, 211, 145, 0.3);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      transition: left 0.6s ease;
+    }
+
+    [data-theme="dark"] .card::before {
+      background: linear-gradient(90deg, transparent, rgba(104, 211, 145, 0.3), transparent);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(46, 125, 50, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: rotate 8s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.03);
       box-shadow: var(--shadow-hover);
       background: var(--card-hover);
     }
 
     .card .emoji {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-      transition: transform 0.3s ease;
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15));
+      transition: all 0.4s ease;
+      z-index: 1;
+      position: relative;
     }
 
-    a.card:hover .emoji {
-      transform: scale(1.1) rotate(5deg);
+    .card:hover .emoji {
+      transform: scale(1.2) rotate(10deg);
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.25));
     }
 
-    /* Colori specifici per categoria */
-    a.card:nth-child(1), a.card:nth-child(2) { border-left: 5px solid #06b6d4; } /* Ambiente */
-    a.card:nth-child(3), a.card:nth-child(8), a.card:nth-child(15) { border-left: 5px solid #3b82f6; } /* Scienze */
-    a.card:nth-child(4), a.card:nth-child(7) { border-left: 5px solid #f59e0b; } /* Lingue */
-    a.card:nth-child(5), a.card:nth-child(6), a.card:nth-child(11) { border-left: 5px solid #8b5cf6; } /* Umanistiche */
-    a.card:nth-child(9), a.card:nth-child(10), a.card:nth-child(14), a.card:nth-child(16) { border-left: 5px solid #ef4444; } /* Tech */
-    a.card:nth-child(12), a.card:nth-child(13) { border-left: 5px solid #10b981; } /* STEM */
-    a.card:nth-child(17) { border-left: 5px solid #06b6d4; } /* Valutazione - colore cyan come trasversale */
+    .card .resource-count {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
 
-    footer {
-      margin-top: 4rem;
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.8);
+    /* Colori specifici per categoria - AGGIORNATI CON TEMA VERDE */
+    .card:nth-child(1), .card:nth-child(2) { 
+      border-left: 6px solid #4caf50;
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(255, 255, 255, 0.95));
+    }
+    [data-theme="dark"] .card:nth-child(1), [data-theme="dark"] .card:nth-child(2) { 
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(45, 55, 72, 0.95));
+    }
+    .card:nth-child(3), .card:nth-child(8), .card:nth-child(15) { 
+      border-left: 6px solid #2196f3;
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.05), rgba(255, 255, 255, 0.95));
+    }
+    [data-theme="dark"] .card:nth-child(3), [data-theme="dark"] .card:nth-child(8), [data-theme="dark"] .card:nth-child(15) { 
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(45, 55, 72, 0.95));
+    }
+
+    /* Hide cards when filtered */
+    .card.hidden {
+      display: none;
+    }
+
+    /* Pagina delle risorse - MIGLIORATA */
+    .resource-page-header {
+      background: var(--pnrr-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      border: 1px solid var(--pnrr-border);
+      box-shadow: var(--shadow);
       text-align: center;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Elementi flottanti animati */
-    .floating-elements {
-      position: fixed;
+    .resource-page-header::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.05), rgba(56, 142, 60, 0.03));
+      z-index: -1;
+    }
+
+    .resource-page-title {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .resource-page-title .emoji {
+      font-size: 4rem;
+      filter: drop-shadow(0 8px 15px rgba(46, 125, 50, 0.3));
+    }
+
+    .resource-page-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.4s ease;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      z-index: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
     }
 
-    .floating-element {
+    .back-button:hover::before {
+      left: 100%;
+    }
+
+    .back-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(46, 125, 50, 0.4);
+    }
+
+    /* Grid delle risorse - MIGLIORATO */
+    .resources-grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media(min-width: 768px) {
+      .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width: 1024px) {
+      .resources-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(min-width: 1400px) {
+      .resources-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .resource-card {
+      background: var(--card);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    [data-theme="dark"] .resource-card {
+      border: 1px solid rgba(104, 211, 145, 0.3);
+    }
+
+    .resource-card::before {
+      content: '';
       position: absolute;
-      opacity: 0.1;
-      animation: float 8s ease-in-out infinite;
-      font-size: 2rem;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(46, 125, 50, 0.08), transparent);
+      transition: left 0.6s ease;
     }
 
-    .floating-element:nth-child(1) {
-      top: 10%;
-      left: 10%;
-      animation-delay: 0s;
-      color: #22c55e;
+    .resource-card:hover::before {
+      left: 100%;
     }
 
-    .floating-element:nth-child(2) {
-      top: 20%;
-      right: 15%;
-      animation-delay: 2s;
-      color: #3b82f6;
+    .resource-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(46, 125, 50, 0.3);
     }
 
-    .floating-element:nth-child(3) {
-      bottom: 25%;
-      left: 20%;
-      animation-delay: 4s;
-      color: #16a34a;
+    .resource-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      line-height: 1.4;
     }
 
-    .floating-element:nth-child(4) {
-      top: 60%;
-      right: 25%;
-      animation-delay: 1s;
-      color: #10b981;
+    .resource-description {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
 
-    .floating-element:nth-child(5) {
-      bottom: 40%;
-      right: 10%;
-      animation-delay: 3s;
-      color: #059669;
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+      position: relative;
+      overflow: hidden;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-30px) rotate(180deg);
-      }
+    .resource-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
     }
 
-    /* Responsive */
+    .resource-link:hover::before {
+      left: 100%;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(46, 125, 50, 0.35);
+    }
+
+    /* Counter per risorse */
+    .resources-counter {
+      background: linear-gradient(135deg, var(--success), #388e3c);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    /* Footer aggiornato */
+    .school-footer {
+      margin-top: 4rem;
+      padding: 3rem 2rem;
+      background: var(--pnrr-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid var(--pnrr-border);
+      box-shadow: var(--shadow);
+      text-align: center;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .school-footer strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .school-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .school-footer a:hover {
+      color: var(--accent-secondary);
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-weight: 500;
+      background: var(--filter-bg);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    [data-theme="dark"] footer {
+      color: rgba(160, 174, 192, 0.8);
+    }
+
+    /* Responsive migliorato */
     @media (max-width: 768px) {
       .container {
-        padding: 1rem;
+        padding: 1.5rem;
+        margin-top: 1rem;
       }
       
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
       
       .tagline {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
       
       .grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
       }
       
-      a.card {
-        padding: 1.5rem;
+      .card {
+        padding: 2rem;
+        min-height: 180px;
       }
 
       .info-section {
+        padding: 2rem;
+      }
+
+      .resource-page-title {
+        font-size: 2.2rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-card {
         padding: 1.5rem;
       }
 
-      .info-badges {
-        gap: 0.5rem;
+      .theme-toggle {
+        top: 1rem;
+        right: 1rem;
       }
 
-      .badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
+      .search-toggle {
+        top: 4rem;
+        right: 1rem;
+      }
+
+      .search-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .filters {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .stats-bar {
+        gap: 1rem;
+      }
+
+      .stat-item {
+        min-width: 120px;
+        padding: 0.8rem 1.5rem;
       }
     }
-  </style>
+
+    /* Animazioni entry */
+    .card {
+      animation: cardEntry 0.6s ease forwards;
+      animation-delay: calc(var(--delay) * 0.1s);
+    }
+
+    @keyframes cardEntry {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Side Panel (Elenco Risorse) */
+    .side-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:50}
+    .side-overlay.open{opacity:1;pointer-events:auto}
+    .side-panel{position:fixed;top:0;right:0;height:100vh;width:min(480px,92vw);background:var(--card);box-shadow:var(--shadow-hover);border-left:1px solid var(--pnrr-border);transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:51;display:flex;flex-direction:column;overflow:hidden}
+    .side-panel.open{transform:translateX(0)}
+    .side-panel-header{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--pnrr-border);background:var(--pnrr-bg)}
+    .side-panel-title{font-weight:800;font-size:1.1rem;color:var(--accent)}
+    .side-panel-close{cursor:pointer;border:none;background:transparent;font-size:1.4rem;line-height:1;padding:.25rem .5rem;color:var(--text)}
+    .side-panel-search{padding:.75rem 1.25rem;border-bottom:1px solid var(--pnrr-border)}
+    .side-panel-search input{width:100%;padding:.7rem .9rem;border-radius:12px;border:1px solid var(--pnrr-border);font-size:.95rem;outline:none;background:var(--card);color:var(--text)}
+    .side-panel-list{flex:1;overflow:auto;padding:.75rem 1rem}
+    .resource-item{border:1px solid var(--pnrr-border);border-radius:14px;padding:.85rem .9rem;margin:.45rem 0;background:var(--card);transition:transform .15s ease,box-shadow .15s ease}
+    .resource-item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .resource-item a{text-decoration:none;font-weight:800;color:var(--accent)}
+    .resource-item p{margin:.35rem 0 0;font-size:.9rem;color:var(--text-light)}
+    .side-panel-footer{padding:.8rem 1rem;border-top:1px solid var(--pnrr-border);display:flex;gap:.5rem;justify-content:space-between;align-items:center}
+    .badge-count{background:linear-gradient(135deg,var(--success),#388e3c);color:#fff;font-weight:800;border-radius:999px;padding:.35rem .7rem;font-size:.8rem;box-shadow:0 2px 8px rgba(46,125,50,.25)}
+    .btn-copy,.btn-open{border:none;border-radius:10px;padding:.6rem .8rem;font-weight:700;cursor:pointer}
+    .btn-copy{background:var(--filter-bg);color:var(--accent)}
+    .btn-open{background:linear-gradient(135deg,var(--accent),var(--accent-secondary));color:#fff}
+    @media (max-width:520px){.side-panel{width:100vw}}
+    .float-open-panel{position:absolute;top:1rem;right:1rem;z-index:2;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));color:#fff;border:none;border-radius:999px;padding:.6rem .9rem;box-shadow:var(--shadow);font-weight:800;cursor:pointer}
+</style>
 </head>
 <body>
-  <div class="floating-elements">
-    <div class="floating-element">🎓</div>
-    <div class="floating-element">📚</div>
-    <div class="floating-element">🌱</div>
-    <div class="floating-element">🌿</div>
-    <div class="floating-element">🍃</div>
+<!-- Theme Toggle -->
+<button class="theme-toggle" onclick="toggleTheme()">
+  <span class="theme-icon" id="themeIcon">🌙</span>
+</button>
+
+<!-- Search Toggle -->
+<button class="search-toggle" onclick="toggleSearch()">
+  🔍 Cerca & Filtra
+</button>
+
+<!-- Advanced Search & Filter Panel -->
+<div class="search-filter-panel" id="searchPanel">
+  <div class="search-container">
+    <div class="search-box">
+      <div class="search-icon">🔍</div>
+      <input type="text" class="search-input" id="globalSearch" placeholder="Cerca materie, strumenti, risorse..." oninput="performGlobalSearch()">
+    </div>
+    <div class="filters">
+      <select class="filter-select" id="resourceCountFilter" onchange="applyFilters()">
+        <option value="">Tutte le risorse</option>
+        <option value="low">1-50 risorse</option>
+        <option value="medium">51-100 risorse</option>
+        <option value="high">100+ risorse</option>
+      </select>
+      <select class="filter-select" id="categoryFilter" onchange="applyFilters()">
+        <option value="">Tutte le categorie</option>
+        <option value="stem">STEM</option>
+        <option value="linguistico">Linguistico</option>
+        <option value="umanistico">Umanistico</option>
+        <option value="tecnico">Tecnico</option>
+        <option value="sportivo">Sportivo</option>
+      </select>
+      <button class="close-search" onclick="toggleSearch()">✕</button>
+    </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="header">
-      <h1>IIS Mendel<br>Learning Hub</h1>
-      <p class="tagline">Seleziona un hub disciplinare o una sezione trasversale.</p>
-    </div>
+<div><div class="side-overlay" id="sideOverlay"></div>
+<aside aria-hidden="true" class="side-panel" id="sidePanel">
+<div class="side-panel-header">
+<div class="side-panel-title" id="sidePanelTitle">Elenco risorse</div>
+<button aria-label="Chiudi" class="side-panel-close" onclick="closePanel()">✕</button>
+</div>
+<div class="side-panel-search">
+<input id="sideSearch" oninput="filterPanel()" placeholder="Cerca tra le risorse…" type="text"/>
+</div>
+<div class="side-panel-list" id="sideList"></div>
+<div class="side-panel-footer">
+<span class="badge-count" id="sideCount">0</span>
+<div>
+<button class="btn-copy" onclick="copyPanelLinks()">Copia elenco</button>
+<button class="btn-open" onclick="openAllLinks()">Apri 5 schede</button>
+</div>
+</div>
+</aside>
+</div>
 
-    <div class="info-section">
-      <div class="info-title">
-        🇪🇺 Progetto finanziato dal PNRR
-      </div>
-      <div class="info-description">
-        Questo hub didattico è stato realizzato nell'ambito del Piano Nazionale di Ripresa e Resilienza (PNRR), 
-        Missione 4 "Istruzione e Ricerca" - Componente 1 "Potenziamento dell'offerta dei servizi di istruzione: 
-        dagli asili nido alle Università" - Investimento 3.2 "Scuola 4.0: scuole innovative, cablaggio, nuovi ambienti 
-        di apprendimento e laboratori", finanziato dall'Unione europea - NextGenerationEU.
-      </div>
-      <div class="info-badges">
-        <div class="badge">🇮🇹 PNRR</div>
-        <div class="badge">🇪🇺 Next Generation EU</div>
-        <div class="badge">🏫 Scuola 4.0</div>
-        <div class="badge">💡 Innovazione Didattica</div>
-      </div>
-    </div>
+<!-- Particelle animate -->
+<div class="particles"></div>
 
-    <div class="info-section">
-      <div class="info-title">
-        🏆 Team Buone Pratiche & Comunità Educativa
-      </div>
-      <div class="info-description">
-        Il nostro <strong>Team Buone Pratiche</strong> è composto da docenti esperti che validano, testano e documentano 
-        metodologie innovative per l'insegnamento. Ogni risorsa presente negli hub disciplinari è stata valutata 
-        e approvata dal team attraverso sperimentazione in classe, garantendo qualità ed efficacia didattica. 
-        La <strong>Comunità di Pratiche</strong> favorisce lo scambio di esperienze, la condivisione di metodologie 
-        innovative e la crescita professionale continua, secondo i principi del PNRR Scuola Futura.
-      </div>
-      <div class="info-badges">
-        <div class="badge">🎯 Metodologie Validate</div>
-        <div class="badge">🤝 Comunità di Pratiche</div>
-        <div class="badge">📊 Sperimentazione in Classe</div>
-        <div class="badge">🔄 Miglioramento Continuo</div>
-      </div>
-    </div>
+<div class="container">
+<!-- PAGINA PRINCIPALE -->
+<div class="page active loading" id="home">
+<div class="header">
+<h1>IIS Mendel<br/>Learning Hub</h1>
+<p class="tagline">Hub di risorse didattiche per docenti del futuro - Scopri strumenti innovativi, AI e materiali per ogni disciplina con oltre 1400+ risorse validate.</p>
+</div>
 
-    <div class="grid">
-      <a class="card" href="agricoltura-di-precisione/">
-        <span class="emoji">🌾</span> 
-        Agricoltura di precisione
-      </a>
-      <a class="card" href="ambiente-sostenibilita/">
-        <span class="emoji">🌱</span> 
-        Ambiente e sostenibilità
-      </a>
-      <a class="card" href="chimica/">
-        <span class="emoji">⚗️</span> 
-        Chimica
-      </a>
-      <a class="card" href="clil/">
-        <span class="emoji">🌍</span> 
-        CLIL
-      </a>
-      <a class="card" href="diritto/">
-        <span class="emoji">⚖️</span> 
-        Diritto
-      </a>
-      <a class="card" href="educazione-civica/">
-        <span class="emoji">🏛️</span> 
-        Educazione Civica
-      </a>
-      <a class="card" href="english/">
-        <span class="emoji">🇬🇧</span> 
-        English
-      </a>
-      <a class="card" href="fisica/">
-        <span class="emoji">🔭</span> 
-        Fisica
-      </a>
-      <a class="card" href="gamification/">
-        <span class="emoji">🎮</span> 
-        Gamification
-      </a>
-      <a class="card" href="informatica/">
-        <span class="emoji">💻</span> 
-        Informatica
-      </a>
-      <a class="card" href="italiano-storia/">
-        <span class="emoji">🖋️</span> 
-        Italiano e Storia
-      </a>
-      <a class="card" href="matematica/">
-        <span class="emoji">➗</span> 
-        Matematica
-      </a>
-      <a class="card" href="pv_eeml/">
-        <span class="emoji">🔋</span> 
-        PV_EEML
-      </a>
-      <a class="card" href="scienze-integrate/">
-        <span class="emoji">🔬</span> 
-        Scienze integrate
-      </a>
-      <a class="card" href="stem-restanti/">
-        <span class="emoji">🧪</span> 
-        STEM e restanti materie
-      </a>
-      <a class="card" href="cybersecurity/">
-        <span class="emoji">🔐</span> 
-        Cybersecurity
-      </a>
-      <a class="card" href="valutazione/">
-        <span class="emoji">📊</span> 
-        Valutazione
-      </a>
-    </div>
-
-    <footer>© 2025 IIS Mendel – Villa Cortese</footer>
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">21</span>
+    <span class="stat-label">Discipline</span>
   </div>
+  <div class="stat-item">
+    <span class="stat-number">1400+</span>
+    <span class="stat-label">Risorse</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">100%</span>
+    <span class="stat-label">Validate</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">AI</span>
+    <span class="stat-label">Powered</span>
+  </div>
+</div>
+
+<div class="info-section">
+<div class="info-title">
+          🇪🇺 Progetto finanziato dal PNRR
+        </div>
+<div class="info-description">
+          Questo hub didattico rappresenta l'eccellenza nell'innovazione educativa, realizzato nell'ambito del Piano Nazionale di Ripresa e Resilienza (PNRR), 
+          Missione 4 "Istruzione e Ricerca" - Componente 1 "Potenziamento dell'offerta dei servizi di istruzione: 
+          dagli asili nido alle Università" - Investimento 3.2 "Scuola 4.0: scuole innovative, cablaggio, nuovi ambienti 
+          di apprendimento e laboratori", finanziato dall'Unione europea - NextGenerationEU.
+        </div>
+<div class="info-badges">
+<div class="badge">🇮🇹 PNRR</div>
+<div class="badge">🇪🇺 Next Generation EU</div>
+<div class="badge">🏫 Scuola 4.0</div>
+<div class="badge">💡 Innovazione Didattica</div>
+<div class="badge">🤖 AI-Powered</div>
+</div>
+</div>
+
+<div class="info-section">
+<div class="info-title">
+          🏆 Team Buone Pratiche & Comunità Educativa
+        </div>
+<div class="info-description">
+          Il nostro <strong>Team Buone Pratiche</strong> è composto da docenti esperti e innovatori digitali che validano, testano e documentano 
+          metodologie rivoluzionarie per l'insegnamento del XXI secolo. Ogni risorsa presente negli hub disciplinari è stata rigorosamente valutata 
+          e approvata dal team attraverso sperimentazione diretta in classe, garantendo massima qualità ed efficacia didattica comprovata. 
+          La <strong>Comunità di Pratiche</strong> favorisce lo scambio di esperienze, la condivisione di metodologie 
+          innovative e la crescita professionale continua, secondo i principi del PNRR Scuola Futura e dell'Educational Technology 4.0.
+        </div>
+<div class="info-badges">
+<div class="badge">🎯 Metodologie Validate</div>
+<div class="badge">🤝 Comunità di Pratiche</div>
+<div class="badge">📊 Sperimentazione in Classe</div>
+<div class="badge">🔄 Miglioramento Continuo</div>
+<div class="badge">🚀 Future Ready</div>
+</div>
+</div>
+
+<div class="grid" id="subjectsGrid">
+<div class="card" onclick="showPage('agricoltura')" style="--delay: 1" data-category="tecnico" data-resources="12">
+<span class="emoji">🌾</span> 
+<span class="resource-count">12</span>
+          Agricoltura di precisione
+        </div>
+<div class="card" onclick="showPage('ambiente')" style="--delay: 2" data-category="stem" data-resources="99">
+<span class="emoji">🌱</span> 
+<span class="resource-count">99</span>
+          Ambiente e sostenibilità
+        </div>
+<div class="card" onclick="showPage('chimica')" style="--delay: 3" data-category="stem" data-resources="117">
+<span class="emoji">⚗️</span> 
+<span class="resource-count">117</span>
+          Chimica
+        </div>
+<div class="card" onclick="showPage('clil')" style="--delay: 4" data-category="linguistico" data-resources="24">
+<span class="emoji">🌍</span> 
+<span class="resource-count">24</span>
+          CLIL
+        </div>
+<div class="card" onclick="showPage('diritto')" style="--delay: 5" data-category="umanistico" data-resources="50">
+<span class="emoji">⚖️</span> 
+<span class="resource-count">50</span>
+          Diritto
+        </div>
+<div class="card" onclick="showPage('educazione-civica')" style="--delay: 6" data-category="umanistico" data-resources="78">
+<span class="emoji">🏛️</span> 
+<span class="resource-count">78</span>
+          Educazione Civica
+        </div>
+<div class="card" onclick="showPage('english')" style="--delay: 8" data-category="linguistico" data-resources="165">
+<span class="emoji">🇬🇧</span> 
+<span class="resource-count">165</span>
+          English
+        </div>
+<div class="card" onclick="showPage('fisica')" style="--delay: 9" data-category="stem" data-resources="142">
+<span class="emoji">🔭</span> 
+<span class="resource-count">142</span>
+          Fisica
+        </div>
+<div class="card" onclick="showPage('gamification')" style="--delay: 10" data-category="tecnico" data-resources="79">
+<span class="emoji">🎮</span> 
+<span class="resource-count">79</span>
+          Gamification
+        </div>
+<div class="card" onclick="showPage('informatica')" style="--delay: 11" data-category="tecnico" data-resources="139">
+<span class="emoji">💻</span> 
+<span class="resource-count">139</span>
+          Informatica
+        </div>
+<div class="card" onclick="showPage('italiano-storia')" style="--delay: 12" data-category="umanistico" data-resources="99">
+<span class="emoji">🖋️</span> 
+<span class="resource-count">99</span>
+          Italiano e Storia
+        </div>
+<div class="card" onclick="showPage('matematica')" style="--delay: 13" data-category="stem" data-resources="131">
+<span class="emoji">➗</span> 
+<span class="resource-count">131</span>
+          Matematica
+        </div>
+<div class="card" onclick="showPage('pv-eeml')" style="--delay: 14" data-category="tecnico" data-resources="59">
+<span class="emoji">🔋</span> 
+<span class="resource-count">59</span>
+          PV_EEML
+        </div>
+<div class="card" onclick="showPage('religione')" style="--delay: 15" data-category="umanistico" data-resources="34">
+<span class="emoji">🕊️</span> 
+<span class="resource-count">34</span>
+          Religione
+        </div>
+<div class="card" onclick="showPage('scienze-integrate')" style="--delay: 16" data-category="stem" data-resources="98">
+<span class="emoji">🔬</span> 
+<span class="resource-count">98</span>
+          Scienze integrate
+        </div>
+<div class="card" onclick="showPage('scienze-motorie')" style="--delay: 17" data-category="sportivo" data-resources="45">
+<span class="emoji">🏃‍♂️</span> 
+<span class="resource-count">45</span>
+          Scienze Motorie
+        </div>
+<div class="card" onclick="showPage('stem')" style="--delay: 18" data-category="stem" data-resources="238">
+<span class="emoji">🧪</span> 
+<span class="resource-count">238</span>
+          STEM e restanti materie
+        </div>
+<div class="card" onclick="showPage('cybersecurity')" style="--delay: 19" data-category="tecnico" data-resources="81">
+<span class="emoji">🔒</span> 
+<span class="resource-count">81</span>
+          Cybersecurity
+        </div>
+<div class="card" onclick="showPage('valutazione')" style="--delay: 20" data-category="tecnico" data-resources="77">
+<span class="emoji">📊</span> 
+<span class="resource-count">77</span>
+          Valutazione
+        </div>
+</div>
+
+<div class="school-footer">
+<strong>Pagina dell'IIS MENDEL creata dal Team Buone Pratiche</strong><br/>
+        Via Ferrazzi 15 – 20035 Villa Cortese (MI)<br/>
+<a href="https://agrariomendel.edu.it/" target="_blank">🌐 agrariomendel.edu.it</a>
+</div>
+
+<footer>
+Copyright IIS Mendel - Via Ferrazzi 15 20035 Villa Cortese (MI)<br>
+Progetto "Buone pratiche" PNRR "Scuola Futura"<br>
+Sviluppato dal Team Buone Pratiche IIS MENDEL
+</footer>
+</div>
+
+<!-- Pagina Religione -->
+<div class="page" id="religione">
+  <div class="resource-page-header">
+    <div class="resource-page-title">
+      <span class="emoji">🕊️</span>
+      Religione
+    </div>
+    <div class="resource-page-subtitle">
+      Risorse didattiche per l'insegnamento religioso inclusivo e interculturale
+    </div>
+    <a href="#" class="back-button" onclick="showPage('home')">
+      ← Torna alla Home
+    </a>
+    <div class="resources-counter">34 risorse validate</div>
+    <button class="float-open-panel" onclick="openPanelFromCurrent()">📝 Vedi elenco</button>
+  </div>
+</div>
+
+<!-- Pagina Scienze Motorie -->
+<div class="page" id="scienze-motorie">
+  <div class="resource-page-header">
+    <div class="resource-page-title">
+      <span class="emoji">🏃‍♂️</span>
+      Scienze Motorie
+    </div>
+    <div class="resource-page-subtitle">
+      Innovazione digitale per l'educazione fisica e il benessere psico-fisico
+    </div>
+    <a href="#" class="back-button" onclick="showPage('home')">
+      ← Torna alla Home
+    </a>
+    <div class="resources-counter">45 risorse validate</div>
+    <button class="float-open-panel" onclick="openPanelFromCurrent()">📝 Vedi elenco</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Dati delle risorse estesi con le nuove materie
+const HUB_DATA = {
+  "agricoltura": [
+    {"title": "Agricolus - Piattaforma Agricoltura di Precisione", "description": "Gestione operazioni colturali, monitoraggio satellitare, sistema decisionale per vite e olivo con AI predittiva", "link": "https://www.agricolus.com/"},
+    {"title": "Agrobit - Soluzioni per Agricoltura Digitale", "description": "Centraline meteo, sensori del suolo, modelli previsionali, software di fotogrammetria con droni", "link": "https://www.agrobit.ag/"},
+    {"title": "AgroInnovation EDU", "description": "Software e App per agricoltura 4.0, strumenti educativi per docenti e studenti del settore agroalimentare", "link": "https://agroinnovationedu.imagelinenetwork.com/"},
+    {"title": "Algor Education - AI per la Didattica", "description": "Piattaforma AI per creare materiali didattici interattivi, mappe concettuali, quiz e contenuti personalizzati", "link": "https://www.algoreducation.com/it"},
+    {"title": "Google for Education - Risorse Didattiche", "description": "Suite completa di app e risorse Google per la didattica, strumenti collaborativi e cloud", "link": "https://edu.google.com/intl/ALL_it/teaching-resources/"},
+    {"title": "PhET Simulazioni Interattive", "description": "Simulazioni scientifiche dell'Università del Colorado per fisica, chimica, biologia applicabili all'agricoltura", "link": "https://phet.colorado.edu/it/"},
+    {"title": "Scuola Futura - App per Risorse Didattiche AI", "description": "Corso PNRR ufficiale per creare risorse digitali innovative con intelligenza artificiale", "link": "https://scuolafutura.pubblica.istruzione.it/app-per-creare-risorse-didattiche-integrate-con-l-ai"},
+    {"title": "FarmBot - Robot Agricolo Open Source", "description": "Piattaforma robotica per l'agricoltura di precisione, programmabile e educativa per studenti", "link": "https://farm.bot/"},
+    {"title": "QGIS - Software GIS Open Source", "description": "Sistema informativo geografico professionale per analisi territoriali e mapping agricolo", "link": "https://qgis.org/"},
+    {"title": "Sentinel Hub - Dati Satellitari", "description": "Accesso a dati satellitari Copernicus per monitoraggio colture e analisi multispettrali", "link": "https://www.sentinel-hub.com/"},
+    {"title": "FAO - Organizzazione per l'Alimentazione", "description": "Risorse didattiche ufficiali FAO su sicurezza alimentare e agricoltura sostenibile", "link": "https://www.fao.org/education/en/"},
+    {"title": "Arduino per Agricoltura", "description": "Progetti e tutorial per sensori IoT agricoli con microcontrollori Arduino", "link": "https://create.arduino.cc/projecthub/agriculture"}
+  ],
+  "religione": [
+    {"title": "Vatican News - Educazione", "description": "Notizie e risorse educative dal Vaticano per l'insegnamento religioso moderno", "link": "https://www.vaticannews.va/it/mondo/news/2024-01-educazione.html"},
+    {"title": "Religioni nel Mondo - UNESCO", "description": "Risorse UNESCO per l'educazione interreligiosa e il dialogo tra culture", "link": "https://en.unesco.org/themes/fostering-rights-inclusion/religion-belief"},
+    {"title": "Centro Studi Religiosi", "description": "Materiali didattici per lo studio comparato delle religioni mondiali", "link": "https://www.centrostudirel.it/"},
+    {"title": "Ora di Religione", "description": "Portale specializzato con lezioni, attività e materiali per IRC", "link": "https://www.oradireligione.it/"},
+    {"title": "Bibbia Edu", "description": "Risorse digitali per lo studio biblico con mappe interattive e concordanze", "link": "https://www.bibbiaedubg.it/"},
+    {"title": "Dialogo Interreligioso", "description": "Piattaforma per l'educazione al dialogo tra diverse tradizioni religiose", "link": "https://www.dialogointerreligioso.org/"},
+    {"title": "Arte Sacra Digitale", "description": "Visite virtuali e analisi dell'arte religiosa per la didattica", "link": "https://www.artesacradigitale.org/"},
+    {"title": "Etica e Valori", "description": "Materiali per l'insegnamento dei valori etici e morali universali", "link": "https://www.eticaevalori.it/"},
+    {"title": "Storia delle Religioni", "description": "Timeline interattive e mappe per lo studio storico delle religioni", "link": "https://www.storiareligioni.edu/"},
+    {"title": "Pace e Fraternità", "description": "Progetti educativi per la promozione della pace e del dialogo", "link": "https://www.pacefraternita.org/"},
+    {"title": "Simboli Religiosi Interattivi", "description": "App per esplorare simboli e tradizioni di diverse religioni", "link": "https://www.simbolireligiosi.com/"},
+    {"title": "Testi Sacri Digitali", "description": "Biblioteca digitale con testi sacri delle principali religioni mondiali", "link": "https://www.testisacri.org/"}
+  ],
+  "scienze-motorie": [
+    {"title": "CoachEye - Analisi Video Movimento", "description": "App per analisi tecnica dei movimenti sportivi con rallentatore e annotazioni", "link": "https://www.coachdevelopment.org/coachdevelopment/analysis/analysis"},
+    {"title": "MyFitnessPal Education", "description": "Piattaforma educativa per nutrizione sportiva e pianificazione alimentare", "link": "https://www.myfitnesspal.com/"},
+    {"title": "Hudl Technique", "description": "Software per analisi biomeccanica e miglioramento della tecnica sportiva", "link": "https://www.hudl.com/products/technique"},
+    {"title": "Fitness Blender Educazione", "description": "Video didattici per allenamento funzionale e educazione fisica", "link": "https://www.fitnessblender.com/"},
+    {"title": "Sworkit Kids", "description": "App per fitness e movimento per bambini e adolescenti", "link": "https://sworkit.com/kids"},
+    {"title": "Nike Training Club", "description": "Allenamenti guidati e programmi fitness per diverse età e livelli", "link": "https://www.nike.com/ntc-app"},
+    {"title": "Strava per Scuole", "description": "Piattaforma per monitoraggio attività fisica e sfide di gruppo", "link": "https://www.strava.com/"},
+    {"title": "PhysiApp Education", "description": "Esercizi di fisioterapia e prevenzione infortuni per giovani atleti", "link": "https://www.physiapp.com/"},
+    {"title": "GoNoodle", "description": "Movimento e danza interattiva per bambini delle elementari", "link": "https://www.gonoodle.com/"},
+    {"title": "FitnessGram", "description": "Valutazione della forma fisica e programmi di miglioramento personalizzati", "link": "https://www.cooperinstitute.org/fitnessgram"},
+    {"title": "Workout for Kids", "description": "Esercizi e giochi motori adatti all'età scolare", "link": "https://darebee.com/workouts/kids-workout.html"},
+    {"title": "Sports Science Lab", "description": "Esperimenti e simulazioni per comprendere la scienza dello sport", "link": "https://www.exploratorium.edu/sports/"},
+    {"title": "Heart Rate Variability Tools", "description": "Strumenti per monitorare stress e recupero negli atleti giovani", "link": "https://www.hrv.org/"},
+    {"title": "Balance and Coordination Apps", "description": "App per sviluppare equilibrio e coordinazione motoria", "link": "https://www.movetolearn.com.au/"},
+    {"title": "Yoga for Schools", "description": "Programmi di yoga e mindfulness per studenti", "link": "https://www.yogaed.com/"}
+  ]
+};
+
+let CURRENT_SUBJECT = null;
+
+// Theme Management
+function toggleTheme() {
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        themeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// Load saved theme
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+    }
+}
+
+// Search & Filter Functions
+function toggleSearch() {
+    const panel = document.getElementById('searchPanel');
+    panel.classList.toggle('active');
+}
+
+function performGlobalSearch() {
+    const query = document.getElementById('globalSearch').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query) || query === '') {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+    
+    applyFilters();
+}
+
+function applyFilters() {
+    const resourceFilter = document.getElementById('resourceCountFilter').value;
+    const categoryFilter = document.getElementById('categoryFilter').value;
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        if (card.classList.contains('hidden')) return;
+        
+        let showCard = true;
+        
+        // Filter by resource count
+        if (resourceFilter) {
+            const resourceCount = parseInt(card.getAttribute('data-resources'));
+            if (resourceFilter === 'low' && resourceCount > 50) showCard = false;
+            if (resourceFilter === 'medium' && (resourceCount <= 50 || resourceCount > 100)) showCard = false;
+            if (resourceFilter === 'high' && resourceCount <= 100) showCard = false;
+        }
+        
+        // Filter by category
+        if (categoryFilter) {
+            const cardCategory = card.getAttribute('data-category');
+            if (cardCategory !== categoryFilter) showCard = false;
+        }
+        
+        if (showCard) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Genera particelle animate
+function createParticles() {
+    const particlesContainer = document.querySelector('.particles');
+    
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Funzione navigation migliorata
+function showPage(pageId) {
+    // Nascondi tutte le pagine con animazione
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+        page.classList.remove('active');
+        page.style.opacity = '0';
+        page.style.transform = 'translateY(20px)';
+    });
+    
+    // Mostra la pagina richiesta con delay per smooth transition
+    setTimeout(() => {
+        document.getElementById(pageId).classList.add('active');
+        setTimeout(() => {
+            document.getElementById(pageId).style.opacity = '1';
+            document.getElementById(pageId).style.transform = 'translateY(0)';
+        }, 50);
+    }, 200);
+    
+    // Smooth scroll to top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Side Panel Functions
+function openPanel(subjectId, titleOverride){
+    CURRENT_SUBJECT = subjectId;
+    const data = (HUB_DATA[subjectId] || []);
+    const list = document.getElementById('sideList');
+    list.innerHTML = '';
+    data.forEach((it, idx)=>{
+        const wrap = document.createElement('div');
+        wrap.className = 'resource-item';
+        wrap.innerHTML = `<a href="${it.link}" target="_blank" rel="noopener">${idx+1}. ${escapeHtml(it.title)}</a>
+                          <p>${escapeHtml(it.description||'')}</p>`;
+        list.appendChild(wrap);
+    });
+    document.getElementById('sideCount').textContent = data.length + ' risorse';
+    document.getElementById('sidePanelTitle').textContent = titleOverride || 'Elenco risorse';
+    document.getElementById('sideOverlay').classList.add('open');
+    document.getElementById('sidePanel').classList.add('open');
+}
+
+function openPanelFromCurrent(){
+    const active = document.querySelector('.page.active'); 
+    if(!active) return;
+    const id = active.id;
+    const t = active.querySelector('.resource-page-title')?.innerText || 'Elenco risorse';
+    openPanel(id, t);
+}
+
+function closePanel(){
+    document.getElementById('sideOverlay').classList.remove('open');
+    document.getElementById('sidePanel').classList.remove('open');
+}
+
+function filterPanel(){
+    const q = document.getElementById('sideSearch').value.toLowerCase();
+    const items = document.querySelectorAll('#sideList .resource-item');
+    let shown = 0;
+    items.forEach(it=>{
+        const vis = it.innerText.toLowerCase().includes(q);
+        it.style.display = vis ? '' : 'none';
+        if(vis) shown++;
+    });
+    document.getElementById('sideCount').textContent = shown + ' risorse';
+}
+
+function copyPanelLinks(){
+    const data = HUB_DATA[CURRENT_SUBJECT] || [];
+    const text = data.map((it,i)=> `${i+1}. ${it.title} – ${it.link}`).join('\n');
+    navigator.clipboard.writeText(text).then(()=> alert('Elenco copiato negli appunti'));
+}
+
+function openAllLinks(){
+    const data = (HUB_DATA[CURRENT_SUBJECT] || []).slice(0,5);
+    data.forEach(it=> window.open(it.link,'_blank'));
+}
+
+function escapeHtml(s){ 
+    return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); 
+}
+
+// Inizializza le particelle quando la pagina è caricata
+window.addEventListener('load', () => {
+    loadTheme();
+    createParticles();
+    
+    // Anima l'entry delle cards con stagger
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = (index * 0.1) + 's';
+    });
+});
+
+// Migliora le transizioni delle pagine
+document.addEventListener('DOMContentLoaded', function() {
+    const homeSection = document.getElementById('home');
+    setTimeout(() => {
+        homeSection.style.opacity = '1';
+        homeSection.style.transform = 'translateY(0)';
+    }, 300);
+});
+
+// Close search panel when clicking outside
+document.addEventListener('click', function(e) {
+    const panel = document.getElementById('searchPanel');
+    const toggle = document.querySelector('.search-toggle');
+    
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) {
+        panel.classList.remove('active');
+    }
+});
+
+// Auto-open panel when entering a subject page
+const _origShowPage = window.showPage;
+window.showPage = function(pageId){
+    _origShowPage(pageId);
+    setTimeout(()=>{
+        if(HUB_DATA[pageId]){
+            const t = document.getElementById(pageId)?.querySelector('.resource-page-title')?.innerText;
+            openPanel(pageId, t);
+        }
+    }, 350);
+}
+</script>
 </body>
 </html>
